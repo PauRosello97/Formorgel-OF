@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="src\ofApp.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Pattern.cpp">
+      <Filter>src\Pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="Node.cpp">
+      <Filter>src\Node</Filter>
+    </ClCompile>
+    <ClCompile Include="Line.cpp">
+      <Filter>src\Line</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="src">
+      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Pattern">
+      <UniqueIdentifier>{2782f5b6-d55b-4bff-99de-1628f55f846c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Node">
+      <UniqueIdentifier>{683fa0b5-8528-4c34-a4d6-068430690cd4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Line">
+      <UniqueIdentifier>{fa1cb411-d0d2-40d2-b3d9-cf64d1215593}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\ofApp.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Pattern.h">
+      <Filter>src\Pattern</Filter>
+    </ClInclude>
+    <ClInclude Include="Node.h">
+      <Filter>src\Node</Filter>
+    </ClInclude>
+    <ClInclude Include="Line.h">
+      <Filter>src\Line</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="icon.rc" />
+  </ItemGroup>
+</Project>
