@@ -17,3 +17,7 @@ void Node::draw() {
 bool Node::getIsNull() {
 	return isNull;
 }
+
+bool Node::equals(Node other) {
+	return pos == other.pos;
+}

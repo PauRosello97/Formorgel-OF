@@ -38,12 +38,12 @@ void ofApp::draw(){
 		"fps: " + ofToString((int)ofGetFrameRate()) + 
 		"\nPress 's' to toggle shader: " + (doShader ? "ON" : "OFF") + 
 		"\nPress 'r' to reload" +
-		"\nnLines: " + std::to_string(pattern.getLinesSize()),
+		"\nnLines: " + std::to_string(pattern.getNLines()) +
+		"\nnNodes: " + std::to_string(pattern.getNNodes()) +
+		"\nnTriangles: " + std::to_string(pattern.getNTriangles()),
 		20, 
 		20
 	);
-
-
 }
 
 //--------------------------------------------------------------

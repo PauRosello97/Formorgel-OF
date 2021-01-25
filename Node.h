@@ -8,6 +8,7 @@ class Node
 		Node();
 		bool getIsNull();
 		void draw();
+		bool equals(Node other);
 
 		bool isNull;
 		ofVec2f pos;

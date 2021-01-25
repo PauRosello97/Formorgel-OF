@@ -1,7 +1,7 @@
 #include "Pattern.h"
 
 Pattern::Pattern() {
-
+	
 }
 
 void Pattern::setup(ofShader _shader) {
@@ -11,6 +11,7 @@ void Pattern::setup(ofShader _shader) {
 
 	generateLines();
 	findIntersections();
+	generateTriangles();
 }
 
 void Pattern::draw() {
@@ -21,15 +22,11 @@ void Pattern::draw() {
 		shader.setUniform1f("thickness", 20);
 	}
 
-	ofColor(255);
-
-	for (int i = 0; i < lines.size(); i++) {
-		lines[i].draw();
-	}
-
-	for (int i = 0; i < intersections.size(); i++) {
-		intersections[i].draw();
-	}
+	for (Triangle triangle : triangles) { triangle.draw(); }
+	ofSetColor(ofColor(255));
+	for (Line line : lines) { line.draw(); }
+	for (Node intersection : intersections) { intersection.draw(); }
+	
 
 	if (doShader) shader.end();
 
@@ -45,13 +42,13 @@ void Pattern::generateLines() {
 	float h = ofGetHeight();
 
 	points.clear();
-	for (int i = 0; i < 100; i++) {
+	for (int i = 0; i < 50; i++) {
 		ofVec2f newPoint(ofRandom(0, w), ofRandom(0, h));
 		points.push_back(newPoint);
 	}
 
 	lines.clear();
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 5; i++) {
 		Line newLine(points[i], points[i+1], i);
 		lines.push_back(newLine);
 	}
@@ -84,6 +81,21 @@ void Pattern::findIntersections() {
 	}*/
 }
 
-int Pattern::getLinesSize() {
+void Pattern::generateTriangles() {
+	Triangulator triangulator;
+	if (intersections.size() != 0) {
+		triangles = triangulator.triangulate(intersections);
+	}
+}
+
+int Pattern::getNLines() {
 	return lines.size();
+}
+
+int Pattern::getNNodes() {
+	return intersections.size();
+}
+
+int Pattern::getNTriangles() {
+	return triangles.size();
 }
