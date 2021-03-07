@@ -2238,7 +2238,30 @@ bool PolyDetector::FindPolys()
         poly._area = poly.TriangleArea(*this);
         poly.dissolveStep = dissolveCount;
         poly.c = poly.center();
-        std::sort(poly.p.begin(), poly.p.end(), );
+        poly.color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+        std::sort(poly.p.begin(), poly.p.end(), [&, this](const PointType& p1, const PointType& p2) {
+            //return bComparePointOrder(pd.intersectionPoints[p1], pd.intersectionPoints[p2]);
+            float aA = (atan((p1.x - poly.c.x) / (p1.y - poly.c.y))) * 57.29;
+            float aB = (atan((p2.x - poly.c.x) / (p2.y - poly.c.y))) * 57.29;
+
+            float angleA = p1.x-poly.c.x >= 0 ? (p1.y-poly.c.y >= 0 ? aA : 360+aA) : 180+aA;
+            float angleB = p2.x-poly.c.x >= 0 ? (p2.y-poly.c.y >= 0 ? aB : 360+aB) : 180+aB;
+
+            ofLog(
+                OF_LOG_NOTICE, 
+                "(" 
+                + ofToString(p1.x - poly.c.x)
+                + ", "
+                + ofToString(p1.y - poly.c.y)
+                + ")"
+                + ofToString(aA) 
+                + " - (" + (p1.x-poly.c.x>=0?"+":"-") 
+                + "," + (p1.y - poly.c.y >= 0 ? "+" : "-") 
+                + ") - " + ofToString(angleA)
+            );
+
+            return angleA < angleB;
+        });
         polys.push_back(std::move(poly));
     }
 
@@ -2322,9 +2345,9 @@ bool PolyPol::addPointChecked(const PointType & v)
 
 void PolyPol::draw() {
     //ofSetPolyMode(OF_POLY_WINDING_NONZERO);
-    ofSetColor(0, 0, 255);
+    ofSetColor(0, 0, 0);
     ofDrawCircle(c.x, c.y, 10);
-    ofSetColor(255, 0, 0);
+    ofSetColor(color);
     ofBeginShape();
         for (int i = 0; i < p.size(); i++) {
             ofVertex(p.at(i).x, p.at(i).y);

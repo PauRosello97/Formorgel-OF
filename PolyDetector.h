@@ -224,6 +224,7 @@ struct PolyPol
     std::vector<PointType> p;
     PointType c;
     size_t firstIdx = 0;
+    ofColor color;
 
     PolyCycle cycle;
 
