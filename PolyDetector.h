@@ -29,26 +29,7 @@ enum class RmLinesType : int
     PointConsumed, // point has 2 lines connected all taken
 };
 
-#if 1
 using PointType = vec;
-#else
-// In case some additional members are needed
-struct PointType : public vec
-{
-    PointType() {}
-
-    PointType(vecType v) :
-        vec(v)
-    {}
-
-    PointType(vecType xP, vecType yP, vecType zP) :
-        vec(xP, yP, zP)
-    {}
-
-    //bool ignore = false;
-    uint32_t took = 0;
-};
-#endif
 
 struct PolyCycle
 {
@@ -146,9 +127,6 @@ struct PolyLine
 
     void CalculateFirstAndLastPoint();
 
-    static bool HaveCommonPoints(const PolyLine& l1, const PolyLine& l2);
-    static bool HaveCommonIdxPoints(const PolyLine& l1, const PolyLine& l2);
-
     static bool bCompareLineOrder(const PolyLine& l1, PolyLine& l2);
     static int iCompareLineOrder(const PolyLine& l1, PolyLine& l2);
 
@@ -219,17 +197,11 @@ struct PolyPol
     uint32_t id;
     uint32_t dissolveStep = 0;
 
-    //obb::Polygon poly;
     double _area;
-    // } members
 
     uint32_t GetCount() const { return (uint32_t)p.size(); }
 
     void CalculateFirstAndLastPoint();
-
-    bool IsClosed() const;
-
-    static bool HaveCommonVertex(const PolyPol& p1, const PolyPol& p2, size_t& i, size_t& j);
     bool Minus(const PolyPol& other);
 
     void addLine(const PolyLine& l);
@@ -240,10 +212,7 @@ struct PolyPol
 
     PointType center();
 
-    void genTriangePoints(PolyDetector& pd);
     double TriangleArea(PolyDetector& pd);
-
-    //obb::Polygon &updatePoly();
 };
 
 struct PolyDetector
@@ -268,19 +237,14 @@ struct PolyDetector
 
     std::vector<PointType> intersectionPoints;
     std::map<uint32_t, std::vector<uint32_t>> pointToLines; // key: pid, val: list of nids
-    //std::map<uint32_t, int32_t> lineIdToIdx; // key: lid, val: index in lines
     std::unordered_map<uint32_t, int32_t> lineIdToIdx; // key: lid, val: index in lines
 
     uint32_t dissolveCount = 0;
 
-    // } members
-
-    // ops {
     void reset();
     void AddLine(const PolyLine& line);
     bool DetectPolygons();
     PolyVector& getPolys() { return polys; }
-    // } ops
 
     bool addPointToLine(uint32_t pid, uint32_t lid);
 
@@ -291,22 +255,15 @@ struct PolyDetector
     uint32_t GetPolyCount() const { return (uint32_t)polys.size(); };
     void SortLines();
 
-    bool cycleProcessed(const PolyCycle& cycle) const;
-
     // The order of operations
     void RemoveZeroLengthLines();
-    void RemoveOverlappings();
-    void mergeOverlapped(PolyLine& lid1, PolyLine& lid2);
+    void RemoveOverlappings(); 
     uint32_t DetectAllIntersections();
     bool CreateLines();
     bool FindPolys();
     void SimplifyPolys(double smaller_polygon_length);
 
-    PointType* getPointByID(size_t id);
-
     bool BuildCycle(uint32_t id, PolyCycle cycle); // as value!
-
-    bool Overlap(const PolyCycle& c1, const PolyCycle& c2);
 
     PolyLine newLine(uint32_t i, uint32_t j, PolyLine& origLine);
 
