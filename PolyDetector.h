@@ -123,7 +123,6 @@ struct PolyLine
     PointType center;
     uint32_t id = 0;
     uint32_t test0 = 0, test1 = 0;
-    //obb::Line normal;
     int32_t origLine = -1;
     int32_t attr0 = -1; // used for testing
 
@@ -135,11 +134,8 @@ struct PolyLine
 
     uint32_t lastDissolveStep = 0;
 
-    //obb::Line &calcNormal(PolyDetector &pd);
-
     void calcCenter();
 
-    //bool HasCommonPoints(const PolyLine &line) const;
     bool HasCommonIdxPoints(const PolyLine& line) const;
     bool Equals(const PolyLine& line) const;
 
@@ -176,18 +172,10 @@ struct PolyLine
         return *this;
     }
 
-    /*PolyLine &rot(float r, const vec axis = {0, 0, 1})
-    {
-        a.rotate(r, axis);
-        b.rotate(r, axis);
-        return *this;
-    }*/
-
     void setIgnore(PolyDetector& pd, const char* msg);
     bool contains(const PointType& point) const;
     bool contains(const PolyLine& line) const;
     bool collinear(const PolyLine& l) const;
-    //bool intersects(const PolyLine &line) const;
 
     uint32_t minPid() const
     {

@@ -11,10 +11,6 @@
 
 #define arToStr(arg) #arg
 
-//static const float minPointDiff = .1f;
-//static const float minPointDiff = 1e-2f;
-//static const float minPointDiff = 1e-3f;
-//static const float minPointDiff = 1e-4f;
 static const float minPointDiff = 1e-5f;
 
 static const float minPointDiffSq = minPointDiff * minPointDiff;
@@ -140,11 +136,6 @@ bool PolyLine::collinear(const PolyLine& line) const
 {
     return !doIntersect(a, b, line.a, line.b);
 }
-
-//bool PolyLine::intersects(const PolyLine &line) const
-//{
-//    return doIntersect(a, b, line.a, line.b);
-//}
 
 bool PolyLine::IntersectionPoint(const PolyLine& line, PointType& pos) const
 {
@@ -307,15 +298,6 @@ static float Area(const PointType& a, const PointType& b, const PointType& c)
     return 0.5 * ((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
 }
 
-/*
-bool PolyLine::Equals(const PolyLine &line) const
-{
-    return
-        (!pointsDiffer(line.a, a) || !pointsDiffer(line.a, b)) &&
-        (!pointsDiffer(line.b, a) || !pointsDiffer(line.b, b));
-}
-*/
-
 bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
 {
     return
@@ -324,19 +306,6 @@ bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
         bIdx == line.aIdx ||
         bIdx == line.bIdx;
 }
-
-/*
-bool PolyLine::HasCommonPoints(const PolyLine &line) const
-{
-    return HaveCommonPoints(*this, line);
-}
-
-bool PolyLine::HaveCommonPoints(const PolyLine &l1, const PolyLine &l2)
-{
-    return (!pointsDiffer(l1.a, l2.a) || !pointsDiffer(l1.b, l2.b) ||
-            !pointsDiffer(l1.a, l2.b) || !pointsDiffer(l1.b, l2.a));
-}
-*/
 
 // https://www.geeksforgeeks.org/program-for-point-of-intersection-of-two-lines/
 bool PolyLine::LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const
@@ -373,7 +342,6 @@ bool PolyLine::LineLineIntersectionPoint(const PolyLine& line, PointType& pos) c
 void PolyLine::SortIntersectionsList(PolyDetector& pd)
 {
     std::sort(intersections.begin(), intersections.end(), [&pd, this](const uint32_t& p1, const uint32_t& p2) {
-        //return bComparePointOrder(pd.intersectionPoints[p1], pd.intersectionPoints[p2]);
         return pd.intersectionPoints[p1].squaredist(a) < pd.intersectionPoints[p2].squaredist(a);
     });
 }
@@ -396,7 +364,6 @@ PolyLine PolyDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
 
 bool PolyDetector::CreateLines()
 {
-    //logoutf("Line creation");
 
     uint32_t n = 0;
     for (auto& l : origLines)
@@ -501,9 +468,6 @@ bool PolyDetector::CreateLines()
     {
         auto& l1 = lines[i];
 
-        //if (!pointsDiffer(l1.a, l1.b)) // find a zero length line
-        //    logoutf("line %s points are the same!", l1.toString(*this).c_str());
-
         for (uint32_t j = i + 1; j < lines.size(); j++)
         {
             auto& l2 = lines[j];
@@ -522,9 +486,6 @@ bool PolyDetector::CreateLines()
             if (aIdx1 == aIdx2 && bIdx1 == bIdx2)
             {
                 logoutf("%u:%s and %u:%s have same points! [P%u P%u] olid1:#%u olid2:#%u", i, l1.toString(*this).c_str(), j, l2.toString(*this).c_str(), aIdx1, bIdx1, l1.origLine, l2.origLine);
-                //assert(0);
-
-                //dumpLines("commonPts");
             }
         }
     }
@@ -578,8 +539,6 @@ void PolyDetector::RemoveOverlappings()
 {
     uint32_t i, j, count = uint32_t(origLines.size());
 
-    //logoutf("RemoveOverlappings");
-
     for (auto& l : origLines)
     {
         l.calcCenter();
@@ -621,7 +580,6 @@ void PolyDetector::RemoveOverlappings()
                 {
                     if (ret != 2)
                     {
-                        //line.id = uint32_t(origLines.size());
                         line.id = line_i.id;
 
                         if (verbose)
@@ -686,26 +644,6 @@ uint32_t PolyDetector::DetectAllIntersections()
             auto& l2 = origLines[j];
             if (doIntersect(l1.a, l1.b, l2.a, l2.b))
             {
-                //if (verbose > 1)
-                //    logoutf("line #%u intersects #%u", l1.id, l2.id);
-
-                /*
-                for (auto &l : {&l1, &l2})
-                {
-                    auto &otherLid = l->id == l1.id ? l2.id : l1.id;
-
-                    if (l->intersectedLines.find(otherLid) != l->intersectedLines.end())
-                    {
-                        logoutf("WARN: origLine #%u already contains intersected origLine #%u", l->id, otherLid);
-                    }
-                    else
-                    {
-                        l->intersectedLines.insert(otherLid);
-                    }
-                }
-                */
-
-                //if (l1.intersectedLines.find(l2.id) != l1.intersectedLines.end())
                 l1.intersectedLines.insert(l2.id);
                 l2.intersectedLines.insert(l1.id);
             }
@@ -749,7 +687,6 @@ uint32_t PolyDetector::DetectAllIntersections()
     {
         for (auto& l : origLines)
         {
-            //if (!l.intersectedLines.empty())
             {
                 std::string str;
                 for (auto& n : l.intersectedLines)
@@ -824,18 +761,9 @@ uint32_t PolyDetector::DetectAllIntersections()
                         }
                         else
                         {
-                            //auto d = obb::LineSegment(l->a, l->b).Distance(intersection);
-                            //assert(d < .1f);
-
-                            //auto d1 = obb::LineSegment(l->a, l->b).Distance(intersectionPoints[intersectionIdx]);
-                            //assert(d1 < .1f);
-
                             l->intersections.push_back(intersectionIdx);
                         }
                     }
-
-                    //addPointToLine(intersectionIdx, l1.id);
-                    //addPointToLine(intersectionIdx, l2.id);
 
                     took.insert(std::make_pair(l1.id, l2.id));
                     took.insert(std::make_pair(l2.id, l1.id));
@@ -848,13 +776,10 @@ uint32_t PolyDetector::DetectAllIntersections()
     if (verbose)
         logoutf("intersectionPoints:%u", uint32_t(intersectionPoints.size()));
 
-    //return 0;
-
     if (verbose > 2)
     {
         for (auto& l : origLines)
         {
-            //if (!l.intersections.empty())
             {
                 std::string str;
                 for (auto& n : l.intersections)
@@ -885,9 +810,6 @@ uint32_t PolyDetector::DetectAllIntersections()
             if (l1.ignore) continue;
             if (l1.intersections.size() < 2) continue;
 
-            //if (times == 1)
-            //    l1.SortIntersectionsList(*this);
-
             float a, b, c;
             vec::line(vec(l1.a.x, l1.a.y), vec(l1.b.x, l1.b.y), a, b, c);
             if (a + b == 0.0f)
@@ -897,17 +819,12 @@ uint32_t PolyDetector::DetectAllIntersections()
                 continue;
             }
 
-            //obb::Line line = obb::LineSegment(l1.a, l1.b).ToLine();
-
             for (auto& l2 : origLines)
             {
                 if (l2.ignore) continue;
                 if (l2.intersections.size() < 2) continue;
 
-                //if (took.find(std::make_pair(l1.id, l2.id)) == took.end())
                 {
-                    //if (k == 1)
-                    //    l2.SortIntersectionsList(*this);
 
                     took.insert(std::make_pair(l1.id, l2.id));
                     took.insert(std::make_pair(l2.id, l1.id));
@@ -929,7 +846,6 @@ uint32_t PolyDetector::DetectAllIntersections()
                                 pids.push_back(pid1);
                             }
 
-                            //float d = line.Distance(intersectionPoints[pid2]);
                             float d = vec::lineDist(a, b, c, vec(intersectionPoints[pid2].x, intersectionPoints[pid2].y));
                             if (d > maxLineDist)
                                 maxLineDist = d;
@@ -1028,7 +944,6 @@ uint32_t PolyDetector::DetectAllIntersections()
         if (l.intersections.size() == 1)
         {
             logoutf("WARN: line #%u has only %u intersections!", l.id, uint32_t(l.intersections.size()));
-            //assert(false);
         }
     }
 
@@ -1130,9 +1045,6 @@ uint32_t PolyLine::canBeRemoved(PolyDetector& pd, RmLinesType type) const
 {
     assert(!ignore);
 
-    //if (type == 1 && verbose)
-    //    logoutf("canBeRemoved(%s) type:%d", toString(pd).c_str(), type);
-
     if (type == RmLinesType::NoPointNeigh)
     {
         // Remove lines having points with no neighbors
@@ -1141,8 +1053,6 @@ uint32_t PolyLine::canBeRemoved(PolyDetector& pd, RmLinesType type) const
             auto& neigh = pd.pointToLines[abId];
             if (neigh.size() <= 1) // including self
             {
-                //if (pd.verbose)
-                //    logoutf("canBeRemoved(%s) point with no neighbors! CAN be removed", toString(pd).c_str());
                 return true;
             }
 
@@ -1171,17 +1081,12 @@ uint32_t PolyLine::canBeRemoved(PolyDetector& pd, RmLinesType type) const
                 auto l = pd.findLine(lid);
                 if (l && l->id != id)
                 {
-                    //if (pd.verbose)
-                    //    logoutf("nlid %s", l->toString(pd).c_str());
-
-                    //if (!l->took)
                     if (l->took < 0)
                     {
                         return false;
                     }
                 }
             }
-            //logoutf("canBeRemoved(%s) line tooked 2 times! CAN be removed", toString(pd).c_str());
             return true;
         }
     }
@@ -1225,7 +1130,6 @@ bool PolyDetector::DetectPolygons()
             logoutf("Polygon set contains %d polygons.", GetPolyCount());
 
         SimplifyPolys(0.0);
-        //logoutf("Polygon set contains %d polygons after simplification!.", GetPolyCount());
 
         auto beforeCount = dissolveCount;
 
@@ -1245,13 +1149,6 @@ bool PolyDetector::DetectPolygons()
     return true;
 }
 
-/*
-bool PolyPol::IsClosed() const
-{
-    return !p.empty() && !pointsDiffer(p[0], p.back());
-}
-*/
-
 PointType PolyPol::center()
 {
     if (p.empty())
@@ -1264,32 +1161,6 @@ PointType PolyPol::center()
 
     return c;
 }
-
-
-/***
-* @return true if polylines have a common vertex, false otherwise
-* param p1, p2 pointers to polylines
-* param i, j pointers to the indices of first common vertices found
-*/
-/*
-bool PolyPol::HaveCommonVertex(const PolyPol &p1, const PolyPol &p2, size_t &i, size_t &j)
-{
-    // sweeps all vertices in p1
-    for (i = 0; i < p1.p.size(); ++i)
-    {
-        auto &v1 = p1.p[i];
-
-        for (j = 0; j < p2.p.size(); ++j)
-        {
-            auto &v2 = p2.p[j];
-            if (!pointsDiffer(v1, v2))
-                return true;
-        }
-    }
-
-    return false;
-}
-*/
 
 /***
 * @desc simplifies current polygon, subtracting <p>, in case there are
@@ -1321,14 +1192,6 @@ void PolyPol::CalculateFirstAndLastPoint()
         p.clear();
         return;
     }
-
-    /*
-    if (!IsClosed())
-    {
-        p.clear();
-        return;
-    }
-    */
 
     // the case of the closed polyline
     // here we're going to find the first point by seeing them all
@@ -1700,64 +1563,8 @@ bool PolyCycle::accepted(PolyDetector & pd)
     return true;
 }
 
-/*
-static bool equalCycles(const CycleSet &a, const CycleSet &b)
-{
-    if (a.size() != b.size())
-        return false;
-
-#if 0
-    return a == b;
-#elif 0
-
-
-#if 1
-    return std::equal(a.begin(), a.end(), b.begin());
-#else
-    for (auto aIt = a.begin(), bIt = b.begin(); aIt != a.end(); ++aIt, ++bIt)
-        if (*aIt != *bIt)
-            return false;
-    return true;
-#endif
-
-#else
-
-    assert(a.size() >= 3);
-    assert(b.size() >= 3);
-
-    auto end1 = a.cend();
-    auto end2 = b.cend();
-    --end1;
-    --end2;
-    if (*a.cbegin() == *b.cbegin() && *end1 == *end2)
-        return true;
-
-    return false;
-
-#endif // ==
-}
-*/
-
-/*
-bool PolyDetector::cycleProcessed(const PolyCycle &cycle) const
-{
-    if (cycle.idx.size() < 3)
-        return false;
-
-    for (auto &c : processed)
-        if (c.idx.size() == cycle.idx.size() && equalCycles(c.idx, cycle.idx))
-            return true;
-    return false;
-}
- */
-
 bool PolyDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
 {
-    //if (cycle.startIdx != id && cycle.idx.size() > 2)
-    //    return true;
-
-    //if (cycle.idx.size() >= 7)
-    //    return true;
 
     auto l = findLine(id);
     if (!l)
@@ -1864,20 +1671,15 @@ bool PolyLine::betweenNeighbors(PolyDetector & pd, const PolyLine & l1, const Po
         return false;
     }
 
-    //auto &p1 =  pd.intersectionPoints[l1.otherPid(cpid)];
-    //auto &p2 =  pd.intersectionPoints[l2.otherPid(cpid)];
-
     vec cp = pd.intersectionPoints[cpid];
     vec p = pd.intersectionPoints[otherPid(cpid)];
 
-    //bool ret = obb::Line(cp, cp.sub(p).normalize()).Intersects(obb::LineSegment(l1.center, l2.center));
     bool ret = doIntersect(cp, p, l1.center, l2.center);
 
     if (ret)
     {
         if (pd.verbose > 2)
         {
-            //logoutf("line %s is between %s and %s (commonP: P%d)", toString(pd).c_str(), l1.toString(pd).c_str(), l2.toString(pd).c_str(), cpid);
             logoutf("line %u is between %u and %u (commonP: P%d)", id, l1.id, l2.id, cpid);
         }
     }
@@ -1888,27 +1690,6 @@ bool PolyLine::betweenNeighbors(PolyDetector & pd, const PolyLine & l1, const Po
 
     return ret;
 }
-
-/*
-float PolyLine::angle(PolyDetector &pd, const PolyLine &l) const
-{
-    auto cpid = l.commonPid(*this);
-
-    auto pid = l.otherPid(cpid);
-
-    const vec &cp = pd.intersectionPoints[cpid];
-    const vec &p = pd.intersectionPoints[pid];
-
-    vec dir = vec(b).sub(a);
-    vec dir1 = vec(p).sub(cp);
-
-    dir.normalize();
-    dir1.normalize();
-
-    //return dir1.dot(dir);
-    return acosf(dir1.dot(dir));
-}
-*/
 
 bool PolyLine::compareNeigh(PolyDetector & pd, uint32_t nid1, uint32_t nid2) const
 {
@@ -2036,9 +1817,6 @@ bool PolyDetector::FindPolys()
             }
             if (!neigh.empty())
             {
-                //std::sort(neigh.begin(), neigh.end(), [this, &l1](const uint32_t &nid1, const uint32_t &nid2) {
-                //    return l1.compareNeigh(*this, nid1, nid2);
-                //});
                 for (auto& nid : neigh)
                 {
                     if (verbose > 1)
@@ -2240,7 +2018,6 @@ bool PolyDetector::FindPolys()
         poly.c = poly.center();
         poly.color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
         std::sort(poly.p.begin(), poly.p.end(), [&, this](const PointType& p1, const PointType& p2) {
-            //return bComparePointOrder(pd.intersectionPoints[p1], pd.intersectionPoints[p2]);
             float aA = (atan((p1.x - poly.c.x) / (p1.y - poly.c.y))) * 57.29;
             float aB = (atan((p2.x - poly.c.x) / (p2.y - poly.c.y))) * 57.29;
 
@@ -2268,54 +2045,6 @@ bool PolyDetector::FindPolys()
     return true;
 }
 
-/*
-obb::Line &PolyLine::calcNormal(PolyDetector &pd)
-{
-    auto line = pd.findLine(id);
-    if (!line)
-    {
-        return normal;
-    }
-    vec n = vec(line->a).sub(line->b).cross(vec(0,0,1));
-    n.normalize();
-    normal = obb::Line(line->center, n);
-    return normal;
-}
-*/
-
-/*
-void PolyPol::genTriangePoints(PolyDetector &pd)
-{
-    std::vector<size_t> ret;
-
-    std::vector<PolyLine *> lines;
-    for (auto &n : cycle.idx)
-    {
-        auto l = pd.findLine(n);
-        if (!l) continue;
-        lines.push_back(l);
-    }
-
-    for (auto &l : lines)
-    {
-        l->calcNormal(pd);
-        for (auto &l1 : lines)
-        {
-            if (l != l1)
-            {
-                if (l->Intersects(*l1))
-                {
-                    auto pt = l->ClosestPoint(*l1);
-                    pt.y -= .01f;
-                    p.push_back(pt);
-                    break;
-                }
-            }
-        }
-    }
-}
-*/
-
 double PolyPol::TriangleArea(PolyDetector & pd)
 {
     if (p.size() <= 2)
@@ -2330,7 +2059,6 @@ double PolyPol::TriangleArea(PolyDetector & pd)
             return 0.0f;
         area += abs(::Area(c, l->a, l->b));
     }
-    //logoutf("area:%f", area);
     return area;
 }
 
@@ -2344,7 +2072,6 @@ bool PolyPol::addPointChecked(const PointType & v)
 }
 
 void PolyPol::draw() {
-    //ofSetPolyMode(OF_POLY_WINDING_NONZERO);
     ofSetColor(0, 0, 0);
     ofDrawCircle(c.x, c.y, 10);
     ofSetColor(color);
@@ -2354,16 +2081,6 @@ void PolyPol::draw() {
         }
     ofEndShape();
 }
-
-/*
-obb::Polygon &PolyPol::updatePoly()
-{
-    poly.p.clear();
-    for (auto &pt : p)
-        poly.p.push_back(pt);
-    return poly;
-}
-*/
 
 void PolyLine::calcCenter()
 {
@@ -2496,11 +2213,6 @@ bool PolyDetector::dissolveCollinearLine(PolyLine & l)
                 }
             }
         }
-        //if (nValid == 1)
-        //if (nValid > 0)
-        //{
-        //    logoutf("CollinearIdx[P%u](%s, %s)) = %d. nValid:%u", id, l.toString(*this).c_str(), l1->toString(*this).c_str(), CollinearIdx(l, *l1), nValid);
-        //}
         if (nValid == 1 && CollinearIdx(l, *l1))
         {
             if (verbose)
@@ -2513,9 +2225,6 @@ bool PolyDetector::dissolveCollinearLine(PolyLine & l)
 
 bool PolyDetector::dissolve()
 {
-    //return false; // test
-    //if (dissolveCount == 1) return false;
-    //if (dissolveCount == 1) return false;
 
     if (verbose > 3)
     {
@@ -2760,9 +2469,6 @@ bool PolyDetector::rmEarPoints()
             }
         }
     }
-    //if (verbose)
-    //    logoutf("cyclePids:%u/%u", uint32_t(pids.size()), uint32_t(intersectionPoints.size()));
-
     for (auto& l : torm)
     {
         l->setIgnore(*this, "rmEarPoints");
@@ -2803,7 +2509,6 @@ bool PolyDetector::rmLines(RmLinesType type)
         return true;
     }
 
-    // else pass type to canBeRemoved
     for (uint32_t i = 0; i < lines.size(); ++i)
     {
         auto& l = lines[i];
