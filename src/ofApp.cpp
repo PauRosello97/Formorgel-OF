@@ -1,5 +1,6 @@
 #include "ofApp.h"
 #include <string> 
+#include <sstream>
 
 //--------------------------------------------------------------
 void ofApp::setup(){
@@ -17,11 +18,37 @@ void ofApp::setup(){
 	ofLog() << "Maximum number of output vertices support is: " << shader.getGeometryMaxOutputCount();
 
 
-	pattern.setup(shader);
-
 	doShader = true;
 	ofEnableDepthTest();
 
+	std::vector<PolyLine> lines = {
+			{{0,25,0}, {100,25,0}},
+			{{0,75,0}, {100,75,0}},
+			{{25,0,0}, {25,100,0}},
+			{{75,0,0}, {75,100,0}},
+	};
+
+	PolyDetector pd;
+
+	for (auto& l : lines)
+	{
+		pd.AddLine(l);
+	}
+
+
+	if (!pd.DetectPolygons())
+	{
+		logoutf("%s", "WARN: cannot detect polys!");
+	}
+
+	logoutf("nPolys:%u dissolveSteps:%u lines:%u", uint32_t(pd.polys.size()), pd.dissolveCount + 1, uint32_t(pd.lines.size()));
+
+	
+	for (int i = 0; i < pd.polys.size(); i++) {
+		logoutf("nPolys: (%u,%u) ", uint32_t(pd.polys.at(i).p.at(0).x), uint32_t(pd.polys.at(i).p.at(0).y));
+	}
+
+	polygons = pd.polys;
 }
 
 //--------------------------------------------------------------
@@ -32,30 +59,14 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 
-	pattern.draw();
+	for (int i = 0; i < polygons.size(); i++) {
+		polygons.at(i).draw();
+	}
 
-	ofDrawBitmapString(
-		"fps: " + ofToString((int)ofGetFrameRate()) + 
-		"\nPress 's' to toggle shader: " + (doShader ? "ON" : "OFF") + 
-		"\nPress 'r' to reload" +
-		"\nnLines: " + std::to_string(pattern.getNLines()) +
-		"\nnNodes: " + std::to_string(pattern.getNNodes()) +
-		"\nnTriangles: " + std::to_string(pattern.getNTriangles()),
-		20, 
-		20
-	);
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == 's') {
-		doShader = !doShader;
-		pattern.setDoShader(doShader);
-	}
-	else if (key == 'r') {
-		pattern.setup(shader);
-		pattern.setDoShader(doShader);
-	}
 }
 
 //--------------------------------------------------------------

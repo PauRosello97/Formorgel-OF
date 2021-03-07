@@ -1,7 +1,8 @@
 #pragma once
 
 #include "ofMain.h"
-#include "../Pattern.h"
+#include "../PolyDetector.h"
+#include "../PolyDetector.h"
 
 class ofApp : public ofBaseApp{
 
@@ -25,6 +26,5 @@ public:
 
 	ofShader shader;
 	bool doShader;
-	Pattern pattern;
-		
+	std::vector<PolyPol> polygons;
 };
