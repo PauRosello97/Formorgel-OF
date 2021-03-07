@@ -324,6 +324,4 @@ struct PolyDetector
     bool dissolve();
 
     void dumpLines(const char* msg, bool useIgnore = false);
-
-
 };

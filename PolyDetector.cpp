@@ -2018,8 +2018,8 @@ bool PolyDetector::FindPolys()
         poly.c = poly.center();
         poly.color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
         std::sort(poly.p.begin(), poly.p.end(), [&, this](const PointType& p1, const PointType& p2) {
-            float aA = (atan((p1.x - poly.c.x) / (p1.y - poly.c.y))) * 57.29;
-            float aB = (atan((p2.x - poly.c.x) / (p2.y - poly.c.y))) * 57.29;
+            float aA = (atan((p1.y - poly.c.y) / (p1.x - poly.c.x))) * 57.29;
+            float aB = (atan((p2.y - poly.c.y) / (p2.x - poly.c.x))) * 57.29;
 
             float angleA = p1.x-poly.c.x >= 0 ? (p1.y-poly.c.y >= 0 ? aA : 360+aA) : 180+aA;
             float angleB = p2.x-poly.c.x >= 0 ? (p2.y-poly.c.y >= 0 ? aB : 360+aB) : 180+aB;

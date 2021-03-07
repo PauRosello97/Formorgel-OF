@@ -20,15 +20,25 @@ void ofApp::setup(){
 
 	doShader = true;
 	ofEnableDepthTest();
-
-	std::vector<PolyLine> lines = {
+	/*
+	lines = {
 			{{0,250,0}, {1000,250,0}},
 			{{0,750,0}, {1000,750,0}},
-			{{250,0,0}, {250,1000,0}},
 			{{750,0,0}, {750,1000,0}},
 			{{300,0,0}, {600,1000,0}},
 			{{300,0,0}, {0,300,0}},
 	};
+	*/
+	lines = {
+			{{0,300,0}, {600,1000,0}},
+			{{0,600,0}, {600,0,0}},
+			{{300,0,0}, {1000,600,0}},
+			{{300,1000,0}, {1000,300,0}},
+	};
+	
+	for (int i = 0; i < 50; i++) {
+		lines.push_back({ {ofRandom(1000),ofRandom(1000),0}, {ofRandom(1000),ofRandom(1000),0} });
+	}
 
 	PolyDetector pd;
 
@@ -63,6 +73,10 @@ void ofApp::draw(){
 
 	for (int i = 0; i < polygons.size(); i++) {
 		polygons.at(i).draw();
+	}
+
+	for (int i = 0; i < lines.size(); i++) {
+		ofDrawLine(lines.at(i).a.x, lines.at(i).a.y, lines.at(i).b.x, lines.at(i).b.y);
 	}
 
 }

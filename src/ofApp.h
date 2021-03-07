@@ -27,4 +27,5 @@ public:
 	ofShader shader;
 	bool doShader;
 	std::vector<PolyPol> polygons;
+	std::vector<PolyLine> lines;
 };
