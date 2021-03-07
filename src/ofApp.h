@@ -2,7 +2,6 @@
 
 #include "ofMain.h"
 #include "../PolyDetector.h"
-#include "../PolyDetector.h"
 
 class ofApp : public ofBaseApp{
 
@@ -24,8 +23,8 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	ofShader shader;
-	bool doShader;
+	void generatePattern();
+
 	std::vector<PolyPol> polygons;
 	std::vector<PolyLine> lines;
 };

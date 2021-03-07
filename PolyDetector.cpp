@@ -2024,6 +2024,7 @@ bool PolyDetector::FindPolys()
             float angleA = p1.x-poly.c.x >= 0 ? (p1.y-poly.c.y >= 0 ? aA : 360+aA) : 180+aA;
             float angleB = p2.x-poly.c.x >= 0 ? (p2.y-poly.c.y >= 0 ? aB : 360+aB) : 180+aB;
 
+            /*
             ofLog(
                 OF_LOG_NOTICE, 
                 "(" 
@@ -2035,7 +2036,7 @@ bool PolyDetector::FindPolys()
                 + " - (" + (p1.x-poly.c.x>=0?"+":"-") 
                 + "," + (p1.y - poly.c.y >= 0 ? "+" : "-") 
                 + ") - " + ofToString(angleA)
-            );
+            );*/
 
             return angleA < angleB;
         });
@@ -2072,8 +2073,8 @@ bool PolyPol::addPointChecked(const PointType & v)
 }
 
 void PolyPol::draw() {
-    ofSetColor(0, 0, 0);
-    ofDrawCircle(c.x, c.y, 10);
+    //ofSetColor(0, 0, 0);
+    //ofDrawCircle(c.x, c.y, 10);
     ofSetColor(color);
     ofBeginShape();
         for (int i = 0; i < p.size(); i++) {
@@ -2183,9 +2184,6 @@ bool PolyDetector::dissolveCollinear(PolyLine & l1, PolyLine & l2)
     lines.back().sortNeigh(*this);
     if (verbose)
         logoutf("added new line %s by merging %u and %u", lines.back().toString(*this).c_str(), l1.id, l2.id);
-
-    // it can be removed
-    //dissolveCollinearLine(lines.back());
 
     return true;
 }
