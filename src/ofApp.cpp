@@ -16,13 +16,24 @@ void ofApp::setup(){
 
 void ofApp::generatePattern() {
 	lines = {};
+	
+	lines.push_back({ {10, 10}, {500, 500} }); // Diagonal
+	lines.push_back({ {20, 10}, {20,  500} }); // Vertical
+	lines.push_back({ {10, 20}, {500, 20} }); // Horitzontal
+	lines.push_back({ {10, 300},{300, 10} });
+	
+	//lines.push_back({ {10,1000}, {1000,1000} });
+	//lines.push_back({ {1000,10}, {1000,1000} });
 
+	
 	for (int i = 0; i < 50; i++) {
 		lines.push_back({ 
 			{ofRandom(ofGetWidth()),ofRandom(ofGetHeight())}, 
 			{ofRandom(ofGetWidth()),ofRandom(ofGetHeight())} 
 		});
 	}
+	
+	
 
 	PolyDetector pd;
 

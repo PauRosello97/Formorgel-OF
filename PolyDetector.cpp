@@ -812,7 +812,7 @@ uint32_t PolyDetector::DetectAllIntersections()
             if (a + b == 0.0f)
             {
                 logoutf("l1:#%u l1.a: [%f %f] l1.b: [%f %f]", l1.id, l1.a.x, l1.a.y, l1.b.x, l1.b.y);
-                assert(0);
+                //assert(0);
                 continue;
             }
 
@@ -2248,7 +2248,6 @@ bool PolyDetector::rmEarPoints()
     {
         l->setIgnore(*this, "rmEarPoints");
     }
-
     return true;
 }
 
@@ -2273,8 +2272,7 @@ bool PolyDetector::rmLines(RmLinesType type)
                 }
             }
         }
-        if (verbose)
-            logoutf("Collinear removed lines:%u", nCollinearRemoved);
+        if (verbose) logoutf("Collinear removed lines:%u", nCollinearRemoved);
         return true;
     }
 
@@ -2295,7 +2293,6 @@ bool PolyDetector::rmLines(RmLinesType type)
 
             // reprocess same position
             if (i > 0) i--;
-            //i = 0;
         }
     }
 
@@ -2320,14 +2317,11 @@ bool PolyCycle::convex(PolyDetector & pd) const
             PolyLine ls(l1->center, l2->center);
             for (auto it3 = idx.begin(); it3 != idx.end(); ++it3)
             {
-                if (it3 != it1 && it3 != it2
-                    //&& !pd.CollinearIdx(*it3, *it1) && !pd.CollinearIdx(*it3, *it2)
-                    )
+                if (it3 != it1 && it3 != it2)
                 {
                     auto l3 = pd.findLine(*it3);
 
                     if (l3 && doIntersect(ls.a, ls.b, l3->a, l3->b))
-                        //if (l2 && !Collinear(ls, *l2) && ls.PolyIntersects(*l2))
                     {
                         logoutf("convex(%s): l1:%u intersects l2:%u l3:%u", toString().c_str(), l1->id, l2->id, l3->id);
                         return false;
@@ -2342,7 +2336,6 @@ bool PolyCycle::convex(PolyDetector & pd) const
 void PolyDetector::reset()
 {
     _cycles.clear();
-    //processed.clear();
     origLines.clear();
     lines.clear();
     polys.clear();
