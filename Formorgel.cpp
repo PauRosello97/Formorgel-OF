@@ -3,7 +3,7 @@
 void Formorgel::generatePattern() {
 	lines = {};
 
-	generateOnePack(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 3);
+	generateSecondLevelPack(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 3);
 
 	/*
 	for (int i = 0; i < 50; i++) {
@@ -65,8 +65,8 @@ void Formorgel::generateOnePack(float x, float y, float d) {
 
 	float extraR = d == 4 ? 45 : 90;
 
-	for (int i = 0; i < rep; i++) {
-	//for (int i = 0; i < 5; i++) {
+	//for (int i = 0; i < rep; i++) {
+	for (int i = 0; i < 6; i++) {
 		float angle = i * polygonVertexAngle + 90;
 		generateOneShape(x + rotationRadius * cos(radians(angle + extraR)), y + rotationRadius * sin(radians(angle + extraR)), d, angle);
 	}

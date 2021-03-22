@@ -52,7 +52,6 @@ static int orientation(const PointType& p, const PointType& q, const PointType& 
         (q.x - p.x) * (r.y - q.y);
 
     if (val == 0.0) return 0;  // colinear
-    //if (abs(val) <= 1e-7f) return 0;  // colinear
 
     return (val > 0) ? 1 : 2; // clock or counterclock wise
 }
