@@ -13,6 +13,7 @@
 #include <vector>
 
 using PointType = vec;
+struct PolyLine;
 
 // This variable is really important!
 static const float minPointDiff = 2;
@@ -24,3 +25,4 @@ bool onSegment(const PointType& p, const PointType& q, const PointType& r);
 bool collinearVecs(const PointType& p, const PointType& q, const PointType& r);
 bool between(const PointType& p, const PointType& a, const PointType& b);
 bool pointsDiffer(const PointType& a, const PointType& b, bool aprox = true);
+bool overlap(const PolyLine& l1, const PolyLine& l2);

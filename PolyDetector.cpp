@@ -43,12 +43,7 @@ bool PolyLine::IntersectionPoint(const PolyLine& line, PointType& pos) const
     return LineLineIntersectionPoint(line, pos);
 }
 
-static bool overlap(const PolyLine& l1, const PolyLine& l2)
-{
-    return (collinearVecs(l1.a, l2.a, l2.b) && collinearVecs(l1.b, l2.a, l2.b)) &&
-        ((l1.contains(l2.a) || l1.contains(l2.b)) ||
-        (l2.contains(l1.a) || l2.contains(l1.b)));
-}
+
 
 /***
 * @return a new simplified line if line_1 and line_2 overlaps, NULL otherwise

@@ -97,3 +97,9 @@ bool pointsDiffer(const PointType& a, const PointType& b, bool aprox)
     return a.x != b.x || a.y != b.y;
 }
 
+bool overlap(const PolyLine& l1, const PolyLine& l2)
+{
+    return (collinearVecs(l1.a, l2.a, l2.b) && collinearVecs(l1.b, l2.a, l2.b)) &&
+        ((l1.contains(l2.a) || l1.contains(l2.b)) ||
+        (l2.contains(l1.a) || l2.contains(l1.b)));
+}
