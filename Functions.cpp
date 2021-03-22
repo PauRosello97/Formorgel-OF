@@ -68,3 +68,23 @@ bool collinearVecs(const PointType& p, const PointType& q, const PointType& r)
 {
     return orientation(p, q, r) == 0;
 }
+
+/***
+* @return true is this point is betwen a and b
+* @note c must be collinear with a and b
+* @see O'Rourke, Joseph, "Computational Geometry in C, 2nd Ed.", pp.32
+*/
+bool between(const PointType& p, const PointType& a, const PointType& b)
+{
+    // if this point is not collinear with a and b
+    // then it cannot be between this two points
+    if (!collinearVecs(p, a, b))
+        return false;
+
+    auto& _x = p.x;
+    auto& _y = p.y;
+
+    return
+        ((a.x <= _x && _x <= b.x) && (a.y <= _y && _y <= b.y)) ||
+        ((b.x <= _x && _x <= a.x) && (b.y <= _y && _y <= a.y));
+}
