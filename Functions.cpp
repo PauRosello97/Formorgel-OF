@@ -103,3 +103,71 @@ bool overlap(const PolyLine& l1, const PolyLine& l2)
         ((l1.contains(l2.a) || l1.contains(l2.b)) ||
         (l2.contains(l1.a) || l2.contains(l1.b)));
 }
+
+
+/***
+* @return a new simplified line if line_1 and line_2 overlaps, NULL otherwise
+*/
+int simplifiedLine(const PolyLine& line_1, const PolyLine& line_2, PolyLine& ret)
+{
+    if (overlap(line_1, line_2))
+    {
+        if (line_1.contains(line_2))
+        {
+            ret = line_1;
+            return 1;
+        }
+        if (line_2.contains(line_1))
+        {
+            ret = line_2;
+            return 2;
+        }
+
+        PointType new_line_start_point;
+        PointType new_line_end_point;
+
+        // detects which point of <line_1> must be removed
+        if (between(line_1.a, line_2.a, line_2.b)) {
+            new_line_start_point = line_1.b;
+        }
+        else {
+            new_line_start_point = line_1.a;
+        }
+        // detects which point of <line_2> must be removed
+        if (between(line_2.a, line_1.a, line_1.b)) {
+            new_line_end_point = line_2.b;
+        }
+        else {
+            new_line_end_point = line_2.a;
+        }
+
+        // create a new line
+        ret = PolyLine(new_line_start_point, new_line_end_point);
+        return 3;
+    }
+
+    return 0;
+
+}
+
+
+int iComparePointOrder(const PointType& p1, const PointType& p2)
+{
+    if (p1.y < p2.y)
+        return -1;
+    else if (p1.y == p2.y)
+    {
+        if (p1.x < p2.x)
+            return -1;
+        else if (p1.x == p2.x)
+            return 0;
+    }
+    // p1 is greater than p2
+    return 1;
+}
+
+bool bComparePointOrder(const PointType& p1, const PointType& p2)
+{
+    return iComparePointOrder(p1, p2) < 0;
+}
+

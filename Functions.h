@@ -26,3 +26,6 @@ bool collinearVecs(const PointType& p, const PointType& q, const PointType& r);
 bool between(const PointType& p, const PointType& a, const PointType& b);
 bool pointsDiffer(const PointType& a, const PointType& b, bool aprox = true);
 bool overlap(const PolyLine& l1, const PolyLine& l2);
+int simplifiedLine(const PolyLine& line_1, const PolyLine& line_2, PolyLine& ret);
+int iComparePointOrder(const PointType& p1, const PointType& p2);
+bool bComparePointOrder(const PointType& p1, const PointType& p2);

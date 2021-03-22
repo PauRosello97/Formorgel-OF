@@ -43,72 +43,11 @@ bool PolyLine::IntersectionPoint(const PolyLine& line, PointType& pos) const
     return LineLineIntersectionPoint(line, pos);
 }
 
-
-
-/***
-* @return a new simplified line if line_1 and line_2 overlaps, NULL otherwise
-*/
-static int simplifiedLine(const PolyLine& line_1, const PolyLine& line_2, PolyLine& ret)
+static float Area(const PointType& a, const PointType& b, const PointType& c)
 {
-    if (overlap(line_1, line_2))
-    {
-        if (line_1.contains(line_2))
-        {
-            ret = line_1;
-            return 1;
-        }
-        if (line_2.contains(line_1))
-        {
-            ret = line_2;
-            return 2;
-        }
-
-        PointType new_line_start_point;
-        PointType new_line_end_point;
-
-        // detects which point of <line_1> must be removed
-        if (between(line_1.a, line_2.a, line_2.b)) {
-            new_line_start_point = line_1.b;
-        }
-        else {
-            new_line_start_point = line_1.a;
-        }
-        // detects which point of <line_2> must be removed
-        if (between(line_2.a, line_1.a, line_1.b)) {
-            new_line_end_point = line_2.b;
-        }
-        else {
-            new_line_end_point = line_2.a;
-        }
-
-        // create a new line
-        ret = PolyLine(new_line_start_point, new_line_end_point);
-        return 3;
-    }
-
-    return 0;
-
+    return 0.5 * ((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
 }
 
-static int iComparePointOrder(const PointType& p1, const PointType& p2)
-{
-    if (p1.y < p2.y)
-        return -1;
-    else if (p1.y == p2.y)
-    {
-        if (p1.x < p2.x)
-            return -1;
-        else if (p1.x == p2.x)
-            return 0;
-    }
-    // p1 is greater than p2
-    return 1;
-}
-
-static bool bComparePointOrder(const PointType& p1, const PointType& p2)
-{
-    return iComparePointOrder(p1, p2) < 0;
-}
 
 bool PolyLine::bCompareLineOrder(const PolyLine& l1, PolyLine& l2)
 {
@@ -189,10 +128,7 @@ int PolyLine::iCompareLineOrder(const PolyLine& l1, PolyLine& l2)
     return result;
 }
 
-static float Area(const PointType& a, const PointType& b, const PointType& c)
-{
-    return 0.5 * ((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
-}
+
 
 bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
 {
