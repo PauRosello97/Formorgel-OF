@@ -12,6 +12,7 @@
 #include <set>
 #include <list>
 #include <vector>
+#include "Functions.h"
 
 #define logoutf1(x) printf(x "\n")
 #define logoutf(format, ...) printf(format "\n", __VA_ARGS__)
@@ -281,4 +282,6 @@ struct PolyDetector
     bool dissolve();
 
     void dumpLines(const char* msg, bool useIgnore = false);
+
+    
 };

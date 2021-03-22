@@ -181,12 +181,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Formorgel.cpp" />
+    <ClCompile Include="Functions.cpp" />
     <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Formorgel.h" />
+    <ClInclude Include="Functions.h" />
     <ClInclude Include="geom.h" />
     <ClInclude Include="PolyDetector.h" />
     <ClInclude Include="src\ofApp.h" />

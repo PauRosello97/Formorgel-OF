@@ -9,6 +9,7 @@
     </ClCompile>
     <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="Formorgel.cpp" />
+    <ClCompile Include="Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -24,6 +25,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Formorgel.h" />
+    <ClInclude Include="Functions.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
