@@ -798,7 +798,6 @@ uint32_t PolyDetector::DetectAllIntersections()
     do
     {
         took.clear();
-        //nCol = 0;
 
         ok = true;
 
@@ -861,10 +860,8 @@ uint32_t PolyDetector::DetectAllIntersections()
                             uint32_t nMerged = 0;
                             for (auto& pid : l2.intersections)
                             {
-                                //logoutf("add P%u to l#%u", pid, l1.id);
                                 if (std::find(l1.intersections.begin(), l1.intersections.end(), pid) == l1.intersections.end())
                                 {
-                                    //logoutf("add P%u to l#%u", pid, l1.id);
                                     l1.intersections.push_back(pid);
                                     nMerged++;
                                 }
@@ -1208,8 +1205,6 @@ void PolyPol::CalculateFirstAndLastPoint()
 */
 void PolyDetector::SimplifyPolys(double smaller_polygon_length)
 {
-    //logoutf("Polygon set simplification");
-
     // remove small polygons
     uint32_t nRemoved = 0;
     for (auto it = polys.begin(); it != polys.end(); )
@@ -1231,7 +1226,6 @@ void PolyDetector::SimplifyPolys(double smaller_polygon_length)
 
 void PolyDetector::AddLine(const PolyLine& line)
 {
-    //logoutf("add line #%u (%f %f %f %f)", uint32_t(origLines.size()), line.a.x, line.a.y, line.b.x, line.b.y);
     origLines.push_back(line);
 }
 
@@ -1260,11 +1254,9 @@ PolyLine* PolyDetector::findLine(uint32_t id, bool useIgnore)
     auto search = lineIdToIdx.find(id);
     if (search != lineIdToIdx.end())
     {
-        //assert(search->second >= 0 && search->second < lines.size());
         auto& l = lines[search->second];
         if (useIgnore && l.ignore)
         {
-            //logoutf("line id %u is ignored!", id);
             return nullptr;
         }
 
@@ -1398,14 +1390,11 @@ bool PolyCycle::AddLineId(PolyDetector & pd, uint32_t id)
 
         for (auto& id2 : idx)
         {
-            if (id2 != id && id2 != id1
-                //&& !pd.CollinearIdx(id2, id) && !pd.CollinearIdx(id2, id1)
-                )
+            if (id2 != id && id2 != id1)
             {
                 auto l2 = pd.findLine(id2);
 
                 if (l2 && doIntersect(l->center, l1->center, l2->a, l2->b))
-                    //if (l2 && !Collinear(ls, *l2) && ls.PolyIntersects(*l2))
                 {
                     if (pd.verbose > 2)
                         logoutf("line %u can't be added to cycle (coll test)! id2:%u intersects with middle(%u, %u)", id, id2, l->id, l1->id);
@@ -1434,7 +1423,6 @@ bool PolyCycle::AddLineId(PolyDetector & pd, uint32_t id)
 
                         if (nlid2 != id && !contains(nlid2))
                         {
-                            //auto l1 = pd.findLine(nlid1, false);
                             auto l1 = pd.findLine(nlid1, false);
                             auto l2 = pd.findLine(nlid2);
                             if (l1 && l2)
@@ -1498,8 +1486,6 @@ bool PolyDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
                 _cycles.push_back(cycle);
                 if (verbose > 2)
                     cycle.print("[ACCEPTED] ");
-                //logoutf("nCycles:%u", uint32_t(_cycles.size()));
-                //return false;
             }
             else
             {
@@ -1531,7 +1517,6 @@ bool PolyDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
             if (!BuildCycle(nid, cycle))
             {
                 return false;
-                //break;
             }
         }
     }
@@ -1544,14 +1529,11 @@ bool PolyLine::betweenNeighbors(PolyDetector & pd, const PolyLine & l1, const Po
     auto cpid = commonPid(l1);
     if (cpid < 0)
     {
-        //logoutf("l1: cpid %d between %u and %u", cpid, id, l1.id);
-        //logoutf("%s %s", toString(pd).c_str(), l1.toString(pd).c_str());
         return false;
     }
     auto cpid2 = commonPid(l2);
     if (cpid != cpid2)
     {
-        //logoutf("l2: cpid %d between %u and %u", cpid2, id, l2.id);
         return false;
     }
 
@@ -1567,10 +1549,6 @@ bool PolyLine::betweenNeighbors(PolyDetector & pd, const PolyLine & l1, const Po
             logoutf("line %u is between %u and %u (commonP: P%d)", id, l1.id, l2.id, cpid);
         }
     }
-    else
-    {
-        //logoutf("line %u is NOT between %u and %u (commonP: P%d)", id, l1.id, l2.id, cpid);
-    }
 
     return ret;
 }
@@ -1585,15 +1563,9 @@ bool PolyLine::compareNeigh(PolyDetector & pd, uint32_t nid1, uint32_t nid2) con
         return true;
     }
 
-#if 1
     auto dl1 = nl1->center.squaredist(center);
     auto dl2 = nl2->center.squaredist(center);
     return dl1 < dl2;
-#elif 0
-    return PolyLine::bCompareLineOrder(*nl1, *nl2);
-#else
-    return angle(pd, *nl1) < angle(pd, *nl2);
-#endif
 }
 
 bool PolyLine::sortNeigh(PolyDetector & pd) const

@@ -11,44 +11,10 @@ void ofApp::setup(){
 
 	ofEnableDepthTest();
 	
-	generatePattern();
+	formorgel = Formorgel();
+	formorgel.generatePattern();
 }
 
-void ofApp::generatePattern() {
-	lines = {};
-	
-	lines.push_back({ {10, 10}, {500, 500} }); // Diagonal
-	lines.push_back({ {20, 10}, {20,  500} }); // Vertical
-	lines.push_back({ {10, 20}, {500, 20} }); // Horitzontal
-	lines.push_back({ {10, 300},{300, 10} });
-	
-	//lines.push_back({ {10,1000}, {1000,1000} });
-	//lines.push_back({ {1000,10}, {1000,1000} });
-
-	
-	for (int i = 0; i < 50; i++) {
-		lines.push_back({ 
-			{ofRandom(ofGetWidth()),ofRandom(ofGetHeight())}, 
-			{ofRandom(ofGetWidth()),ofRandom(ofGetHeight())} 
-		});
-	}
-	
-	
-
-	PolyDetector pd;
-
-	for (auto& l : lines)
-	{
-		pd.AddLine(l);
-	}
-
-	if (!pd.DetectPolygons())
-	{
-		logoutf("%s", "WARN: cannot detect polys!");
-	}
-
-	polygons = pd.polys;
-}
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -57,18 +23,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	for (int i = 0; i < lines.size(); i++) {
-		ofSetColor(0, 0, 0);
-		ofDrawLine(lines.at(i).a.x, lines.at(i).a.y, lines.at(i).b.x, lines.at(i).b.y);
-	}
-	for (int i = 0; i < polygons.size(); i++) {
-		polygons.at(i).draw();
-	}
+	formorgel.display();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	generatePattern();
+	formorgel.generatePattern();
 }
 
 //--------------------------------------------------------------

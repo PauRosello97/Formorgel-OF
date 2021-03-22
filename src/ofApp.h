@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "../PolyDetector.h"
+#include "../Formorgel.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,8 +23,5 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	void generatePattern();
-
-	std::vector<PolyPol> polygons;
-	std::vector<PolyLine> lines;
+	Formorgel formorgel;
 };
