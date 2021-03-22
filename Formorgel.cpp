@@ -4,6 +4,7 @@ void Formorgel::generatePattern() {
 	lines = {};
 
 	generateSecondLevelPack(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 3);
+	//generateThirdLevelPack(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 3);
 
 	/*
 	for (int i = 0; i < 50; i++) {
@@ -83,6 +84,16 @@ void Formorgel::generateSecondLevelPack(float x, float y, float d) {
 	}
 }
 
+void Formorgel::generateThirdLevelPack(float x, float y, float d) {
+	int rep = int(pow(2 * sin(radians(180 - 360 / d)), 2));
+	float rotationRadius = 2 * rep * radius / 2;
+	float extraR = d == 4 ? 45 : 0;
+
+	for (int i = 0; i < rep; i++) {
+		float angle = radians(extraR + i * 360 / rep);
+		generateSecondLevelPack(x - rotationRadius * cos(angle), y - rotationRadius * sin(angle), d);
+	}
+}
 
 float Formorgel::radians(float degrees) {
 	float pi = 3.14159265359;

@@ -1,6 +1,9 @@
 #include "Functions.h"
 #include "PolyDetector.h"
 
+// The main function that returns true if line segment 'p1q1'
+// and 'p2q2' intersect.
+// https://www.cdn.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
 bool doIntersect(const PointType& p1, const PointType& q1, const PointType& p2, const PointType& q2)
 {
     // Find the four orientations needed for general and
@@ -59,4 +62,9 @@ bool onSegment(const PointType& p, const PointType& q, const PointType& r)
         return true;
 
     return false;
+}
+
+bool collinearVecs(const PointType& p, const PointType& q, const PointType& r)
+{
+    return orientation(p, q, r) == 0;
 }

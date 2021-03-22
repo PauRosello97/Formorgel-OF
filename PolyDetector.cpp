@@ -29,16 +29,6 @@ const char* RmLinesTypeStr(RmLinesType type)
 
 
 
-static bool collinearVecs(const PointType& p, const PointType& q, const PointType& r)
-{
-    return orientation(p, q, r) == 0;
-}
-
-// The main function that returns true if line segment 'p1q1'
-// and 'p2q2' intersect.
-// https://www.cdn.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-
-
 static bool pointsDiffer(const PointType& a, const PointType& b, bool aprox = true)
 {
     // max precision is mandatory since this can break convex polys!

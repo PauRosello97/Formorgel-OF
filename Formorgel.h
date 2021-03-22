@@ -7,6 +7,7 @@ class Formorgel
 	void generateOneShape(float x, float y, float d, float r);
 	void generateOnePack(float x, float y, float d);
 	void generateSecondLevelPack(float x, float y, float d);
+	void generateThirdLevelPack(float x, float y, float d);
 	float radians(float degrees);
 	float radius = 100;
 	float offsetKnob = 0;
