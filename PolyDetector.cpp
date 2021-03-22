@@ -11,8 +11,8 @@
 
 #define arToStr(arg) #arg
 
-static const float minPointDiff = 1e-5f;
-
+// This variable is really important!
+static const float minPointDiff = 2;
 static const float minPointDiffSq = minPointDiff * minPointDiff;
 
 const char* RmLinesTypeStr(RmLinesType type)
