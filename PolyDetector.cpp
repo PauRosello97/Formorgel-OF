@@ -11,10 +11,6 @@
 
 #define arToStr(arg) #arg
 
-// This variable is really important!
-static const float minPointDiff = 2;
-static const float minPointDiffSq = minPointDiff * minPointDiff;
-
 const char* RmLinesTypeStr(RmLinesType type)
 {
     switch (type)
@@ -26,18 +22,6 @@ const char* RmLinesTypeStr(RmLinesType type)
     }
     return "UNKN";
 }
-
-
-
-static bool pointsDiffer(const PointType& a, const PointType& b, bool aprox = true)
-{
-    // max precision is mandatory since this can break convex polys!
-    if (aprox)
-        return a.squaredist(b) >= minPointDiffSq;
-    return a.x != b.x || a.y != b.y;
-}
-
-
 
 bool PolyLine::contains(const PolyLine& line) const
 {

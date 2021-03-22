@@ -88,3 +88,12 @@ bool between(const PointType& p, const PointType& a, const PointType& b)
         ((a.x <= _x && _x <= b.x) && (a.y <= _y && _y <= b.y)) ||
         ((b.x <= _x && _x <= a.x) && (b.y <= _y && _y <= a.y));
 }
+
+bool pointsDiffer(const PointType& a, const PointType& b, bool aprox)
+{
+    // max precision is mandatory since this can break convex polys!
+    if (aprox)
+        return a.squaredist(b) >= minPointDiffSq;
+    return a.x != b.x || a.y != b.y;
+}
+
