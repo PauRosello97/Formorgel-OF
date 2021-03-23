@@ -24,10 +24,7 @@ void Formorgel::generatePattern() {
 		pd.AddLine(l);
 	}
 
-	if (!pd.DetectPolygons())
-	{
-		logoutf("%s", "WARN: cannot detect polys!");
-	}
+	pd.DetectPolygons();
 
 	polygons = pd.polys;
 }
@@ -57,7 +54,6 @@ void Formorgel::generateOneShape(float x, float y, float d, float r) {
 		float endX = startX + radius * lengthKnob * cos(radians(fix + angle + angleKnob));
 		float endY = startY + radius * lengthKnob * sin(radians(fix + angle + angleKnob));
 	
-		std::cout << "------" << startX << "," << startY << "-" << endX << "," << endY << "\n";
 		lines.push_back({{ startX, startY }, { endX, endY }});
 	}
 }

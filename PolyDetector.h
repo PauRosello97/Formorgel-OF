@@ -70,11 +70,6 @@ struct PolyCycle
         return str;
     }
 
-    void print(const char* msg = nullptr) const
-    {
-        logoutf("%s%s", msg ? msg : "", toString().c_str());
-    }
-
     bool Equals(const PolyCycle& p) const;
 
     bool convex(PolyDetector& pd) const;

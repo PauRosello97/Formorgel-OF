@@ -240,7 +240,6 @@ bool PolyDetector::CreateLines()
                 auto& p2 = intersectionPoints[bIdx];
                 if (!pointsDiffer(p1, p2))
                 {
-                    logoutf("P%u P%u are the same for line #%u", aIdx, bIdx, line.id);
                     assert(pointsDiffer(p1, p2));
                 }
 
@@ -251,8 +250,6 @@ bool PolyDetector::CreateLines()
                     if ((lDup.minPid() == std::min(aIdx, bIdx)) &&
                         lDup.maxPid() == std::max(aIdx, bIdx))
                     {
-                        logoutf("WARN: Identical lines detected! procLine:%u [P%u P%u]. Means origLine:#%u and origLine:#%u are collinear!", lDup.id,
-                            lDup.minPid(), lDup.maxPid(), line.id, lDup.origLine);
                         foundDup = true;
                     }
                 }
@@ -285,16 +282,6 @@ bool PolyDetector::CreateLines()
 
             auto aIdx2 = l2.minPid();
             auto bIdx2 = l2.maxPid();
-
-            if (!l1.HasCommonIdxPoints(l2) && overlap(l1, l2))
-            {
-                logoutf("%u:%s and %u:%s overlap! olid:#%u olid:#%u", i, l1.toString(*this).c_str(), j, l2.toString(*this).c_str(), l1.origLine, l2.origLine);
-            }
-
-            if (aIdx1 == aIdx2 && bIdx1 == bIdx2)
-            {
-                logoutf("%u:%s and %u:%s have same points! [P%u P%u] olid1:#%u olid2:#%u", i, l1.toString(*this).c_str(), j, l2.toString(*this).c_str(), aIdx1, bIdx1, l1.origLine, l2.origLine);
-            }
         }
     }
 
@@ -307,7 +294,6 @@ void PolyDetector::dumpLines(const char* msg, bool useIgnore)
     for (auto& l : lines)
     {
         if (useIgnore && l.ignore) continue;
-        logoutf("[%s] %s", msg, l.toString(*this).c_str());
     }
 }
 
@@ -396,9 +382,6 @@ void PolyDetector::RemoveOverlappings()
             }
         }
     }
-
-    if (countBefore != count)
-        logoutf("orig: countBefore:%u count:%u", countBefore, count);
 }
 
 uint32_t PolyDetector::DetectAllIntersections()
@@ -544,7 +527,6 @@ uint32_t PolyDetector::DetectAllIntersections()
             vec::line(vec(l1.a.x, l1.a.y), vec(l1.b.x, l1.b.y), a, b, c);
             if (a + b == 0.0f)
             {
-                logoutf("l1:#%u l1.a: [%f %f] l1.b: [%f %f]", l1.id, l1.a.x, l1.a.y, l1.b.x, l1.b.y);
                 continue;
             }
 
@@ -587,8 +569,6 @@ uint32_t PolyDetector::DetectAllIntersections()
 
                         if (maxLineDist <= minPointDiff)
                         {
-                            logoutf("[%u]: line #%u is collinear with line #%u! nFound:%u lineDist:%f merging ...", times, l1.id, l2.id, nFound, maxLineDist);
-
                             // TODO: merge point of l2 into l1
                             uint32_t nMerged = 0;
                             for (auto& pid : l2.intersections)
@@ -598,10 +578,6 @@ uint32_t PolyDetector::DetectAllIntersections()
                                     l1.intersections.push_back(pid);
                                     nMerged++;
                                 }
-                            }
-                            if (nMerged > 0)
-                            {
-                                logoutf("[%u]: merged %u points from line #%u into line #%u! dist:%f", times, nMerged, l2.id, l1.id, maxLineDist);
                             }
 
                             l2.intersections.clear();
@@ -617,7 +593,6 @@ uint32_t PolyDetector::DetectAllIntersections()
                             uint32_t nRm1 = 0, nRm2 = 0;
                             for (auto& pid : pids)
                             {
-                                logoutf("[%u]]: P%u", times, pid);
                                 for (auto it = l1.intersections.begin(); it != l1.intersections.end();)
                                 {
                                     if (*it == pid)
@@ -642,30 +617,13 @@ uint32_t PolyDetector::DetectAllIntersections()
                             auto keepPid = pids[0];
                             l1.intersections.push_back(keepPid);
                             l2.intersections.push_back(keepPid);
-
-                            logoutf("[%u]]: line #%u has common points(%u) with line #%u keeping just P%u nRm1:%u nRm2:%u rem1:%u rem2:%u lineDist:%f",
-                                times, l1.id, uint32_t(pids.size()), l2.id, keepPid, nRm1, nRm2,
-                                uint32_t(l1.intersections.size()),
-                                uint32_t(l2.intersections.size()),
-                                maxLineDist);
                         }
-
                     }
                 }
             }
         }
         times++;
     } while (!ok);
-
-    logoutf("Number of col lines using intersection points: %u", uint32_t(nCol));
-
-    for (auto& l : origLines)
-    {
-        if (l.intersections.size() == 1)
-        {
-            logoutf("WARN: line #%u has only %u intersections!", l.id, uint32_t(l.intersections.size()));
-        }
-    }
 
     return ret;
 }
@@ -818,7 +776,6 @@ bool PolyDetector::DetectPolygons()
 
     if (!CreateLines())
     {
-        logoutf1("Error: Could not successfully create lines!");
         return false;
     }
 
@@ -830,7 +787,6 @@ bool PolyDetector::DetectPolygons()
 
         if (!FindPolys())
         {
-            logoutf1("Error constructing the polygon set.");
             return false;
         }
 
@@ -926,10 +882,6 @@ void PolyDetector::SimplifyPolys(double smaller_polygon_length)
             ++it;
         } 
     }
-
-    if (nRemoved) {
-        logoutf("Removed %d small polygons", nRemoved);
-    }
 }
 
 void PolyDetector::AddLine(const PolyLine& line)
@@ -970,14 +922,6 @@ PolyLine* PolyDetector::findLine(uint32_t id, bool useIgnore)
 
         return &l;
     }
-    if (search == lineIdToIdx.end())
-    {
-        logoutf("WARN: line %u can't be found in lineIdToIdx! szFast:%u szLines:%u v:%d", id,
-            uint32_t(lineIdToIdx.size()),
-            uint32_t(lines.size()),
-            search != lineIdToIdx.end() ? search->second : -2);
-    }
-
     return nullptr;
 }
 
@@ -990,7 +934,6 @@ PolyLine* PolyDetector::findOrigLine(uint32_t id)
             return &l;
         }
     }
-    logoutf("Cannot find origLine with id %u. nlines:%u", id, uint32_t(origLines.size()));
     return nullptr;
 }
 
@@ -1042,7 +985,6 @@ bool PolyCycle::AddLineId(PolyDetector & pd, uint32_t id)
     auto l = pd.findLine(id);
     if (!l)
     {
-        logoutf("findLine(%u) failed!", id);
         return false;
     }
 
@@ -1254,10 +1196,6 @@ uint32_t& PolyLine::incTook(PolyDetector & pd)
     if (took >= 2)
         return took;
     took++;
-    if (took > 2)
-    {
-        logoutf("WARN: line %s taken %u times!", toString(pd).c_str(), took);
-    }
 
     return took;
 }
@@ -1353,7 +1291,6 @@ bool PolyDetector::FindPolys()
                 auto& l2 = lines[j];
                 if (l1.id == l2.id)
                 {
-                    logoutf("line %s and %s have the same ids!", l1.toString(*this).c_str(), l2.toString(*this).c_str());
                     assert(false);
                 }
             }
@@ -1420,7 +1357,6 @@ bool PolyDetector::FindPolys()
         }
         if (exists)
         {
-            logoutf("WARN: cycle %s already exists!", cycle.toString().c_str());
             continue;
         }
 
@@ -1537,9 +1473,6 @@ bool PolyDetector::dissolveCollinear(PolyLine & l1, PolyLine & l2)
     auto search = findLine(*p1, *p2, false);
     if (search)
     {
-        logoutf("A line %s origLine:#%u already exists with P%u P%u!", search->toString(*this).c_str(), search->origLine, *p1, *p2);
-        //assert(false);
-
         l1.setIgnore(*this, "rmCollinear.l1 (dup)");
         l2.setIgnore(*this, "rmCollinear.l2 (dup)");
 
@@ -1679,11 +1612,8 @@ bool PolyDetector::dissolve()
 
     for (auto& l : lines)
     {
-        if (!l.ignore)
+        if (!l.ignore) {
             l.lastDissolveStep = dissolveCount;
-        if (l.took > 2)
-        {
-            logoutf("WARN: line %s tooked %u times!", l.toString(*this).c_str(), l.took);
         }
     }
 
@@ -1868,7 +1798,6 @@ bool PolyCycle::convex(PolyDetector & pd) const
 
                     if (l3 && doIntersect(ls.a, ls.b, l3->a, l3->b))
                     {
-                        logoutf("convex(%s): l1:%u intersects l2:%u l3:%u", toString().c_str(), l1->id, l2->id, l3->id);
                         return false;
                     }
                 }
