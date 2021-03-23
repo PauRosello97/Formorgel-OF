@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "../Pattern.h"
+#include "../Formorgel.h"
 
 class ofApp : public ofBaseApp{
 
@@ -23,8 +23,5 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	ofShader shader;
-	bool doShader;
-	Pattern pattern;
-		
+	Formorgel formorgel;
 };

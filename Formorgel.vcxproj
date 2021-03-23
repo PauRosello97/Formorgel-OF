@@ -180,27 +180,18 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CircumCircle.cpp" />
-    <ClCompile Include="Edge.cpp" />
-    <ClCompile Include="Line.cpp" />
-    <ClCompile Include="LineIntersector.cpp" />
-    <ClCompile Include="Node.cpp" />
-    <ClCompile Include="Pattern.cpp" />
+    <ClCompile Include="Formorgel.cpp" />
+    <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
-    <ClCompile Include="Triangle.cpp" />
-    <ClCompile Include="Triangulator.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="CircumCircle.h" />
-    <ClInclude Include="Edge.h" />
-    <ClInclude Include="Line.h" />
-    <ClInclude Include="LineIntersector.h" />
-    <ClInclude Include="Node.h" />
-    <ClInclude Include="Pattern.h" />
+    <ClInclude Include="Formorgel.h" />
+    <ClInclude Include="Functions.h" />
+    <ClInclude Include="geom.h" />
+    <ClInclude Include="PolyDetector.h" />
     <ClInclude Include="src\ofApp.h" />
-    <ClInclude Include="Triangle.h" />
-    <ClInclude Include="Triangulator.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

@@ -7,88 +7,25 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Pattern.cpp">
-      <Filter>src\Pattern</Filter>
-    </ClCompile>
-    <ClCompile Include="Node.cpp">
-      <Filter>src\Node</Filter>
-    </ClCompile>
-    <ClCompile Include="Line.cpp">
-      <Filter>src\Line</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangle.cpp">
-      <Filter>src\Triangle</Filter>
-    </ClCompile>
-    <ClCompile Include="LineIntersector.cpp">
-      <Filter>src\LineIntersector</Filter>
-    </ClCompile>
-    <ClCompile Include="Triangulator.cpp">
-      <Filter>src\Triangulator</Filter>
-    </ClCompile>
-    <ClCompile Include="CircumCircle.cpp">
-      <Filter>src\CircumCircle</Filter>
-    </ClCompile>
-    <ClCompile Include="Edge.cpp">
-      <Filter>src\Edge</Filter>
-    </ClCompile>
+    <ClCompile Include="PolyDetector.cpp" />
+    <ClCompile Include="Formorgel.cpp" />
+    <ClCompile Include="Functions.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Pattern">
-      <UniqueIdentifier>{2782f5b6-d55b-4bff-99de-1628f55f846c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Node">
-      <UniqueIdentifier>{683fa0b5-8528-4c34-a4d6-068430690cd4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Line">
-      <UniqueIdentifier>{fa1cb411-d0d2-40d2-b3d9-cf64d1215593}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Triangle">
-      <UniqueIdentifier>{8362803a-3cc7-40fe-a4c0-7719e7ff3fe5}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\LineIntersector">
-      <UniqueIdentifier>{a1c9ecc8-d93b-494b-ad63-a6c2a15d982a}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Triangulator">
-      <UniqueIdentifier>{284c140a-4024-42fb-8571-0325a3bfcd08}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\CircumCircle">
-      <UniqueIdentifier>{6cab5f44-bae9-4fa7-ae9e-203d34d20bc9}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Edge">
-      <UniqueIdentifier>{c4131fd5-ccdf-4fbc-bfab-eb6b63754a3a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Pattern.h">
-      <Filter>src\Pattern</Filter>
+    <ClInclude Include="PolyDetector.h" />
+    <ClInclude Include="geom.h">
+      <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Node.h">
-      <Filter>src\Node</Filter>
-    </ClInclude>
-    <ClInclude Include="Line.h">
-      <Filter>src\Line</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangle.h">
-      <Filter>src\Triangle</Filter>
-    </ClInclude>
-    <ClInclude Include="Triangulator.h">
-      <Filter>src\Triangulator</Filter>
-    </ClInclude>
-    <ClInclude Include="LineIntersector.h">
-      <Filter>src\LineIntersector</Filter>
-    </ClInclude>
-    <ClInclude Include="CircumCircle.h">
-      <Filter>src\CircumCircle</Filter>
-    </ClInclude>
-    <ClInclude Include="Edge.h">
-      <Filter>src\Edge</Filter>
-    </ClInclude>
+    <ClInclude Include="Formorgel.h" />
+    <ClInclude Include="Functions.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

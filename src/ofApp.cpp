@@ -1,28 +1,20 @@
 #include "ofApp.h"
 #include <string> 
+#include <sstream>
 
 //--------------------------------------------------------------
 void ofApp::setup(){
-
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofBackground(50, 50, 50);
 	ofSetVerticalSync(false);
 	ofEnableAlphaBlending();
 
-	shader.setGeometryInputType(GL_LINES);
-	shader.setGeometryOutputType(GL_TRIANGLE_STRIP);
-	shader.setGeometryOutputCount(4);
-	shader.load("shaders/vert.glsl", "shaders/frag.glsl", "shaders/geom.glsl");
-
-	ofLog() << "Maximum number of output vertices support is: " << shader.getGeometryMaxOutputCount();
-
-
-	pattern.setup(shader);
-
-	doShader = true;
 	ofEnableDepthTest();
-
+	
+	formorgel = Formorgel();
+	formorgel.generatePattern();
 }
+
 
 //--------------------------------------------------------------
 void ofApp::update(){
@@ -31,31 +23,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-
-	pattern.draw();
-
-	ofDrawBitmapString(
-		"fps: " + ofToString((int)ofGetFrameRate()) + 
-		"\nPress 's' to toggle shader: " + (doShader ? "ON" : "OFF") + 
-		"\nPress 'r' to reload" +
-		"\nnLines: " + std::to_string(pattern.getNLines()) +
-		"\nnNodes: " + std::to_string(pattern.getNNodes()) +
-		"\nnTriangles: " + std::to_string(pattern.getNTriangles()),
-		20, 
-		20
-	);
+	formorgel.display();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	if (key == 's') {
-		doShader = !doShader;
-		pattern.setDoShader(doShader);
-	}
-	else if (key == 'r') {
-		pattern.setup(shader);
-		pattern.setDoShader(doShader);
-	}
+	formorgel.generatePattern();
 }
 
 //--------------------------------------------------------------
