@@ -215,11 +215,6 @@ bool PolyDetector::CreateLines()
     int intersection_count = DetectAllIntersections();
     if (intersection_count == 0)
         return true;
-    if (verbose)
-    {
-        logoutf("Detected %d intersections", intersection_count);
-        logoutf("%u lines after intersection detection", uint32_t(origLines.size()));
-    }
 
     // sweep all lines
     lines.clear();
@@ -231,8 +226,6 @@ bool PolyDetector::CreateLines()
         if (line.intersections.size() >= 2)
         {
             line.SortIntersectionsList(*this);
-            if (verbose > 1)
-                logoutf("line #%u nIntersections:%u", line.id, uint32_t(line.intersections.size()));
 
             for (uint32_t i = 1; i < line.intersections.size(); ++i)
             {
@@ -258,38 +251,22 @@ bool PolyDetector::CreateLines()
                     if ((lDup.minPid() == std::min(aIdx, bIdx)) &&
                         lDup.maxPid() == std::max(aIdx, bIdx))
                     {
-                        //if (verbose)
                         logoutf("WARN: Identical lines detected! procLine:%u [P%u P%u]. Means origLine:#%u and origLine:#%u are collinear!", lDup.id,
                             lDup.minPid(), lDup.maxPid(), line.id, lDup.origLine);
-                        //assert(false);
                         foundDup = true;
                     }
                 }
 
                 if (foundDup)
                 {
-                    if (verbose)
-                        logoutf("WARN: line #%u has duplicate procLines! [P%u P%u]", line.id, aIdx, bIdx);
+                    
                 }
                 else if (!pointsDiffer(p1, p2))
                 {
-                    if (verbose)
-                        logoutf("WARN: line #%u has zero length! [P%u P%u]", line.id, aIdx, bIdx);
                 }
                 else
                 {
                     lines.push_back(newLine(i - 1, i, line));
-                }
-
-                if (verbose > 3)
-                {
-                    logoutf("[L#%u][%f %f, %f %f] -> %u [P%u P%u] [%f %f] [%f %f]",
-                        line.id,
-                        line.a.x, line.a.y, line.b.x, line.b.y,
-                        i,
-                        aIdx < bIdx ? aIdx : bIdx, aIdx < bIdx ? bIdx : aIdx,
-                        p1.x, p1.y,
-                        p2.x, p2.y);
                 }
             }
         }
@@ -321,8 +298,6 @@ bool PolyDetector::CreateLines()
         }
     }
 
-    if (verbose)
-        logoutf("nOrigLines:%u nLines:%u", uint32_t(origLines.size()), uint32_t(lines.size()));
 
     return true;
 }
@@ -389,31 +364,17 @@ void PolyDetector::RemoveOverlappings()
             {
                 int ret = simplifiedLine(line_i, line_j, line);
 
-                if (verbose > 3)
-                    logoutf("origLine #%u {%f %f %f %f} overlaps with origLine #%u {%f %f %f %f} ret:%d",
-                        line_i.id, line_i.a.x, line_i.a.y, line_i.b.x, line_i.b.y,
-                        line_j.id, line_j.a.x, line_j.a.y, line_j.b.x, line_j.b.y,
-                        ret);
-
                 if (ret == 1)
                 {
-                    // must remove line_j
-                    if (verbose > 1)
-                        logoutf("rm origLine %u", line_j.id);
                     origLines.erase(origLines.begin() + j);
                     j--;
                     count--;
-
-                    //i = 0; break;
                 }
                 else
                 {
                     if (ret != 2)
                     {
                         line.id = line_i.id;
-
-                        if (verbose)
-                            logoutf("new origLine %u by merging %u and %u", line.id, line_i.id, line_j.id);
 
                         // must remove both line_i and line_j and add a new one
                         origLines.erase(origLines.begin() + j);
@@ -498,8 +459,6 @@ uint32_t PolyDetector::DetectAllIntersections()
                     {
                         if (*it == l1.id)
                         {
-                            if (verbose)
-                                logoutf("removed intersectedLine line #%u from line #%u", l1.id, l2.id);
                             it = l2.intersectedLines.erase(it);
                             i = 0; // recheck all lines
                         }

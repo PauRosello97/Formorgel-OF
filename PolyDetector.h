@@ -35,23 +35,17 @@ using PointType = vec;
 struct PolyCycle
 {
     CycleSet idx;
-
     uint32_t startIdx, lastIdx;
     bool isClosed;
     bool fine;
     //uint32_t colStep = 0; // use it to increase the recursive colliniar length
-
     bool canBeClosed(PolyDetector& pd, uint32_t idToAdd) const;
-
     bool contains(uint32_t idP) const
     {
         return std::find(idx.begin(), idx.end(), idP) != idx.end();
     }
-
     uint32_t numCuts(PolyDetector& pd, const PolyLine& l) const;
-
     bool AddLineId(PolyDetector& pd, uint32_t id);
-
     std::string idxToString() const
     {
         std::string str;
