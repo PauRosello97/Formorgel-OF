@@ -225,7 +225,6 @@ struct PolyDetector
         origLines, // from user
         lines; // active lines
     PolyVector polys;
-    uint32_t verbose = 0;
 
     std::map<uint32_t, std::vector<uint32_t>> _neighbors; // key: lid, val: vec(neighborLine)
     std::map<uint32_t, std::vector<uint32_t>> collinearLineMap; // key: lid, val: vec(collinearLine)
