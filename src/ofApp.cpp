@@ -11,8 +11,8 @@ void ofApp::setup(){
 
 	ofEnableDepthTest();
 	
-	formorgel = Formorgel();
-	formorgel.generatePattern();
+	geometricSynth = GeometricSynth();
+	geometricSynth.generateComposition();
 }
 
 
@@ -23,12 +23,12 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-	formorgel.display();
+	geometricSynth.display();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	formorgel.generatePattern();
+	//formorgel.generatePattern();
 }
 
 //--------------------------------------------------------------

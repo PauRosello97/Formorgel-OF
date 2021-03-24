@@ -1,7 +1,7 @@
 #pragma once
 
 #include "ofMain.h"
-#include "../Formorgel.h"
+#include "../GeometricSynth.h";
 
 class ofApp : public ofBaseApp{
 
@@ -23,5 +23,5 @@ public:
 	void dragEvent(ofDragInfo dragInfo);
 	void gotMessage(ofMessage msg);
 
-	Formorgel formorgel;
+	GeometricSynth geometricSynth;
 };

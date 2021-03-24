@@ -1,45 +1,18 @@
 #include "Formorgel.h"
 
-void Formorgel::generatePattern() {
+Formorgel::Formorgel() {
+
+}
+
+std::vector<PolyLine> Formorgel::generatePattern() {
 	lines = {};
 
 	generateSecondLevelPack(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 3);
-	generateSecondLevelPack((ofGetWindowWidth() / 2)+50, (ofGetWindowHeight() / 2) + 50, 3);
-	//generateThirdLevelPack(ofGetWindowWidth() / 2, ofGetWindowHeight() / 2, 3);
-
-	/*
-	for (int i = 0; i < 50; i++) {
-		lines.push_back({
-			{ofRandom(ofGetWidth()),ofRandom(ofGetHeight())},
-			{ofRandom(ofGetWidth()),ofRandom(ofGetHeight())}
-			}
-		);
-	}
-	*/	
-
-	PolyDetector pd;
-
-	for (auto& l : lines)
-	{
-		pd.AddLine(l);
-	}
-
-	pd.DetectPolygons();
-
-	polygons = pd.polys;
+	//generateSecondLevelPack((ofGetWindowWidth() / 2)+50, (ofGetWindowHeight() / 2) + 50, 3);
+	
+	return lines;
 }
 
-void Formorgel::display() {
-	
-	for (int i = 0; i < lines.size(); i++) {
-		ofSetColor(0, 0, 0);
-		ofDrawLine(lines.at(i).a.x, lines.at(i).a.y, lines.at(i).b.x, lines.at(i).b.y);
-	}
-	
-	for (int i = 0; i < polygons.size(); i++) {
-		polygons.at(i).draw();
-	}
-}
 
 void Formorgel::generateOneShape(float x, float y, float d, float r) {
 	

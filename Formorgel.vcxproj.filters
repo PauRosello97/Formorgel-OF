@@ -10,6 +10,7 @@
     <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="Formorgel.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="GeometricSynth.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -26,6 +27,7 @@
     </ClInclude>
     <ClInclude Include="Formorgel.h" />
     <ClInclude Include="Functions.h" />
+    <ClInclude Include="GeometricSynth.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

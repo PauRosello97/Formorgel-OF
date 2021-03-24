@@ -182,6 +182,7 @@
   <ItemGroup>
     <ClCompile Include="Formorgel.cpp" />
     <ClCompile Include="Functions.cpp" />
+    <ClCompile Include="GeometricSynth.cpp" />
     <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -190,6 +191,7 @@
     <ClInclude Include="Formorgel.h" />
     <ClInclude Include="Functions.h" />
     <ClInclude Include="geom.h" />
+    <ClInclude Include="GeometricSynth.h" />
     <ClInclude Include="PolyDetector.h" />
     <ClInclude Include="src\ofApp.h" />
   </ItemGroup>

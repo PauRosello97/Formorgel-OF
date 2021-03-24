@@ -1,6 +1,7 @@
 #pragma once
-#include <vector>
+#include "ofMain.h"
 #include "PolyDetector.h"
+#include <vector>
 
 class Formorgel
 {
@@ -16,11 +17,8 @@ class Formorgel
 
 public:
 
-	std::vector<PolyPol> polygons;
+	Formorgel();
 	std::vector<PolyLine> lines;
-
-	void generatePattern();
-	void display();
-	
+	std::vector<PolyLine> generatePattern();
 };
 
