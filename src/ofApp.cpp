@@ -23,12 +23,19 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	ofSetColor(120, 120, 120);
+	float width = ofGetWindowWidth();
+	float height = ofGetWindowHeight();
+	ofDrawRectangle(0, 0, width, 50); //Top
+	ofDrawRectangle(0, height-50, width, 50); //Bot
+	ofDrawRectangle(width-50, 0, 50, height); //Right
+	ofDrawRectangle(0, 0, 350, height); //Left
 	geometricSynth.display();
 }
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	//formorgel.generatePattern();
+	geometricSynth.generateComposition();
 }
 
 //--------------------------------------------------------------

@@ -12,6 +12,7 @@ void GeometricSynth::generateComposition() {
 	for (auto& l : linesB) { lines.push_back(l); }
 	for (auto& l : lines){ polyDetector.AddLine(l); }
 
+	//polyDetector.reset();
 	polyDetector.DetectPolygons();
 
 	polygons = polyDetector.polys;
