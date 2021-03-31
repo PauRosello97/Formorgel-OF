@@ -9,16 +9,19 @@ class Formorgel
 	void generateOnePack(float x, float y, float d);
 	void generateSecondLevelPack(float x, float y, float d);
 	void generateThirdLevelPack(float x, float y, float d);
+	void generateFourthLevelPack(float x, float y, float d);
 	float radians(float degrees);
-	float radius = 100;
-	float offsetKnob = 0;
-	float angleKnob = 0;
-	float lengthKnob = 2;
+	float radius = 200;
+	float offsetKnob;
+	float angleKnob;
+	float lengthKnob;
 
 public:
-
 	Formorgel();
+	Formorgel(float offsetKnob, float angleKnob, float lengthKnob);
 	std::vector<PolyLine> lines;
 	std::vector<PolyLine> generatePattern();
+
+	
 };
 

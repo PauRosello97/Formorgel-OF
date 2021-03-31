@@ -5,7 +5,9 @@
 class GeometricSynth
 {
 public:
-	Formorgel formorgel;
+	GeometricSynth();
+	Formorgel formorgelA;
+	Formorgel formorgelB;
 	PolyDetector polyDetector;
 
 	std::vector<PolyPol> polygons;

@@ -1,13 +1,19 @@
 #include "Formorgel.h"
 
-Formorgel::Formorgel() {
+Formorgel::Formorgel(){}
+
+Formorgel::Formorgel(float _offsetKnob, float _angleKnob, float _lengthKnob) {
+	offsetKnob = _offsetKnob;
+	angleKnob = _angleKnob;
+	lengthKnob = _lengthKnob;
 
 }
 
 std::vector<PolyLine> Formorgel::generatePattern() {
 	lines = {};
 
-	generateSecondLevelPack(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 3);
+	//generateFourthLevelPack(ofGetWindowWidth() / 2 + x, ofGetWindowHeight() / 2 + y, 3);
+	generateThirdLevelPack(ofGetWindowWidth()/2, ofGetWindowHeight()/2, 3);
 	//generateSecondLevelPack((ofGetWindowWidth() / 2)+50, (ofGetWindowHeight() / 2) + 50, 3);
 	
 	return lines;
@@ -64,6 +70,17 @@ void Formorgel::generateThirdLevelPack(float x, float y, float d) {
 	for (int i = 0; i < rep; i++) {
 		float angle = radians(extraR + i * 360 / rep);
 		generateSecondLevelPack(x - rotationRadius * cos(angle), y - rotationRadius * sin(angle), d);
+	}
+}
+
+void Formorgel::generateFourthLevelPack(float x, float y, float d) {
+	int rep = int(pow(2 * sin(radians(180 - 360 / d)), 2));
+	float rotationRadius = 2 * rep * radius * sin(radians(180 - 360 / d));
+	float extraR = d == 4 ? 45 : 0;
+
+	for (int i = 0; i < rep; i++) {
+		float angle = radians(extraR + i * 360 / rep);
+		generateThirdLevelPack(x + rotationRadius * sin(angle), y + rotationRadius * cos(angle), d);
 	}
 }
 
