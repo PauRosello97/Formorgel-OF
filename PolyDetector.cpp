@@ -1281,22 +1281,19 @@ bool PolyDetector::FindPolys()
             l->sortNeigh(*this);
     }
 
-    if (1)
+    // Checks if there are two lines with the same ID.
+    for (int i = 0; i < lines.size(); ++i)
     {
-        for (uint32_t i = 0; i < lines.size(); ++i)
+        auto& l1 = lines[i];
+        for (int j = i + 1; j < lines.size(); ++j)
         {
-            auto& l1 = lines[i];
-            for (uint32_t j = i + 1; j < lines.size(); ++j)
+            auto& l2 = lines[j];
+            if (l1.id == l2.id)
             {
-                auto& l2 = lines[j];
-                if (l1.id == l2.id)
-                {
-                    assert(false);
-                }
+                assert(false);
             }
         }
     }
-
 
     if (dissolveCount == 0)
     {
@@ -1810,7 +1807,7 @@ bool PolyCycle::convex(PolyDetector & pd) const
 void PolyDetector::reset()
 {
     _cycles.clear();
-    origLines.clear();
+    //origLines.clear();
     lines.clear();
     polys.clear();
     _neighbors.clear();
