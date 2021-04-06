@@ -15,7 +15,6 @@ void ofApp::setup(){
 	geometricSynth.generateComposition();
 }
 
-
 //--------------------------------------------------------------
 void ofApp::update(){
 

@@ -11,7 +11,7 @@ class Formorgel
 	void generateThirdLevelPack(float x, float y, float d);
 	void generateFourthLevelPack(float x, float y, float d);
 	float radians(float degrees);
-	float radius = 200;
+	float radius = 150;
 	float offsetKnob;
 	float angleKnob;
 	float lengthKnob;

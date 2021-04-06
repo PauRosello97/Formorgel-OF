@@ -4,18 +4,17 @@
 
 class GeometricSynth
 {
-public:
-	GeometricSynth();
 	Formorgel formorgelA;
 	Formorgel formorgelB;
 	PolyDetector polyDetector;
+
+public:
+	GeometricSynth();
 
 	std::vector<PolyPol> polygons;
 	std::vector<PolyLine> lines;
 
 	void generateComposition();
 	void display();
-
-	
 };
 
