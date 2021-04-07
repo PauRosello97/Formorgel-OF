@@ -6,7 +6,6 @@ Formorgel::Formorgel(float _offsetKnob, float _angleKnob, float _lengthKnob) {
 	offsetKnob = _offsetKnob;
 	angleKnob = _angleKnob;
 	lengthKnob = _lengthKnob;
-
 }
 
 std::vector<PolyLine> Formorgel::generatePattern() {

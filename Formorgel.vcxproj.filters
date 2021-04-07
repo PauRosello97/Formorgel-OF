@@ -7,10 +7,18 @@
     <ClCompile Include="src\main.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="PolyDetector.cpp" />
-    <ClCompile Include="Formorgel.cpp" />
-    <ClCompile Include="Functions.cpp" />
-    <ClCompile Include="GeometricSynth.cpp" />
+    <ClCompile Include="Formorgel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Functions.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometricSynth.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="PolyDetector.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -21,13 +29,21 @@
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="PolyDetector.h" />
     <ClInclude Include="geom.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Formorgel.h" />
-    <ClInclude Include="Functions.h" />
-    <ClInclude Include="GeometricSynth.h" />
+    <ClInclude Include="Formorgel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Functions.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometricSynth.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="PolyDetector.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

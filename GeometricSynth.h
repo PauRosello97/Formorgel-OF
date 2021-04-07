@@ -14,7 +14,7 @@ public:
 	std::vector<PolyPol> polygons;
 	std::vector<PolyLine> lines;
 
-	void generateComposition();
+	void generateComposition(Formorgel fA, Formorgel fB);
 	void display();
 };
 

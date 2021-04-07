@@ -10,9 +10,12 @@ void ofApp::setup(){
 	ofEnableAlphaBlending();
 
 	ofEnableDepthTest();
-	
+
 	geometricSynth = GeometricSynth();
-	geometricSynth.generateComposition();
+	geometricSynth.generateComposition(
+		Formorgel(offsetA, angleA, lengthA), 
+		Formorgel(offsetB, angleB, lengthB)
+	);
 }
 
 //--------------------------------------------------------------
@@ -34,7 +37,11 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	geometricSynth.generateComposition();
+	geometricSynth = GeometricSynth();
+	geometricSynth.generateComposition(
+		Formorgel(offsetA, angleA, lengthA),
+		Formorgel(offsetB, angleB, lengthB)
+	);
 }
 
 //--------------------------------------------------------------

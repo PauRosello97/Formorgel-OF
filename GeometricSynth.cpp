@@ -2,9 +2,9 @@
 
 GeometricSynth::GeometricSynth(){}
 
-void GeometricSynth::generateComposition() {
-	formorgelA = Formorgel(0, 0, 2);
-	formorgelB = Formorgel(0.6, 0, 0.5);
+void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB) {
+	formorgelA = fA;
+	formorgelB = fB;
 
 	lines = formorgelA.generatePattern();
 	std::vector<PolyLine> linesB = formorgelB.generatePattern();
@@ -26,7 +26,6 @@ void GeometricSynth::display() {
 	}
 	*/
 
-	
 	for (int i = 0; i < polygons.size(); i++) {
 		polygons.at(i).draw();
 	}
