@@ -29,6 +29,4 @@ void GeometricSynth::display() {
 	for (int i = 0; i < polygons.size(); i++) {
 		polygons.at(i).draw();
 	}
-		
 }
-

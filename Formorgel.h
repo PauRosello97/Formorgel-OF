@@ -15,13 +15,12 @@ class Formorgel
 	float offsetKnob;
 	float angleKnob;
 	float lengthKnob;
+	int id;
 
 public:
 	Formorgel();
-	Formorgel(float offsetKnob, float angleKnob, float lengthKnob);
+	Formorgel(float offsetKnob, float angleKnob, float lengthKnob, int id);
 	std::vector<PolyLine> lines;
 	std::vector<PolyLine> generatePattern();
-
-	
 };
 

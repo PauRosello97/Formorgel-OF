@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "../GeometricSynth.h";
+#include "../Oscillator.h";
 
 class ofApp : public ofBaseApp{
 
@@ -13,6 +14,8 @@ class ofApp : public ofBaseApp{
 	float angleB = 0;
 	float lengthB = 2;
 	
+	Oscillator oscA;
+	Oscillator oscB;
 
 public:
 	void setup();

@@ -2,10 +2,11 @@
 
 Formorgel::Formorgel(){}
 
-Formorgel::Formorgel(float _offsetKnob, float _angleKnob, float _lengthKnob) {
+Formorgel::Formorgel(float _offsetKnob, float _angleKnob, float _lengthKnob, int _id) {
 	offsetKnob = _offsetKnob;
 	angleKnob = _angleKnob;
 	lengthKnob = _lengthKnob;
+	id = _id;
 }
 
 std::vector<PolyLine> Formorgel::generatePattern() {
@@ -18,7 +19,6 @@ std::vector<PolyLine> Formorgel::generatePattern() {
 	
 	return lines;
 }
-
 
 void Formorgel::generateOneShape(float x, float y, float d, float r) {
 	

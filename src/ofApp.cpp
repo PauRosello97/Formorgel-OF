@@ -13,9 +13,14 @@ void ofApp::setup(){
 
 	geometricSynth = GeometricSynth();
 	geometricSynth.generateComposition(
-		Formorgel(offsetA, angleA, lengthA), 
-		Formorgel(offsetB, angleB, lengthB)
+		Formorgel(offsetA, angleA, lengthA, 0), 
+		Formorgel(offsetB, angleB, lengthB, 1)
 	);
+
+	float margin = 25;
+	float lateralWidth = 350;
+	oscA = Oscillator(margin, margin, lateralWidth - 50, 300);
+	oscB = Oscillator(margin, lateralWidth, lateralWidth - 50, 300);
 }
 
 //--------------------------------------------------------------
@@ -25,13 +30,17 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
+	float margin = 25;
+	float lateralWidth = 350;
+	oscA.display();
+	oscB.display();
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
-	ofDrawRectangle(0, 0, width, 50); //Top
-	ofDrawRectangle(0, height-50, width, 50); //Bot
-	ofDrawRectangle(width-50, 0, 50, height); //Right
-	ofDrawRectangle(0, 0, 350, height); //Left
+	ofDrawRectangle(0, 0, width, margin); //Top
+	ofDrawRectangle(0, height-margin, width, margin); //Bot
+	ofDrawRectangle(width- margin, 0, margin, height); //Right
+	ofDrawRectangle(0, 0, lateralWidth, height); //Left
 	geometricSynth.display();
 }
 
@@ -39,8 +48,8 @@ void ofApp::draw(){
 void ofApp::keyPressed(int key){
 	geometricSynth = GeometricSynth();
 	geometricSynth.generateComposition(
-		Formorgel(offsetA, angleA, lengthA),
-		Formorgel(offsetB, angleB, lengthB)
+		Formorgel(offsetA, ofRandom(90), lengthA, 0),
+		Formorgel(offsetB, angleB, lengthB, 1)
 	);
 }
 
