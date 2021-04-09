@@ -184,6 +184,7 @@
     <ClCompile Include="Formorgel.cpp" />
     <ClCompile Include="Functions.cpp" />
     <ClCompile Include="GeometricSynth.cpp" />
+    <ClCompile Include="Input.cpp" />
     <ClCompile Include="Oscillator.cpp" />
     <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="Functions.h" />
     <ClInclude Include="geom.h" />
     <ClInclude Include="GeometricSynth.h" />
+    <ClInclude Include="Input.h" />
     <ClInclude Include="Oscillator.h" />
     <ClInclude Include="PolyDetector.h" />
     <ClInclude Include="src\ofApp.h" />

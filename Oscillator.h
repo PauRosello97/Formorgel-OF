@@ -1,10 +1,12 @@
 #pragma once
 #include "ofMain.h"
 #include "Button.h"
+#include "Input.h"
 
 class Oscillator
 {
 	Button button;
+	Input angleInput;
 	float x, y, h, w;
 
 public:
@@ -12,6 +14,7 @@ public:
 	Oscillator(float x, float y, float w, float h);
 	void display();
 	bool isOverButton();
+	void mousePressed();
 
 	float offset = 0;
 	float angle = ofRandom(90);

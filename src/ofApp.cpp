@@ -73,6 +73,9 @@ void ofApp::mousePressed(int x, int y, int button){
 			Formorgel(oscB.offset, oscB.angle, oscB.length, 1)
 		);
 	}
+	else {
+		oscA.mousePressed();
+	}
 }
 
 //--------------------------------------------------------------
