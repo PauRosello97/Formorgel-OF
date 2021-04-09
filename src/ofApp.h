@@ -5,14 +5,6 @@
 #include "../Oscillator.h";
 
 class ofApp : public ofBaseApp{
-
-	float offsetA = 0;
-	float angleA = 0;
-	float lengthA = 2;
-	
-	float offsetB = 0.6;
-	float angleB = 0;
-	float lengthB = 2;
 	
 	Oscillator oscA;
 	Oscillator oscB;

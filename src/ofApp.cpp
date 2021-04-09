@@ -13,8 +13,8 @@ void ofApp::setup(){
 
 	geometricSynth = GeometricSynth();
 	geometricSynth.generateComposition(
-		Formorgel(offsetA, angleA, lengthA, 0), 
-		Formorgel(offsetB, angleB, lengthB, 1)
+		Formorgel(oscA.offset, oscA.angle, oscA.length, 0), 
+		Formorgel(oscB.offset, oscB.angle, oscB.length, 1)
 	);
 
 	float margin = 25;
@@ -46,11 +46,7 @@ void ofApp::draw(){
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
-	geometricSynth = GeometricSynth();
-	geometricSynth.generateComposition(
-		Formorgel(offsetA, ofRandom(90), lengthA, 0),
-		Formorgel(offsetB, angleB, lengthB, 1)
-	);
+	
 }
 
 //--------------------------------------------------------------
@@ -70,7 +66,13 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-
+	if (oscA.isOverButton() || oscB.isOverButton()) {
+		geometricSynth = GeometricSynth();
+		geometricSynth.generateComposition(
+			Formorgel(oscA.offset, oscA.angle, oscA.length, 0),
+			Formorgel(oscB.offset, oscB.angle, oscB.length, 1)
+		);
+	}
 }
 
 //--------------------------------------------------------------

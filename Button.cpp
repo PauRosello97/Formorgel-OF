@@ -1,9 +1,7 @@
 #include "Button.h"
 
 
-Button::Button() {
-
-}
+Button::Button() {}
 
 Button::Button(float _x, float _y, float _w, float _h) {
 	x = _x;
@@ -21,9 +19,8 @@ void Button::display() {
 	}
 	
 	ofDrawRectangle(x, y, w, h);
-
 }
 
 bool Button::isOver() {
-	return true;
+	return ofGetMouseX() > x && ofGetMouseX() < x+w && ofGetMouseY()> y && ofGetMouseY()<y+h;
 }

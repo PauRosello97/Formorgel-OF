@@ -19,8 +19,12 @@
     <ClCompile Include="PolyDetector.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Oscillator.cpp" />
-    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Oscillator.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -46,8 +50,12 @@
     <ClInclude Include="PolyDetector.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Oscillator.h" />
-    <ClInclude Include="Button.h" />
+    <ClInclude Include="Oscillator.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
