@@ -6,12 +6,13 @@
 class Oscillator
 {
 	Button button;
-	Input angleInput;
+	
 	float x, y, h, w;
 
 public:
 	Oscillator();
 	Oscillator(float x, float y, float w, float h);
+
 	void display();
 	bool isOverButton();
 	void mousePressed();
@@ -19,5 +20,6 @@ public:
 	float offset = 0;
 	float angle = ofRandom(90);
 	float length = 2;
+	Input angleInput;
 };
 

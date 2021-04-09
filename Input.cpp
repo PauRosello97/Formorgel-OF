@@ -1,13 +1,6 @@
 #include "Input.h"
 #include <iostream>
 
-Input::Input(){}
-
-Input::Input(float _x, float _y) {
-	x = _x;
-	y = _y;
-}
-
 void Input::display() {
 	ofSetColor(0, 0, 0);
 

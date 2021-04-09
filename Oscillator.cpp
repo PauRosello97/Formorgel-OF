@@ -1,6 +1,7 @@
 #include "Oscillator.h"
 
-Oscillator::Oscillator(){}
+
+Oscillator::Oscillator() {}
 
 Oscillator::Oscillator(float _x, float _y, float _w, float _h) {
 	x = _x;
@@ -13,7 +14,7 @@ Oscillator::Oscillator(float _x, float _y, float _w, float _h) {
 
 void Oscillator::display() {
 	button.display();
-	angleInput.display();
+	//angleInput.display();
 	//ofDrawBitmapString("Offset: " + ofToString(offset), x+100, y+100);
 	//ofDrawBitmapString("Length: " + ofToString(length), x+100, y+120);
 	ofDrawBitmapString("Angle: " + ofToString(angle), x+100, y+140);
@@ -26,5 +27,5 @@ bool Oscillator::isOverButton() {
 }
 
 void Oscillator::mousePressed() {
-	angleInput.mousePressed();
+	//angleInput.mousePressed();
 }

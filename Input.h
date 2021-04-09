@@ -9,8 +9,11 @@ class Input
 	//float& value;
 
 public:
-	Input();
-	Input(float x, float y);
+	Input(){};
+	Input(float _x, float _y){
+		x = _x;
+		y = _y;
+	};
 	void display();
 	bool isOver();
 	void mousePressed();
