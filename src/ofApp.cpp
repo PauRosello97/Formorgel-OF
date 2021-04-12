@@ -12,15 +12,16 @@ void ofApp::setup(){
 	ofEnableDepthTest();
 
 	geometricSynth = GeometricSynth();
+	/*
 	geometricSynth.generateComposition(
 		Formorgel(oscA.offset, oscA.angle, oscA.length, 0), 
 		Formorgel(oscB.offset, oscB.angle, oscB.length, 1)
-	);
+	);*/
 
 	float margin = 25;
 	float lateralWidth = 350;
-	oscA = Oscillator(margin, margin, lateralWidth - 50, 300);
-	oscB = Oscillator(margin, lateralWidth, lateralWidth - 50, 300);
+	//oscA = Oscillator(margin, margin, lateralWidth - 50, 300);
+	//oscB = Oscillator(margin, lateralWidth, lateralWidth - 50, 300);
 }
 
 //--------------------------------------------------------------
@@ -32,8 +33,10 @@ void ofApp::update(){
 void ofApp::draw(){
 	float margin = 25;
 	float lateralWidth = 350;
-	oscA.display();
-	oscB.display();
+	oscillators.display();
+	//a.display();
+	//oscA.display();
+	//oscB.display();
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
@@ -66,6 +69,8 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+	oscillators.mousePressed();
+	/*
 	if (oscA.isOverButton() || oscB.isOverButton()) {
 		geometricSynth = GeometricSynth();
 		geometricSynth.generateComposition(
@@ -76,6 +81,7 @@ void ofApp::mousePressed(int x, int y, int button){
 	else {
 		oscA.mousePressed();
 	}
+	*/
 }
 
 //--------------------------------------------------------------

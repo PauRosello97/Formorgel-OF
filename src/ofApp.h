@@ -3,14 +3,14 @@
 #include "ofMain.h"
 #include "../GeometricSynth.h";
 #include "../Oscillator.h";
-#include "../Osc.h";
+#include "../Oscillators.h";
 
 class ofApp : public ofBaseApp{
 	
-	Oscillator oscA;
-	Oscillator oscB;
+	//Oscillator oscA;
+	//Oscillator oscB;
 
-	Osc a;
+	Oscillators oscillators;
 
 public:
 	void setup();

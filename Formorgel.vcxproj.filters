@@ -28,6 +28,7 @@
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Osc.cpp" />
     <ClCompile Include="FloatInput.cpp" />
+    <ClCompile Include="Oscillators.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -62,6 +63,7 @@
     <ClInclude Include="Input.h" />
     <ClInclude Include="Osc.h" />
     <ClInclude Include="FloatInput.h" />
+    <ClInclude Include="Oscillators.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

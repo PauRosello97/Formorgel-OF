@@ -1,4 +1,6 @@
 #pragma once
+#include "ofMain.h"
+
 class FloatInput
 {
     float& value;
@@ -8,5 +10,11 @@ public:
 
     void modify_value() {
         value++;
+    }
+
+    void display(float x, float y) {
+        ofSetColor(0, 0, 255);
+        ofDrawBitmapString("AngleINPUT: " + ofToString(value), x + 10, y + 60);
+        ofDrawRectangle(x, y, 20, 20);
     }
 };

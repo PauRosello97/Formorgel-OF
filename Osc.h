@@ -4,26 +4,31 @@
 
 class Osc
 {
-    FloatInput b;
-    float x, y, h, w;
+    FloatInput floatInput;
+    float x = 10, y = 10, h = 100, w = 100;
     float value;
-    float angle = ofRandom(90);
+    //float angle = ofRandom(90);
 
 public:
-    Osc() : value(50), b(value) {};
-    Osc(float _x, float _y, float _w, float _h) : value(50), b(value)
+    Osc() : value(50), floatInput(value) {};
+    Osc(float _x, float _y) : value(50), floatInput(value)
     {
         x = _x;
         y = _y;
-        w = _w;
-        h = _h;
+        w = 200;
+        h = 200;
     }
 
     void display();
 
-    void modify_value() {
-        b.modify_value();
+    void mousePressed() {
+        if (isOver()) {
+            floatInput.modify_value();
+            cout << "hi";
+        }        
     }
+
+    bool isOver();
 
     float get_value() const {
         return value;

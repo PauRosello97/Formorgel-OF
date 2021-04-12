@@ -188,6 +188,7 @@
     <ClCompile Include="GeometricSynth.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="Oscillator.cpp" />
+    <ClCompile Include="Oscillators.cpp" />
     <ClCompile Include="PolyDetector.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -202,6 +203,7 @@
     <ClInclude Include="GeometricSynth.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="Oscillator.h" />
+    <ClInclude Include="Oscillators.h" />
     <ClInclude Include="PolyDetector.h" />
     <ClInclude Include="src\ofApp.h" />
   </ItemGroup>
