@@ -26,6 +26,8 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="Input.cpp" />
+    <ClCompile Include="Osc.cpp" />
+    <ClCompile Include="FloatInput.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -58,6 +60,8 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="Input.h" />
+    <ClInclude Include="Osc.h" />
+    <ClInclude Include="FloatInput.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

@@ -6,17 +6,18 @@ class Input
 	float x, y;
 	float w = 150;
 	float h = 50;
+	float& value;
 	
 public:
-	Input(){};
-	Input(float& _value, float _x, float _y) : value(_value){
+	Input() : value(h) {};
+	Input(float& v, float _x, float _y) : value(v){
 		x = _x;
 		y = _y;
 	};
 	void display();
 	bool isOver();
 	void mousePressed();
-	float value;
+	
 	
 };
 

@@ -3,8 +3,7 @@
 
 void Input::display() {
 	ofSetColor(0, 0, 0);
-
-	//ofDrawBitmapString("Angle: " + ofToString(pointer), x+10, y+20);
+	ofDrawBitmapString("Angle: " + ofToString(value), x+10, y+20);
 	if (isOver()) {
 		ofSetColor(200, 200, 200);
 	}
@@ -20,5 +19,5 @@ bool Input::isOver() {
 }
 
 void Input::mousePressed() {
-
+	value++;
 }

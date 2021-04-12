@@ -180,6 +180,8 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Osc.cpp" />
+    <ClCompile Include="FloatInput.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Formorgel.cpp" />
     <ClCompile Include="Functions.cpp" />
@@ -191,6 +193,8 @@
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Osc.h" />
+    <ClInclude Include="FloatInput.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Formorgel.h" />
     <ClInclude Include="Functions.h" />
