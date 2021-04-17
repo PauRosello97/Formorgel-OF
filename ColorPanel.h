@@ -8,12 +8,24 @@ class ColorPanel
 	float y = 50;
 	float w = 400;
 
-	std::vector<PolyPol> polygons;
+	vector<PolyPol> polygons;
 
 public:
 	ColorPanel() {};
-	ColorPanel(std::vector<PolyPol> _polygons) {
+	ColorPanel(vector<PolyPol> _polygons) {
 		polygons = _polygons;
+		vector<int> areas;
+		for (PolyPol poly : polygons) {
+			int roundArea = round(poly._area);
+			if (!ofContains(areas, roundArea)) {
+				areas.push_back(roundArea);
+			}
+		}
+		for (int area : areas) {
+			cout << area;
+			cout << "\n";
+		}
+		cout << "-------------------";
 	};
 
 	void display() {
