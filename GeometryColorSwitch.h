@@ -3,6 +3,7 @@
 
 class GeometryColorSwitch
 {
+	string mode = "geometry";
 	float x = 10;
 	float y = 10;
 	float w = 400;
@@ -15,17 +16,18 @@ public:
 		ofDrawBitmapString("Color", x +w/2 + 10, y + 20);
 
 		//Geometry
-		if (isOverA()) {
-			ofSetColor(255, 0, 0);
-		}else {
+		if (mode == "geometry") {
 			ofSetColor(150, 150, 150);
+		}else {
+			ofSetColor(180, 180, 180);
 		}
 		ofDrawRectangle(x, y, w/2, h);
 
 		//Color
-		if (isOverB()) {
-			ofSetColor(255, 0, 0);
-		}else {
+		if (mode == "color") {
+			ofSetColor(150, 150, 150);
+		}
+		else {
 			ofSetColor(180, 180, 180);
 		}
 		ofDrawRectangle(x + w / 2, y, w / 2, h);
@@ -38,5 +40,19 @@ public:
 	bool isOverB() {
 		return ofGetMouseX() > x +w/2 && ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
 	}
+
+	void mousePressed() {
+		if (isOverA()) {
+			mode = "geometry";
+		}
+		else if (isOverB()) {
+			mode = "color";
+		}
+	}
+
+	bool inGeometryMode() {
+		return mode == "geometry";
+	}
 };
+
 

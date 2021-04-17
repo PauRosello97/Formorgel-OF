@@ -29,7 +29,10 @@ void ofApp::draw(){
 	float margin = 25;
 
 	geometryColorSwitch.display();
-	oscillators.display();
+	if (geometryColorSwitch.inGeometryMode()) {
+		oscillators.display();
+	}
+	
 
 	//Margins
 	ofSetColor(120, 120, 120);
@@ -74,6 +77,9 @@ void ofApp::mousePressed(int x, int y, int button){
 			Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
 			Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
 		);
+	}
+	else {
+		geometryColorSwitch.mousePressed();
 	}
 }
 
