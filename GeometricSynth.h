@@ -16,5 +16,6 @@ public:
 
 	void generateComposition(Formorgel fA, Formorgel fB);
 	void display();
+	void displayLines();
 };
 

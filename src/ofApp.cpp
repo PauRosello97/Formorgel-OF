@@ -10,15 +10,13 @@ void ofApp::setup(){
 	ofEnableAlphaBlending();
 	ofEnableDepthTest();
 
+	lateralWidth = oscillators.w + 20;
 
 	geometricSynth = GeometricSynth();
 	geometricSynth.generateComposition(
 		Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
 		Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
 	);
-
-	float margin = 25;
-	float lateralWidth = 350;
 }
 
 //--------------------------------------------------------------
@@ -29,7 +27,6 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	float margin = 25;
-	float lateralWidth = 350;
 	oscillators.display();
 
 	//Margins
@@ -40,7 +37,11 @@ void ofApp::draw(){
 	ofDrawRectangle(0, height-margin, width, margin); //Bot
 	ofDrawRectangle(width- margin, 0, margin, height); //Right
 	ofDrawRectangle(0, 0, lateralWidth, height); //Left
+
+	//Polygons
 	geometricSynth.display();
+
+	geometricSynth.displayLines();
 }
 
 //--------------------------------------------------------------
@@ -66,7 +67,6 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 	if (oscillators.mousePressed()) {
-		cout << "Apply";
 		geometricSynth = GeometricSynth();
 		geometricSynth.generateComposition(
 			Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),

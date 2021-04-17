@@ -19,14 +19,14 @@ void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB) {
 
 }
 void GeometricSynth::display() {
-	/*
-	ofSetColor(0, 0, 0);
-	for (int i = 0; i < lines.size(); i++) {
-		ofDrawLine(lines.at(i).a.x, lines.at(i).a.y, lines.at(i).b.x, lines.at(i).b.y);
-	}
-	*/
-
 	for (int i = 0; i < polygons.size(); i++) {
 		polygons.at(i).draw();
 	}
+}
+
+void GeometricSynth::displayLines() {
+	ofSetColor(0, 0, 0);
+	for (int i = 0; i < lines.size(); i++) {
+		ofDrawLine(lines.at(i).a.x, lines.at(i).a.y, lines.at(i).b.x, lines.at(i).b.y);
+	}	
 }

@@ -10,6 +10,8 @@ class ofApp : public ofBaseApp{
 	Oscillators oscillators;
 	Button applyButton;
 
+	float lateralWidth;
+
 public:
 	void setup();
 	void update();
