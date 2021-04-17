@@ -9,7 +9,7 @@ public:
 	Osc oscA;
 	Osc oscB;
 
-	Oscillators() : oscA(10, 10), oscB(10, 300) {};
+	Oscillators() : oscA(10, 25), oscB(10, 300) {};
 
 	void display() {
 		oscA.display();

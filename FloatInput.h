@@ -4,18 +4,24 @@
 class FloatInput
 {
     float& value;
+    float x, y;
+    float w = 150;
+    float h = 30;
+    string label;
 
 public:
-    FloatInput(float& v) : value(v) {};
+     
+    FloatInput(float& v, string _label, float _x, float _y) : value(v) {
+        label = _label;
+        x = _x;
+        y = _y;
+    };
 
-    void modify_value() {
+    void modifyValue() {
         value++;
     }
 
-    void display(float x, float y) {
-        ofSetColor(0, 0, 0);
-        ofDrawBitmapString("AngleINPUT: " + ofToString(value), x + 10, y + 20);
-        ofSetColor(120, 120, 120);
-        ofDrawRectangle(x, y, 150, 30);
-    }
+    bool isOver();
+    void display();
+    void mousePressed();
 };

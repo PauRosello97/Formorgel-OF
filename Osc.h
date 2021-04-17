@@ -11,12 +11,12 @@ class Osc
     //float angle = ofRandom(90);
 
 public:
-    Osc() : value(50), offsetInput(offset) {};
-    Osc(float _x, float _y) : value(50), offsetInput(value)
+    Osc() : value(50), offsetInput(offset, "Offset", x+10, y+10) {};
+    Osc(float _x, float _y) : value(50), offsetInput(offset, "Offset", _x+10, _y+10)
     {
         x = _x;
         y = _y;
-        w = 200;
+        w = 300;
         h = 200;
     }
 
@@ -25,18 +25,8 @@ public:
     float length = 2;
 
     void display();
-
-    bool mousePressed() {
-        if (isOver()) {
-            offsetInput.modify_value();
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
-
     bool isOver();
+    bool mousePressed();
 
     float get_value() const {
         return value;
