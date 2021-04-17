@@ -2,6 +2,8 @@
 
 void Osc::display() {
 	offsetInput.display();
+	angleInput.display();
+	lengthInput.display();
 	ofSetColor(0, 0, 0);
 	if (isOver()) {
 		ofSetColor(255, 0, 0);
@@ -19,7 +21,11 @@ bool Osc::isOver() {
 
 bool Osc::mousePressed() {
 	if (isOver()) {
-		offsetInput.mousePressed();
+		if (!offsetInput.mousePressed()) {
+			if (!angleInput.mousePressed()) {
+				lengthInput.mousePressed();
+			}
+		}
 		return true;
 	}
 	else {

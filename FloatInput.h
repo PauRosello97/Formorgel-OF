@@ -23,5 +23,5 @@ public:
 
     bool isOver();
     void display();
-    void mousePressed();
+    bool mousePressed();
 };

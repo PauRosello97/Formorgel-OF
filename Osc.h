@@ -5,14 +5,23 @@
 class Osc
 {
     FloatInput offsetInput;
+    FloatInput angleInput;
+    FloatInput lengthInput;
     float x = 10, y = 10, h = 100, w = 100;
     float value;
     
-    //float angle = ofRandom(90);
-
 public:
-    Osc() : value(50), offsetInput(offset, "Offset", x+10, y+10) {};
-    Osc(float _x, float _y) : value(50), offsetInput(offset, "Offset", _x+10, _y+10)
+    Osc() : 
+        value(50), 
+        offsetInput(offset, "Offset", x+10, y+10),
+        angleInput(angle, "Angle", x+10, y+75),
+        lengthInput(length, "Length", x + 10, y + 125) {};
+
+    Osc(float _x, float _y) : 
+        value(50), 
+        offsetInput(offset, "Offset", _x+10, _y+10),
+        angleInput(angle, "Angle", _x + 10, _y + 75),
+        lengthInput(length, "Length", _x + 10, _y + 125)
     {
         x = _x;
         y = _y;

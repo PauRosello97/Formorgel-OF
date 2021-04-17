@@ -20,8 +20,6 @@ void ofApp::setup(){
 
 	float margin = 25;
 	float lateralWidth = 350;
-	//oscA = Oscillator(margin, margin, lateralWidth - 50, 300);
-	//oscB = Oscillator(margin, lateralWidth, lateralWidth - 50, 300);
 }
 
 //--------------------------------------------------------------
@@ -34,9 +32,8 @@ void ofApp::draw(){
 	float margin = 25;
 	float lateralWidth = 350;
 	oscillators.display();
-	//a.display();
-	//oscA.display();
-	//oscB.display();
+
+	//Margins
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
@@ -70,18 +67,6 @@ void ofApp::mouseDragged(int x, int y, int button){
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 	oscillators.mousePressed();
-	/*
-	if (oscA.isOverButton() || oscB.isOverButton()) {
-		geometricSynth = GeometricSynth();
-		geometricSynth.generateComposition(
-			Formorgel(oscA.offset, oscA.angle, oscA.length, 0),
-			Formorgel(oscB.offset, oscB.angle, oscB.length, 1)
-		);
-	}
-	else {
-		oscA.mousePressed();
-	}
-	*/
 }
 
 //--------------------------------------------------------------

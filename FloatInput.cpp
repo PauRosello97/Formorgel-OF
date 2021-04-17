@@ -17,8 +17,10 @@ void FloatInput::display() {
     ofDrawRectangle(x, y, w, h);
 }
 
-void FloatInput::mousePressed() {
+bool FloatInput::mousePressed() {
     if (isOver()) {
         modifyValue();
+        return true;
     }
+    return false;
 }
