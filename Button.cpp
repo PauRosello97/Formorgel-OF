@@ -24,3 +24,7 @@ void Button::display() {
 bool Button::isOver() {
 	return ofGetMouseX() > x && ofGetMouseX() < x+w && ofGetMouseY()> y && ofGetMouseY()<y+h;
 }
+
+bool Button::mousePressed() {
+	return isOver();
+}

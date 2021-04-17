@@ -16,7 +16,7 @@ public:
 		oscB.display();
 	}
 
-	void mousePressed();
+	bool mousePressed();
 
 };
 

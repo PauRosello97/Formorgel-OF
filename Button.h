@@ -10,5 +10,6 @@ public:
 	Button(float x, float y, float w, float h);
 	void display();
 	bool isOver();
+	bool mousePressed();
 };
 

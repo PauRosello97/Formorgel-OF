@@ -8,11 +8,10 @@ void ofApp::setup(){
 	ofBackground(50, 50, 50);
 	ofSetVerticalSync(false);
 	ofEnableAlphaBlending();
-
 	ofEnableDepthTest();
 
+
 	geometricSynth = GeometricSynth();
-	
 	geometricSynth.generateComposition(
 		Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
 		Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
@@ -66,7 +65,14 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	oscillators.mousePressed();
+	if (oscillators.mousePressed()) {
+		cout << "Apply";
+		geometricSynth = GeometricSynth();
+		geometricSynth.generateComposition(
+			Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
+			Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
+		);
+	}
 }
 
 //--------------------------------------------------------------

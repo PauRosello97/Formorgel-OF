@@ -3,10 +3,12 @@
 #include "ofMain.h"
 #include "../GeometricSynth.h";
 #include "../Oscillators.h";
+#include "../Button.h";
 
 class ofApp : public ofBaseApp{
 
 	Oscillators oscillators;
+	Button applyButton;
 
 public:
 	void setup();
