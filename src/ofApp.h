@@ -3,12 +3,14 @@
 #include "ofMain.h"
 #include "../GeometricSynth.h";
 #include "../GeometryPanel.h";
+#include "../ColorPanel.h";
 #include "../Button.h";
 #include "../GeometryColorSwitch.h";
 
 class ofApp : public ofBaseApp{
 
 	GeometryPanel geometryPanel;
+	ColorPanel colorPanel;
 	Button applyButton;
 	GeometryColorSwitch geometryColorSwitch;
 

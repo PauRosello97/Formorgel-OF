@@ -180,6 +180,7 @@
     <PostBuildEvent />
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="ColorPanel.cpp" />
     <ClCompile Include="GeometryColorSwitch.cpp" />
     <ClCompile Include="Osc.cpp" />
     <ClCompile Include="FloatInput.cpp" />
@@ -194,6 +195,7 @@
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorPanel.h" />
     <ClInclude Include="GeometryColorSwitch.h" />
     <ClInclude Include="Osc.h" />
     <ClInclude Include="FloatInput.h" />

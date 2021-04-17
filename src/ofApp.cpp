@@ -17,6 +17,8 @@ void ofApp::setup(){
 		Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
 		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
 	);
+
+	colorPanel = ColorPanel(geometricSynth.polygons);
 }
 
 //--------------------------------------------------------------
@@ -32,7 +34,9 @@ void ofApp::draw(){
 	if (geometryColorSwitch.inGeometryMode()) {
 		geometryPanel.display();
 	}
-	
+	else {
+		colorPanel.display();
+	}
 
 	//Margins
 	ofSetColor(120, 120, 120);
@@ -71,7 +75,7 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	if (geometryPanel.mousePressed()) {
+	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed() ) {
 		geometricSynth = GeometricSynth();
 		geometricSynth.generateComposition(
 			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),

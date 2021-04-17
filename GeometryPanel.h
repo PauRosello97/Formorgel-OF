@@ -4,13 +4,15 @@
 
 class GeometryPanel
 {
+	float x = 10;
+	float y = 50;
 	
 public:
 	Osc oscA;
 	Osc oscB;
 	float w = 400;
 	//Si es canvia w, cal canviar els constructors Osc
-	GeometryPanel() : oscA(10, 50, 400), oscB(10, 260, 400) {};
+	GeometryPanel() : oscA(x, y, 400), oscB(x, y+210, 400) {};
 
 	void display() {
 		oscA.display();
