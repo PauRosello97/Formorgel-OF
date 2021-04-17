@@ -1,5 +1,7 @@
 #include "Oscillators.h"
 
 void Oscillators::mousePressed() {
-	oscA.mousePressed();
+	if (!oscA.mousePressed()) {
+		oscB.mousePressed();
+	}
 }

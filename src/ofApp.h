@@ -2,13 +2,9 @@
 
 #include "ofMain.h"
 #include "../GeometricSynth.h";
-#include "../Oscillator.h";
 #include "../Oscillators.h";
 
 class ofApp : public ofBaseApp{
-	
-	//Oscillator oscA;
-	//Oscillator oscB;
 
 	Oscillators oscillators;
 

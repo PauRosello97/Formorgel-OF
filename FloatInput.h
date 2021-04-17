@@ -13,8 +13,9 @@ public:
     }
 
     void display(float x, float y) {
-        ofSetColor(0, 0, 255);
-        ofDrawBitmapString("AngleINPUT: " + ofToString(value), x + 10, y + 60);
-        ofDrawRectangle(x, y, 20, 20);
+        ofSetColor(0, 0, 0);
+        ofDrawBitmapString("AngleINPUT: " + ofToString(value), x + 10, y + 20);
+        ofSetColor(120, 120, 120);
+        ofDrawRectangle(x, y, 150, 30);
     }
 };

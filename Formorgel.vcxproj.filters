@@ -19,16 +19,21 @@
     <ClCompile Include="PolyDetector.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Oscillator.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Button.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp" />
-    <ClCompile Include="Osc.cpp" />
-    <ClCompile Include="FloatInput.cpp" />
-    <ClCompile Include="Oscillators.cpp" />
+    <ClCompile Include="Input.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Osc.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Oscillators.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="FloatInput.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -54,16 +59,21 @@
     <ClInclude Include="PolyDetector.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Oscillator.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h" />
-    <ClInclude Include="Osc.h" />
-    <ClInclude Include="FloatInput.h" />
-    <ClInclude Include="Oscillators.h" />
+    <ClInclude Include="FloatInput.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Input.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Osc.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Oscillators.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
