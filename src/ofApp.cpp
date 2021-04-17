@@ -12,11 +12,11 @@ void ofApp::setup(){
 	ofEnableDepthTest();
 
 	geometricSynth = GeometricSynth();
-	/*
+	
 	geometricSynth.generateComposition(
-		Formorgel(oscA.offset, oscA.angle, oscA.length, 0), 
-		Formorgel(oscB.offset, oscB.angle, oscB.length, 1)
-	);*/
+		Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
+		Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
+	);
 
 	float margin = 25;
 	float lateralWidth = 350;

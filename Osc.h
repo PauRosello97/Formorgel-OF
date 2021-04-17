@@ -7,6 +7,7 @@ class Osc
     FloatInput floatInput;
     float x = 10, y = 10, h = 100, w = 100;
     float value;
+    
     //float angle = ofRandom(90);
 
 public:
@@ -18,6 +19,9 @@ public:
         w = 200;
         h = 200;
     }
+    float offset = 0;
+    float angle = ofRandom(90);
+    float length = 2;
 
     void display();
 
