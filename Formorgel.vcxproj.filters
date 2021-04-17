@@ -28,13 +28,13 @@
     <ClCompile Include="Osc.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Oscillators.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="FloatInput.cpp">
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="GeometryColorSwitch.cpp" />
+    <ClCompile Include="GeometryPanel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -72,10 +72,10 @@
     <ClInclude Include="Osc.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Oscillators.h">
+    <ClInclude Include="GeometryColorSwitch.h" />
+    <ClInclude Include="GeometryPanel.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="GeometryColorSwitch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

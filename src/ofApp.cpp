@@ -10,12 +10,12 @@ void ofApp::setup(){
 	ofEnableAlphaBlending();
 	ofEnableDepthTest();
 
-	lateralWidth = oscillators.w + 20;
+	lateralWidth = geometryPanel.w + 20;
 
 	geometricSynth = GeometricSynth();
 	geometricSynth.generateComposition(
-		Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
-		Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
+		Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
+		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
 	);
 }
 
@@ -30,7 +30,7 @@ void ofApp::draw(){
 
 	geometryColorSwitch.display();
 	if (geometryColorSwitch.inGeometryMode()) {
-		oscillators.display();
+		geometryPanel.display();
 	}
 	
 
@@ -71,11 +71,11 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
-	if (oscillators.mousePressed()) {
+	if (geometryPanel.mousePressed()) {
 		geometricSynth = GeometricSynth();
 		geometricSynth.generateComposition(
-			Formorgel(oscillators.oscA.offset, oscillators.oscA.angle, oscillators.oscA.length, 0),
-			Formorgel(oscillators.oscB.offset, oscillators.oscB.angle, oscillators.oscB.length, 1)
+			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
+			Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
 		);
 	}
 	else {

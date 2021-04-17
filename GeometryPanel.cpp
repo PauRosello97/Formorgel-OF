@@ -1,6 +1,6 @@
-#include "Oscillators.h"
+#include "GeometryPanel.h"
 
-bool Oscillators::mousePressed() {
+bool GeometryPanel::mousePressed() {
 	if (oscA.mousePressed()) {
 		return true;
 	}

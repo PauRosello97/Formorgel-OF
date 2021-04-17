@@ -2,13 +2,13 @@
 
 #include "ofMain.h"
 #include "../GeometricSynth.h";
-#include "../Oscillators.h";
+#include "../GeometryPanel.h";
 #include "../Button.h";
 #include "../GeometryColorSwitch.h";
 
 class ofApp : public ofBaseApp{
 
-	Oscillators oscillators;
+	GeometryPanel geometryPanel;
 	Button applyButton;
 	GeometryColorSwitch geometryColorSwitch;
 

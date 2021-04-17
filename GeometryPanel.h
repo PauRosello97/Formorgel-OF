@@ -2,7 +2,7 @@
 #include "ofMain.h"
 #include "Osc.h"
 
-class Oscillators
+class GeometryPanel
 {
 	
 public:
@@ -10,7 +10,7 @@ public:
 	Osc oscB;
 	float w = 400;
 	//Si es canvia w, cal canviar els constructors Osc
-	Oscillators() : oscA(10, 50, 400), oscB(10, 260, 400) {};
+	GeometryPanel() : oscA(10, 50, 400), oscB(10, 260, 400) {};
 
 	void display() {
 		oscA.display();
