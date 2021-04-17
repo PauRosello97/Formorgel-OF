@@ -34,6 +34,7 @@
     <ClCompile Include="FloatInput.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="GeometryColorSwitch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -74,6 +75,7 @@
     <ClInclude Include="Oscillators.h">
       <Filter>src</Filter>
     </ClInclude>
+    <ClInclude Include="GeometryColorSwitch.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

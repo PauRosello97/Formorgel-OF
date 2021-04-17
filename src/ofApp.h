@@ -4,13 +4,16 @@
 #include "../GeometricSynth.h";
 #include "../Oscillators.h";
 #include "../Button.h";
+#include "../GeometryColorSwitch.h";
 
 class ofApp : public ofBaseApp{
 
 	Oscillators oscillators;
 	Button applyButton;
+	GeometryColorSwitch geometryColorSwitch;
 
 	float lateralWidth;
+	bool workingMode = true;
 
 public:
 	void setup();

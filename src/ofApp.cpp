@@ -27,6 +27,8 @@ void ofApp::update(){
 //--------------------------------------------------------------
 void ofApp::draw(){
 	float margin = 25;
+
+	geometryColorSwitch.display();
 	oscillators.display();
 
 	//Margins
@@ -38,10 +40,10 @@ void ofApp::draw(){
 	ofDrawRectangle(width- margin, 0, margin, height); //Right
 	ofDrawRectangle(0, 0, lateralWidth, height); //Left
 
+	geometricSynth.displayLines();
+
 	//Polygons
 	geometricSynth.display();
-
-	geometricSynth.displayLines();
 }
 
 //--------------------------------------------------------------
