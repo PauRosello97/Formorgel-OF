@@ -55,6 +55,9 @@ void ofApp::newPattern() {
 	);
 
 	colorPanel = ColorPanel(geometricSynth.polygons);
+
+	geometricSynth.applyColors(colorPanel.assignations);
+	
 }
 
 void ofApp::mousePressed(int x, int y, int button){

@@ -1385,7 +1385,7 @@ bool PolyDetector::FindPolys()
         poly._area = poly.TriangleArea(*this);
         poly.dissolveStep = dissolveCount;
         poly.c = poly.center();
-        poly.color = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+        poly.color = ofColor(0, 0, 255);
         std::sort(poly.p.begin(), poly.p.end(), [&, this](const PointType& p1, const PointType& p2) {
             float aA = (atan((p1.y - poly.c.y) / (p1.x - poly.c.x))) * 57.29;
             float aB = (atan((p2.y - poly.c.y) / (p2.x - poly.c.x))) * 57.29;
@@ -1427,9 +1427,13 @@ bool PolyPol::addPointChecked(const PointType & v)
     return true;
 }
 
+void PolyPol::setColor(ofColor c) {
+    color = c;
+    cout << "(" << to_string(c.r) << "\n";
+    cout << "(" << to_string(color.r) << "\n";
+}
+
 void PolyPol::draw() {
-    //ofSetColor(0, 0, 0);
-    //ofDrawCircle(c.x, c.y, 10);
     ofSetColor(color);
     ofBeginShape();
         for (int i = 0; i < p.size(); i++) {

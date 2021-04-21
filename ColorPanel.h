@@ -11,9 +11,11 @@ class ColorPanel
 	float w = 400;
 
 	vector<PolyPol> polygons;
-	vector<ColorAreaAssignation> assignations;
+	
 
 public:
+	map<int, ofColor> assignations;
+
 	ColorPanel() {};
 	ColorPanel(vector<PolyPol> _polygons) {
 		polygons = _polygons;
@@ -22,16 +24,9 @@ public:
 			int roundArea = poly.roundArea();
 			if (!ofContains(areas, roundArea)) {
 				areas.push_back(roundArea);
-				assignations.push_back(ColorAreaAssignation(roundArea, ofRandom(255), ofRandom(255), ofRandom(255)));
+				assignations.insert(pair<int, ofColor>(roundArea, ofColor(ofRandom(255), ofRandom(255), ofRandom(255))));
 			}
 		}
-
-		for (ColorAreaAssignation assignation : assignations) {
-			cout << assignation.toString();
-			cout << "\n";
-		}
-
-		cout << "-------------------";
 	};
 
 	void display() {

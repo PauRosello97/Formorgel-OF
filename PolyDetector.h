@@ -201,7 +201,7 @@ struct PolyPol
     }
 
     bool addPointChecked(const PointType& v);
-
+    void setColor(ofColor color);
     void draw();
 
     PointType center();
