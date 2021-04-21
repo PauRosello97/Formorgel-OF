@@ -1,6 +1,8 @@
 #pragma once
 #include "ofMain.h";
 #include "PolyDetector.h";
+#include "ColorAreaAssignation.h";
+
 
 class ColorPanel
 {
@@ -9,6 +11,7 @@ class ColorPanel
 	float w = 400;
 
 	vector<PolyPol> polygons;
+	vector<ColorAreaAssignation> assignations;
 
 public:
 	ColorPanel() {};
@@ -16,15 +19,18 @@ public:
 		polygons = _polygons;
 		vector<int> areas;
 		for (PolyPol poly : polygons) {
-			int roundArea = round(poly._area);
+			int roundArea = poly.roundArea();
 			if (!ofContains(areas, roundArea)) {
 				areas.push_back(roundArea);
+				assignations.push_back(ColorAreaAssignation(roundArea, ofRandom(255), ofRandom(255), ofRandom(255)));
 			}
 		}
-		for (int area : areas) {
-			cout << area;
+
+		for (ColorAreaAssignation assignation : assignations) {
+			cout << assignation.toString();
 			cout << "\n";
 		}
+
 		cout << "-------------------";
 	};
 
@@ -33,6 +39,6 @@ public:
 		ofDrawBitmapString("nPolygons: " + ofToString(polygons.size()), x + 10, y + 20);
 		ofSetColor(255);
 		ofDrawRectangle(x, y, 400, 600);
-	}
+	};
 };
 

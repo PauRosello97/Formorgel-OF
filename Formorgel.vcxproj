@@ -195,6 +195,7 @@
     <ClCompile Include="src\ofApp.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="ColorAreaAssignation.h" />
     <ClInclude Include="ColorPanel.h" />
     <ClInclude Include="GeometryColorSwitch.h" />
     <ClInclude Include="Osc.h" />

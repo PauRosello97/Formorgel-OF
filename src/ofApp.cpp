@@ -2,7 +2,6 @@
 #include <string> 
 #include <sstream>
 
-//--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetLogLevel(OF_LOG_VERBOSE);
 	ofBackground(50, 50, 50);
@@ -12,21 +11,11 @@ void ofApp::setup(){
 
 	lateralWidth = geometryPanel.w + 20;
 
-	geometricSynth = GeometricSynth();
-	geometricSynth.generateComposition(
-		Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
-		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
-	);
-
-	colorPanel = ColorPanel(geometricSynth.polygons);
+	newPattern();
 }
 
-//--------------------------------------------------------------
-void ofApp::update(){
+void ofApp::update(){ }
 
-}
-
-//--------------------------------------------------------------
 void ofApp::draw(){
 	float margin = 25;
 
@@ -53,66 +42,34 @@ void ofApp::draw(){
 	geometricSynth.display();
 }
 
-//--------------------------------------------------------------
-void ofApp::keyPressed(int key){
-	
+void ofApp::keyPressed(int key){ }
+void ofApp::keyReleased(int key){ }
+void ofApp::mouseMoved(int x, int y ){ }
+void ofApp::mouseDragged(int x, int y, int button){ }
+
+void ofApp::newPattern() {
+	geometricSynth = GeometricSynth();
+	geometricSynth.generateComposition(
+		Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
+		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
+	);
+
+	colorPanel = ColorPanel(geometricSynth.polygons);
 }
 
-//--------------------------------------------------------------
-void ofApp::keyReleased(int key){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseMoved(int x, int y ){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseDragged(int x, int y, int button){
-
-}
-
-//--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
 	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed() ) {
-		geometricSynth = GeometricSynth();
-		geometricSynth.generateComposition(
-			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
-			Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
-		);
+		newPattern();
 	}
 	else {
 		geometryColorSwitch.mousePressed();
 	}
 }
 
-//--------------------------------------------------------------
-void ofApp::mouseReleased(int x, int y, int button){
 
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseEntered(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::mouseExited(int x, int y){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::windowResized(int w, int h){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::gotMessage(ofMessage msg){
-
-}
-
-//--------------------------------------------------------------
-void ofApp::dragEvent(ofDragInfo dragInfo){ 
-
-}
+void ofApp::mouseReleased(int x, int y, int button){ }
+void ofApp::mouseEntered(int x, int y){ }
+void ofApp::mouseExited(int x, int y){ }
+void ofApp::windowResized(int w, int h){ }
+void ofApp::gotMessage(ofMessage msg){ }
+void ofApp::dragEvent(ofDragInfo dragInfo){ }

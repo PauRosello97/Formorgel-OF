@@ -196,6 +196,10 @@ struct PolyPol
 
     void addLine(const PolyLine& l);
 
+    int roundArea() {
+        return round(_area);
+    }
+
     bool addPointChecked(const PointType& v);
 
     void draw();

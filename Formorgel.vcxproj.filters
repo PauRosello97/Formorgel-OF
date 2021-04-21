@@ -78,6 +78,9 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="ColorPanel.h" />
+    <ClInclude Include="ColorAreaAssignation.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />
