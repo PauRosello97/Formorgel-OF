@@ -22,9 +22,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="Input.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="Osc.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -36,6 +33,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="ColorPanel.cpp" />
+    <ClCompile Include="SmallButton.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -67,9 +65,6 @@
     <ClInclude Include="FloatInput.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="Input.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="Osc.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -78,9 +73,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="ColorPanel.h" />
-    <ClInclude Include="ColorAreaAssignation.h">
-      <Filter>src</Filter>
-    </ClInclude>
+    <ClInclude Include="SmallButton.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

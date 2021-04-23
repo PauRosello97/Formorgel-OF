@@ -1,8 +1,6 @@
 #pragma once
 #include "ofMain.h";
 #include "PolyDetector.h";
-#include "ColorAreaAssignation.h";
-
 
 class ColorPanel
 {

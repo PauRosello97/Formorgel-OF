@@ -36,7 +36,7 @@ void ofApp::draw(){
 	ofDrawRectangle(width- margin, 0, margin, height); //Right
 	ofDrawRectangle(0, 0, lateralWidth, height); //Left
 
-	geometricSynth.displayLines();
+	//geometricSynth.displayLines();
 
 	//Polygons
 	geometricSynth.display();

@@ -5,6 +5,8 @@ bool FloatInput::isOver() {
 }
 
 void FloatInput::display() {
+    plusButton.display();
+    lessButton.display();
     ofSetColor(0, 0, 0);
     ofDrawBitmapString(label + ": " + ofToString(value), x + 10, y + 20);
     if (isOver()) {

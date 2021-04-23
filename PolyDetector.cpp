@@ -1429,8 +1429,6 @@ bool PolyPol::addPointChecked(const PointType & v)
 
 void PolyPol::setColor(ofColor c) {
     color = c;
-    cout << "(" << to_string(c.r) << "\n";
-    cout << "(" << to_string(color.r) << "\n";
 }
 
 void PolyPol::draw() {
