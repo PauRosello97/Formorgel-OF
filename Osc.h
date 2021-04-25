@@ -14,16 +14,16 @@ class Osc
 public:
     Osc() : 
         value(50), 
-        offsetInput(offset, "Offset", 0, 0),
-        angleInput(angle, "Angle", 0, 0),
-        lengthInput(length, "Length", 0, 0) 
+        offsetInput(offset, "Offset", 0, 0, 1),
+        angleInput(angle, "Angle", 0, 0, 1),
+        lengthInput(length, "Length", 0, 0, 1) 
     {};
 
     Osc(float _x, float _y, float _w) : 
         value(50), 
-        offsetInput(offset, "Offset", _x+_w/2, _y+10),
-        angleInput(angle, "Angle", _x+_w/2, _y+50),
-        lengthInput(length, "Length", _x+_w/2, _y+90)
+        offsetInput(offset, "Offset", _x+_w/2, _y+10, 0.2),
+        angleInput(angle, "Angle", _x+_w/2, _y+50, 1),
+        lengthInput(length, "Length", _x+_w/2, _y+90, 0.2)
     {
         x = _x;
         y = _y;

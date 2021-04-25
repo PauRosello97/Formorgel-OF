@@ -8,14 +8,16 @@ class FloatInput
     float x, y;
     float w = 190;
     float h = 30;
+    float step = 0;
     string label;
     SmallButton plusButton;
     SmallButton lessButton;
 
 public:
      
-    FloatInput(float& v, string _label, float _x, float _y) : value(v) {
+    FloatInput(float& v, string _label, float _x, float _y, float _step) : value(v) {
         label = _label;
+        step = _step;
         x = _x;
         y = _y;
         lessButton = SmallButton(x + 150, y+h/2);
@@ -24,12 +26,11 @@ public:
 
     void modifyValue() {
         if (plusButton.isOver()) {
-            value++;
+            value += step;
         }
         else if (lessButton.isOver()) {
-            value--;
+            value -= step;
         }
-        
     }
 
     bool isOver();
