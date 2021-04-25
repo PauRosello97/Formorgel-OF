@@ -37,8 +37,7 @@ public:
 
     void display();
     bool isOver();
-    bool mousePressed();
-    
+    bool mousePressed();    
 
     float get_value() const {
         return value;
