@@ -60,7 +60,8 @@ void ofApp::newPattern() {
 		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
 	);
 
-	colorPanel = ColorPanel(geometricSynth.polygons);
+	colorPanel.update(geometricSynth.polygons);
+	//colorPanel = ColorPanel(geometricSynth.polygons);
 
 	geometricSynth.applyColors(colorPanel.assignations);
 	

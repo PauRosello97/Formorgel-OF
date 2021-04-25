@@ -9,6 +9,7 @@ class ColorPanel
 	float w = 400;
 
 	vector<PolyPol> polygons;
+	vector<ofColor> colors;
 	
 public:
 	map<int, ofColor> assignations;
@@ -17,5 +18,6 @@ public:
 	ColorPanel(vector<PolyPol> _polygons);
 
 	void display();
+	void update(vector<PolyPol> _polygons);
 };
 
