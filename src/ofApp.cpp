@@ -12,6 +12,7 @@ void ofApp::setup(){
 	lateralWidth = geometryPanel.w + 20;
 
 	newPattern();
+	displayLinesToggle = Button(420, 10, 100, 30);
 }
 
 void ofApp::update(){ }
@@ -19,6 +20,9 @@ void ofApp::update(){ }
 void ofApp::draw(){
 	float margin = 25;
 
+	displayLinesToggle.display();
+
+	// Lateral panels
 	geometryColorSwitch.display();
 	if (geometryColorSwitch.inGeometryMode()) {
 		geometryPanel.display();
@@ -31,12 +35,14 @@ void ofApp::draw(){
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
-	ofDrawRectangle(0, 0, width, margin); //Top
+	ofDrawRectangle(0, 0, width, margin*2); //Top
 	ofDrawRectangle(0, height-margin, width, margin); //Bot
 	ofDrawRectangle(width- margin, 0, margin, height); //Right
 	ofDrawRectangle(0, 0, lateralWidth, height); //Left
 
-	//geometricSynth.displayLines();
+	if (displayingLines) {
+		geometricSynth.displayLines();
+	}
 
 	//Polygons
 	geometricSynth.display();
@@ -63,6 +69,9 @@ void ofApp::newPattern() {
 void ofApp::mousePressed(int x, int y, int button){
 	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed() ) {
 		newPattern();
+	}
+	else if (displayLinesToggle.mousePressed()) {
+		displayingLines = !displayingLines;
 	}
 	else {
 		geometryColorSwitch.mousePressed();

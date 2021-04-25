@@ -11,7 +11,7 @@ void Osc::display() {
 	int d = 3;
 	float radius = 50;
 	for (int i = 0; i < d; i++) {
-		float a = (radius + i * 360 / d - 90);
+		float a = (radius +10 + i * 360 / d );
 
 		float startX = x + 100 + radius * offset * cos(radians(a));
 		float startY = y + 100 + radius * offset * sin(radians(a));

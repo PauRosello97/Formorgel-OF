@@ -23,7 +23,7 @@ public:
         value(50), 
         offsetInput(offset, "Offset", _x+_w/2, _y+10, 0.2),
         angleInput(angle, "Angle", _x+_w/2, _y+50, 1),
-        lengthInput(length, "Length", _x+_w/2, _y+90, 0.2)
+        lengthInput(length, "Length", _x+_w/2, _y+90, 0.1)
     {
         x = _x;
         y = _y;
@@ -32,7 +32,7 @@ public:
     }
 
     float offset = 0;
-    float angle = ofRandom(90);
+    float angle = round(ofRandom(90));
     float length = 2;
 
     void display();

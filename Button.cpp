@@ -11,6 +11,8 @@ Button::Button(float _x, float _y, float _w, float _h) {
 }
 
 void Button::display() {
+	ofSetColor(0, 0, 0);
+	ofDrawBitmapString("Show lines", x + 10, y + 20);
 	if (isOver()) {
 		ofSetColor(125, 125, 0);
 	}

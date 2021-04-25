@@ -12,7 +12,9 @@ class ofApp : public ofBaseApp{
 	GeometryPanel geometryPanel;
 	ColorPanel colorPanel;
 	Button applyButton;
+	Button displayLinesToggle;
 	GeometryColorSwitch geometryColorSwitch;
+	bool displayingLines = true;
 
 	float lateralWidth;
 	bool workingMode = true;
