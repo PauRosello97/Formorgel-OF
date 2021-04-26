@@ -190,6 +190,7 @@
     <ClCompile Include="GeometricSynth.cpp" />
     <ClCompile Include="GeometryPanel.cpp" />
     <ClCompile Include="PolyDetector.cpp" />
+    <ClCompile Include="PolygonColorControl.cpp" />
     <ClCompile Include="SmallButton.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
@@ -206,6 +207,7 @@
     <ClInclude Include="GeometricSynth.h" />
     <ClInclude Include="GeometryPanel.h" />
     <ClInclude Include="PolyDetector.h" />
+    <ClInclude Include="PolygonColorControl.h" />
     <ClInclude Include="SmallButton.h" />
     <ClInclude Include="src\ofApp.h" />
   </ItemGroup>

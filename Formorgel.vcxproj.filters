@@ -34,6 +34,7 @@
     </ClCompile>
     <ClCompile Include="ColorPanel.cpp" />
     <ClCompile Include="SmallButton.cpp" />
+    <ClCompile Include="PolygonColorControl.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -74,6 +75,7 @@
     </ClInclude>
     <ClInclude Include="ColorPanel.h" />
     <ClInclude Include="SmallButton.h" />
+    <ClInclude Include="PolygonColorControl.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

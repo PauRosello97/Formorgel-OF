@@ -1,12 +1,15 @@
 #include "ColorPanel.h"
 
-
-ColorPanel::ColorPanel(vector<PolyPol> _polygons) {
-}
+ColorPanel::ColorPanel(vector<PolyPol> _polygons) {}
 
 void ColorPanel::display() {
+	// Controls
+	polygonColorControl.display();
+
 	ofSetColor(0);
 	ofDrawBitmapString("nPolygons: " + ofToString(polygons.size()), x + 10, y + 20);
+
+	// Background
 	ofSetColor(255);
 	ofDrawRectangle(x, y, 400, 600);
 };
@@ -15,9 +18,10 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 	polygons = _polygons;
 	vector<int> areas;
 	assignations.clear();
+	/*
 	sort(polygons.begin(), polygons.end(), [](const PolyPol& a, const PolyPol& b) {
 		return a._area < b._area;
-	});
+	});*/
 	for (int i = 0; i < polygons.size(); i++) {
 		int roundArea = polygons[i].roundArea();
 		if (!ofContains(areas, roundArea)) {
@@ -30,5 +34,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			assignations.insert(pair<int, ofColor>(roundArea, colors[assignations.size()]));
 		}
 	}
-	cout << "done";
+
+	// Controls 
+	polygonColorControl = PolygonColorControl(x + 10, x + 100);
 }

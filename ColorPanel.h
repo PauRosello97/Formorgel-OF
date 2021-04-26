@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h";
 #include "PolyDetector.h";
+#include "PolygonColorControl.h";
 
 class ColorPanel
 {
@@ -10,6 +11,7 @@ class ColorPanel
 
 	vector<PolyPol> polygons;
 	vector<ofColor> colors;
+	PolygonColorControl polygonColorControl;
 	
 public:
 	map<int, ofColor> assignations;
