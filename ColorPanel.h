@@ -11,7 +11,7 @@ class ColorPanel
 
 	vector<PolyPol> polygons;
 	vector<ofColor> colors;
-	PolygonColorControl polygonColorControl;
+	vector<PolygonColorControl> polygonColorControls;
 	
 public:
 	map<int, ofColor> assignations;

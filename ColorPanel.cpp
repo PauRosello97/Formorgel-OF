@@ -4,8 +4,10 @@ ColorPanel::ColorPanel(vector<PolyPol> _polygons) {}
 
 void ColorPanel::display() {
 	// Controls
-	polygonColorControl.display();
-
+	for (PolygonColorControl pcc : polygonColorControls) {
+		pcc.display();
+	}
+	
 	ofSetColor(0);
 	ofDrawBitmapString("nPolygons: " + ofToString(polygons.size()), x + 10, y + 20);
 
@@ -18,6 +20,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 	polygons = _polygons;
 	vector<int> areas;
 	assignations.clear();
+	polygonColorControls.clear();
 	/*
 	sort(polygons.begin(), polygons.end(), [](const PolyPol& a, const PolyPol& b) {
 		return a._area < b._area;
@@ -26,15 +29,21 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 		int roundArea = polygons[i].roundArea();
 		if (!ofContains(areas, roundArea)) {
 			areas.push_back(roundArea);
-			cout << colors.size();
 			if (i >= colors.size()) {
 				ofColor c = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
 				colors.push_back(c);
 			}
+			cout << assignations.size() << " - " << roundArea << "\n";
+			polygonColorControls.push_back(
+				PolygonColorControl(
+					x + 10 + 110*(assignations.size()%3),
+					y + 10 + 110*((assignations.size()/3)),
+					roundArea, 
+					colors[assignations.size()]
+				)
+			);
 			assignations.insert(pair<int, ofColor>(roundArea, colors[assignations.size()]));
+			
 		}
 	}
-
-	// Controls 
-	polygonColorControl = PolygonColorControl(x + 10, x + 100);
 }
