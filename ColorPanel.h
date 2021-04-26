@@ -21,5 +21,7 @@ public:
 
 	void display();
 	void update(vector<PolyPol> _polygons);
+
+	void mousePressed();
 };
 

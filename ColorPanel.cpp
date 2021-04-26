@@ -47,3 +47,9 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 		}
 	}
 }
+
+void ColorPanel::mousePressed() {
+	for (PolygonColorControl pcc : polygonColorControls) {
+		pcc.mousePressed();
+	}
+}

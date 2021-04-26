@@ -68,7 +68,7 @@ void ofApp::newPattern() {
 }
 
 void ofApp::mousePressed(int x, int y, int button){
-	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed() ) {
+	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed()) {
 		newPattern();
 	}
 	else if (displayLinesToggle.mousePressed()) {
@@ -76,6 +76,7 @@ void ofApp::mousePressed(int x, int y, int button){
 	}
 	else {
 		geometryColorSwitch.mousePressed();
+		colorPanel.mousePressed();
 	}
 }
 
