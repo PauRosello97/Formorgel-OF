@@ -25,10 +25,10 @@ void Formorgel::generateOneShape(float x, float y, float d, float r) {
 	for (int i = 0; i < d; i++) {
 		float angle = (r + i * 360 / d - 90);
 
-		float startX = x + radius * offsetKnob * cos(radians(angle));
-		float startY = y + radius * offsetKnob * sin(radians(angle));
-
 		float fix = 150;
+
+		float startX = x + radius * offsetKnob * cos(radians(fix + angle));
+		float startY = y + radius * offsetKnob * sin(radians(fix + angle));
 
 		float endX = startX + radius * lengthKnob * cos(radians(fix + angle + angleKnob));
 		float endY = startY + radius * lengthKnob * sin(radians(fix + angle + angleKnob));

@@ -7,9 +7,6 @@ void ColorPanel::display() {
 	for (PolygonColorControl pcc : polygonColorControls) {
 		pcc.display();
 	}
-	
-	ofSetColor(0);
-	ofDrawBitmapString("nPolygons: " + ofToString(polygons.size()), x + 10, y + 20);
 
 	// Background
 	ofSetColor(255);
@@ -21,10 +18,10 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 	vector<int> areas;
 	assignations.clear();
 	polygonColorControls.clear();
-	/*
+	
 	sort(polygons.begin(), polygons.end(), [](const PolyPol& a, const PolyPol& b) {
-		return a._area < b._area;
-	});*/
+		return a._area > b._area;
+	});
 	for (int i = 0; i < polygons.size(); i++) {
 		int roundArea = polygons[i].roundArea();
 		if (!ofContains(areas, roundArea)) {
@@ -33,7 +30,6 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 				ofColor c = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
 				colors.push_back(c);
 			}
-			cout << assignations.size() << " - " << roundArea << "\n";
 			polygonColorControls.push_back(
 				PolygonColorControl(
 					x + 10 + 110*(assignations.size()%3),
