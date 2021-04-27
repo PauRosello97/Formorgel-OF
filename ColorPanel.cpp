@@ -35,7 +35,8 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 					x + 10 + 110*(assignations.size()%3),
 					y + 10 + 110*((assignations.size()/3)),
 					roundArea, 
-					colors[assignations.size()]
+					colors[assignations.size()],
+					colors
 				)
 			);
 			assignations.insert(pair<int, ofColor>(roundArea, colors[assignations.size()]));
@@ -46,6 +47,8 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 
 void ColorPanel::mousePressed() {
 	for (PolygonColorControl pcc : polygonColorControls) {
+		
 		pcc.mousePressed();
 	}
+	update(polygons);
 }

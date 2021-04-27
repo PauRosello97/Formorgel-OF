@@ -1,11 +1,5 @@
 #include "PolygonColorControl.h"
 
-PolygonColorControl::PolygonColorControl(float _x, float _y, int _area, ofColor _color) {
-	x = _x;
-	y = _y;
-	color = _color;
-	area = _area;
-}
 
 void PolygonColorControl::display() {
 	ofSetColor(0);
@@ -20,6 +14,8 @@ bool PolygonColorControl::isOver() {
 
 void PolygonColorControl::mousePressed() {
 	if (isOver()) {
-		cout << "isOverColorCOntrol";
+		for (int i = 0; i < colors.size(); i++) {
+			colors[i] = ofColor(255, 0, 0);
+		}
 	}
 }
