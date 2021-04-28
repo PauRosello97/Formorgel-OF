@@ -20,8 +20,8 @@ public:
         step = _step;
         x = _x;
         y = _y;
-        lessButton = SmallButton(x + 150, y+h/2);
-        plusButton = SmallButton(x + 175, y + h / 2);
+        lessButton = SmallButton(x + 150, y+h/2, 20);
+        plusButton = SmallButton(x + 175, y + h / 2, 20);
     };
 
     void modifyValue() {

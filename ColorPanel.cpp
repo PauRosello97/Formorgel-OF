@@ -37,7 +37,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			polygonColorControls.push_back(
 				PolygonColorControl(
 					x + 10 + 110*(assignations.size()%3),
-					y + 150 + 110*((assignations.size()/3)),
+					y + 100 + 110*((assignations.size()/3)),
 					roundArea, 
 					colors[assignations.size()],
 					colors
@@ -49,6 +49,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 }
 
 void ColorPanel::mousePressed() {
+	modeSelector.mousePressed();
 	for (PolygonColorControl pcc : polygonColorControls) {
 		if (pcc.mousePressed()) {
 			break;

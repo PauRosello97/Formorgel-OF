@@ -6,9 +6,10 @@ class SmallButton {
     float size = 20;
 public:
     SmallButton() {};
-    SmallButton(float _x, float _y) {
+    SmallButton(float _x, float _y, float _size) {
         x = _x;
         y = _y;
+        size = _size;
     };
     void display() {
         ofSetColor(20, 20, 20);
