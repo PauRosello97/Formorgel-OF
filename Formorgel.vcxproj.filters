@@ -28,13 +28,22 @@
     <ClCompile Include="FloatInput.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="GeometryColorSwitch.cpp" />
     <ClCompile Include="GeometryPanel.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="ColorPanel.cpp" />
-    <ClCompile Include="SmallButton.cpp" />
-    <ClCompile Include="PolygonColorControl.cpp" />
+    <ClCompile Include="ColorPanel.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="GeometryColorSwitch.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="PolygonColorControl.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="SmallButton.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeSelector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -69,13 +78,22 @@
     <ClInclude Include="Osc.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="GeometryColorSwitch.h" />
     <ClInclude Include="GeometryPanel.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="ColorPanel.h" />
-    <ClInclude Include="SmallButton.h" />
-    <ClInclude Include="PolygonColorControl.h" />
+    <ClInclude Include="ColorPanel.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="GeometryColorSwitch.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="PolygonColorControl.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="SmallButton.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeSelector.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

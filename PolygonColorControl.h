@@ -10,9 +10,10 @@ class PolygonColorControl
 	ofColor color;
 	int area;
 	vector<ofColor>& colors;
-	bool displayingDialog;
+	
 
 public:
+	bool displayingDialog;
 	//PolygonColorControl(){}
 	PolygonColorControl(float _x, float _y, int _area, ofColor _color, vector<ofColor>& _colors) : colors(_colors) {
 		x = _x;

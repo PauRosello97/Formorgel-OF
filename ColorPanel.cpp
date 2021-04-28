@@ -3,6 +3,9 @@
 ColorPanel::ColorPanel(vector<PolyPol> _polygons) {}
 
 void ColorPanel::display() {
+	// Mode Selector
+	modeSelector.display();
+
 	// Controls
 	for (PolygonColorControl pcc : polygonColorControls) {
 		pcc.display();
@@ -10,7 +13,7 @@ void ColorPanel::display() {
 
 	// Background
 	ofSetColor(255);
-	ofDrawRectangle(x, y, 400, 600);
+	ofDrawRectangle(x, y, w, h);
 };
 
 void ColorPanel::update(vector<PolyPol> _polygons) {
@@ -34,7 +37,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			polygonColorControls.push_back(
 				PolygonColorControl(
 					x + 10 + 110*(assignations.size()%3),
-					y + 10 + 110*((assignations.size()/3)),
+					y + 150 + 110*((assignations.size()/3)),
 					roundArea, 
 					colors[assignations.size()],
 					colors
@@ -51,7 +54,7 @@ void ColorPanel::mousePressed() {
 			break;
 		}
 	}
-	updateAssignations();
+	//updateAssignations();
 }
 
 void ColorPanel::updateAssignations() {

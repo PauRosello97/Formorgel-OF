@@ -3,7 +3,6 @@
 void PolygonColorControl::display() {
 	ofSetColor(0);
 	ofDrawBitmapString(ofToString(area), x + 10, y + 20);
-	ofDrawBitmapString(displayingDialog ? "true" : "false", x + 10, y + 40);
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
 	ofSetColor(230);
@@ -21,6 +20,8 @@ bool PolygonColorControl::isOver() {
 bool PolygonColorControl::mousePressed() {
 	if (isOver()) {
 		displayingDialog = true;
+		cout << "click \n";
+		/*
 		auto it = find(colors.begin(), colors.end(), color);
 		if (it != colors.end())
 		{
@@ -28,6 +29,7 @@ bool PolygonColorControl::mousePressed() {
 			colors[index] = ofColor(255, 0, 0);
 		}
 		return true;
+		*/
 	}
 	return false;
 }
