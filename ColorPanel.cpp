@@ -15,7 +15,7 @@ void ColorPanel::display() {
 
 void ColorPanel::update(vector<PolyPol> _polygons) {
 	polygons = _polygons;
-	vector<int> areas;
+	areas.clear();
 	assignations.clear();
 	polygonColorControls.clear();
 	
@@ -23,9 +23,6 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 		return a._area > b._area;
 	});
 
-	for (int i = 0; i < colors.size(); i++) {
-		cout << colors[i] << "\n";
-	}
 	for (int i = 0; i < polygons.size(); i++) {
 		int roundArea = polygons[i].roundArea();
 		if (!ofContains(areas, roundArea)) {
@@ -50,7 +47,17 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 
 void ColorPanel::mousePressed() {
 	for (PolygonColorControl pcc : polygonColorControls) {
-		pcc.mousePressed();
+		if (pcc.mousePressed()) {
+			break;
+		}
 	}
-	update(polygons);
+	updateAssignations();
+}
+
+void ColorPanel::updateAssignations() {
+	assignations.clear();
+	for (int i = 0; i < areas.size(); i++) {
+		assignations.insert(pair<int, ofColor>(areas[i], colors[i]));
+		polygonColorControls[i].setColor(colors[i]);
+	}
 }

@@ -10,6 +10,7 @@ class PolygonColorControl
 	ofColor color;
 	int area;
 	vector<ofColor>& colors;
+	bool displayingDialog = false;
 
 public:
 	//PolygonColorControl(){}
@@ -22,6 +23,7 @@ public:
 
 	void display();
 	bool isOver();
-	void mousePressed();
+	bool mousePressed();
+	void setColor(ofColor c);
 };
 

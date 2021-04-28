@@ -1,24 +1,36 @@
 #include "PolygonColorControl.h"
 
-
 void PolygonColorControl::display() {
 	ofSetColor(0);
 	ofDrawBitmapString(ofToString(area), x + 10, y + 20);
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
+	ofSetColor(255, 255, 255);
+
+	// Dialog
+	if (displayingDialog) {
+		ofDrawRectangle(x, y + h, w, h);
+	}
 }
 
 bool PolygonColorControl::isOver() {
 	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
 }
 
-void PolygonColorControl::mousePressed() {
+bool PolygonColorControl::mousePressed() {
 	if (isOver()) {
+		displayingDialog = true;
 		auto it = find(colors.begin(), colors.end(), color);
 		if (it != colors.end())
 		{
 			int index = it - colors.begin();
 			colors[index] = ofColor(255, 0, 0);
 		}
+		return true;
 	}
+	return false;
+}
+
+void PolygonColorControl::setColor(ofColor c) {
+	color = c;
 }

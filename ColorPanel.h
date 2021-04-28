@@ -11,6 +11,7 @@ class ColorPanel
 
 	vector<PolyPol> polygons;
 	vector<ofColor> colors;
+	vector<int> areas;
 	vector<PolygonColorControl> polygonColorControls;
 	
 public:
@@ -21,7 +22,7 @@ public:
 
 	void display();
 	void update(vector<PolyPol> _polygons);
-
+	void updateAssignations();
 	void mousePressed();
 };
 
