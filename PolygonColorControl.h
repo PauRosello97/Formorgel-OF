@@ -10,7 +10,7 @@ class PolygonColorControl
 	ofColor color;
 	int area;
 	vector<ofColor>& colors;
-	bool displayingDialog = false;
+	bool displayingDialog;
 
 public:
 	//PolygonColorControl(){}
@@ -19,6 +19,8 @@ public:
 		y = _y;
 		color = _color;
 		area = _area;
+		displayingDialog = false;
+		cout << "new control \n";
 	};
 
 	void display();

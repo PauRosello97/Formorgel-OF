@@ -3,9 +3,10 @@
 void PolygonColorControl::display() {
 	ofSetColor(0);
 	ofDrawBitmapString(ofToString(area), x + 10, y + 20);
+	ofDrawBitmapString(displayingDialog ? "true" : "false", x + 10, y + 40);
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
-	ofSetColor(255, 255, 255);
+	ofSetColor(230);
 
 	// Dialog
 	if (displayingDialog) {

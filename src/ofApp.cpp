@@ -61,8 +61,6 @@ void ofApp::newPattern() {
 	);
 
 	colorPanel.update(geometricSynth.polygons);
-	//colorPanel = ColorPanel(geometricSynth.polygons);
-
 	geometricSynth.applyColors(colorPanel.assignations);
 }
 
