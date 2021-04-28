@@ -11,8 +11,10 @@ class ModeSelector
 	SmallButton nextButton;
 	int mode = 0;
 	vector<string> modeNames = { "Lydian", "Ionian", "Mixolydian", "Dorian", "Aeolian", "Phrygian", "Locrian" };
+	
 
 public:
+	
 
 	ModeSelector() {};
 	ModeSelector(float _x, float _y) {
@@ -45,6 +47,10 @@ public:
 			mode = (mode + 1) % 7;
 
 		}
+	}
+
+	int getMode() {
+		return mode;
 	}
 };
 
