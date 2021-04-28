@@ -14,8 +14,11 @@ bool PolygonColorControl::isOver() {
 
 void PolygonColorControl::mousePressed() {
 	if (isOver()) {
-		for (int i = 0; i < colors.size(); i++) {
-			colors[i] = ofColor(255, 0, 0);
+		auto it = find(colors.begin(), colors.end(), color);
+		if (it != colors.end())
+		{
+			int index = it - colors.begin();
+			colors[index] = ofColor(255, 0, 0);
 		}
 	}
 }

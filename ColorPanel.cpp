@@ -22,6 +22,10 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 	sort(polygons.begin(), polygons.end(), [](const PolyPol& a, const PolyPol& b) {
 		return a._area > b._area;
 	});
+
+	for (int i = 0; i < colors.size(); i++) {
+		cout << colors[i] << "\n";
+	}
 	for (int i = 0; i < polygons.size(); i++) {
 		int roundArea = polygons[i].roundArea();
 		if (!ofContains(areas, roundArea)) {
@@ -40,14 +44,12 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 				)
 			);
 			assignations.insert(pair<int, ofColor>(roundArea, colors[assignations.size()]));
-			
 		}
 	}
 }
 
 void ColorPanel::mousePressed() {
 	for (PolygonColorControl pcc : polygonColorControls) {
-		
 		pcc.mousePressed();
 	}
 	update(polygons);
