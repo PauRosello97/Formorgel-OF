@@ -32,6 +32,8 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			areas.push_back(roundArea);
 			if (i >= colors.size()) {
 				ofColor c = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+				Tone t = Tone(ofRandom(7), ofRandom(100));
+				tones.push_back(t);
 				colors.push_back(c);
 			}
 			polygonColorControls.push_back(
@@ -40,6 +42,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 					y + 100 + 110*((assignations.size()/3)),
 					roundArea, 
 					colors[assignations.size()],
+					tones[assignations.size()],
 					colors
 				)
 			);

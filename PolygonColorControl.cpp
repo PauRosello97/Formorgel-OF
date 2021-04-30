@@ -3,6 +3,7 @@
 void PolygonColorControl::display() {
 	ofSetColor(0);
 	ofDrawBitmapString(ofToString(area), x + 10, y + 20);
+	ofDrawBitmapString(ofToString(tone.number) + " - " + ofToString(tone.luminance), x + 10, y + 40);
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
 	ofSetColor(230);
@@ -14,7 +15,7 @@ void PolygonColorControl::display() {
 }
 
 bool PolygonColorControl::isOver() {
-	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
+	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y && ofGetMouseY() < y + h;
 }
 
 bool PolygonColorControl::mousePressed() {

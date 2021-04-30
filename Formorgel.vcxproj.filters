@@ -44,6 +44,7 @@
       <Filter>src</Filter>
     </ClCompile>
     <ClCompile Include="ModeSelector.cpp" />
+    <ClCompile Include="Tone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -94,6 +95,7 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="ModeSelector.h" />
+    <ClInclude Include="Tone.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

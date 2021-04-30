@@ -195,6 +195,7 @@
     <ClCompile Include="SmallButton.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\ofApp.cpp" />
+    <ClCompile Include="Tone.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ColorPanel.h" />
@@ -212,6 +213,7 @@
     <ClInclude Include="PolygonColorControl.h" />
     <ClInclude Include="SmallButton.h" />
     <ClInclude Include="src\ofApp.h" />
+    <ClInclude Include="Tone.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

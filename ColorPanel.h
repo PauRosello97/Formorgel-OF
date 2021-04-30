@@ -3,6 +3,7 @@
 #include "PolyDetector.h";
 #include "PolygonColorControl.h";
 #include "ModeSelector.h"
+#include "Tone.h"
 
 class ColorPanel
 {
@@ -14,6 +15,7 @@ class ColorPanel
 	vector<PolyPol> polygons;
 	vector<ofColor> colors;
 	vector<int> areas;
+	vector<Tone> tones;
 	vector<PolygonColorControl> polygonColorControls;
 	ModeSelector modeSelector = ModeSelector(x + 10, y + 10);
 	vector<vector<int>> modesMatrix = {
