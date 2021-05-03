@@ -3,15 +3,11 @@
 void PolygonColorControl::display() {
 	ofSetColor(0);
 	ofDrawBitmapString(ofToString(area), x + 10, y + 20);
-	ofDrawBitmapString(ofToString(tone.number) + " - " + ofToString(tone.luminance), x + 10, y + 40);
+	ofDrawBitmapString("Tone: " + ofToString(tone.number) + " - " + ofToString(modeMatrix[tone.number]), x + 10, y + 40);
+	ofDrawBitmapString("H: " + ofToString(color.getHue()), x + 10, y + 60);
+	ofDrawBitmapString("L: " + ofToString(tone.luminance), x + 10, y + 80);
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
-	ofSetColor(230);
-
-	// Dialog
-	if (displayingDialog) {
-		ofDrawRectangle(x, y + h, w, h);
-	}
 }
 
 bool PolygonColorControl::isOver() {
@@ -37,4 +33,13 @@ bool PolygonColorControl::mousePressed() {
 
 void PolygonColorControl::setColor(ofColor c) {
 	color = c;
+}
+
+void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
+	modeMatrix = _modeMatrix;
+	setColor();
+}
+
+void PolygonColorControl::setColor() {
+	color.setHsb(((modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, 255);
 }

@@ -11,24 +11,35 @@ class PolygonColorControl
 	Tone tone;
 	ofColor color;
 	int area;
-	vector<ofColor>& colors;
+	vector<Tone>& tones;
+	vector<int> modeMatrix;
 	
 public:
 	bool displayingDialog;
 	//PolygonColorControl(){}
-	PolygonColorControl(float _x, float _y, int _area, ofColor _color, Tone _tone, vector<ofColor>& _colors) : colors(_colors) {
+	PolygonColorControl(
+		float _x, 
+		float _y, 
+		int _area, 
+		Tone _tone, 
+		vector<Tone>& _tones, 
+		vector<int> _modeMatrix
+	) : tones(_tones) {
+		modeMatrix = _modeMatrix;
 		x = _x;
 		y = _y;
-		
 		area = _area;
 		displayingDialog = false;
 		tone = _tone;
-		color.setHsb(tone.number * 30, 255, tone.luminance*2.5);
+		setColor();
 	};
 
 	void display();
 	bool isOver();
 	bool mousePressed();
 	void setColor(ofColor c);
+	void setModeMatrix(vector<int> modeMatrix);
+	void setColor();
+	
 };
 

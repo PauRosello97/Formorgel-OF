@@ -1,4 +1,6 @@
 #pragma once
+#include "ofMain.h";
+
 class Tone
 {
 public:
@@ -9,5 +11,11 @@ public:
 	}
 	int number;
 	float luminance;
+
+	ofColor getColor() {
+		ofColor c;
+		c.setHsb(number * 30, 255, luminance * 2.5);
+		return c;
+	}
 };
 

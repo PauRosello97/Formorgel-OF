@@ -18,53 +18,72 @@ void ColorPanel::display() {
 
 void ColorPanel::update(vector<PolyPol> _polygons) {
 	polygons = _polygons;
+
+	// Clear arrays
 	areas.clear();
 	assignations.clear();
 	polygonColorControls.clear();
 	
+	// Sort polygons by area
 	sort(polygons.begin(), polygons.end(), [](const PolyPol& a, const PolyPol& b) {
 		return a._area > b._area;
 	});
 
+	// For each Polygon
 	for (int i = 0; i < polygons.size(); i++) {
 		int roundArea = polygons[i].roundArea();
+		// If this area is not registered yet
 		if (!ofContains(areas, roundArea)) {
+			// Register it
 			areas.push_back(roundArea);
-			if (i >= colors.size()) {
-				ofColor c = ofColor(ofRandom(255), ofRandom(255), ofRandom(255));
+			// If we need a new tone, create it
+			if (i >= tones.size()) {
 				Tone t = Tone(ofRandom(7), ofRandom(100));
 				tones.push_back(t);
-				colors.push_back(c);
 			}
+			// Create a new control
 			polygonColorControls.push_back(
 				PolygonColorControl(
 					x + 10 + 110*(assignations.size()%3),
 					y + 100 + 110*((assignations.size()/3)),
 					roundArea, 
-					colors[assignations.size()],
 					tones[assignations.size()],
-					colors
+					tones,
+					modesMatrix[nMode]
 				)
 			);
-			assignations.insert(pair<int, ofColor>(roundArea, colors[assignations.size()]));
+			// And create a new assignation
+			assignations.insert(pair<int, ofColor>(roundArea, tones[assignations.size()].getColor()));
 		}
 	}
 }
 
 void ColorPanel::mousePressed() {
-	modeSelector.mousePressed();
-	for (PolygonColorControl pcc : polygonColorControls) {
-		if (pcc.mousePressed()) {
-			break;
+	if (modeSelector.mousePressed()) {
+		updateModeArray();
+	}
+	else {
+		for (PolygonColorControl pcc : polygonColorControls) {
+			if (pcc.mousePressed()) {
+				break;
+			}
 		}
 	}
+
 	//updateAssignations();
+}
+
+void ColorPanel::updateModeArray() {
+	nMode = modeSelector.getMode();
+	for (int i = 0; i < polygonColorControls.size(); i++) {
+		polygonColorControls[i].setModeMatrix(modesMatrix[nMode]);
+	}
 }
 
 void ColorPanel::updateAssignations() {
 	assignations.clear();
 	for (int i = 0; i < areas.size(); i++) {
-		assignations.insert(pair<int, ofColor>(areas[i], colors[i]));
-		polygonColorControls[i].setColor(colors[i]);
+		assignations.insert(pair<int, ofColor>(areas[i], tones[i].getColor()));
+		polygonColorControls[i].setColor(tones[i].getColor());
 	}
 }

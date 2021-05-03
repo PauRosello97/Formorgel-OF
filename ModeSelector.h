@@ -12,10 +12,8 @@ class ModeSelector
 	int mode = 0;
 	vector<string> modeNames = { "Lydian", "Ionian", "Mixolydian", "Dorian", "Aeolian", "Phrygian", "Locrian" };
 	
-
 public:
 	
-
 	ModeSelector() {};
 	ModeSelector(float _x, float _y) {
 		x = _x;
@@ -38,15 +36,16 @@ public:
 		ofDrawRectangle(x, y, w, h);
 	}
 
-	void mousePressed() {
+	bool mousePressed() {
 		if (previousButton.isOver()) {
 			mode = mode > 0 ? mode - 1 : 6;
-
+			return true;
 		}
 		else if (nextButton.isOver()) {
 			mode = (mode + 1) % 7;
-
+			return true;
 		}
+		return false;
 	}
 
 	int getMode() {

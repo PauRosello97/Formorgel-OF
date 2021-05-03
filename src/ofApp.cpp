@@ -74,7 +74,7 @@ void ofApp::mousePressed(int x, int y, int button){
 	else {
 		geometryColorSwitch.mousePressed();
 		colorPanel.mousePressed();
-		//geometricSynth.applyColors(colorPanel.assignations);
+		geometricSynth.applyColors(colorPanel.assignations);
 	}
 }
 
