@@ -39,6 +39,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			// If we need a new tone, create it
 			if (i >= tones.size()) {
 				Tone t = Tone(ofRandom(7), ofRandom(100));
+				t.hue = (modesMatrix[nMode][t.number]*30)*0.7083;
 				tones.push_back(t);
 			}
 			// Create a new control
