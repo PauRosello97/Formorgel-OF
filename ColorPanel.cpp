@@ -70,7 +70,7 @@ void ColorPanel::mousePressed() {
 		}
 	}
 
-	//updateAssignations();
+	updateAssignations();
 }
 
 void ColorPanel::updateModeArray() {
@@ -83,7 +83,8 @@ void ColorPanel::updateModeArray() {
 void ColorPanel::updateAssignations() {
 	assignations.clear();
 	for (int i = 0; i < areas.size(); i++) {
+		tones[i].hue = polygonColorControls[i].getColor().getHue();
 		assignations.insert(pair<int, ofColor>(areas[i], tones[i].getColor()));
-		polygonColorControls[i].setColor(tones[i].getColor());
+		//polygonColorControls[i].setColor(tones[i].getColor());
 	}
 }

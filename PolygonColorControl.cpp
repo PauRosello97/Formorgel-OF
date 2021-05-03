@@ -41,5 +41,9 @@ void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
 }
 
 void PolygonColorControl::setColor() {
-	color.setHsb(((modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, 255);
+	color.setHsb(((modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, tone.luminance*2.5);
+}
+
+ofColor PolygonColorControl::getColor() {
+	return color;
 }

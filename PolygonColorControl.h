@@ -40,6 +40,7 @@ public:
 	void setColor(ofColor c);
 	void setModeMatrix(vector<int> modeMatrix);
 	void setColor();
+	ofColor getColor();
 	
 };
 
