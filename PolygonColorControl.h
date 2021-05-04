@@ -1,6 +1,7 @@
 #pragma once
 #include "ofMain.h";
 #include "Tone.h";
+#include "SmallButton.h";
 
 class PolygonColorControl
 {
@@ -15,6 +16,8 @@ class PolygonColorControl
 	vector<Tone>& tones;
 	vector<int> modeMatrix;
 	vector<string> romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII"};
+
+	vector<SmallButton> shadesButtons;
 	
 public:
 	bool displayingDialog;
@@ -27,16 +30,7 @@ public:
 		vector<Tone>& _tones, 
 		vector<int> _modeMatrix,
 		int baseTone
-	) : tones(_tones) {
-		modeMatrix = _modeMatrix;
-		x = _x;
-		y = _y;
-		area = _area;
-		displayingDialog = false;
-		tone = _tone;
-		baseHue = baseTone * 30;
-		setColor();
-	};
+	);
 
 	void display();
 	bool isOver();

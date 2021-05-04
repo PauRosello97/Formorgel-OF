@@ -91,6 +91,5 @@ void ColorPanel::updateAssignations() {
 	for (int i = 0; i < areas.size(); i++) {
 		tones[i].hue = polygonColorControls[i].getColor().getHue();
 		assignations.insert(pair<int, ofColor>(areas[i], tones[i].getColor()));
-		//polygonColorControls[i].setColor(tones[i].getColor());
 	}
 }
