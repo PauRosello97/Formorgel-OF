@@ -52,8 +52,6 @@ public:
 	}
 
 	int getValue() {
-		cout << "Get value \n";
-		cout << value << "\n";
 		return value;
 	}
 };

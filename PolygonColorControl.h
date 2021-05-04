@@ -34,8 +34,8 @@ public:
 		area = _area;
 		displayingDialog = false;
 		tone = _tone;
-		setColor();
 		baseHue = baseTone * 30;
+		setColor();
 	};
 
 	void display();
