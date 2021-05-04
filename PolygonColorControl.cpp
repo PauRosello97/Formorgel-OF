@@ -1,11 +1,15 @@
 #include "PolygonColorControl.h"
 
 void PolygonColorControl::display() {
-	ofSetColor(0);
-	ofDrawBitmapString(ofToString(area), x + 10, y + 20);
-	ofDrawBitmapString("Tone: " + ofToString(tone.number) + " - " + ofToString(modeMatrix[tone.number]), x + 10, y + 40);
-	ofDrawBitmapString("H: " + ofToString(color.getHue()), x + 10, y + 60);
-	ofDrawBitmapString("L: " + ofToString(tone.luminance), x + 10, y + 80);
+	if (tone.luminance > 90) {
+		ofSetColor(0);
+	}
+	else {
+		ofSetColor(255);
+	}
+	
+	ofDrawBitmapString(romanNumbers[tone.number] + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
+	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 10, y + 40);
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
 }
@@ -37,13 +41,16 @@ void PolygonColorControl::setColor(ofColor c) {
 
 void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
 	modeMatrix = _modeMatrix;
-	setColor();
 }
 
 void PolygonColorControl::setColor() {
-	color.setHsb(((modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, tone.luminance*2.5);
+	color.setHsb(((baseHue + modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, tone.luminance*2.5);
 }
 
 ofColor PolygonColorControl::getColor() {
 	return color;
+}
+
+void PolygonColorControl::setBaseHue(int baseTone) {
+	baseHue = baseTone * 30;
 }

@@ -5,6 +5,7 @@ ColorPanel::ColorPanel(vector<PolyPol> _polygons) {}
 void ColorPanel::display() {
 	// Mode Selector
 	modeSelector.display();
+	baseToneSelector.display();
 
 	// Controls
 	for (PolygonColorControl pcc : polygonColorControls) {
@@ -39,18 +40,19 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			// If we need a new tone, create it
 			if (i >= tones.size()) {
 				Tone t = Tone(ofRandom(7), ofRandom(100));
-				t.hue = (modesMatrix[nMode][t.number]*30)*0.7083;
+				t.hue = ((baseTone + modesMatrix[nMode][t.number]*30)%360)*0.7083;
 				tones.push_back(t);
 			}
 			// Create a new control
 			polygonColorControls.push_back(
 				PolygonColorControl(
 					x + 10 + 110*(assignations.size()%3),
-					y + 100 + 110*((assignations.size()/3)),
+					y + 130 + 110*((assignations.size()/3)),
 					roundArea, 
 					tones[assignations.size()],
 					tones,
-					modesMatrix[nMode]
+					modesMatrix[nMode],
+					baseTone
 				)
 			);
 			// And create a new assignation
@@ -60,8 +62,10 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 }
 
 void ColorPanel::mousePressed() {
-	if (modeSelector.mousePressed()) {
-		updateModeArray();
+	if (modeSelector.mousePressed() || baseToneSelector.mousePressed()) {
+		nMode = modeSelector.getValue();
+		baseTone = baseToneSelector.getValue();
+		updateControls();
 	}
 	else {
 		for (PolygonColorControl pcc : polygonColorControls) {
@@ -74,10 +78,11 @@ void ColorPanel::mousePressed() {
 	updateAssignations();
 }
 
-void ColorPanel::updateModeArray() {
-	nMode = modeSelector.getMode();
+void ColorPanel::updateControls() {
 	for (int i = 0; i < polygonColorControls.size(); i++) {
 		polygonColorControls[i].setModeMatrix(modesMatrix[nMode]);
+		polygonColorControls[i].setBaseHue(baseTone);
+		polygonColorControls[i].setColor();
 	}
 }
 

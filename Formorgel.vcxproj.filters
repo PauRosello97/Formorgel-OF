@@ -43,8 +43,12 @@
     <ClCompile Include="SmallButton.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="ModeSelector.cpp" />
-    <ClCompile Include="Tone.cpp" />
+    <ClCompile Include="Selector.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Tone.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -94,8 +98,12 @@
     <ClInclude Include="SmallButton.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="ModeSelector.h" />
-    <ClInclude Include="Tone.h" />
+    <ClInclude Include="Selector.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Tone.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="icon.rc" />

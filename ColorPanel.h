@@ -2,7 +2,7 @@
 #include "ofMain.h";
 #include "PolyDetector.h";
 #include "PolygonColorControl.h";
-#include "ModeSelector.h"
+#include "Selector.h"
 #include "Tone.h"
 
 class ColorPanel
@@ -12,14 +12,24 @@ class ColorPanel
 	float w = 400;
 	float h = 690;
 
+	int baseTone = 0;
 	vector<PolyPol> polygons;
 	vector<int> areas;
 	vector<Tone> tones;
 	vector<PolygonColorControl> polygonColorControls;
-	ModeSelector modeSelector = ModeSelector(x + 10, y + 10);
+	Selector modeSelector = Selector(
+		x + 10, 
+		y + 10, 
+		{ "Lydian", "Ionian", "Mixolydian", "Dorian", "Aeolian", "Phrygian", "Locrian" }
+	);
+	Selector baseToneSelector = Selector(
+		x + 10, 
+		y + 70, 
+		{ "0 Red", "30 Orange", "60 Yellow", "90 Yellow-Green", "120 Green", "150 Green-Cyan", "180 Cyan", "210 Cyan-Blue", "240 Blue", "270 Blue-Magenta", "300 Magenta", "330 Red-Magenta" }
+	);
 	int nMode = 0;
 
-	void updateModeArray();
+	void updateControls();
 	
 public:
 	vector<vector<int>> modesMatrix = {

@@ -182,7 +182,7 @@
   <ItemGroup>
     <ClCompile Include="ColorPanel.cpp" />
     <ClCompile Include="GeometryColorSwitch.cpp" />
-    <ClCompile Include="ModeSelector.cpp" />
+    <ClCompile Include="Selector.cpp" />
     <ClCompile Include="Osc.cpp" />
     <ClCompile Include="FloatInput.cpp" />
     <ClCompile Include="Button.cpp" />
@@ -200,7 +200,7 @@
   <ItemGroup>
     <ClInclude Include="ColorPanel.h" />
     <ClInclude Include="GeometryColorSwitch.h" />
-    <ClInclude Include="ModeSelector.h" />
+    <ClInclude Include="Selector.h" />
     <ClInclude Include="Osc.h" />
     <ClInclude Include="FloatInput.h" />
     <ClInclude Include="Button.h" />
