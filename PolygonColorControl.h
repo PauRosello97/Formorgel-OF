@@ -18,6 +18,8 @@ class PolygonColorControl
 	vector<string> romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII"};
 
 	vector<SmallButton> shadesButtons;
+
+	void updateShadeButtons();
 	
 public:
 	bool displayingDialog;
@@ -35,10 +37,10 @@ public:
 	void display();
 	bool isOver();
 	bool mousePressed();
-	void setColor(ofColor c);
 	void setModeMatrix(vector<int> modeMatrix);
 	void setColor();
 	void setBaseHue(int baseTone);
+	float getLuminance();
 	ofColor getColor();
 	
 };

@@ -17,7 +17,29 @@ PolygonColorControl::PolygonColorControl(
 	tone = _tone;
 	baseHue = baseTone * 30;
 	setColor();
+
+	float shadeSize = w / 7;
+	for (int i = 0; i < 7; i++) {
+		ofColor buttonColor;
+		buttonColor.setHsb(color.getHue(), 100, i * 255 / 6);
+		shadesButtons.push_back(
+			SmallButton(
+				x + shadeSize*i + shadeSize / 2 , 
+				y + h - shadeSize / 2, 
+				shadeSize,
+				buttonColor
+			)
+		);
+	}
 };
+
+void PolygonColorControl::updateShadeButtons() {
+	for (int i = 0; i < shadesButtons.size(); i++) {
+		ofColor buttonColor;
+		buttonColor.setHsb(color.getHue(), 100, i * 255 / 6);
+		shadesButtons[i].setColor(buttonColor);
+	}
+}
 
 void PolygonColorControl::display() {
 	// Text
@@ -30,11 +52,10 @@ void PolygonColorControl::display() {
 	ofDrawBitmapString(romanNumbers[tone.number] + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
 	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 10, y + 40);
 	
-	float shadeSize = w / 7;
-
 	// Shades
-	ofSetColor(255, 0, 0);
-	ofDrawRectangle(x, y + h - shadeSize, shadeSize, shadeSize);
+	for (SmallButton shade : shadesButtons) {
+		shade.display();
+	}
 	
 	// Background
 	ofSetColor(color);
@@ -47,23 +68,17 @@ bool PolygonColorControl::isOver() {
 
 bool PolygonColorControl::mousePressed() {
 	if (isOver()) {
-		displayingDialog = true;
-		cout << "click \n";
-		/*
-		auto it = find(colors.begin(), colors.end(), color);
-		if (it != colors.end())
-		{
-			int index = it - colors.begin();
-			colors[index] = ofColor(255, 0, 0);
+		for (SmallButton shade : shadesButtons) {
+			if (shade.isOver()) {
+				//setColor(ofColor(255, 0, 0));
+				tone.luminance = 100 * shade.getColor().getBrightness() / 255;
+				//tone.luminance = 255;				
+				break;
+			}
 		}
 		return true;
-		*/
 	}
 	return false;
-}
-
-void PolygonColorControl::setColor(ofColor c) {
-	color = c;
 }
 
 void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
@@ -72,6 +87,7 @@ void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
 
 void PolygonColorControl::setColor() {
 	color.setHsb(((baseHue + modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, tone.luminance*2.5);
+	updateShadeButtons();
 }
 
 ofColor PolygonColorControl::getColor() {
@@ -80,4 +96,8 @@ ofColor PolygonColorControl::getColor() {
 
 void PolygonColorControl::setBaseHue(int baseTone) {
 	baseHue = baseTone * 30;
+}
+
+float PolygonColorControl::getLuminance() {
+	return tone.luminance;
 }

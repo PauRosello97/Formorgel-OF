@@ -65,16 +65,17 @@ void ColorPanel::mousePressed() {
 	if (modeSelector.mousePressed() || baseToneSelector.mousePressed()) {
 		nMode = modeSelector.getValue();
 		baseTone = baseToneSelector.getValue();
-		updateControls();
+		
 	}
 	else {
-		for (PolygonColorControl pcc : polygonColorControls) {
-			if (pcc.mousePressed()) {
+		for (int i = 0; i < polygonColorControls.size(); i++) {
+			if (polygonColorControls[i].mousePressed()) {
+				tones[i].luminance = polygonColorControls[i].getLuminance();
 				break;
 			}
 		}
 	}
-
+	updateControls();
 	updateAssignations();
 }
 
