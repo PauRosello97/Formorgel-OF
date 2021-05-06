@@ -21,7 +21,7 @@ PolygonColorControl::PolygonColorControl(
 	float shadeSize = w / 7;
 	for (int i = 0; i < 7; i++) {
 		ofColor buttonColor;
-		buttonColor.setHsb(color.getHue(), 100, i * 255 / 6);
+		buttonColor.setHsb(color.getHue(), 255, i * 255 / 6);
 		shadesButtons.push_back(
 			SmallButton(
 				x + shadeSize*i + shadeSize / 2 , 
@@ -36,7 +36,7 @@ PolygonColorControl::PolygonColorControl(
 void PolygonColorControl::updateShadeButtons() {
 	for (int i = 0; i < shadesButtons.size(); i++) {
 		ofColor buttonColor;
-		buttonColor.setHsb(color.getHue(), 100, i * 255 / 6);
+		buttonColor.setHsb(color.getHue(), 255, i * 255 / 6);
 		shadesButtons[i].setColor(buttonColor);
 	}
 }
@@ -50,7 +50,7 @@ void PolygonColorControl::display() {
 		ofSetColor(255);
 	}
 	ofDrawBitmapString(romanNumbers[tone.number] + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
-	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 10, y + 40);
+	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
 	
 	// Shades
 	for (SmallButton shade : shadesButtons) {

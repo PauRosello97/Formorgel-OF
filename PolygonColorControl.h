@@ -7,7 +7,7 @@ class PolygonColorControl
 {
 	float x;
 	float y;
-	float w = 100;
+	float w = 120;
 	float h = 100;
 	int baseHue;
 	Tone tone;
