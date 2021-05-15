@@ -64,7 +64,7 @@ void PolygonColorControl::display() {
 	string romanName = romanNumbers[tone.number];
 	//ofDrawBitmapString(romanName + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
 	ofDrawBitmapString(romanName, x -romanName.length()*4 + w/2, y + h/2);
-	//ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
+	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
 	
 	// Shades
 	for (SmallButton shade : shadesButtons) {

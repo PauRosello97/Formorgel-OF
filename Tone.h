@@ -4,9 +4,10 @@
 class Tone
 {
 public:
-	Tone() {
-		number = ofRandom(7);
-		luminance = round(ofRandom(4)) * 25;
+	Tone() {};
+	Tone(int toneN) {
+		number = toneN;
+		luminance = 20 + round(ofRandom(4)) * 20;
 	};
 	int number;
 	float hue;

@@ -39,7 +39,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 			areas.push_back(roundArea);
 			// If we need a new tone, create it
 			if (i >= tones.size()) {
-				Tone t = Tone();
+				Tone t = Tone(tones.size()%7);
 				t.hue = ((baseTone + modesMatrix[nMode][t.number]*30)%360)*0.7083;
 				tones.push_back(t);
 			}
