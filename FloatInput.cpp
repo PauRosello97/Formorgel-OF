@@ -30,8 +30,14 @@ bool FloatInput::mousePressed() {
 void FloatInput::modifyValue() {
     if (plusButton.isOver()) {
         value += step;
+        if (value > max) {
+            value = max;
+        }
     }
     else if (lessButton.isOver()) {
         value -= step;
+        if (value < min) {
+            value = min;
+        }
     }
 }

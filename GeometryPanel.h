@@ -21,7 +21,7 @@ public:
 		oscA(x, y+70, 400, 0), 
 		oscB(x, y+280, 400, 0), 
 		oscC(x, y+490, 400), 
-		iterationsInput(iterations, "Iterations", x, y+10, 1) {};
+		iterationsInput(iterations, "Iterations", x, y+10, 1, 0, 4) {};
 
 	void display() {
 		oscA.display();
