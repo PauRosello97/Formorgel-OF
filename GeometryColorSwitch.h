@@ -3,7 +3,7 @@
 
 class GeometryColorSwitch
 {
-	string mode = "color";
+	string mode = "geometry";
 	float x = 10;
 	float y = 10;
 	float w = 400;

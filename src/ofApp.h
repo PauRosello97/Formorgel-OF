@@ -13,8 +13,10 @@ class ofApp : public ofBaseApp{
 	ColorPanel colorPanel;
 	Button applyButton;
 	Button displayLinesToggle;
+	Button displayPolygonsToggle;
 	GeometryColorSwitch geometryColorSwitch;
 	bool displayingLines = true;
+	bool displayingPolygons = false;
 
 	float lateralWidth;
 	bool workingMode = true;

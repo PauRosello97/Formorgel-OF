@@ -8,7 +8,7 @@ class Button
 public:
 	Button();
 	Button(float x, float y, float w, float h);
-	void display();
+	void display(string message);
 	bool isOver();
 	bool mousePressed();
 };

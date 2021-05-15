@@ -13,6 +13,7 @@ void ofApp::setup(){
 
 	newPattern();
 	displayLinesToggle = Button(420, 10, 100, 30);
+	displayPolygonsToggle = Button(530, 10, 100, 30);
 }
 
 void ofApp::update(){ }
@@ -20,7 +21,8 @@ void ofApp::update(){ }
 void ofApp::draw(){
 	float margin = 25;
 
-	displayLinesToggle.display();
+	displayLinesToggle.display(displayingLines ? "Hide lines" : "Show lines");
+	displayPolygonsToggle.display(displayingPolygons ? "Hide polygons" : "Show polygons");
 
 	// Lateral panels
 	geometryColorSwitch.display();
@@ -45,7 +47,10 @@ void ofApp::draw(){
 	}
 
 	//Polygons
-	geometricSynth.display();
+	if (displayingPolygons) {
+		geometricSynth.display();
+	}
+	
 }
 
 void ofApp::keyPressed(int key){ }
@@ -55,11 +60,20 @@ void ofApp::mouseDragged(int x, int y, int button){ }
 
 void ofApp::newPattern() {
 	geometricSynth = GeometricSynth();
-	geometricSynth.generateComposition(
-		Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
-		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1),
-		Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2)
-	);
+	if (displayingPolygons) {
+		geometricSynth.generateComposition(
+			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
+			Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1),
+			Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2)
+		);
+	}
+	else {
+		geometricSynth.generateLines(
+			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
+			Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1),
+			Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2)
+		);
+	}
 
 	colorPanel.update(geometricSynth.polygons);
 	geometricSynth.applyColors(colorPanel.assignations);
@@ -71,6 +85,10 @@ void ofApp::mousePressed(int x, int y, int button){
 	}
 	else if (displayLinesToggle.mousePressed()) {
 		displayingLines = !displayingLines;
+	}
+	else if (displayPolygonsToggle.mousePressed()) {
+		displayingPolygons = !displayingPolygons;
+		newPattern();
 	}
 	else {
 		geometryColorSwitch.mousePressed();

@@ -1,6 +1,5 @@
 #include "Button.h"
 
-
 Button::Button() {}
 
 Button::Button(float _x, float _y, float _w, float _h) {
@@ -10,9 +9,9 @@ Button::Button(float _x, float _y, float _w, float _h) {
 	h = _h;
 }
 
-void Button::display() {
+void Button::display(string message) {
 	ofSetColor(0, 0, 0);
-	ofDrawBitmapString("Show lines", x + 10, y + 20);
+	ofDrawBitmapString(message, x + 10, y + 20);
 	if (isOver()) {
 		ofSetColor(125, 125, 0);
 	}

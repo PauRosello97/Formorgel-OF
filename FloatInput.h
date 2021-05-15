@@ -24,15 +24,7 @@ public:
         plusButton = SmallButton(x + 175, y + h / 2, 20);
     };
 
-    void modifyValue() {
-        if (plusButton.isOver()) {
-            value += step;
-        }
-        else if (lessButton.isOver()) {
-            value -= step;
-        }
-    }
-
+    void modifyValue();
     bool isOver();
     void display();
     bool mousePressed();

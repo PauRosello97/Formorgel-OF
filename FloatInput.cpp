@@ -26,3 +26,12 @@ bool FloatInput::mousePressed() {
     }
     return false;
 }
+
+void FloatInput::modifyValue() {
+    if (plusButton.isOver()) {
+        value += step;
+    }
+    else if (lessButton.isOver()) {
+        value -= step;
+    }
+}
