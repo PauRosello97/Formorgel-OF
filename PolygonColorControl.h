@@ -18,6 +18,8 @@ class PolygonColorControl
 	vector<string> romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII"};
 
 	vector<SmallButton> shadesButtons;
+	SmallButton nextTone;
+	SmallButton previousTone;
 
 	void updateShadeButtons();
 	

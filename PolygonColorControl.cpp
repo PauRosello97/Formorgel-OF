@@ -31,6 +31,18 @@ PolygonColorControl::PolygonColorControl(
 			)
 		);
 	}
+	previousTone = SmallButton( 
+		x-30+w/2,
+		y-15+ w/2, 
+		20, 
+		ofColor(120, 120, 0)
+	);
+	nextTone = SmallButton(
+		x + 30 + w / 2,
+		y - 15 + w / 2,
+		20,
+		ofColor(120, 120, 0)
+	);
 };
 
 void PolygonColorControl::updateShadeButtons() {
@@ -49,13 +61,18 @@ void PolygonColorControl::display() {
 	else {
 		ofSetColor(255);
 	}
-	ofDrawBitmapString(romanNumbers[tone.number] + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
-	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
+	string romanName = romanNumbers[tone.number];
+	//ofDrawBitmapString(romanName + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
+	ofDrawBitmapString(romanName, x -romanName.length()*4 + w/2, y + h/2);
+	//ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
 	
 	// Shades
 	for (SmallButton shade : shadesButtons) {
 		shade.display();
 	}
+
+	nextTone.display();
+	previousTone.display();
 	
 	// Background
 	ofSetColor(color);
@@ -75,6 +92,14 @@ bool PolygonColorControl::mousePressed() {
 				//tone.luminance = 255;				
 				break;
 			}
+		}
+		if (nextTone.isOver()) {
+			tone.increaseTone();
+			return true;
+		}
+		if (previousTone.isOver()) {
+			tone.decreaseTone();
+			return true;
 		}
 		return true;
 	}
