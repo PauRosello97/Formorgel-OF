@@ -13,7 +13,7 @@ void ofApp::setup(){
 
 	newPattern();
 	displayLinesToggle = Button(420, 10, 100, 30);
-	displayPolygonsToggle = Button(530, 10, 100, 30);
+	displayPolygonsToggle = Button(530, 10, 130, 30);
 }
 
 void ofApp::update(){ }
@@ -60,18 +60,21 @@ void ofApp::mouseDragged(int x, int y, int button){ }
 
 void ofApp::newPattern() {
 	geometricSynth = GeometricSynth();
+
 	if (displayingPolygons) {
 		geometricSynth.generateComposition(
 			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
 			Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1),
-			Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2)
+			Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2),
+			iterations
 		);
 	}
 	else {
 		geometricSynth.generateLines(
 			Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
 			Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1),
-			Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2)
+			Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2),
+			iterations
 		);
 	}
 
@@ -81,6 +84,7 @@ void ofApp::newPattern() {
 
 void ofApp::mousePressed(int x, int y, int button){
 	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed()) {
+		iterations = round(geometryPanel.iterations);
 		newPattern();
 	}
 	else if (displayLinesToggle.mousePressed()) {

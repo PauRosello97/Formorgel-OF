@@ -9,13 +9,24 @@ Formorgel::Formorgel(float _offsetKnob, float _angleKnob, float _lengthKnob, int
 	id = _id;
 }
 
-std::vector<PolyLine> Formorgel::generatePattern() {
+std::vector<PolyLine> Formorgel::generatePattern(int iterations) {
 	lines = {};
 
-	//generateFourthLevelPack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
-	//generateThirdLevelPack(ofGetWindowWidth()/1.6, ofGetWindowHeight()/2, 3);
-	//generateSecondLevelPack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
-	generateOnePack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
+	if (iterations == 0) {
+		generateOneShape(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3, 0);
+	}
+	else if (iterations == 1) {
+		generateOnePack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
+	}
+	else if (iterations == 2) {
+		generateSecondLevelPack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
+	}
+	else if (iterations == 3) {
+		generateThirdLevelPack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
+	}
+	else if (iterations == 4) {
+		generateFourthLevelPack(ofGetWindowWidth() / 1.6, ofGetWindowHeight() / 2, 3);
+	}
 	
 	return lines;
 }

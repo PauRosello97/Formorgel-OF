@@ -2,8 +2,8 @@
 
 GeometricSynth::GeometricSynth(){}
 
-void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB, Formorgel fC) {
-	generateLines(fA, fB, fC);
+void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB, Formorgel fC, int iterations) {
+	generateLines(fA, fB, fC, iterations);
 
 	polyDetector.reset();
 	polyDetector.DetectPolygons();
@@ -13,14 +13,14 @@ void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB, Formorgel f
 
 }
 
-void GeometricSynth::generateLines(Formorgel fA, Formorgel fB, Formorgel fC) {
+void GeometricSynth::generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int iterations) {
 	formorgelA = fA;
 	formorgelB = fB;
 	formorgelC = fC;
 
-	lines = formorgelA.generatePattern();
-	std::vector<PolyLine> linesB = formorgelB.generatePattern();
-	std::vector<PolyLine> linesC = formorgelC.generatePattern();
+	lines = formorgelA.generatePattern(iterations);
+	std::vector<PolyLine> linesB = formorgelB.generatePattern(iterations);
+	std::vector<PolyLine> linesC = formorgelC.generatePattern(iterations);
 
 	for (auto& l : linesB) { lines.push_back(l); }
 	for (auto& l : linesC) { lines.push_back(l); }

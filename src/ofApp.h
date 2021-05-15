@@ -6,6 +6,7 @@
 #include "../ColorPanel.h";
 #include "../Button.h";
 #include "../GeometryColorSwitch.h";
+#include "../FloatInput.h";
 
 class ofApp : public ofBaseApp{
 
@@ -15,11 +16,13 @@ class ofApp : public ofBaseApp{
 	Button displayLinesToggle;
 	Button displayPolygonsToggle;
 	GeometryColorSwitch geometryColorSwitch;
+
 	bool displayingLines = true;
 	bool displayingPolygons = false;
 
 	float lateralWidth;
 	bool workingMode = true;
+	int iterations = 1;
 
 public:
 	void setup();

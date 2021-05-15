@@ -15,8 +15,8 @@ public:
 	std::vector<PolyPol> polygons;
 	std::vector<PolyLine> lines;
 
-	void generateLines(Formorgel fA, Formorgel fB, Formorgel fC);
-	void generateComposition(Formorgel fA, Formorgel fB, Formorgel fC);
+	void generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int iterations);
+	void generateComposition(Formorgel fA, Formorgel fB, Formorgel fC, int iterations);
 	void display();
 	void displayLines();
 	void applyColors(map<int, ofColor> assignations);

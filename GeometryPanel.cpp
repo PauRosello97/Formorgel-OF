@@ -10,5 +10,8 @@ bool GeometryPanel::mousePressed() {
 	else if (oscC.mousePressed()) {
 		return true;
 	}
+	else if (iterationsInput.mousePressed()) {
+		return true;
+	}
 	return false;	
 }
