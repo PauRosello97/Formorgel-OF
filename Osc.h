@@ -29,11 +29,27 @@ public:
         y = _y;
         w = _w;
         h = _w/2;
+        offset = round(ofRandom(100)) / 100;
+        angle = round(ofRandom(90));
+        length = round(ofRandom(200)) / 100;
     }
 
-    float offset = 0;
-    float angle = round(ofRandom(90));
-    float length = 2;
+    Osc(float _x, float _y, float _w, float _offset) :
+        value(50),
+        offsetInput(offset, "Offset", _x + _w / 2, _y + 10, 0.2),
+        angleInput(angle, "Angle", _x + _w / 2, _y + 50, 1),
+        lengthInput(length, "Length", _x + _w / 2, _y + 90, 0.1)
+    {
+        x = _x;
+        y = _y;
+        w = _w;
+        h = _w / 2;
+        offset = _offset;
+        angle = round(ofRandom(90));
+        length = round(ofRandom(200)) / 100;
+    }
+
+    float offset, angle, length;
 
     void display();
     bool isOver();

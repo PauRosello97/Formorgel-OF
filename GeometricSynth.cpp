@@ -2,14 +2,17 @@
 
 GeometricSynth::GeometricSynth(){}
 
-void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB) {
+void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB, Formorgel fC) {
 	formorgelA = fA;
 	formorgelB = fB;
+	formorgelC = fC;
 
 	lines = formorgelA.generatePattern();
 	std::vector<PolyLine> linesB = formorgelB.generatePattern();
+	std::vector<PolyLine> linesC = formorgelC.generatePattern();
 	
 	for (auto& l : linesB) { lines.push_back(l); }
+	for (auto& l : linesC) { lines.push_back(l); }
 	for (auto& l : lines){ polyDetector.AddLine(l); }
 
 	polyDetector.reset();

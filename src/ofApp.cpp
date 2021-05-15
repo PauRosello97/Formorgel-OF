@@ -57,7 +57,8 @@ void ofApp::newPattern() {
 	geometricSynth = GeometricSynth();
 	geometricSynth.generateComposition(
 		Formorgel(geometryPanel.oscA.offset, geometryPanel.oscA.angle, geometryPanel.oscA.length, 0),
-		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1)
+		Formorgel(geometryPanel.oscB.offset, geometryPanel.oscB.angle, geometryPanel.oscB.length, 1),
+		Formorgel(geometryPanel.oscC.offset, geometryPanel.oscC.angle, geometryPanel.oscC.length, 2)
 	);
 
 	colorPanel.update(geometricSynth.polygons);

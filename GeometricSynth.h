@@ -6,6 +6,7 @@ class GeometricSynth
 {
 	Formorgel formorgelA;
 	Formorgel formorgelB;
+	Formorgel formorgelC;
 	PolyDetector polyDetector;
 
 public:
@@ -14,7 +15,7 @@ public:
 	std::vector<PolyPol> polygons;
 	std::vector<PolyLine> lines;
 
-	void generateComposition(Formorgel fA, Formorgel fB);
+	void generateComposition(Formorgel fA, Formorgel fB, Formorgel fC);
 	void display();
 	void displayLines();
 	void applyColors(map<int, ofColor> assignations);
