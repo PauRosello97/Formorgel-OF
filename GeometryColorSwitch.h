@@ -41,13 +41,16 @@ public:
 		return ofGetMouseX() > x +w/2 && ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
 	}
 
-	void mousePressed() {
+	bool mousePressed() {
 		if (isOverA()) {
 			mode = "geometry";
+			return true;
 		}
 		else if (isOverB()) {
 			mode = "color";
+			return true;
 		}
+		return false;
 	}
 
 	bool inGeometryMode() {

@@ -94,8 +94,12 @@ void ofApp::mousePressed(int x, int y, int button){
 		displayingPolygons = !displayingPolygons;
 		newPattern();
 	}
-	else {
-		geometryColorSwitch.mousePressed();
+	else if (geometryColorSwitch.mousePressed()) {
+		if (!geometryColorSwitch.inGeometryMode() && !displayingPolygons) {
+			displayingPolygons = true;
+			newPattern();
+		}
+	}else {
 		colorPanel.mousePressed();
 		geometricSynth.applyColors(colorPanel.assignations);
 	}
