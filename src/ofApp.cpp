@@ -49,8 +49,7 @@ void ofApp::draw(){
 	//Polygons
 	if (displayingPolygons) {
 		geometricSynth.display();
-	}
-	
+	}	
 }
 
 void ofApp::keyPressed(int key){ }
@@ -104,7 +103,6 @@ void ofApp::mousePressed(int x, int y, int button){
 		geometricSynth.applyColors(colorPanel.assignations);
 	}
 }
-
 
 void ofApp::mouseReleased(int x, int y, int button){ }
 void ofApp::mouseEntered(int x, int y){ }

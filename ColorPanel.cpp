@@ -12,6 +12,11 @@ void ColorPanel::display() {
 		pcc.display();
 	}
 
+	if (polygonColorControls.size()==0) {
+		ofSetColor(0);
+		ofDrawBitmapString("No polygons detected", x + 120, y + 150);
+	}
+
 	// Background
 	ofSetColor(255);
 	ofDrawRectangle(x, y, w, h);
