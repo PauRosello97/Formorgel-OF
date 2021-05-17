@@ -2,8 +2,9 @@
 #include "ofMain.h";
 #include "PolyDetector.h";
 #include "PolygonColorControl.h";
-#include "Selector.h"
-#include "Tone.h"
+#include "Selector.h";
+#include "Tone.h";
+#include "Button.h";
 
 class ColorPanel
 {

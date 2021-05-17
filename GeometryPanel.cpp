@@ -13,5 +13,23 @@ bool GeometryPanel::mousePressed() {
 	else if (iterationsInput.mousePressed()) {
 		return true;
 	}
+	else if (randomizeButton.mousePressed()) {
+		randomize();
+		return true;
+	}
 	return false;	
+}
+
+void GeometryPanel::display() {
+	oscA.display();
+	oscB.display();
+	oscC.display();
+	iterationsInput.display();
+	randomizeButton.display("Randomize");
+};
+
+void GeometryPanel::randomize() {
+	oscA.randomize();
+	oscB.randomize();
+	oscC.randomize();
 }

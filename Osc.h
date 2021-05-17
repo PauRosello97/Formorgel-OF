@@ -10,7 +10,7 @@ class Osc
     float x = 10, y = 10, h = 100, w = 100;
     float value;
     float radians(float degrees);
-    
+
 public:
     Osc() : 
         value(50), 
@@ -54,6 +54,7 @@ public:
     void display();
     bool isOver();
     bool mousePressed();    
+    void randomize();
 
     float get_value() const {
         return value;

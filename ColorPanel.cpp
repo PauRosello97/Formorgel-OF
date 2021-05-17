@@ -3,6 +3,7 @@
 ColorPanel::ColorPanel(vector<PolyPol> _polygons) {}
 
 void ColorPanel::display() {
+
 	// Mode Selector
 	modeSelector.display();
 	baseToneSelector.display();
@@ -16,7 +17,7 @@ void ColorPanel::display() {
 		ofSetColor(0);
 		ofDrawBitmapString("No polygons detected", x + 120, y + 150);
 	}
-
+	
 	// Background
 	ofSetColor(255);
 	ofDrawRectangle(x, y, w, h);
