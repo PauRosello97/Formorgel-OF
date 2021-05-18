@@ -49,10 +49,19 @@
     <ClCompile Include="Tone.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="ofxHLuv.cpp">
+      <Filter>src\ofxHLuv</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
       <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ofxHLuv">
+      <UniqueIdentifier>{9295b5c0-ab1f-4675-96ff-0e826d3edfb6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\ofxPolyDetector">
+      <UniqueIdentifier>{e8074fc7-cf84-481c-9234-272e50727bd6}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,6 +112,9 @@
     </ClInclude>
     <ClInclude Include="Tone.h">
       <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="ofxHLuv.h">
+      <Filter>src\ofxHLuv</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

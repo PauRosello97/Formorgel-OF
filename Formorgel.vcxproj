@@ -182,6 +182,7 @@
   <ItemGroup>
     <ClCompile Include="ColorPanel.cpp" />
     <ClCompile Include="GeometryColorSwitch.cpp" />
+    <ClCompile Include="ofxHLuv.cpp" />
     <ClCompile Include="Selector.cpp" />
     <ClCompile Include="Osc.cpp" />
     <ClCompile Include="FloatInput.cpp" />
@@ -200,6 +201,7 @@
   <ItemGroup>
     <ClInclude Include="ColorPanel.h" />
     <ClInclude Include="GeometryColorSwitch.h" />
+    <ClInclude Include="ofxHLuv.h" />
     <ClInclude Include="Selector.h" />
     <ClInclude Include="Osc.h" />
     <ClInclude Include="FloatInput.h" />
