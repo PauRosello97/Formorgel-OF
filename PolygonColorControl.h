@@ -17,6 +17,8 @@ class PolygonColorControl
 	vector<int> modeMatrix;
 	vector<string> romanNumbers = {"I", "II", "III", "IV", "V", "VI", "VII"};
 
+	ofxHLuv HLuv;
+
 	vector<SmallButton> shadesButtons;
 	SmallButton nextTone;
 	SmallButton previousTone;

@@ -20,8 +20,7 @@ PolygonColorControl::PolygonColorControl(
 
 	float shadeSize = w / 7;
 	for (int i = 0; i < 7; i++) {
-		ofColor buttonColor;
-		buttonColor.setHsb(color.getHue(), 255, i * 255 / 6);
+		ofColor buttonColor = HLuv.getColor(color.getHue(), i * 100 / 6);		
 		shadesButtons.push_back(
 			SmallButton(
 				x + shadeSize*i + shadeSize / 2 , 
@@ -111,7 +110,7 @@ void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
 }
 
 void PolygonColorControl::setColor() {
-	color.setHsb(((baseHue + modeMatrix[tone.number] * 30) % 360) * 0.7083, 255, tone.luminance*2.5);
+	color = HLuv.getColor(((baseHue + modeMatrix[tone.number] * 30) % 360) * 0.7083, tone.luminance);
 	updateShadeButtons();
 }
 

@@ -1,8 +1,11 @@
 #pragma once
 #include "ofMain.h";
+#include "ofxHLuv.h";
 
 class Tone
 {
+
+	ofxHLuv HLuv;
 public:
 	Tone() {};
 	Tone(int toneN) {

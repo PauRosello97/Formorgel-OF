@@ -1,9 +1,7 @@
 #include "Tone.h"
 
 ofColor Tone::getColor() {
-	ofColor c;
-	c.setHsb(hue, 255, luminance * 2.5);
-	return c;
+	return HLuv.getColor(hue, luminance);
 }
 
 void Tone::increaseTone() {
