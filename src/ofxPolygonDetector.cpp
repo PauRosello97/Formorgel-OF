@@ -227,7 +227,6 @@ PolyLine ofxPolygonDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
 }
 bool ofxPolygonDetector::CreateLines()
 {
-
     uint32_t n = 0;
     for (auto& l : origLines)
     {
