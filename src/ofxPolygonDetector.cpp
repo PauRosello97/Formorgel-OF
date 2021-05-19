@@ -1913,3 +1913,29 @@ bool PolyCycle::convex(ofxPolygonDetector & pd) const
     }
     return true;
 }
+bool PolyCycle::contains(uint32_t idP) const
+{
+    return std::find(idx.begin(), idx.end(), idP) != idx.end();
+}
+string PolyCycle::idxToString() const
+{
+    std::string str;
+    for (auto& n : idx)
+    {
+        str += std::to_string(n) + " ";
+    }
+    if (!str.empty())
+        str.pop_back();
+    return str;
+}
+string PolyCycle::toString() const
+{
+    std::string str = "C{[" + std::to_string(startIdx) + "] nLines:";
+    str += std::to_string(idx.size());
+
+    str += " [";
+    str += idxToString();
+    str += "]}";
+
+    return str;
+}

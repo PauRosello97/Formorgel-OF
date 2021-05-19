@@ -39,36 +39,11 @@ struct PolyCycle
     bool isClosed;
     bool fine;
     bool canBeClosed(ofxPolygonDetector& pd, uint32_t idToAdd) const;
-    bool contains(uint32_t idP) const
-    {
-        return std::find(idx.begin(), idx.end(), idP) != idx.end();
-    }
+    bool contains(uint32_t idP) const;
     uint32_t numCuts(ofxPolygonDetector& pd, const PolyLine& l) const;
     bool AddLineId(ofxPolygonDetector& pd, uint32_t id);
-    std::string idxToString() const
-    {
-        std::string str;
-        for (auto& n : idx)
-        {
-            str += std::to_string(n) + " ";
-        }
-        if (!str.empty())
-            str.pop_back();
-        return str;
-    }
-
-    std::string toString() const
-    {
-        std::string str = "C{[" + std::to_string(startIdx) + "] nLines:";
-        str += std::to_string(idx.size());
-
-        str += " [";
-        str += idxToString();
-        str += "]}";
-
-        return str;
-    }
-
+    string idxToString() const;
+    string toString() const;
     bool Equals(const PolyCycle& p) const;
     bool convex(ofxPolygonDetector& pd) const;
     bool pointConsumed(ofxPolygonDetector& pd, uint32_t pid) const;
