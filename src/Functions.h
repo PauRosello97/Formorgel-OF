@@ -1,11 +1,11 @@
 #pragma once
-#include "PolyDetector.h";
+#include "ofMain.h"
+#include "ofxPolygonDetector.h";
 #include "geom.h"
 #include <algorithm>
 #include <cstdint>
 #include <string>
 #include <cmath>
-#include "ofMain.h"
 #include <map>
 #include <unordered_map>
 #include <set>

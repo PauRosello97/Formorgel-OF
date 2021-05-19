@@ -1,13 +1,13 @@
 #pragma once
 #include "Formorgel.h";
-#include "PolyDetector.h";
+#include "ofxPolygonDetector.h";
 
 class GeometricSynth
 {
 	Formorgel formorgelA;
 	Formorgel formorgelB;
 	Formorgel formorgelC;
-	PolyDetector polyDetector;
+	ofxPolygonDetector polyDetector;
 
 public:
 	GeometricSynth();

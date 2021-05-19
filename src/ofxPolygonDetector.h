@@ -18,7 +18,7 @@
 #define logoutf(format, ...) printf(format "\n", __VA_ARGS__)
 
 struct PolyLine;
-struct PolyDetector;
+struct ofxPolygonDetector;
 
 using CycleSet = std::set<uint32_t>;
 
@@ -39,13 +39,13 @@ struct PolyCycle
     bool isClosed;
     bool fine;
     //uint32_t colStep = 0; // use it to increase the recursive colliniar length
-    bool canBeClosed(PolyDetector& pd, uint32_t idToAdd) const;
+    bool canBeClosed(ofxPolygonDetector& pd, uint32_t idToAdd) const;
     bool contains(uint32_t idP) const
     {
         return std::find(idx.begin(), idx.end(), idP) != idx.end();
     }
-    uint32_t numCuts(PolyDetector& pd, const PolyLine& l) const;
-    bool AddLineId(PolyDetector& pd, uint32_t id);
+    uint32_t numCuts(ofxPolygonDetector& pd, const PolyLine& l) const;
+    bool AddLineId(ofxPolygonDetector& pd, uint32_t id);
     std::string idxToString() const
     {
         std::string str;
@@ -72,11 +72,11 @@ struct PolyCycle
 
     bool Equals(const PolyCycle& p) const;
 
-    bool convex(PolyDetector& pd) const;
+    bool convex(ofxPolygonDetector& pd) const;
 
-    bool pointConsumed(PolyDetector& pd, uint32_t pid) const;
+    bool pointConsumed(ofxPolygonDetector& pd, uint32_t pid) const;
 
-    bool accepted(PolyDetector& pd);
+    bool accepted(ofxPolygonDetector& pd);
 };
 using PolyCycles = std::vector<PolyCycle>;
 
@@ -110,7 +110,7 @@ struct PolyLine
     bool HasCommonIdxPoints(const PolyLine& line) const;
     bool Equals(const PolyLine& line) const;
 
-    void SortIntersectionsList(PolyDetector& pd);
+    void SortIntersectionsList(ofxPolygonDetector& pd);
 
     bool IntersectionPoint(const PolyLine& line, PointType& pos) const;
     bool LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const;
@@ -120,12 +120,12 @@ struct PolyLine
     static bool bCompareLineOrder(const PolyLine& l1, PolyLine& l2);
     static int iCompareLineOrder(const PolyLine& l1, PolyLine& l2);
 
-    std::string neighToString(PolyDetector& pd, uint32_t* retNNeigh = nullptr) const;
-    std::string toString(PolyDetector& pd) const;
-    uint32_t numNeigh(PolyDetector& pd) const;
-    uint32_t numIntersections(PolyDetector& pd) const;
+    std::string neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh = nullptr) const;
+    std::string toString(ofxPolygonDetector& pd) const;
+    uint32_t numNeigh(ofxPolygonDetector& pd) const;
+    uint32_t numIntersections(ofxPolygonDetector& pd) const;
 
-    uint32_t canBeRemoved(PolyDetector& pd, RmLinesType type) const;
+    uint32_t canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const;
 
     PolyLine& mul(float m)
     {
@@ -140,7 +140,7 @@ struct PolyLine
         return *this;
     }
 
-    void setIgnore(PolyDetector& pd, const char* msg);
+    void setIgnore(ofxPolygonDetector& pd, const char* msg);
     bool contains(const PointType& point) const;
     bool contains(const PolyLine& line) const;
     bool collinear(const PolyLine& l) const;
@@ -166,12 +166,12 @@ struct PolyLine
         return aIdx == pid ? bIdx : aIdx;
     }
 
-    bool compareNeigh(PolyDetector& pd, uint32_t nid1, uint32_t nid2) const;
-    bool sortNeigh(PolyDetector& pd) const;
-    uint32_t& incTook(PolyDetector& pd);
+    bool compareNeigh(ofxPolygonDetector& pd, uint32_t nid1, uint32_t nid2) const;
+    bool sortNeigh(ofxPolygonDetector& pd) const;
+    uint32_t& incTook(ofxPolygonDetector& pd);
 
-    float angle(PolyDetector& pd, const PolyLine& l) const;
-    bool betweenNeighbors(PolyDetector& pd, const PolyLine& l1, const PolyLine& l2) const;
+    float angle(ofxPolygonDetector& pd, const PolyLine& l) const;
+    bool betweenNeighbors(ofxPolygonDetector& pd, const PolyLine& l1, const PolyLine& l2) const;
 };
 
 struct PolyPol
@@ -206,10 +206,10 @@ struct PolyPol
 
     PointType center();
 
-    double TriangleArea(PolyDetector& pd);
+    double TriangleArea(ofxPolygonDetector& pd);
 };
 
-struct PolyDetector
+struct ofxPolygonDetector
 {
     using LineVector = std::vector<PolyLine>;
     using LineList = std::list<PolyLine>;

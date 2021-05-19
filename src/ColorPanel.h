@@ -1,6 +1,6 @@
 #pragma once
 #include "ofMain.h";
-#include "PolyDetector.h";
+#include "ofxPolygonDetector.h";
 #include "PolygonColorControl.h";
 #include "Selector.h";
 #include "Tone.h";

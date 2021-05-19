@@ -191,7 +191,7 @@
     <ClCompile Include="src\GeometryColorSwitch.cpp" />
     <ClCompile Include="src\GeometryPanel.cpp" />
     <ClCompile Include="src\Osc.cpp" />
-    <ClCompile Include="src\PolyDetector.cpp" />
+    <ClCompile Include="src\ofxPolygonDetector.cpp" />
     <ClCompile Include="src\PolygonColorControl.cpp" />
     <ClCompile Include="src\Selector.cpp" />
     <ClCompile Include="src\SmallButton.cpp" />
@@ -210,7 +210,7 @@
     <ClInclude Include="src\GeometryColorSwitch.h" />
     <ClInclude Include="src\GeometryPanel.h" />
     <ClInclude Include="src\Osc.h" />
-    <ClInclude Include="src\PolyDetector.h" />
+    <ClInclude Include="src\ofxPolygonDetector.h" />
     <ClInclude Include="src\PolygonColorControl.h" />
     <ClInclude Include="src\Selector.h" />
     <ClInclude Include="src\SmallButton.h" />

@@ -40,9 +40,6 @@
     <ClCompile Include="src\Osc.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\PolyDetector.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\PolygonColorControl.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -57,6 +54,9 @@
     </ClCompile>
     <ClCompile Include="..\..\..\..\addons\ofxHLuv\src\ofxHLuv.cpp">
       <Filter>addons\ofxHLuv\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ofxPolygonDetector.cpp">
+      <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -110,9 +110,6 @@
     <ClInclude Include="src\Osc.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\PolyDetector.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\PolygonColorControl.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -127,6 +124,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\..\addons\ofxHLuv\src\ofxHLuv.h">
       <Filter>addons\ofxHLuv\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ofxPolygonDetector.h">
+      <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
