@@ -1,12 +1,12 @@
 #pragma once
 
 #include "ofMain.h"
-#include "../GeometricSynth.h";
-#include "../GeometryPanel.h";
-#include "../ColorPanel.h";
-#include "../Button.h";
-#include "../GeometryColorSwitch.h";
-#include "../FloatInput.h";
+#include "GeometricSynth.h";
+#include "GeometryPanel.h";
+#include "ColorPanel.h";
+#include "Button.h";
+#include "GeometryColorSwitch.h";
+#include "FloatInput.h";
 
 class ofApp : public ofBaseApp{
 
