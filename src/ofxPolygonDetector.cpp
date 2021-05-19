@@ -1,17 +1,9 @@
 
 #include <assert.h>
 #include "ofxPolygonDetector.h"
-
 #include <set>
 
-#if 0
-#undef logoutf
-#define logoutf(...) do {} while(false)
-#endif
-
 #define arToStr(arg) #arg
-
-
 
 const char* RmLinesTypeStr(RmLinesType type)
 {
@@ -29,6 +21,192 @@ const char* RmLinesTypeStr(RmLinesType type)
 static float Area(const PointType& a, const PointType& b, const PointType& c)
 {
     return 0.5 * ((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
+}
+bool similarCycle(const PolyCycles& cycles, const PolyCycle& cycle)
+{
+    for (auto& c : cycles)
+    {
+        bool equal = true;
+
+        // set already sorted
+        for (auto itC = c.idx.cbegin(), itCycle = cycle.idx.cbegin(); itC != c.idx.cend();)
+        {
+            if (*itC != *itCycle)
+            {
+                equal = false;
+                break;
+            }
+            bool cEnd = ++itC == c.idx.cend();
+            bool cycleEnd = ++itCycle == cycle.idx.cend();
+            if (cEnd || cycleEnd)
+            {
+                if (cEnd != cycleEnd) // contained!
+                {
+                    return true;
+                }
+                break;
+            }
+        }
+
+        if (equal) return true;
+    }
+    return false;
+}
+// The main function that returns true if line segment 'p1q1'
+// and 'p2q2' intersect.
+// https://www.cdn.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
+bool doIntersect(const PointType& p1, const PointType& q1, const PointType& p2, const PointType& q2)
+{
+    // Find the four orientations needed for general and
+    // special cases
+    int o1 = orientation(p1, q1, p2);
+    int o2 = orientation(p1, q1, q2);
+    int o3 = orientation(p2, q2, p1);
+    int o4 = orientation(p2, q2, q1);
+
+    // General case
+    if (o1 != o2 && o3 != o4)
+        return true;
+
+    // Special Cases
+    // p1, q1 and p2 are colinear and p2 lies on segment p1q1
+    if (o1 == 0 && onSegment(p1, p2, q1)) return true;
+
+    // p1, q1 and q2 are colinear and q2 lies on segment p1q1
+    if (o2 == 0 && onSegment(p1, q2, q1)) return true;
+
+    // p2, q2 and p1 are colinear and p1 lies on segment p2q2
+    if (o3 == 0 && onSegment(p2, p1, q2)) return true;
+
+    // p2, q2 and q1 are colinear and q1 lies on segment p2q2
+    if (o4 == 0 && onSegment(p2, q1, q2)) return true;
+
+    return false; // Doesn't fall in any of the above cases
+}
+// To find orientation of ordered triplet (p, q, r).
+// The function returns following values
+// 0 --> p, q and r are colinear
+// 1 --> Clockwise
+// 2 --> Counterclockwise
+int orientation(const PointType& p, const PointType& q, const PointType& r)
+{
+    // See https://www.geeksforgeeks.org/orientation-3-ordered-points/
+    // for details of below formula.
+    double val =
+        (q.y - p.y) * (r.x - q.x) -
+        (q.x - p.x) * (r.y - q.y);
+
+    if (val == 0.0) return 0;  // colinear
+
+    return (val > 0) ? 1 : 2; // clock or counterclock wise
+}
+// Given three colinear points p, q, r, the function checks if
+// point q lies on line segment 'pr'
+bool onSegment(const PointType& p, const PointType& q, const PointType& r)
+{
+    if (q.x <= std::max(p.x, r.x) && q.x >= std::min(p.x, r.x) &&
+        q.y <= std::max(p.y, r.y) && q.y >= std::min(p.y, r.y))
+        return true;
+
+    return false;
+}
+bool collinearVecs(const PointType& p, const PointType& q, const PointType& r)
+{
+    return orientation(p, q, r) == 0;
+}
+/***
+* @return true is this point is betwen a and b
+* @note c must be collinear with a and b
+* @see O'Rourke, Joseph, "Computational Geometry in C, 2nd Ed.", pp.32
+*/
+bool between(const PointType& p, const PointType& a, const PointType& b)
+{
+    // if this point is not collinear with a and b
+    // then it cannot be between this two points
+    if (!collinearVecs(p, a, b))
+        return false;
+
+    auto& _x = p.x;
+    auto& _y = p.y;
+
+    return
+        ((a.x <= _x && _x <= b.x) && (a.y <= _y && _y <= b.y)) ||
+        ((b.x <= _x && _x <= a.x) && (b.y <= _y && _y <= a.y));
+}
+bool pointsDiffer(const PointType& a, const PointType& b, bool aprox)
+{
+    // max precision is mandatory since this can break convex polys!
+    if (aprox)
+        return a.squaredist(b) >= minPointDiffSq;
+    return a.x != b.x || a.y != b.y;
+}
+bool overlap(const PolyLine& l1, const PolyLine& l2)
+{
+    return (collinearVecs(l1.a, l2.a, l2.b) && collinearVecs(l1.b, l2.a, l2.b)) &&
+        ((l1.contains(l2.a) || l1.contains(l2.b)) ||
+        (l2.contains(l1.a) || l2.contains(l1.b)));
+}
+/***
+* @return a new simplified line if line_1 and line_2 overlaps, NULL otherwise
+*/
+int simplifiedLine(const PolyLine& line_1, const PolyLine& line_2, PolyLine& ret)
+{
+    if (overlap(line_1, line_2))
+    {
+        if (line_1.contains(line_2))
+        {
+            ret = line_1;
+            return 1;
+        }
+        if (line_2.contains(line_1))
+        {
+            ret = line_2;
+            return 2;
+        }
+
+        PointType new_line_start_point;
+        PointType new_line_end_point;
+
+        // detects which point of <line_1> must be removed
+        if (between(line_1.a, line_2.a, line_2.b)) {
+            new_line_start_point = line_1.b;
+        }
+        else {
+            new_line_start_point = line_1.a;
+        }
+        // detects which point of <line_2> must be removed
+        if (between(line_2.a, line_1.a, line_1.b)) {
+            new_line_end_point = line_2.b;
+        }
+        else {
+            new_line_end_point = line_2.a;
+        }
+
+        // create a new line
+        ret = PolyLine(new_line_start_point, new_line_end_point);
+        return 3;
+    }
+
+    return 0;
+
+}
+int iComparePointOrder(const PointType& p1, const PointType& p2)
+{
+    if (p1.y < p2.y)
+        return -1;
+    else if (p1.y == p2.y)
+    {
+        if (p1.x < p2.x)
+            return -1;
+        else if (p1.x == p2.x)
+            return 0;
+    }
+    // p1 is greater than p2
+    return 1;
+}
+bool bComparePointOrder(const PointType& p1, const PointType& p2)
+{
+    return iComparePointOrder(p1, p2) < 0;
 }
 
 // --------------------- OFXPOLYGONDETECTOR
@@ -520,6 +698,579 @@ bool ofxPolygonDetector::DetectPolygons()
 
     return true;
 }
+/***
+* @desc simplifies the polygons in this set
+* @note removes inclusions and disposes small polygons
+*/
+void ofxPolygonDetector::SimplifyPolys(double smaller_polygon_length)
+{
+    // remove small polygons
+    uint32_t nRemoved = 0;
+    for (auto it = polys.begin(); it != polys.end(); )
+    {
+        if (it->GetCount() < smaller_polygon_length)
+        {
+            it = polys.erase(it);
+            nRemoved++;
+        }
+        else {
+            ++it;
+        }
+    }
+}
+void ofxPolygonDetector::AddLine(const PolyLine& line)
+{
+    origLines.push_back(line);
+}
+PolyLine* ofxPolygonDetector::findLine(uint32_t pidA, uint32_t pidB, bool useIgnore)
+{
+    auto m = std::min(pidA, pidB);
+    auto M = std::max(pidA, pidB);
+
+    for (auto& l : lines)
+    {
+        if (useIgnore && l.ignore) continue;
+        if (l.minPid() == m && l.maxPid() == M)
+            return &l;
+    }
+    return nullptr;
+}
+PolyLine* ofxPolygonDetector::findLine(uint32_t id, bool useIgnore)
+{
+    auto search = lineIdToIdx.find(id);
+    if (search != lineIdToIdx.end())
+    {
+        auto& l = lines[search->second];
+        if (useIgnore && l.ignore)
+        {
+            return nullptr;
+        }
+
+        return &l;
+    }
+    return nullptr;
+}
+PolyLine* ofxPolygonDetector::findOrigLine(uint32_t id)
+{
+    for (auto& l : origLines)
+    {
+        if (l.id == id)
+        {
+            return &l;
+        }
+    }
+    return nullptr;
+}
+bool ofxPolygonDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
+{
+    auto l = findLine(id);
+    if (!l) {
+        return true;
+    }
+
+    if (_neighbors[id].size() < 2)
+    {
+        return true;
+    }
+
+    if (cycle.canBeClosed(*this, id))
+    {
+        cycle.isClosed = true;
+        if (!similarCycle(_cycles, cycle))
+        {
+            if (cycle.accepted(*this))
+            {
+                _cycles.push_back(cycle);
+            }
+        }
+        return true;
+    }
+
+    if (!cycle.AddLineId(*this, l->id))
+    {
+        return true;
+    }
+
+    for (auto& nid : _neighbors[id])
+    {
+        if (_neighbors[nid].size() < 2) continue;
+        if (cycle.canBeClosed(*this, nid) || !cycle.contains(nid))
+        {
+            if (!BuildCycle(nid, cycle))
+            {
+                return false;
+            }
+        }
+    }
+
+    return true;
+}
+bool ofxPolygonDetector::FindPolys()
+{
+    pointToLines.clear();
+    collinearLineMap.clear();
+
+    // assign line ids
+    uint32_t n = 0;
+    lineIdToIdx.clear();
+    for (auto& l : lines)
+    {
+
+        if (dissolveCount == 0) // only on first step
+        {
+            l.id = n;
+        }
+
+        if (!l.ignore)
+        {
+            addPointToLine(l.aIdx, l.id);
+            addPointToLine(l.bIdx, l.id);
+        }
+
+        lineIdToIdx[l.id] = n; // lineIdToIdx[l.id] = lines[n]
+
+        n++;
+    }
+
+    // build collinearLineMap
+    for (auto& lo : origLines)
+    {
+        for (uint32_t i = 0; i < lines.size(); ++i)
+        {
+            auto& l1 = lines[i];
+            if (!l1.ignore && l1.origLine == lo.id)
+            {
+                for (uint32_t j = i + 1; j < lines.size(); ++j)
+                {
+                    auto& l2 = lines[j];
+                    if (!l2.ignore && l2.origLine == lo.id)
+                    {
+                        setCollinear(l1.id, l2.id);
+                    }
+                }
+            }
+        }
+    }
+
+    // Build neighbors
+    std::vector<uint32_t> neigh;
+    _neighbors.clear();
+    for (uint32_t i = 0; i < lines.size(); ++i)
+    {
+        auto& l1 = lines[i];
+        if (!l1.ignore)
+        {
+            neigh.clear();
+            for (uint32_t j = i + 1; j < lines.size(); ++j)
+            {
+                auto& l2 = lines[j];
+                if (!l2.ignore && l1.HasCommonIdxPoints(l2))
+                {
+                    neigh.push_back(l2.id);
+                }
+            }
+            if (!neigh.empty())
+            {
+                for (auto& nid : neigh)
+                {
+                    _neighbors[l1.id].push_back(nid);
+                    _neighbors[nid].push_back(l1.id);
+                }
+            }
+        }
+    }
+    for (auto& kv : _neighbors)
+    {
+        auto l = findLine(kv.first);
+        if (l)
+            l->sortNeigh(*this);
+    }
+
+    // Checks if there are two lines with the same ID.
+    for (int i = 0; i < lines.size(); ++i)
+    {
+        auto& l1 = lines[i];
+        for (int j = i + 1; j < lines.size(); ++j)
+        {
+            auto& l2 = lines[j];
+            if (l1.id == l2.id)
+            {
+                assert(false);
+            }
+        }
+    }
+
+    if (dissolveCount == 0)
+    {
+        for (auto& l : lines)
+            l.processed = 0;
+    }
+
+    for (auto& kv : _neighbors) // point by point
+    {
+        if (_neighbors[kv.first].size() < 2) continue;
+
+        PolyCycle cycle;
+        cycle.startIdx = cycle.lastIdx = kv.first;
+        cycle.isClosed = false;
+        BuildCycle(kv.first, cycle);
+    }
+
+    std::sort(_cycles.begin(), _cycles.end(), [](const PolyCycle& a, const PolyCycle& b) {
+        return a.idxToString().compare(b.idxToString()) < 0;
+    });
+
+    for (auto& cycle : _cycles)
+    {
+        cycle.fine = true;
+        if (!cycle.convex(*this))
+            cycle.fine = false;
+    }
+
+    for (auto& cycle : _cycles)
+    {
+        if (!cycle.fine) continue;
+
+        // other the lines for proper triangulation
+        std::vector<uint32_t> lidx;
+        lidx.reserve(cycle.idx.size());
+        for (auto& lid : cycle.idx)
+            lidx.push_back(lid);
+        std::sort(lidx.begin(), lidx.end(), [this](const uint32_t& lid1, const uint32_t& lid2) {
+            auto l1 = findLine(lid1, false);
+            auto l2 = findLine(lid2, false);
+            if (!l1 || !l2)
+            {
+                assert(false);
+                return true;
+            }
+            return PolyLine::bCompareLineOrder(*l1, *l2);
+        });
+
+        // check if not already exists
+        bool exists = false;
+        for (auto& p : polys)
+        {
+            if (p.cycle.Equals(cycle))
+            {
+                exists = true;
+                break;
+            }
+        }
+        if (exists)
+        {
+            continue;
+        }
+
+        PolyPol poly;
+        PointType* last = nullptr;
+        for (auto& id : lidx)
+        {
+            auto lPtr = findLine(id);
+            if (lPtr)
+            {
+                lPtr->CalculateFirstAndLastPoint();
+
+                auto& a = intersectionPoints[lPtr->aIdx];
+                auto& b = intersectionPoints[lPtr->bIdx];
+
+                //lPtr->incTook(*this);
+
+                poly.addPointChecked(a);
+
+                last = &b;
+            }
+        }
+        if (last)
+            poly.addPointChecked(*last);
+
+        poly.id = cycle.startIdx;
+        poly.cycle = cycle;
+
+        poly._area = poly.TriangleArea(*this);
+        poly.dissolveStep = dissolveCount;
+        poly.c = poly.center();
+        poly.color = ofColor(0, 0, 255);
+        std::sort(poly.p.begin(), poly.p.end(), [&, this](const PointType& p1, const PointType& p2) {
+            float aA = (atan((p1.y - poly.c.y) / (p1.x - poly.c.x))) * 57.29;
+            float aB = (atan((p2.y - poly.c.y) / (p2.x - poly.c.x))) * 57.29;
+
+            float angleA = p1.x - poly.c.x >= 0 ? (p1.y - poly.c.y >= 0 ? aA : 360 + aA) : 180 + aA;
+            float angleB = p2.x - poly.c.x >= 0 ? (p2.y - poly.c.y >= 0 ? aB : 360 + aB) : 180 + aB;
+
+            return angleA < angleB;
+        });
+        polys.push_back(std::move(poly));
+    }
+
+    return true;
+}
+bool ofxPolygonDetector::dissolveCollinear(PolyLine& l1, PolyLine& l2)
+{
+    assert(&l1 != &l2);
+
+    uint32_t* p1 = nullptr, * p2 = nullptr;
+    if (l1.aIdx == l2.aIdx || l1.aIdx == l2.bIdx)
+    {
+        p1 = &l1.bIdx; // other point (B)
+        p2 = l1.aIdx == l2.aIdx ? &l2.bIdx : &l2.aIdx; // aidx is common point. other point
+    }
+    else if (l1.bIdx == l2.aIdx || l1.bIdx == l2.bIdx)
+    {
+        p1 = &l1.aIdx; // other point (A)
+        p2 = l1.bIdx == l2.aIdx ? &l2.bIdx : &l2.aIdx; // bidx is common point. other point
+    }
+    if (!p1 || !p2)
+    {
+        assert(p1 && p2);
+        return false;
+    }
+
+    auto search = findLine(*p1, *p2, false);
+    if (search)
+    {
+        l1.setIgnore(*this, "rmCollinear.l1 (dup)");
+        l2.setIgnore(*this, "rmCollinear.l2 (dup)");
+
+        return false;
+    }
+
+    PolyLine nl;
+    nl.id = uint32_t(lines.size());
+    nl.aIdx = *p1;
+    nl.bIdx = *p2;
+    nl.a = intersectionPoints[nl.aIdx];
+    nl.b = intersectionPoints[nl.bIdx];
+    nl.calcCenter(); // calls CalculateFirstAndLastPoint
+    nl.origLine = l1.origLine; // will be used to construct collinearLineMap
+    nl.lastDissolveStep = l1.lastDissolveStep;
+    nl.attr0 = l1.attr0;
+
+    // build point to lines link
+    addPointToLine(nl.aIdx, nl.id);
+    addPointToLine(nl.bIdx, nl.id);
+
+    // build neighbors
+    for (auto& id : { l1.id, l2.id })
+    {
+        for (auto& n : _neighbors[id])
+        {
+            if (n != l1.id && n != l2.id)
+            {
+                auto l = findLine(n);
+                if (l)
+                {
+                    _neighbors[nl.id].push_back(n);
+                    _neighbors[n].push_back(nl.id);
+                }
+            }
+        }
+    }
+
+    // set proper collinearities
+    for (auto& kv : collinearLineMap)
+    {
+        if (kv.first == l1.id || kv.first == l2.id)
+        {
+            for (auto& c : kv.second)
+                setCollinear(nl.id, c);
+        }
+    }
+
+    // after neigh built!
+    l1.setIgnore(*this, "rmCollinear.l1");
+    l2.setIgnore(*this, "rmCollinear.l2");
+
+    lineIdToIdx[nl.id] = uint32_t(lines.size());
+    lines.push_back(nl);
+    lines.back().sortNeigh(*this);
+
+    return true;
+}
+bool ofxPolygonDetector::dissolveCollinearLine(PolyLine& l)
+{
+    for (auto id : { l.aIdx, l.bIdx })
+    {
+        uint32_t nValid = 0;
+        PolyLine* l1 = nullptr;
+        for (auto& n : pointToLines[id])
+        {
+            if (n != l.id)
+            {
+                auto lPtr = findLine(n);
+                if (lPtr)
+                {
+                    if (lPtr->took < 2)
+                        //if (lPtr->took == 0)
+                        //if (lPtr->numNeigh(*this) < 2)
+                    {
+                        l1 = lPtr;
+                        nValid++;
+                    }
+                }
+            }
+        }
+        if (nValid == 1 && CollinearIdx(l, *l1))
+        {
+            return dissolveCollinear(l, *l1);
+        }
+    }
+    return false;
+}
+bool ofxPolygonDetector::dissolve()
+{
+    uint32_t nLinesBefore = uint32_t(lines.size());
+    uint32_t nIgnoredBefore = 0;
+    for (auto& l : lines)
+        if (l.ignore)
+            nIgnoredBefore++;
+
+    if (_cycles.empty())
+    {
+        return false;
+    }
+
+    rmLines(RmLinesType::PointConsumed);
+    rmLines(RmLinesType::TakenTwice); // points taken twice
+    rmLines(RmLinesType::NoPointNeigh);
+    rmLines(RmLinesType::Collinear);
+
+    uint32_t nIgnored = 0;
+    uint32_t nValid = 0;
+    for (auto& l : lines)
+    {
+        if (!l.ignore)
+        {
+            nValid++;
+        }
+        else
+        {
+            nIgnored++;
+        }
+    }
+
+    if (!nValid)
+    {
+        return false;
+    }
+
+    if (nIgnored == nIgnoredBefore)
+    {
+        return false;
+    }
+
+    // also clear prev cycles
+    _cycles.clear();
+
+    dissolveCount++;
+
+    for (auto& l : lines)
+    {
+        if (!l.ignore) {
+            l.lastDissolveStep = dissolveCount;
+        }
+    }
+
+    return true;
+}
+void ofxPolygonDetector::setCollinear(uint32_t l1, uint32_t l2)
+{
+    collinearLineMap[l1].push_back(l2);
+    collinearLineMap[l2].push_back(l1);
+}
+bool ofxPolygonDetector::CollinearIdx(uint32_t l1, uint32_t l2)
+{
+    auto search = collinearLineMap.find(l1);
+    if (search == collinearLineMap.end())
+        return false;
+    return std::find(search->second.begin(), search->second.end(), l2) != search->second.end();
+}
+bool ofxPolygonDetector::CollinearIdx(const PolyLine& l1, const PolyLine& l2)
+{
+    return CollinearIdx(l1.id, l2.id);
+}
+bool ofxPolygonDetector::rmEarPoints()
+{
+    std::vector<PolyLine*> torm;
+
+    std::set<uint32_t> pids;
+    for (auto& cycle : _cycles)
+    {
+        for (auto& lid : cycle.idx)
+        {
+            auto l = findLine(lid);
+            if (l)
+            {
+                for (auto& pid : { l->aIdx, l->bIdx })
+                {
+                    if (cycle.pointConsumed(*this, pid))
+                    {
+                        torm.push_back(l);
+                    }
+                }
+            }
+        }
+    }
+    for (auto& l : torm)
+    {
+        l->setIgnore(*this, "rmEarPoints");
+    }
+    return true;
+}
+bool ofxPolygonDetector::rmLines(RmLinesType type)
+{
+
+    if (type == RmLinesType::Collinear)
+    {
+        // rm collinear lines
+        uint32_t nCollinearRemoved = 0;
+        for (uint32_t i = 0; i < lines.size(); ++i)
+        {
+            auto& l = lines[i];
+            if (!l.ignore)
+            {
+                if (dissolveCollinearLine(l))
+                {
+                    nCollinearRemoved++;
+                    i = 0; // again
+                }
+            }
+        }
+        return true;
+    }
+
+    if (type == RmLinesType::PointConsumed)
+    {
+        rmEarPoints();
+        return true;
+    }
+
+    for (uint32_t i = 0; i < lines.size(); ++i)
+    {
+        auto& l = lines[i];
+        if (!l.ignore && l.canBeRemoved(*this, type))
+        {
+            l.setIgnore(*this, (std::string("rmLines.") + RmLinesTypeStr(type)).c_str());
+
+            // reprocess same position
+            if (i > 0) i--;
+        }
+    }
+
+    return true;
+}
+void ofxPolygonDetector::reset()
+{
+    _cycles.clear();
+    //origLines.clear();
+    lines.clear();
+    polys.clear();
+    _neighbors.clear();
+    collinearLineMap.clear();
+    intersectionPoints.clear();
+    pointToLines.clear();
+    dissolveCount = 0;
+}
 
 // --------------------- POLYLINE
 bool PolyLine::contains(const PolyLine& line) const
@@ -785,7 +1536,74 @@ uint32_t PolyLine::canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const
 
     return false;
 }
+bool PolyLine::betweenNeighbors(ofxPolygonDetector& pd, const PolyLine& l1, const PolyLine& l2) const
+{
+    auto cpid = commonPid(l1);
+    if (cpid < 0)
+    {
+        return false;
+    }
+    auto cpid2 = commonPid(l2);
+    if (cpid != cpid2)
+    {
+        return false;
+    }
 
+    vec cp = pd.intersectionPoints[cpid];
+    vec p = pd.intersectionPoints[otherPid(cpid)];
+
+    bool ret = doIntersect(cp, p, l1.center, l2.center);
+
+    return ret;
+}
+bool PolyLine::compareNeigh(ofxPolygonDetector& pd, uint32_t nid1, uint32_t nid2) const
+{
+    auto nl1 = pd.findLine(nid1);
+    auto nl2 = pd.findLine(nid2);
+    if (!nl1 || !nl2)
+    {
+        assert(false);
+        return true;
+    }
+
+    auto dl1 = nl1->center.squaredist(center);
+    auto dl2 = nl2->center.squaredist(center);
+    return dl1 < dl2;
+}
+bool PolyLine::sortNeigh(ofxPolygonDetector& pd) const
+{
+    auto& neigh = pd._neighbors[id];
+    std::sort(neigh.begin(), neigh.end(), [this, &pd](uint32_t nid1, uint32_t nid2)
+    {
+        return compareNeigh(pd, nid1, nid2);
+    });
+
+    return true;
+}
+uint32_t& PolyLine::incTook(ofxPolygonDetector& pd)
+{
+    if (took >= 2)
+        return took;
+    took++;
+
+    return took;
+}
+void PolyLine::calcCenter()
+{
+    CalculateFirstAndLastPoint();
+    center = a;
+    center.add(b);
+    center.mul(0.5f);
+}
+void PolyLine::setIgnore(ofxPolygonDetector& pd, const char* msg)
+{
+    if (ignore)
+        return;
+
+    ignore = true;
+}
+
+// --------------------- POLYPOL
 PointType PolyPol::center()
 {
     if (p.empty())
@@ -798,7 +1616,6 @@ PointType PolyPol::center()
 
     return c;
 }
-
 /***
 * @desc simplifies current polygon, subtracting <p>, in case there are
 *       an single relationship between them
@@ -820,7 +1637,6 @@ bool PolyPol::Minus(const PolyPol& other)
     }
     return true;
 }
-
 void PolyPol::CalculateFirstAndLastPoint()
 {
     // if there are only one vertex it is not a polyline
@@ -844,112 +1660,48 @@ void PolyPol::CalculateFirstAndLastPoint()
         }
     }
 }
-
-/***
-* @desc simplifies the polygons in this set
-* @note removes inclusions and disposes small polygons
-*/
-void ofxPolygonDetector::SimplifyPolys(double smaller_polygon_length)
-{
-    // remove small polygons
-    uint32_t nRemoved = 0;
-    for (auto it = polys.begin(); it != polys.end(); )
-    {
-        if (it->GetCount() < smaller_polygon_length)
-        {
-            it = polys.erase(it);
-            nRemoved++;
-        }
-        else {
-            ++it;
-        } 
-    }
-}
-
-void ofxPolygonDetector::AddLine(const PolyLine& line)
-{
-    origLines.push_back(line);
-}
-
 void PolyPol::addLine(const PolyLine& l)
 {
     p.push_back(l.a);
     p.push_back(l.b);
 }
-
-PolyLine* ofxPolygonDetector::findLine(uint32_t pidA, uint32_t pidB, bool useIgnore)
+double PolyPol::TriangleArea(ofxPolygonDetector& pd)
 {
-    auto m = std::min(pidA, pidB);
-    auto M = std::max(pidA, pidB);
+    if (p.size() <= 2)
+        return 0.0f;
+    double area = 0.0;
 
-    for (auto& l : lines)
+    auto c = center();
+    for (auto& n : cycle.idx)
     {
-        if (useIgnore && l.ignore) continue;
-        if (l.minPid() == m && l.maxPid() == M)
-            return &l;
+        auto l = pd.findLine(n);
+        if (!l)
+            return 0.0f;
+        area += abs(::Area(c, l->a, l->b));
     }
-    return nullptr;
+    return area;
+}
+bool PolyPol::addPointChecked(const PointType& v)
+{
+    for (auto& pt : p)
+        if (!pointsDiffer(pt, v))
+            return false;
+    p.push_back(v);
+    return true;
+}
+void PolyPol::setColor(ofColor c) {
+    color = c;
+}
+void PolyPol::draw() {
+    ofSetColor(color);
+    ofBeginShape();
+    for (int i = 0; i < p.size(); i++) {
+        ofVertex(p.at(i).x, p.at(i).y);
+    }
+    ofEndShape();
 }
 
-PolyLine* ofxPolygonDetector::findLine(uint32_t id, bool useIgnore)
-{
-    auto search = lineIdToIdx.find(id);
-    if (search != lineIdToIdx.end())
-    {
-        auto& l = lines[search->second];
-        if (useIgnore && l.ignore)
-        {
-            return nullptr;
-        }
-
-        return &l;
-    }
-    return nullptr;
-}
-
-PolyLine* ofxPolygonDetector::findOrigLine(uint32_t id)
-{
-    for (auto& l : origLines)
-    {
-        if (l.id == id)
-        {
-            return &l;
-        }
-    }
-    return nullptr;
-}
-
-bool similarCycle(const PolyCycles & cycles, const PolyCycle & cycle)
-{
-    for (auto& c : cycles)
-    {
-        bool equal = true;
-
-        // set already sorted
-        for (auto itC = c.idx.cbegin(), itCycle = cycle.idx.cbegin(); itC != c.idx.cend();)
-        {
-            if (*itC != *itCycle)
-            {
-                equal = false;
-                break;
-            }
-            bool cEnd = ++itC == c.idx.cend();
-            bool cycleEnd = ++itCycle == cycle.idx.cend();
-            if (cEnd || cycleEnd)
-            {
-                if (cEnd != cycleEnd) // contained!
-                {
-                    return true;
-                }
-                break;
-            }
-        }
-
-        if (equal) return true;
-    }
-    return false;
-}
-
+// --------------------- POLYCYCLE
 bool PolyCycle::Equals(const PolyCycle & p) const
 {
     if (idx.size() != p.idx.size())
@@ -961,7 +1713,6 @@ bool PolyCycle::Equals(const PolyCycle & p) const
     }
     return true;
 }
-
 bool PolyCycle::AddLineId(ofxPolygonDetector & pd, uint32_t id)
 {
     auto l = pd.findLine(id);
@@ -1064,7 +1815,6 @@ bool PolyCycle::AddLineId(ofxPolygonDetector & pd, uint32_t id)
     l->processed = startIdx + 1;
     return true;
 }
-
 bool PolyCycle::accepted(ofxPolygonDetector & pd)
 {
     for (auto& lid : idx)
@@ -1078,553 +1828,10 @@ bool PolyCycle::accepted(ofxPolygonDetector & pd)
     }
     return true;
 }
-
-bool ofxPolygonDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
-{
-
-    auto l = findLine(id);
-    if (!l)
-        return true;
-
-    if (_neighbors[id].size() < 2)
-    {
-        return true;
-    }
-
-    if (cycle.canBeClosed(*this, id))
-    {
-        cycle.isClosed = true;
-
-        if (!similarCycle(_cycles, cycle))
-        {
-            if (cycle.accepted(*this))
-            {
-                _cycles.push_back(cycle);
-            }
-        }
-
-        return true;
-    }
-
-    if (!cycle.AddLineId(*this, l->id))
-    {
-        return true;
-    }
-
-    for (auto& nid : _neighbors[id])
-    {
-        if (_neighbors[nid].size() < 2) continue;
-        if (cycle.canBeClosed(*this, nid) || !cycle.contains(nid))
-        {
-            if (!BuildCycle(nid, cycle))
-            {
-                return false;
-            }
-        }
-    }
-
-    return true;
-}
-
-bool PolyLine::betweenNeighbors(ofxPolygonDetector & pd, const PolyLine & l1, const PolyLine & l2) const
-{
-    auto cpid = commonPid(l1);
-    if (cpid < 0)
-    {
-        return false;
-    }
-    auto cpid2 = commonPid(l2);
-    if (cpid != cpid2)
-    {
-        return false;
-    }
-
-    vec cp = pd.intersectionPoints[cpid];
-    vec p = pd.intersectionPoints[otherPid(cpid)];
-
-    bool ret = doIntersect(cp, p, l1.center, l2.center);
-
-    return ret;
-}
-
-bool PolyLine::compareNeigh(ofxPolygonDetector & pd, uint32_t nid1, uint32_t nid2) const
-{
-    auto nl1 = pd.findLine(nid1);
-    auto nl2 = pd.findLine(nid2);
-    if (!nl1 || !nl2)
-    {
-        assert(false);
-        return true;
-    }
-
-    auto dl1 = nl1->center.squaredist(center);
-    auto dl2 = nl2->center.squaredist(center);
-    return dl1 < dl2;
-}
-
-bool PolyLine::sortNeigh(ofxPolygonDetector & pd) const
-{
-    auto& neigh = pd._neighbors[id];
-    std::sort(neigh.begin(), neigh.end(), [this, &pd](uint32_t nid1, uint32_t nid2)
-    {
-        return compareNeigh(pd, nid1, nid2);
-    });
-
-    return true;
-}
-
-uint32_t& PolyLine::incTook(ofxPolygonDetector & pd)
-{
-    if (took >= 2)
-        return took;
-    took++;
-
-    return took;
-}
-
-bool ofxPolygonDetector::FindPolys()
-{
-    pointToLines.clear();
-    collinearLineMap.clear();
-
-    // assign line ids
-    uint32_t n = 0;
-    lineIdToIdx.clear();
-    for (auto& l : lines)
-    {
-
-        if (dissolveCount == 0) // only on first step
-        {
-            l.id = n;
-        }
-
-        if (!l.ignore)
-        {
-            addPointToLine(l.aIdx, l.id);
-            addPointToLine(l.bIdx, l.id);
-        }
-
-        lineIdToIdx[l.id] = n; // lineIdToIdx[l.id] = lines[n]
-
-        n++;
-    }
-
-    // build collinearLineMap
-    for (auto& lo : origLines)
-    {
-        for (uint32_t i = 0; i < lines.size(); ++i)
-        {
-            auto& l1 = lines[i];
-            if (!l1.ignore && l1.origLine == lo.id)
-            {
-                for (uint32_t j = i + 1; j < lines.size(); ++j)
-                {
-                    auto& l2 = lines[j];
-                    if (!l2.ignore && l2.origLine == lo.id)
-                    {
-                        setCollinear(l1.id, l2.id);
-                    }
-                }
-            }
-        }
-    }
-
-    // Build neighbors
-    std::vector<uint32_t> neigh;
-    _neighbors.clear();
-    for (uint32_t i = 0; i < lines.size(); ++i)
-    {
-        auto& l1 = lines[i];
-        if (!l1.ignore)
-        {
-            neigh.clear();
-            for (uint32_t j = i + 1; j < lines.size(); ++j)
-            {
-                auto& l2 = lines[j];
-                if (!l2.ignore && l1.HasCommonIdxPoints(l2))
-                {
-                    neigh.push_back(l2.id);
-                }
-            }
-            if (!neigh.empty())
-            {
-                for (auto& nid : neigh)
-                {
-                    _neighbors[l1.id].push_back(nid);
-                    _neighbors[nid].push_back(l1.id);
-                }
-            }
-        }
-    }
-    for (auto& kv : _neighbors)
-    {
-        auto l = findLine(kv.first);
-        if (l)
-            l->sortNeigh(*this);
-    }
-
-    // Checks if there are two lines with the same ID.
-    for (int i = 0; i < lines.size(); ++i)
-    {
-        auto& l1 = lines[i];
-        for (int j = i + 1; j < lines.size(); ++j)
-        {
-            auto& l2 = lines[j];
-            if (l1.id == l2.id)
-            {
-                assert(false);
-            }
-        }
-    }
-
-    if (dissolveCount == 0)
-    {
-        for (auto& l : lines)
-            l.processed = 0;
-    }
-
-    for (auto& kv : _neighbors) // point by point
-    {
-        if (_neighbors[kv.first].size() < 2) continue;
-
-        PolyCycle cycle;
-        cycle.startIdx = cycle.lastIdx = kv.first;
-        cycle.isClosed = false;
-        BuildCycle(kv.first, cycle);
-    }
-
-    std::sort(_cycles.begin(), _cycles.end(), [](const PolyCycle& a, const PolyCycle& b) {
-        return a.idxToString().compare(b.idxToString()) < 0;
-    });
-
-    for (auto& cycle : _cycles)
-    {
-        cycle.fine = true;
-        if (!cycle.convex(*this))
-            cycle.fine = false;
-    }
-
-    for (auto& cycle : _cycles)
-    {
-        if (!cycle.fine) continue;
-
-        // other the lines for proper triangulation
-        std::vector<uint32_t> lidx;
-        lidx.reserve(cycle.idx.size());
-        for (auto& lid : cycle.idx)
-            lidx.push_back(lid);
-        std::sort(lidx.begin(), lidx.end(), [this](const uint32_t& lid1, const uint32_t& lid2) {
-            auto l1 = findLine(lid1, false);
-            auto l2 = findLine(lid2, false);
-            if (!l1 || !l2)
-            {
-                assert(false);
-                return true;
-            }
-            return PolyLine::bCompareLineOrder(*l1, *l2);
-        });
-
-        // check if not already exists
-        bool exists = false;
-        for (auto& p : polys)
-        {
-            if (p.cycle.Equals(cycle))
-            {
-                exists = true;
-                break;
-            }
-        }
-        if (exists)
-        {
-            continue;
-        }
-
-        PolyPol poly;
-        PointType* last = nullptr;
-        for (auto& id : lidx)
-        {
-            auto lPtr = findLine(id);
-            if (lPtr)
-            {
-                lPtr->CalculateFirstAndLastPoint();
-
-                auto& a = intersectionPoints[lPtr->aIdx];
-                auto& b = intersectionPoints[lPtr->bIdx];
-
-                //lPtr->incTook(*this);
-
-                poly.addPointChecked(a);
-
-                last = &b;
-            }
-        }
-        if (last)
-            poly.addPointChecked(*last);
-
-        poly.id = cycle.startIdx;
-        poly.cycle = cycle;
-
-        poly._area = poly.TriangleArea(*this);
-        poly.dissolveStep = dissolveCount;
-        poly.c = poly.center();
-        poly.color = ofColor(0, 0, 255);
-        std::sort(poly.p.begin(), poly.p.end(), [&, this](const PointType& p1, const PointType& p2) {
-            float aA = (atan((p1.y - poly.c.y) / (p1.x - poly.c.x))) * 57.29;
-            float aB = (atan((p2.y - poly.c.y) / (p2.x - poly.c.x))) * 57.29;
-
-            float angleA = p1.x-poly.c.x >= 0 ? (p1.y-poly.c.y >= 0 ? aA : 360+aA) : 180+aA;
-            float angleB = p2.x-poly.c.x >= 0 ? (p2.y-poly.c.y >= 0 ? aB : 360+aB) : 180+aB;
-
-            return angleA < angleB;
-        });
-        polys.push_back(std::move(poly));
-    }
-
-    return true;
-}
-
-double PolyPol::TriangleArea(ofxPolygonDetector & pd)
-{
-    if (p.size() <= 2)
-        return 0.0f;
-    double area = 0.0;
-
-    auto c = center();
-    for (auto& n : cycle.idx)
-    {
-        auto l = pd.findLine(n);
-        if (!l)
-            return 0.0f;
-        area += abs(::Area(c, l->a, l->b));
-    }
-    return area;
-}
-
-bool PolyPol::addPointChecked(const PointType & v)
-{
-    for (auto& pt : p)
-        if (!pointsDiffer(pt, v))
-            return false;
-    p.push_back(v);
-    return true;
-}
-
-void PolyPol::setColor(ofColor c) {
-    color = c;
-}
-
-void PolyPol::draw() {
-    ofSetColor(color);
-    ofBeginShape();
-        for (int i = 0; i < p.size(); i++) {
-            ofVertex(p.at(i).x, p.at(i).y);
-        }
-    ofEndShape();
-}
-
-void PolyLine::calcCenter()
-{
-    CalculateFirstAndLastPoint();
-    center = a;
-    center.add(b);
-    center.mul(0.5f);
-}
-
-bool ofxPolygonDetector::dissolveCollinear(PolyLine & l1, PolyLine & l2)
-{
-    assert(&l1 != &l2);
-
-    uint32_t* p1 = nullptr, * p2 = nullptr;
-    if (l1.aIdx == l2.aIdx || l1.aIdx == l2.bIdx)
-    {
-        p1 = &l1.bIdx; // other point (B)
-        p2 = l1.aIdx == l2.aIdx ? &l2.bIdx : &l2.aIdx; // aidx is common point. other point
-    }
-    else if (l1.bIdx == l2.aIdx || l1.bIdx == l2.bIdx)
-    {
-        p1 = &l1.aIdx; // other point (A)
-        p2 = l1.bIdx == l2.aIdx ? &l2.bIdx : &l2.aIdx; // bidx is common point. other point
-    }
-    if (!p1 || !p2)
-    {
-        assert(p1 && p2);
-        return false;
-    }
-
-    auto search = findLine(*p1, *p2, false);
-    if (search)
-    {
-        l1.setIgnore(*this, "rmCollinear.l1 (dup)");
-        l2.setIgnore(*this, "rmCollinear.l2 (dup)");
-
-        return false;
-    }
-
-    PolyLine nl;
-    nl.id = uint32_t(lines.size());
-    nl.aIdx = *p1;
-    nl.bIdx = *p2;
-    nl.a = intersectionPoints[nl.aIdx];
-    nl.b = intersectionPoints[nl.bIdx];
-    nl.calcCenter(); // calls CalculateFirstAndLastPoint
-    nl.origLine = l1.origLine; // will be used to construct collinearLineMap
-    nl.lastDissolveStep = l1.lastDissolveStep;
-    nl.attr0 = l1.attr0;
-
-    // build point to lines link
-    addPointToLine(nl.aIdx, nl.id);
-    addPointToLine(nl.bIdx, nl.id);
-
-    // build neighbors
-    for (auto& id : { l1.id, l2.id })
-    {
-        for (auto& n : _neighbors[id])
-        {
-            if (n != l1.id && n != l2.id)
-            {
-                auto l = findLine(n);
-                if (l)
-                {
-                    _neighbors[nl.id].push_back(n);
-                    _neighbors[n].push_back(nl.id);
-                }
-            }
-        }
-    }
-
-    // set proper collinearities
-    for (auto& kv : collinearLineMap)
-    {
-        if (kv.first == l1.id || kv.first == l2.id)
-        {
-            for (auto& c : kv.second)
-                setCollinear(nl.id, c);
-        }
-    }
-
-    // after neigh built!
-    l1.setIgnore(*this, "rmCollinear.l1");
-    l2.setIgnore(*this, "rmCollinear.l2");
-
-    lineIdToIdx[nl.id] = uint32_t(lines.size());
-    lines.push_back(nl);
-    lines.back().sortNeigh(*this);
-
-    return true;
-}
-
-bool ofxPolygonDetector::dissolveCollinearLine(PolyLine & l)
-{
-    for (auto id : { l.aIdx, l.bIdx })
-    {
-        uint32_t nValid = 0;
-        PolyLine* l1 = nullptr;
-        for (auto& n : pointToLines[id])
-        {
-            if (n != l.id)
-            {
-                auto lPtr = findLine(n);
-                if (lPtr)
-                {
-                    if (lPtr->took < 2)
-                        //if (lPtr->took == 0)
-                        //if (lPtr->numNeigh(*this) < 2)
-                    {
-                        l1 = lPtr;
-                        nValid++;
-                    }
-                }
-            }
-        }
-        if (nValid == 1 && CollinearIdx(l, *l1))
-        {
-            return dissolveCollinear(l, *l1);
-        }
-    }
-    return false;
-}
-
-bool ofxPolygonDetector::dissolve()
-{
-    uint32_t nLinesBefore = uint32_t(lines.size());
-    uint32_t nIgnoredBefore = 0;
-    for (auto& l : lines)
-        if (l.ignore)
-            nIgnoredBefore++;
-
-    if (_cycles.empty())
-    {
-        return false;
-    }
-
-    rmLines(RmLinesType::PointConsumed);
-    rmLines(RmLinesType::TakenTwice); // points taken twice
-    rmLines(RmLinesType::NoPointNeigh);
-    rmLines(RmLinesType::Collinear);
-
-    uint32_t nIgnored = 0;
-    uint32_t nValid = 0;
-    for (auto& l : lines)
-    {
-        if (!l.ignore)
-        {
-            nValid++;
-        }
-        else
-        {
-            nIgnored++;
-        }
-    }
-
-    if (!nValid)
-    {
-        return false;
-    }
-
-    if (nIgnored == nIgnoredBefore)
-    {
-        return false;
-    }
-
-    // also clear prev cycles
-    _cycles.clear();
-
-    dissolveCount++;
-
-    for (auto& l : lines)
-    {
-        if (!l.ignore) {
-            l.lastDissolveStep = dissolveCount;
-        }
-    }
-
-    return true;
-}
-
-void ofxPolygonDetector::setCollinear(uint32_t l1, uint32_t l2)
-{
-    collinearLineMap[l1].push_back(l2);
-    collinearLineMap[l2].push_back(l1);
-}
-
-bool ofxPolygonDetector::CollinearIdx(uint32_t l1, uint32_t l2)
-{
-    auto search = collinearLineMap.find(l1);
-    if (search == collinearLineMap.end())
-        return false;
-    return std::find(search->second.begin(), search->second.end(), l2) != search->second.end();
-}
-
-bool ofxPolygonDetector::CollinearIdx(const PolyLine & l1, const PolyLine & l2)
-{
-    return CollinearIdx(l1.id, l2.id);
-}
-
 bool PolyCycle::canBeClosed(ofxPolygonDetector & pd, uint32_t idToAdd) const
 {
     return idx.size() > 2 && startIdx == idToAdd;
 }
-
 bool PolyCycle::pointConsumed(ofxPolygonDetector & pd, uint32_t pid) const
 {
     auto& neigh = pd.pointToLines[pid];
@@ -1674,87 +1881,6 @@ bool PolyCycle::pointConsumed(ofxPolygonDetector & pd, uint32_t pid) const
 
     return false;
 }
-
-void PolyLine::setIgnore(ofxPolygonDetector & pd, const char* msg)
-{
-    if (ignore)
-        return;
-
-    ignore = true;
-}
-
-bool ofxPolygonDetector::rmEarPoints()
-{
-    std::vector<PolyLine*> torm;
-
-    std::set<uint32_t> pids;
-    for (auto& cycle : _cycles)
-    {
-        for (auto& lid : cycle.idx)
-        {
-            auto l = findLine(lid);
-            if (l)
-            {
-                for (auto& pid : { l->aIdx, l->bIdx })
-                {
-                    if (cycle.pointConsumed(*this, pid))
-                    {
-                        torm.push_back(l);
-                    }
-                }
-            }
-        }
-    }
-    for (auto& l : torm)
-    {
-        l->setIgnore(*this, "rmEarPoints");
-    }
-    return true;
-}
-
-bool ofxPolygonDetector::rmLines(RmLinesType type)
-{
-
-    if (type == RmLinesType::Collinear)
-    {
-        // rm collinear lines
-        uint32_t nCollinearRemoved = 0;
-        for (uint32_t i = 0; i < lines.size(); ++i)
-        {
-            auto& l = lines[i];
-            if (!l.ignore)
-            {
-                if (dissolveCollinearLine(l))
-                {
-                    nCollinearRemoved++;
-                    i = 0; // again
-                }
-            }
-        }
-        return true;
-    }
-
-    if (type == RmLinesType::PointConsumed)
-    {
-        rmEarPoints();
-        return true;
-    }
-
-    for (uint32_t i = 0; i < lines.size(); ++i)
-    {
-        auto& l = lines[i];
-        if (!l.ignore && l.canBeRemoved(*this, type))
-        {
-            l.setIgnore(*this, (std::string("rmLines.") + RmLinesTypeStr(type)).c_str());
-
-            // reprocess same position
-            if (i > 0) i--;
-        }
-    }
-
-    return true;
-}
-
 bool PolyCycle::convex(ofxPolygonDetector & pd) const
 {
     for (auto it1 = idx.begin(); it1 != idx.end(); ++it1)
@@ -1786,188 +1912,4 @@ bool PolyCycle::convex(ofxPolygonDetector & pd) const
         }
     }
     return true;
-}
-
-void ofxPolygonDetector::reset()
-{
-    _cycles.clear();
-    //origLines.clear();
-    lines.clear();
-    polys.clear();
-    _neighbors.clear();
-    collinearLineMap.clear();
-    intersectionPoints.clear();
-    pointToLines.clear();
-    dissolveCount = 0;
-}
-
-// --------------------- FUNCTIONS
-// The main function that returns true if line segment 'p1q1'
-// and 'p2q2' intersect.
-// https://www.cdn.geeksforgeeks.org/check-if-two-given-line-segments-intersect/
-bool doIntersect(const PointType& p1, const PointType& q1, const PointType& p2, const PointType& q2)
-{
-    // Find the four orientations needed for general and
-    // special cases
-    int o1 = orientation(p1, q1, p2);
-    int o2 = orientation(p1, q1, q2);
-    int o3 = orientation(p2, q2, p1);
-    int o4 = orientation(p2, q2, q1);
-
-    // General case
-    if (o1 != o2 && o3 != o4)
-        return true;
-
-    // Special Cases
-    // p1, q1 and p2 are colinear and p2 lies on segment p1q1
-    if (o1 == 0 && onSegment(p1, p2, q1)) return true;
-
-    // p1, q1 and q2 are colinear and q2 lies on segment p1q1
-    if (o2 == 0 && onSegment(p1, q2, q1)) return true;
-
-    // p2, q2 and p1 are colinear and p1 lies on segment p2q2
-    if (o3 == 0 && onSegment(p2, p1, q2)) return true;
-
-    // p2, q2 and q1 are colinear and q1 lies on segment p2q2
-    if (o4 == 0 && onSegment(p2, q1, q2)) return true;
-
-    return false; // Doesn't fall in any of the above cases
-}
-
-
-// To find orientation of ordered triplet (p, q, r).
-// The function returns following values
-// 0 --> p, q and r are colinear
-// 1 --> Clockwise
-// 2 --> Counterclockwise
-int orientation(const PointType& p, const PointType& q, const PointType& r)
-{
-    // See https://www.geeksforgeeks.org/orientation-3-ordered-points/
-    // for details of below formula.
-    double val =
-        (q.y - p.y) * (r.x - q.x) -
-        (q.x - p.x) * (r.y - q.y);
-
-    if (val == 0.0) return 0;  // colinear
-
-    return (val > 0) ? 1 : 2; // clock or counterclock wise
-}
-
-
-// Given three colinear points p, q, r, the function checks if
-// point q lies on line segment 'pr'
-bool onSegment(const PointType& p, const PointType& q, const PointType& r)
-{
-    if (q.x <= std::max(p.x, r.x) && q.x >= std::min(p.x, r.x) &&
-        q.y <= std::max(p.y, r.y) && q.y >= std::min(p.y, r.y))
-        return true;
-
-    return false;
-}
-
-bool collinearVecs(const PointType& p, const PointType& q, const PointType& r)
-{
-    return orientation(p, q, r) == 0;
-}
-
-/***
-* @return true is this point is betwen a and b
-* @note c must be collinear with a and b
-* @see O'Rourke, Joseph, "Computational Geometry in C, 2nd Ed.", pp.32
-*/
-bool between(const PointType& p, const PointType& a, const PointType& b)
-{
-    // if this point is not collinear with a and b
-    // then it cannot be between this two points
-    if (!collinearVecs(p, a, b))
-        return false;
-
-    auto& _x = p.x;
-    auto& _y = p.y;
-
-    return
-        ((a.x <= _x && _x <= b.x) && (a.y <= _y && _y <= b.y)) ||
-        ((b.x <= _x && _x <= a.x) && (b.y <= _y && _y <= a.y));
-}
-
-bool pointsDiffer(const PointType& a, const PointType& b, bool aprox)
-{
-    // max precision is mandatory since this can break convex polys!
-    if (aprox)
-        return a.squaredist(b) >= minPointDiffSq;
-    return a.x != b.x || a.y != b.y;
-}
-
-bool overlap(const PolyLine& l1, const PolyLine& l2)
-{
-    return (collinearVecs(l1.a, l2.a, l2.b) && collinearVecs(l1.b, l2.a, l2.b)) &&
-        ((l1.contains(l2.a) || l1.contains(l2.b)) ||
-        (l2.contains(l1.a) || l2.contains(l1.b)));
-}
-
-
-/***
-* @return a new simplified line if line_1 and line_2 overlaps, NULL otherwise
-*/
-int simplifiedLine(const PolyLine& line_1, const PolyLine& line_2, PolyLine& ret)
-{
-    if (overlap(line_1, line_2))
-    {
-        if (line_1.contains(line_2))
-        {
-            ret = line_1;
-            return 1;
-        }
-        if (line_2.contains(line_1))
-        {
-            ret = line_2;
-            return 2;
-        }
-
-        PointType new_line_start_point;
-        PointType new_line_end_point;
-
-        // detects which point of <line_1> must be removed
-        if (between(line_1.a, line_2.a, line_2.b)) {
-            new_line_start_point = line_1.b;
-        }
-        else {
-            new_line_start_point = line_1.a;
-        }
-        // detects which point of <line_2> must be removed
-        if (between(line_2.a, line_1.a, line_1.b)) {
-            new_line_end_point = line_2.b;
-        }
-        else {
-            new_line_end_point = line_2.a;
-        }
-
-        // create a new line
-        ret = PolyLine(new_line_start_point, new_line_end_point);
-        return 3;
-    }
-
-    return 0;
-
-}
-
-
-int iComparePointOrder(const PointType& p1, const PointType& p2)
-{
-    if (p1.y < p2.y)
-        return -1;
-    else if (p1.y == p2.y)
-    {
-        if (p1.x < p2.x)
-            return -1;
-        else if (p1.x == p2.x)
-            return 0;
-    }
-    // p1 is greater than p2
-    return 1;
-}
-
-bool bComparePointOrder(const PointType& p1, const PointType& p2)
-{
-    return iComparePointOrder(p1, p2) < 0;
 }
