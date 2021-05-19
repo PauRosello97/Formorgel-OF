@@ -210,7 +210,7 @@ bool bComparePointOrder(const PointType& p1, const PointType& p2)
 }
 
 // --------------------- OFXPOLYGONDETECTOR
-PolyLine ofxPolygonDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
+PolyLine ofxPolygonDetector::newLine(int i, int j, PolyLine& origLine)
 {
     PolyLine l;
 
@@ -227,7 +227,7 @@ PolyLine ofxPolygonDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
 }
 bool ofxPolygonDetector::createLines()
 {
-    uint32_t n = 0;
+    int n = 0;
     for (auto& l : origLines)
     {
         l.id = n++;
@@ -257,7 +257,7 @@ bool ofxPolygonDetector::createLines()
         {
             line.sortIntersectionsList(*this);
 
-            for (uint32_t i = 1; i < line.intersections.size(); ++i)
+            for (int i = 1; i < line.intersections.size(); ++i)
             {
                 bool foundDup = false;
                 auto
@@ -299,11 +299,11 @@ bool ofxPolygonDetector::createLines()
         }
     }
 
-    for (uint32_t i = 0; i < lines.size(); i++)
+    for (int i = 0; i < lines.size(); i++)
     {
         auto& l1 = lines[i];
 
-        for (uint32_t j = i + 1; j < lines.size(); j++)
+        for (int j = i + 1; j < lines.size(); j++)
         {
             auto& l2 = lines[j];
 
@@ -338,7 +338,7 @@ void ofxPolygonDetector::removeZeroLengthLines(void)
             ++it;
     }
 }
-bool ofxPolygonDetector::addPointToLine(uint32_t pid, uint32_t lid)
+bool ofxPolygonDetector::addPointToLine(int pid, int lid)
 {
     auto& v = pointToLines[pid];
     if (std::find(v.begin(), v.end(), lid) == v.end())
@@ -354,7 +354,7 @@ bool ofxPolygonDetector::addPointToLine(uint32_t pid, uint32_t lid)
 */
 void ofxPolygonDetector::removeOverlappings()
 {
-    uint32_t i, j, count = uint32_t(origLines.size());
+    int i, j, count = int(origLines.size());
 
     for (auto& l : origLines)
     {
@@ -364,7 +364,7 @@ void ofxPolygonDetector::removeOverlappings()
     PolyLine line;
 
     // lets find overlapping lines
-    uint32_t countBefore = count;
+    int countBefore = count;
     for (i = 0; i < count; i++)
     {
         auto& line_i = origLines[i];
@@ -409,9 +409,9 @@ void ofxPolygonDetector::removeOverlappings()
         }
     }
 }
-uint32_t ofxPolygonDetector::detectAllIntersections()
+int ofxPolygonDetector::detectAllIntersections()
 {
-    uint32_t ret = 0;
+    int ret = 0;
     size_t counter = origLines.size();
     PointType intersection;
 
@@ -426,7 +426,7 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
     // sort to always have the same results
     std::sort(origLines.begin(), origLines.end(), PolyLine::bCompareLineOrder);
 
-    uint32_t n = 0;
+    int n = 0;
     for (auto& l : origLines)
     {
         l.id = n++;
@@ -435,10 +435,10 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
     }
 
     // intersected lines: remove lines with only one intersection
-    for (uint32_t i = 0; i < counter; i++)
+    for (int i = 0; i < counter; i++)
     {
         auto& l1 = origLines[i];
-        for (uint32_t j = i + 1; j < counter; j++)
+        for (int j = i + 1; j < counter; j++)
         {
             auto& l2 = origLines[j];
             if (doIntersect(l1.a, l1.b, l2.a, l2.b))
@@ -449,13 +449,13 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
         }
     }
 
-    for (uint32_t i = 0; i < counter; i++)
+    for (int i = 0; i < counter; i++)
     {
         auto& l1 = origLines[i];
         if (l1.intersectedLines.size() == 1)
         {
 
-            for (uint32_t j = 0; j < counter; j++)
+            for (int j = 0; j < counter; j++)
             {
                 if (i != j)
                 {
@@ -479,7 +479,7 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
     }
 
     // intersection points
-    std::set<std::pair<uint32_t, uint32_t>> took;
+    std::set<std::pair<int, int>> took;
     for (auto& l1 : origLines)
     {
         for (auto& lid2 : l1.intersectedLines)
@@ -491,11 +491,11 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
                 intersection = PointType(0);
                 if (l1.IntersectionPoint(l2, intersection)) // checks if not parallel
                 {
-                    uint32_t intersectionIdx = uint32_t(intersectionPoints.size());
+                    int intersectionIdx = int(intersectionPoints.size());
 
                     // Check if the same intersection point exists
                     bool dupPoint = false;
-                    for (uint32_t pi = 0; pi < intersectionPoints.size(); ++pi)
+                    for (int pi = 0; pi < intersectionPoints.size(); ++pi)
                     {
                         auto& p = intersectionPoints[pi];
                         if (!pointsDiffer(p, intersection))
@@ -532,10 +532,10 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
         }
     }
 
-    uint32_t nCol = 0;
-    std::vector<uint32_t> pids;
+    int nCol = 0;
+    std::vector<int> pids;
 
-    uint32_t times = 0;
+    int times = 0;
     bool ok = false;
     do
     {
@@ -569,7 +569,7 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
                     if (l2.intersections.empty()) continue;
                     assert(&l1 != &l2);
 
-                    uint32_t nFound = 0;
+                    int nFound = 0;
                     float maxLineDist = 0;
                     pids.clear();
                     for (auto& pid1 : l1.intersections)
@@ -595,7 +595,7 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
                         if (maxLineDist <= minPointDiff)
                         {
                             // TODO: merge point of l2 into l1
-                            uint32_t nMerged = 0;
+                            int nMerged = 0;
                             for (auto& pid : l2.intersections)
                             {
                                 if (std::find(l1.intersections.begin(), l1.intersections.end(), pid) == l1.intersections.end())
@@ -615,7 +615,7 @@ uint32_t ofxPolygonDetector::detectAllIntersections()
                         {
 
                             // remove them
-                            uint32_t nRm1 = 0, nRm2 = 0;
+                            int nRm1 = 0, nRm2 = 0;
                             for (auto& pid : pids)
                             {
                                 for (auto it = l1.intersections.begin(); it != l1.intersections.end();)
@@ -704,7 +704,7 @@ bool ofxPolygonDetector::detectPolygons()
 void ofxPolygonDetector::simplifyPolys(double smaller_polygon_length)
 {
     // remove small polygons
-    uint32_t nRemoved = 0;
+    int nRemoved = 0;
     for (auto it = polys.begin(); it != polys.end(); )
     {
         if (it->getCount() < smaller_polygon_length)
@@ -721,7 +721,7 @@ void ofxPolygonDetector::addLine(const PolyLine& line)
 {
     origLines.push_back(line);
 }
-PolyLine* ofxPolygonDetector::findLine(uint32_t pidA, uint32_t pidB, bool useIgnore)
+PolyLine* ofxPolygonDetector::findLine(int pidA, int pidB, bool useIgnore)
 {
     auto m = std::min(pidA, pidB);
     auto M = std::max(pidA, pidB);
@@ -734,7 +734,7 @@ PolyLine* ofxPolygonDetector::findLine(uint32_t pidA, uint32_t pidB, bool useIgn
     }
     return nullptr;
 }
-PolyLine* ofxPolygonDetector::findLine(uint32_t id, bool useIgnore)
+PolyLine* ofxPolygonDetector::findLine(int id, bool useIgnore)
 {
     auto search = lineIdToIdx.find(id);
     if (search != lineIdToIdx.end())
@@ -749,7 +749,7 @@ PolyLine* ofxPolygonDetector::findLine(uint32_t id, bool useIgnore)
     }
     return nullptr;
 }
-PolyLine* ofxPolygonDetector::findOrigLine(uint32_t id)
+PolyLine* ofxPolygonDetector::findOrigLine(int id)
 {
     for (auto& l : origLines)
     {
@@ -760,7 +760,7 @@ PolyLine* ofxPolygonDetector::findOrigLine(uint32_t id)
     }
     return nullptr;
 }
-bool ofxPolygonDetector::buildCycle(uint32_t id, PolyCycle cycle) // as value!
+bool ofxPolygonDetector::buildCycle(int id, PolyCycle cycle) // as value!
 {
     auto l = findLine(id);
     if (!l) {
@@ -810,7 +810,7 @@ bool ofxPolygonDetector::findPolys()
     collinearLineMap.clear();
 
     // assign line ids
-    uint32_t n = 0;
+    int n = 0;
     lineIdToIdx.clear();
     for (auto& l : lines)
     {
@@ -834,12 +834,12 @@ bool ofxPolygonDetector::findPolys()
     // build collinearLineMap
     for (auto& lo : origLines)
     {
-        for (uint32_t i = 0; i < lines.size(); ++i)
+        for (int i = 0; i < lines.size(); ++i)
         {
             auto& l1 = lines[i];
             if (!l1.ignore && l1.origLine == lo.id)
             {
-                for (uint32_t j = i + 1; j < lines.size(); ++j)
+                for (int j = i + 1; j < lines.size(); ++j)
                 {
                     auto& l2 = lines[j];
                     if (!l2.ignore && l2.origLine == lo.id)
@@ -852,15 +852,15 @@ bool ofxPolygonDetector::findPolys()
     }
 
     // Build neighbors
-    std::vector<uint32_t> neigh;
+    std::vector<int> neigh;
     _neighbors.clear();
-    for (uint32_t i = 0; i < lines.size(); ++i)
+    for (int i = 0; i < lines.size(); ++i)
     {
         auto& l1 = lines[i];
         if (!l1.ignore)
         {
             neigh.clear();
-            for (uint32_t j = i + 1; j < lines.size(); ++j)
+            for (int j = i + 1; j < lines.size(); ++j)
             {
                 auto& l2 = lines[j];
                 if (!l2.ignore && l1.hasCommonIdxPoints(l2))
@@ -931,11 +931,11 @@ bool ofxPolygonDetector::findPolys()
         if (!cycle.fine) continue;
 
         // other the lines for proper triangulation
-        std::vector<uint32_t> lidx;
+        std::vector<int> lidx;
         lidx.reserve(cycle.idx.size());
         for (auto& lid : cycle.idx)
             lidx.push_back(lid);
-        std::sort(lidx.begin(), lidx.end(), [this](const uint32_t& lid1, const uint32_t& lid2) {
+        std::sort(lidx.begin(), lidx.end(), [this](const int& lid1, const int& lid2) {
             auto l1 = findLine(lid1, false);
             auto l2 = findLine(lid2, false);
             if (!l1 || !l2)
@@ -1008,7 +1008,7 @@ bool ofxPolygonDetector::dissolveCollinear(PolyLine& l1, PolyLine& l2)
 {
     assert(&l1 != &l2);
 
-    uint32_t* p1 = nullptr, * p2 = nullptr;
+    int* p1 = nullptr, * p2 = nullptr;
     if (l1.aIdx == l2.aIdx || l1.aIdx == l2.bIdx)
     {
         p1 = &l1.bIdx; // other point (B)
@@ -1035,7 +1035,7 @@ bool ofxPolygonDetector::dissolveCollinear(PolyLine& l1, PolyLine& l2)
     }
 
     PolyLine nl;
-    nl.id = uint32_t(lines.size());
+    nl.id = int(lines.size());
     nl.aIdx = *p1;
     nl.bIdx = *p2;
     nl.a = intersectionPoints[nl.aIdx];
@@ -1080,7 +1080,7 @@ bool ofxPolygonDetector::dissolveCollinear(PolyLine& l1, PolyLine& l2)
     l1.setIgnore(*this, "rmCollinear.l1");
     l2.setIgnore(*this, "rmCollinear.l2");
 
-    lineIdToIdx[nl.id] = uint32_t(lines.size());
+    lineIdToIdx[nl.id] = int(lines.size());
     lines.push_back(nl);
     lines.back().sortNeigh(*this);
 
@@ -1090,7 +1090,7 @@ bool ofxPolygonDetector::dissolveCollinearLine(PolyLine& l)
 {
     for (auto id : { l.aIdx, l.bIdx })
     {
-        uint32_t nValid = 0;
+        int nValid = 0;
         PolyLine* l1 = nullptr;
         for (auto& n : pointToLines[id])
         {
@@ -1118,8 +1118,8 @@ bool ofxPolygonDetector::dissolveCollinearLine(PolyLine& l)
 }
 bool ofxPolygonDetector::dissolve()
 {
-    uint32_t nLinesBefore = uint32_t(lines.size());
-    uint32_t nIgnoredBefore = 0;
+    int nLinesBefore = int(lines.size());
+    int nIgnoredBefore = 0;
     for (auto& l : lines)
         if (l.ignore)
             nIgnoredBefore++;
@@ -1134,8 +1134,8 @@ bool ofxPolygonDetector::dissolve()
     rmLines(RmLinesType::NoPointNeigh);
     rmLines(RmLinesType::Collinear);
 
-    uint32_t nIgnored = 0;
-    uint32_t nValid = 0;
+    int nIgnored = 0;
+    int nValid = 0;
     for (auto& l : lines)
     {
         if (!l.ignore)
@@ -1172,12 +1172,12 @@ bool ofxPolygonDetector::dissolve()
 
     return true;
 }
-void ofxPolygonDetector::setCollinear(uint32_t l1, uint32_t l2)
+void ofxPolygonDetector::setCollinear(int l1, int l2)
 {
     collinearLineMap[l1].push_back(l2);
     collinearLineMap[l2].push_back(l1);
 }
-bool ofxPolygonDetector::collinearIdx(uint32_t l1, uint32_t l2)
+bool ofxPolygonDetector::collinearIdx(int l1, int l2)
 {
     auto search = collinearLineMap.find(l1);
     if (search == collinearLineMap.end())
@@ -1192,7 +1192,7 @@ bool ofxPolygonDetector::rmEarPoints()
 {
     std::vector<PolyLine*> torm;
 
-    std::set<uint32_t> pids;
+    std::set<int> pids;
     for (auto& cycle : _cycles)
     {
         for (auto& lid : cycle.idx)
@@ -1222,8 +1222,8 @@ bool ofxPolygonDetector::rmLines(RmLinesType type)
     if (type == RmLinesType::Collinear)
     {
         // rm collinear lines
-        uint32_t nCollinearRemoved = 0;
-        for (uint32_t i = 0; i < lines.size(); ++i)
+        int nCollinearRemoved = 0;
+        for (int i = 0; i < lines.size(); ++i)
         {
             auto& l = lines[i];
             if (!l.ignore)
@@ -1244,7 +1244,7 @@ bool ofxPolygonDetector::rmLines(RmLinesType type)
         return true;
     }
 
-    for (uint32_t i = 0; i < lines.size(); ++i)
+    for (int i = 0; i < lines.size(); ++i)
     {
         auto& l = lines[i];
         if (!l.ignore && l.canBeRemoved(*this, type))
@@ -1459,7 +1459,7 @@ bool PolyLine::lineLineIntersectionPoint(const PolyLine& line, PointType& pos) c
 }
 void PolyLine::sortIntersectionsList(ofxPolygonDetector& pd)
 {
-    std::sort(intersections.begin(), intersections.end(), [&pd, this](const uint32_t& p1, const uint32_t& p2) {
+    std::sort(intersections.begin(), intersections.end(), [&pd, this](const int& p1, const int& p2) {
         return pd.intersectionPoints[p1].squaredist(a) < pd.intersectionPoints[p2].squaredist(a);
     });
 }
@@ -1475,7 +1475,7 @@ void PolyLine::calculateFirstAndLastPoint()
 }
 std::string PolyLine::toString(ofxPolygonDetector& pd) const
 {
-    uint32_t nNeigh = 0;
+    int nNeigh = 0;
     std::string neighStr = neighToString(pd, &nNeigh);
     std::string str = "L{[" + std::to_string(id) + "] nNeigh:";
     str += std::to_string(nNeigh);
@@ -1497,13 +1497,13 @@ std::string PolyLine::toString(ofxPolygonDetector& pd) const
 
     return str;
 }
-std::string PolyLine::neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh) const
+std::string PolyLine::neighToString(ofxPolygonDetector& pd, int* retNNeigh) const
 {
     auto search = pd._neighbors.find(id);
     if (search == pd._neighbors.end())
         return "[]";
     std::string str;
-    uint32_t nNeigh = 0;
+    int nNeigh = 0;
     for (auto& n : search->second)
     {
         auto l = pd.findLine(n);
@@ -1519,12 +1519,12 @@ std::string PolyLine::neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh)
         *retNNeigh = nNeigh;
     return str;
 }
-uint32_t PolyLine::numNeigh(ofxPolygonDetector& pd) const
+int PolyLine::numNeigh(ofxPolygonDetector& pd) const
 {
     auto search = pd._neighbors.find(id);
     if (search == pd._neighbors.end())
         return 0;
-    uint32_t ret = 0;
+    int ret = 0;
     for (auto& n : search->second)
     {
         auto l = pd.findLine(n);
@@ -1533,11 +1533,11 @@ uint32_t PolyLine::numNeigh(ofxPolygonDetector& pd) const
     }
     return ret;
 }
-uint32_t PolyLine::numIntersections(ofxPolygonDetector& pd) const
+int PolyLine::numIntersections(ofxPolygonDetector& pd) const
 {
-    return uint32_t(intersections.size());
+    return int(intersections.size());
 }
-uint32_t PolyLine::canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const
+int PolyLine::canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const
 {
     assert(!ignore);
 
@@ -1553,7 +1553,7 @@ uint32_t PolyLine::canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const
             }
 
             // check also ignore flag
-            uint32_t nNeigh = 0;
+            int nNeigh = 0;
             for (auto& n : neigh)
             {
                 auto l = pd.findLine(n);
@@ -1607,7 +1607,7 @@ bool PolyLine::betweenNeighbors(ofxPolygonDetector& pd, const PolyLine& l1, cons
 
     return ret;
 }
-bool PolyLine::compareNeigh(ofxPolygonDetector& pd, uint32_t nid1, uint32_t nid2) const
+bool PolyLine::compareNeigh(ofxPolygonDetector& pd, int nid1, int nid2) const
 {
     auto nl1 = pd.findLine(nid1);
     auto nl2 = pd.findLine(nid2);
@@ -1624,14 +1624,14 @@ bool PolyLine::compareNeigh(ofxPolygonDetector& pd, uint32_t nid1, uint32_t nid2
 bool PolyLine::sortNeigh(ofxPolygonDetector& pd) const
 {
     auto& neigh = pd._neighbors[id];
-    std::sort(neigh.begin(), neigh.end(), [this, &pd](uint32_t nid1, uint32_t nid2)
+    std::sort(neigh.begin(), neigh.end(), [this, &pd](int nid1, int nid2)
     {
         return compareNeigh(pd, nid1, nid2);
     });
 
     return true;
 }
-uint32_t& PolyLine::incTook(ofxPolygonDetector& pd)
+int& PolyLine::incTook(ofxPolygonDetector& pd)
 {
     if (took >= 2)
         return took;
@@ -1665,11 +1665,11 @@ PolyLine& PolyLine::add(const PointType& p)
     b.add(p);
     return *this;
 }
-uint32_t PolyLine::minPid() const
+int PolyLine::minPid() const
 {
     return std::min(aIdx, bIdx);
 }
-uint32_t PolyLine::maxPid() const
+int PolyLine::maxPid() const
 {
     return std::max(aIdx, bIdx);
 }
@@ -1679,7 +1679,7 @@ int32_t PolyLine::commonPid(const PolyLine& l) const
     if (bIdx == l.aIdx || bIdx == l.bIdx) return bIdx;
     return -1;
 }
-uint32_t PolyLine::otherPid(uint32_t pid) const
+int PolyLine::otherPid(int pid) const
 {
     return aIdx == pid ? bIdx : aIdx;
 }
@@ -1781,7 +1781,7 @@ void PolyPol::draw() {
     }
     ofEndShape();
 }
-uint32_t PolyPol::getCount() const { return (uint32_t)p.size(); }
+int PolyPol::getCount() const { return (int)p.size(); }
 int PolyPol::roundArea() {
     return round(_area);
 }
@@ -1798,7 +1798,7 @@ bool PolyCycle::equals(const PolyCycle & p) const
     }
     return true;
 }
-bool PolyCycle::addLineId(ofxPolygonDetector & pd, uint32_t id)
+bool PolyCycle::addLineId(ofxPolygonDetector & pd, int id)
 {
     auto l = pd.findLine(id);
     if (!l)
@@ -1913,11 +1913,11 @@ bool PolyCycle::accepted(ofxPolygonDetector & pd)
     }
     return true;
 }
-bool PolyCycle::canBeClosed(ofxPolygonDetector & pd, uint32_t idToAdd) const
+bool PolyCycle::canBeClosed(ofxPolygonDetector & pd, int idToAdd) const
 {
     return idx.size() > 2 && startIdx == idToAdd;
 }
-bool PolyCycle::pointConsumed(ofxPolygonDetector & pd, uint32_t pid) const
+bool PolyCycle::pointConsumed(ofxPolygonDetector & pd, int pid) const
 {
     auto& neigh = pd.pointToLines[pid];
     if (neigh.size() <= 1) // including self
@@ -1925,8 +1925,8 @@ bool PolyCycle::pointConsumed(ofxPolygonDetector & pd, uint32_t pid) const
         return true;
     }
 
-    uint32_t lid1 = 0, lid2 = 0;
-    uint32_t nValid = 0, nTaken = 0;
+    int lid1 = 0, lid2 = 0;
+    int nValid = 0, nTaken = 0;
     for (auto& n : neigh)
     {
         auto l = pd.findLine(n);
@@ -1998,7 +1998,7 @@ bool PolyCycle::convex(ofxPolygonDetector & pd) const
     }
     return true;
 }
-bool PolyCycle::contains(uint32_t idP) const
+bool PolyCycle::contains(int idP) const
 {
     return std::find(idx.begin(), idx.end(), idP) != idx.end();
 }
