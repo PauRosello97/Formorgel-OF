@@ -11,6 +11,8 @@
 
 #define arToStr(arg) #arg
 
+
+
 const char* RmLinesTypeStr(RmLinesType type)
 {
     switch (type)
@@ -23,161 +25,13 @@ const char* RmLinesTypeStr(RmLinesType type)
     return "UNKN";
 }
 
-bool PolyLine::contains(const PolyLine& line) const
-{
-    return contains(line.a) && contains(line.b);
-}
-
-bool PolyLine::contains(const PointType& point) const
-{
-    return between(point, a, b);
-}
-
-bool PolyLine::collinear(const PolyLine& line) const
-{
-    return !doIntersect(a, b, line.a, line.b);
-}
-
-bool PolyLine::IntersectionPoint(const PolyLine& line, PointType& pos) const
-{
-    return LineLineIntersectionPoint(line, pos);
-}
-
+// --------------------- FUNCTIONS
 static float Area(const PointType& a, const PointType& b, const PointType& c)
 {
     return 0.5 * ((b.x - a.x) * (c.y - a.y) - (c.x - a.x) * (b.y - a.y));
 }
 
-
-bool PolyLine::bCompareLineOrder(const PolyLine& l1, PolyLine& l2)
-{
-    return iCompareLineOrder(l1, l2) < 0;
-}
-int PolyLine::iCompareLineOrder(const PolyLine& l1, PolyLine& l2)
-{
-    int result = iComparePointOrder(l1.a, l2.a);
-
-    if (result == 0)
-    {
-        // in case lines share first point
-        // we must order the lines by its slope
-
-        auto dx1 = l1.b.x - l1.a.x;
-        auto dy1 = l1.b.y - l1.a.y;
-        auto dx2 = l2.b.x - l2.a.x;
-        auto dy2 = l2.b.y - l2.a.y;
-
-        // by definition of first and last point we are sure that dy > 0
-
-        if (dx1 > 0 && dx2 < 0)
-            // line 1 in 1st quadrant, line 2 in 2nd quadrant
-            // this means line 2 cames first
-            return 1;
-
-        if (dx1 < 0 && dx2>0)
-            // line 1 in 2nd quadrant, line 2 in 1st quadrant
-            // this means line 1 cames first
-            return -1;
-
-        if (dx1 == 0) {
-            // first line is vertical
-            if (dx2 > 0)
-                // second line in 1st quadrant
-                // first line is previous
-                return -1;
-
-            if (dx2 < 0)
-                // second line in 2nd quadrant
-                // second line is previous
-                return 1;
-            // this should no happen
-            return 0;
-        }
-
-        if (dx2 == 0) {
-            // second line is vertical
-            if (dx1 > 0)
-                // first line in 1st quadrant
-                // second line is previous
-                return 1;
-
-            if (dx1 < 0)
-                // first line in 2nd quadrant
-                // first line is previous
-                return -1;
-
-            // this should not happen
-            return 0;
-        }
-
-
-        // calculate the slopes
-        double m1 = dy1 / dx1;
-        double m2 = dy2 / dx2;
-        // line 1 and line 2 in 2nd quadrant
-        if (m1 > m2)
-            return -1;
-        if (m1 < m2)
-            return 1;
-
-        // in this case we have the same slope in both lines,
-        // which means that both lines are coincident.
-        return 0;
-    }
-
-    return result;
-}
-
-
-
-bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
-{
-    return
-        aIdx == line.aIdx ||
-        aIdx == line.bIdx ||
-        bIdx == line.aIdx ||
-        bIdx == line.bIdx;
-}
-
-// https://www.geeksforgeeks.org/program-for-point-of-intersection-of-two-lines/
-bool PolyLine::LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const
-{
-    auto& c = line.a;
-    auto& d = line.b;
-
-    // Line AB represented as a1x + b1y = c1
-    double a1 = b.y - a.y;
-    double b1 = a.x - b.x;
-    double c1 = a1 * (a.x) + b1 * (a.y);
-
-    // Line CD represented as a2x + b2y = c2
-    double a2 = d.y - c.y;
-    double b2 = c.x - d.x;
-    double c2 = a2 * (c.x) + b2 * (c.y);
-
-    double determinant = a1 * b2 - a2 * b1;
-
-    if (determinant == 0)
-    {
-        // The lines are parallel. This is simplified
-        // by returning a pair of FLT_MAX
-        return false;
-    }
-
-    double x = (b2 * c1 - b1 * c2) / determinant;
-    double y = (a1 * c2 - a2 * c1) / determinant;
-    pos = PointType(x, y, 0.0f);
-
-    return true;
-}
-
-void PolyLine::SortIntersectionsList(ofxPolygonDetector& pd)
-{
-    std::sort(intersections.begin(), intersections.end(), [&pd, this](const uint32_t& p1, const uint32_t& p2) {
-        return pd.intersectionPoints[p1].squaredist(a) < pd.intersectionPoints[p2].squaredist(a);
-    });
-}
-
+// --------------------- OFXPOLYGONDETECTOR
 PolyLine ofxPolygonDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
 {
     PolyLine l;
@@ -193,7 +47,6 @@ PolyLine ofxPolygonDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
 
     return l;
 }
-
 bool ofxPolygonDetector::CreateLines()
 {
 
@@ -256,7 +109,7 @@ bool ofxPolygonDetector::CreateLines()
 
                 if (foundDup)
                 {
-                    
+
                 }
                 else if (!pointsDiffer(p1, p2))
                 {
@@ -288,7 +141,6 @@ bool ofxPolygonDetector::CreateLines()
 
     return true;
 }
-
 void ofxPolygonDetector::dumpLines(const char* msg, bool useIgnore)
 {
     for (auto& l : lines)
@@ -296,7 +148,6 @@ void ofxPolygonDetector::dumpLines(const char* msg, bool useIgnore)
         if (useIgnore && l.ignore) continue;
     }
 }
-
 /***
 * @desc removes all lines with zero length
 */
@@ -310,7 +161,6 @@ void ofxPolygonDetector::RemoveZeroLengthLines(void)
             ++it;
     }
 }
-
 bool ofxPolygonDetector::addPointToLine(uint32_t pid, uint32_t lid)
 {
     auto& v = pointToLines[pid];
@@ -321,7 +171,6 @@ bool ofxPolygonDetector::addPointToLine(uint32_t pid, uint32_t lid)
     }
     return false;
 }
-
 /***
 * @descr removes line overlappings
 * @note must be called before applying Bentley-Ottmann algorithm
@@ -383,7 +232,6 @@ void ofxPolygonDetector::RemoveOverlappings()
         }
     }
 }
-
 uint32_t ofxPolygonDetector::DetectAllIntersections()
 {
     uint32_t ret = 0;
@@ -506,7 +354,7 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
             }
         }
     }
-    
+
     uint32_t nCol = 0;
     std::vector<uint32_t> pids;
 
@@ -627,18 +475,6 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
 
     return ret;
 }
-
-void PolyLine::CalculateFirstAndLastPoint()
-{
-    if (!bComparePointOrder(a, b))
-    {
-        std::swap(a.x, b.x);
-        std::swap(a.y, b.y);
-
-        std::swap(aIdx, bIdx);
-    }
-}
-
 /***
 * @descr sort the lines
 */
@@ -651,7 +487,190 @@ void ofxPolygonDetector::SortLines(void)
     }
     std::sort(lines.begin(), lines.end(), PolyLine::bCompareLineOrder);
 }
+bool ofxPolygonDetector::DetectPolygons()
+{
+    polys.clear();
 
+    if (!CreateLines())
+    {
+        return false;
+    }
+
+    while (true)
+    {
+        bool stop = false;
+
+        SortLines();
+
+        if (!FindPolys())
+        {
+            return false;
+        }
+
+        SimplifyPolys(0.0);
+
+        auto beforeCount = dissolveCount;
+
+        if (!dissolve())
+            stop = true;
+
+        if (stop)
+            break;
+    }
+
+    return true;
+}
+
+// --------------------- POLYLINE
+bool PolyLine::contains(const PolyLine& line) const
+{
+    return contains(line.a) && contains(line.b);
+}
+bool PolyLine::contains(const PointType& point) const
+{
+    return between(point, a, b);
+}
+bool PolyLine::collinear(const PolyLine& line) const
+{
+    return !doIntersect(a, b, line.a, line.b);
+}
+bool PolyLine::IntersectionPoint(const PolyLine& line, PointType& pos) const
+{
+    return LineLineIntersectionPoint(line, pos);
+}
+bool PolyLine::bCompareLineOrder(const PolyLine& l1, PolyLine& l2)
+{
+    return iCompareLineOrder(l1, l2) < 0;
+}
+int PolyLine::iCompareLineOrder(const PolyLine& l1, PolyLine& l2)
+{
+    int result = iComparePointOrder(l1.a, l2.a);
+
+    if (result == 0)
+    {
+        // in case lines share first point
+        // we must order the lines by its slope
+
+        auto dx1 = l1.b.x - l1.a.x;
+        auto dy1 = l1.b.y - l1.a.y;
+        auto dx2 = l2.b.x - l2.a.x;
+        auto dy2 = l2.b.y - l2.a.y;
+
+        // by definition of first and last point we are sure that dy > 0
+
+        if (dx1 > 0 && dx2 < 0)
+            // line 1 in 1st quadrant, line 2 in 2nd quadrant
+            // this means line 2 cames first
+            return 1;
+
+        if (dx1 < 0 && dx2>0)
+            // line 1 in 2nd quadrant, line 2 in 1st quadrant
+            // this means line 1 cames first
+            return -1;
+
+        if (dx1 == 0) {
+            // first line is vertical
+            if (dx2 > 0)
+                // second line in 1st quadrant
+                // first line is previous
+                return -1;
+
+            if (dx2 < 0)
+                // second line in 2nd quadrant
+                // second line is previous
+                return 1;
+            // this should no happen
+            return 0;
+        }
+
+        if (dx2 == 0) {
+            // second line is vertical
+            if (dx1 > 0)
+                // first line in 1st quadrant
+                // second line is previous
+                return 1;
+
+            if (dx1 < 0)
+                // first line in 2nd quadrant
+                // first line is previous
+                return -1;
+
+            // this should not happen
+            return 0;
+        }
+
+
+        // calculate the slopes
+        double m1 = dy1 / dx1;
+        double m2 = dy2 / dx2;
+        // line 1 and line 2 in 2nd quadrant
+        if (m1 > m2)
+            return -1;
+        if (m1 < m2)
+            return 1;
+
+        // in this case we have the same slope in both lines,
+        // which means that both lines are coincident.
+        return 0;
+    }
+
+    return result;
+}
+bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
+{
+    return
+        aIdx == line.aIdx ||
+        aIdx == line.bIdx ||
+        bIdx == line.aIdx ||
+        bIdx == line.bIdx;
+}
+// https://www.geeksforgeeks.org/program-for-point-of-intersection-of-two-lines/
+bool PolyLine::LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const
+{
+    auto& c = line.a;
+    auto& d = line.b;
+
+    // Line AB represented as a1x + b1y = c1
+    double a1 = b.y - a.y;
+    double b1 = a.x - b.x;
+    double c1 = a1 * (a.x) + b1 * (a.y);
+
+    // Line CD represented as a2x + b2y = c2
+    double a2 = d.y - c.y;
+    double b2 = c.x - d.x;
+    double c2 = a2 * (c.x) + b2 * (c.y);
+
+    double determinant = a1 * b2 - a2 * b1;
+
+    if (determinant == 0)
+    {
+        // The lines are parallel. This is simplified
+        // by returning a pair of FLT_MAX
+        return false;
+    }
+
+    double x = (b2 * c1 - b1 * c2) / determinant;
+    double y = (a1 * c2 - a2 * c1) / determinant;
+    pos = PointType(x, y, 0.0f);
+
+    return true;
+}
+void PolyLine::SortIntersectionsList(ofxPolygonDetector& pd)
+{
+    std::sort(intersections.begin(), intersections.end(), [&pd, this](const uint32_t& p1, const uint32_t& p2) {
+        return pd.intersectionPoints[p1].squaredist(a) < pd.intersectionPoints[p2].squaredist(a);
+    });
+}
+void PolyLine::CalculateFirstAndLastPoint()
+{
+    if (!bComparePointOrder(a, b))
+    {
+        std::swap(a.x, b.x);
+        std::swap(a.y, b.y);
+
+        std::swap(aIdx, bIdx);
+    }
+}
 std::string PolyLine::toString(ofxPolygonDetector& pd) const
 {
     uint32_t nNeigh = 0;
@@ -676,7 +695,6 @@ std::string PolyLine::toString(ofxPolygonDetector& pd) const
 
     return str;
 }
-
 std::string PolyLine::neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh) const
 {
     auto search = pd._neighbors.find(id);
@@ -699,7 +717,6 @@ std::string PolyLine::neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh)
         *retNNeigh = nNeigh;
     return str;
 }
-
 uint32_t PolyLine::numNeigh(ofxPolygonDetector& pd) const
 {
     auto search = pd._neighbors.find(id);
@@ -718,7 +735,6 @@ uint32_t PolyLine::numIntersections(ofxPolygonDetector& pd) const
 {
     return uint32_t(intersections.size());
 }
-
 uint32_t PolyLine::canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const
 {
     assert(!ignore);
@@ -768,40 +784,6 @@ uint32_t PolyLine::canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const
     }
 
     return false;
-}
-
-bool ofxPolygonDetector::DetectPolygons()
-{
-    polys.clear();
-
-    if (!CreateLines())
-    {
-        return false;
-    }
-
-    while (true)
-    {
-        bool stop = false;
-
-        SortLines();
-
-        if (!FindPolys())
-        {
-            return false;
-        }
-
-        SimplifyPolys(0.0);
-
-        auto beforeCount = dissolveCount;
-
-        if (!dissolve())
-            stop = true;
-
-        if (stop)
-            break;
-    }
-
-    return true;
 }
 
 PointType PolyPol::center()

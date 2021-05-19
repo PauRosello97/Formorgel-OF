@@ -14,9 +14,6 @@
 #include <vector>
 #include "Functions.h"
 
-#define logoutf1(x) printf(x "\n")
-#define logoutf(format, ...) printf(format "\n", __VA_ARGS__)
-
 static const float minPointDiff = 0.001;
 static const float minPointDiffSq = minPointDiff * minPointDiff;
 
@@ -24,6 +21,8 @@ struct PolyLine;
 struct ofxPolygonDetector;
 
 using CycleSet = std::set<uint32_t>;
+using PointType = vec;
+
 
 enum class RmLinesType : int
 {
@@ -33,15 +32,12 @@ enum class RmLinesType : int
     PointConsumed, // point has 2 lines connected all taken
 };
 
-using PointType = vec;
-
 struct PolyCycle
 {
     CycleSet idx;
-    uint32_t startIdx, lastIdx;
+    int startIdx, lastIdx;
     bool isClosed;
     bool fine;
-    //uint32_t colStep = 0; // use it to increase the recursive colliniar length
     bool canBeClosed(ofxPolygonDetector& pd, uint32_t idToAdd) const;
     bool contains(uint32_t idP) const
     {
@@ -74,13 +70,11 @@ struct PolyCycle
     }
 
     bool Equals(const PolyCycle& p) const;
-
     bool convex(ofxPolygonDetector& pd) const;
-
     bool pointConsumed(ofxPolygonDetector& pd, uint32_t pid) const;
-
     bool accepted(ofxPolygonDetector& pd);
 };
+
 using PolyCycles = std::vector<PolyCycle>;
 
 struct PolyLine
