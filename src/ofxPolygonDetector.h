@@ -38,7 +38,7 @@ struct PointType
     static float lineDist(const PointType& la, const PointType& lb, const PointType& p);
 };
 
-using CycleSet = std::set<uint32_t>;
+using CycleSet = set<uint32_t>;
 
 bool doIntersect(const PointType& p1, const PointType& q1, const PointType& p2, const PointType& q2);
 int orientation(const PointType& p, const PointType& q, const PointType& r);
@@ -77,7 +77,7 @@ struct PolyCycle
     bool accepted(ofxPolygonDetector& pd);
 };
 
-using PolyCycles = std::vector<PolyCycle>;
+using PolyCycles = vector<PolyCycle>;
 
 struct PolyLine
 {
@@ -86,8 +86,8 @@ struct PolyLine
     PolyLine() {}
     PolyLine(const PointType& aP, const PointType& bP) : a(aP), b(bP) {}
 
-    std::vector<uint32_t> intersections;
-    std::set<uint32_t> intersectedLines;
+    vector<uint32_t> intersections;
+    set<uint32_t> intersectedLines;
     PointType center;
     uint32_t id = 0;
     uint32_t test0 = 0, test1 = 0;
@@ -151,26 +151,23 @@ struct PolyPol
 
 struct ofxPolygonDetector
 {
-    using LineVector = std::vector<PolyLine>;
-    using LineList = std::list<PolyLine>;
-    using PolyVector = std::vector<PolyPol>;
+    using LineVector = vector<PolyLine>;
+    using LineList = list<PolyLine>;
+    using PolyVector = vector<PolyPol>;
 
-    // members {
     PolyCycles _cycles;
-
-    //std::vector<CycleSet> processed;
 
     LineVector
         origLines, // from user
         lines; // active lines
     PolyVector polys;
 
-    std::map<uint32_t, std::vector<uint32_t>> _neighbors; // key: lid, val: vec(neighborLine)
-    std::map<uint32_t, std::vector<uint32_t>> collinearLineMap; // key: lid, val: vec(collinearLine)
+    map<uint32_t, vector<uint32_t>> _neighbors; // key: lid, val: vec(neighborLine)
+    map<uint32_t, vector<uint32_t>> collinearLineMap; // key: lid, val: vec(collinearLine)
 
-    std::vector<PointType> intersectionPoints;
-    std::map<uint32_t, std::vector<uint32_t>> pointToLines; // key: pid, val: list of nids
-    std::unordered_map<uint32_t, int32_t> lineIdToIdx; // key: lid, val: index in lines
+    vector<PointType> intersectionPoints;
+    map<uint32_t, vector<uint32_t>> pointToLines; // key: pid, val: list of nids
+    unordered_map<uint32_t, int32_t> lineIdToIdx; // key: lid, val: index in lines
 
     uint32_t dissolveCount = 0;
 
@@ -214,6 +211,4 @@ struct ofxPolygonDetector
     bool dissolve();
 
     void dumpLines(const char* msg, bool useIgnore = false);
-
-    
 };
