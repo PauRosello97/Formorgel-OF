@@ -1271,6 +1271,58 @@ void ofxPolygonDetector::reset()
     dissolveCount = 0;
 }
 
+// --------------------- POINTTYPE
+PointType& PointType::sub(const PointType& v)
+{
+    x -= v.x;
+    y -= v.y;
+    return *this;
+}
+PointType& PointType::add(const PointType& v)
+{
+    x += v.x;
+    y += v.y;
+    return *this;
+}
+PointType& PointType::mul(const float& v)
+{
+    x *= v;
+    y *= v;
+    return *this;
+}
+PointType& PointType::div(const float& v)
+{
+    x /= v;
+    y /= v;
+    return *this;
+}
+float PointType::squaredlen() const
+{
+    return x * x + y * y;
+}
+float PointType::squaredist(const PointType& v) const
+{
+    return PointType(*this).sub(v).squaredlen();
+}
+void PointType::line(const PointType& p, const PointType& q, float& a, float& b, float& c)
+{
+    // Line AB represented as a*x + b*y = c
+    a = p.y - q.y;
+    b = q.x - p.x;
+    c = (p.x - q.x) * p.y + (q.y - p.y) * p.x;
+}
+float PointType::lineDist(float a, float b, float c, const PointType& p)
+{
+    if (a + b == 0.0f) return std::numeric_limits<float>::max();
+    return fabs(a * p.x + b * p.y + c) / sqrtf(a * a + b * b);
+}
+float PointType::lineDist(const PointType& la, const PointType& lb, const PointType& p)
+{
+    float a, b, c;
+    line(la, lb, a, b, c);
+    return lineDist(a, b, c, p);
+}
+
 // --------------------- POLYLINE
 bool PolyLine::contains(const PolyLine& line) const
 {

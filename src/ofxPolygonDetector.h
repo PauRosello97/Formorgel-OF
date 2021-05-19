@@ -23,66 +23,19 @@ struct PointType
     float x, y;
 
     PointType() {}
-
     PointType(float a, float b) : x(a), y(b) {}
     PointType(float a) : x(a), y(a) {}
     PointType(float a, float b, float c) : x(a), y(b) {}
 
-    PointType& sub(const PointType& v)
-    {
-        x -= v.x;
-        y -= v.y;
-        return *this;
-    }
-    PointType& add(const PointType& v)
-    {
-        x += v.x;
-        y += v.y;
-        return *this;
-    }
-    PointType& mul(const float& v)
-    {
-        x *= v;
-        y *= v;
-        return *this;
-    }
-    PointType& div(const float& v)
-    {
-        x /= v;
-        y /= v;
-        return *this;
-    }
-
-    float squaredlen() const
-    {
-        return x * x + y * y;
-    }
-
-    float squaredist(const PointType& v) const
-    {
-        return PointType(*this).sub(v).squaredlen();
-    }
-
-    static void line(const PointType& p, const PointType& q, float& a, float& b, float& c)
-    {
-        // Line AB represented as a*x + b*y = c
-        a = p.y - q.y;
-        b = q.x - p.x;
-        c = (p.x - q.x) * p.y + (q.y - p.y) * p.x;
-    }
-
-    static float lineDist(float a, float b, float c, const PointType& p)
-    {
-        if (a + b == 0.0f) return std::numeric_limits<float>::max();;
-        return fabs(a * p.x + b * p.y + c) / sqrtf(a * a + b * b);
-    }
-
-    static float lineDist(const PointType& la, const PointType& lb, const PointType& p)
-    {
-        float a, b, c;
-        line(la, lb, a, b, c);
-        return lineDist(a, b, c, p);
-    }
+    PointType& sub(const PointType& v);
+    PointType& add(const PointType& v);
+    PointType& mul(const float& v);
+    PointType& div(const float& v);
+    float squaredlen() const;
+    float squaredist(const PointType& v) const;
+    static void line(const PointType& p, const PointType& q, float& a, float& b, float& c);
+    static float lineDist(float a, float b, float c, const PointType& p);
+    static float lineDist(const PointType& la, const PointType& lb, const PointType& p);
 };
 
 using CycleSet = std::set<uint32_t>;
