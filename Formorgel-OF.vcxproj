@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Condition="'$(WindowsTargetPlatformVersion)'==''">
     <LatestTargetPlatformVersion>$([Microsoft.Build.Utilities.ToolLocationHelper]::GetLatestSDKTargetPlatformVersion('Windows', '10.0'))</LatestTargetPlatformVersion>
-    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion Condition="'$(WindowsTargetPlatformVersion)' == ''">$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
     <TargetPlatformVersion>$(WindowsTargetPlatformVersion)</TargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Label="Globals">
@@ -32,24 +32,24 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
     <CharacterSet>Unicode</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
-    <PlatformToolset>v142</PlatformToolset>
+    <PlatformToolset>v141</PlatformToolset>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
@@ -100,7 +100,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -120,7 +120,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -140,7 +140,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <ObjectFileName>$(IntDir)</ObjectFileName>
@@ -163,7 +163,7 @@
       <PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
       <WarningLevel>Level3</WarningLevel>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
       <CompileAs>CompileAsCpp</CompileAs>
       <ObjectFileName>$(IntDir)</ObjectFileName>
     </ClCompile>
@@ -189,13 +189,13 @@
     <ClCompile Include="src\GeometricSynth.cpp" />
     <ClCompile Include="src\GeometryColorSwitch.cpp" />
     <ClCompile Include="src\GeometryPanel.cpp" />
-    <ClCompile Include="src\ofxPolygonDetector.cpp" />
     <ClCompile Include="src\Osc.cpp" />
     <ClCompile Include="src\PolygonColorControl.cpp" />
     <ClCompile Include="src\Selector.cpp" />
     <ClCompile Include="src\SmallButton.cpp" />
     <ClCompile Include="src\Tone.cpp" />
     <ClCompile Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.cpp" />
+    <ClCompile Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\ofApp.h" />
@@ -206,13 +206,13 @@
     <ClInclude Include="src\GeometricSynth.h" />
     <ClInclude Include="src\GeometryColorSwitch.h" />
     <ClInclude Include="src\GeometryPanel.h" />
-    <ClInclude Include="src\ofxPolygonDetector.h" />
     <ClInclude Include="src\Osc.h" />
     <ClInclude Include="src\PolygonColorControl.h" />
     <ClInclude Include="src\Selector.h" />
     <ClInclude Include="src\SmallButton.h" />
     <ClInclude Include="src\Tone.h" />
     <ClInclude Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.h" />
+    <ClInclude Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

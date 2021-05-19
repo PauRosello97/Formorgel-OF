@@ -34,9 +34,6 @@
     <ClCompile Include="src\ofApp.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\ofxPolygonDetector.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\Osc.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -55,6 +52,9 @@
     <ClCompile Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.cpp">
       <Filter>addons\ofxHLuv\src</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.cpp">
+      <Filter>addons\ofxPolygonDetector\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -68,6 +68,12 @@
     </Filter>
     <Filter Include="addons\ofxHLuv\src">
       <UniqueIdentifier>{35BCC8A3-AB0D-16E1-4E21-4AD5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPolygonDetector">
+      <UniqueIdentifier>{9C428F98-E050-554E-16BA-EF8E}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxPolygonDetector\src">
+      <UniqueIdentifier>{73CAA8CF-774D-AFE3-5A3F-F0E5}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -98,9 +104,6 @@
     <ClInclude Include="src\ofApp.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\ofxPolygonDetector.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\Osc.h">
       <Filter>src</Filter>
     </ClInclude>
@@ -118,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.h">
       <Filter>addons\ofxHLuv\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.h">
+      <Filter>addons\ofxPolygonDetector\src</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
