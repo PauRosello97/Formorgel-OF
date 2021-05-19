@@ -1,123 +1,141 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <ItemGroup>
-    <ClCompile Include="src\ofApp.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Formorgel.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Functions.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometricSynth.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="PolyDetector.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Osc.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="FloatInput.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryPanel.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ColorPanel.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="GeometryColorSwitch.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="PolygonColorControl.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="SmallButton.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Selector.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Tone.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="ofxHLuv.cpp">
-      <Filter>src\ofxHLuv</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Filter Include="src">
-      <UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\ofxHLuv">
-      <UniqueIdentifier>{9295b5c0-ab1f-4675-96ff-0e826d3edfb6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\ofxPolyDetector">
-      <UniqueIdentifier>{e8074fc7-cf84-481c-9234-272e50727bd6}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="src\ofApp.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="geom.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Formorgel.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Functions.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometricSynth.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="PolyDetector.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="FloatInput.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Osc.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryPanel.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="ColorPanel.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="GeometryColorSwitch.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="PolygonColorControl.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="SmallButton.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Selector.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Tone.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="ofxHLuv.h">
-      <Filter>src\ofxHLuv</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="icon.rc" />
-  </ItemGroup>
+	<ItemGroup>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Button.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ColorPanel.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\FloatInput.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Formorgel.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Functions.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\GeometricSynth.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\GeometryColorSwitch.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\GeometryPanel.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\main.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ofApp.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\ofxHLuv.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Osc.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\PolyDetector.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\PolygonColorControl.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Selector.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\SmallButton.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="src\Tone.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
+		<ClCompile Include="..\..\..\..\addons\ofxHLuv\src\ofxHLuv.cpp">
+			<Filter>addons\ofxHLuv\src</Filter>
+		</ClCompile>
+	</ItemGroup>
+	<ItemGroup>
+		<Filter Include="src">
+			<UniqueIdentifier>{d8376475-7454-4a24-b08a-aac121d3ad6f}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons">
+			<UniqueIdentifier>{71834F65-F3A9-211E-73B8-DC85}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxHLuv">
+			<UniqueIdentifier>{B3F3B70C-F760-6A35-2C3C-C205}</UniqueIdentifier>
+		</Filter>
+		<Filter Include="addons\ofxHLuv\src">
+			<UniqueIdentifier>{35BCC8A3-AB0D-16E1-4E21-4AD5}</UniqueIdentifier>
+		</Filter>
+	</ItemGroup>
+	<ItemGroup>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Button.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ColorPanel.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\FloatInput.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Formorgel.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Functions.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\geom.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\GeometricSynth.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\GeometryColorSwitch.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\GeometryPanel.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ofApp.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\ofxHLuv.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Osc.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\PolyDetector.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\PolygonColorControl.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Selector.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\SmallButton.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Tone.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="..\..\..\..\addons\ofxHLuv\src\ofxHLuv.h">
+			<Filter>addons\ofxHLuv\src</Filter>
+		</ClInclude>
+	</ItemGroup>
+	<ItemGroup>
+		<ResourceCompile Include="icon.rc" />
+	</ItemGroup>
 </Project>
