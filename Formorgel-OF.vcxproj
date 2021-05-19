@@ -203,7 +203,6 @@
     <ClInclude Include="src\ColorPanel.h" />
     <ClInclude Include="src\FloatInput.h" />
     <ClInclude Include="src\Formorgel.h" />
-    <ClInclude Include="src\geom.h" />
     <ClInclude Include="src\GeometricSynth.h" />
     <ClInclude Include="src\GeometryColorSwitch.h" />
     <ClInclude Include="src\GeometryPanel.h" />

@@ -86,9 +86,6 @@
     <ClInclude Include="src\Formorgel.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\geom.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\GeometricSynth.h">
       <Filter>src</Filter>
     </ClInclude>
