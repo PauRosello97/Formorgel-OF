@@ -255,7 +255,7 @@ bool ofxPolygonDetector::CreateLines()
         // check if current line has intersections
         if (line.intersections.size() >= 2)
         {
-            line.SortIntersectionsList(*this);
+            line.sortIntersectionsList(*this);
 
             for (uint32_t i = 1; i < line.intersections.size(); ++i)
             {
@@ -660,7 +660,7 @@ void ofxPolygonDetector::SortLines(void)
     for (auto& line : lines)
     {
         if (!line.ignore)
-            line.CalculateFirstAndLastPoint();
+            line.calculateFirstAndLastPoint();
     }
     std::sort(lines.begin(), lines.end(), PolyLine::bCompareLineOrder);
 }
@@ -707,7 +707,7 @@ void ofxPolygonDetector::SimplifyPolys(double smaller_polygon_length)
     uint32_t nRemoved = 0;
     for (auto it = polys.begin(); it != polys.end(); )
     {
-        if (it->GetCount() < smaller_polygon_length)
+        if (it->getCount() < smaller_polygon_length)
         {
             it = polys.erase(it);
             nRemoved++;
@@ -785,7 +785,7 @@ bool ofxPolygonDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
         return true;
     }
 
-    if (!cycle.AddLineId(*this, l->id))
+    if (!cycle.addLineId(*this, l->id))
     {
         return true;
     }
@@ -863,7 +863,7 @@ bool ofxPolygonDetector::FindPolys()
             for (uint32_t j = i + 1; j < lines.size(); ++j)
             {
                 auto& l2 = lines[j];
-                if (!l2.ignore && l1.HasCommonIdxPoints(l2))
+                if (!l2.ignore && l1.hasCommonIdxPoints(l2))
                 {
                     neigh.push_back(l2.id);
                 }
@@ -950,7 +950,7 @@ bool ofxPolygonDetector::FindPolys()
         bool exists = false;
         for (auto& p : polys)
         {
-            if (p.cycle.Equals(cycle))
+            if (p.cycle.equals(cycle))
             {
                 exists = true;
                 break;
@@ -968,7 +968,7 @@ bool ofxPolygonDetector::FindPolys()
             auto lPtr = findLine(id);
             if (lPtr)
             {
-                lPtr->CalculateFirstAndLastPoint();
+                lPtr->calculateFirstAndLastPoint();
 
                 auto& a = intersectionPoints[lPtr->aIdx];
                 auto& b = intersectionPoints[lPtr->bIdx];
@@ -1040,7 +1040,7 @@ bool ofxPolygonDetector::dissolveCollinear(PolyLine& l1, PolyLine& l2)
     nl.bIdx = *p2;
     nl.a = intersectionPoints[nl.aIdx];
     nl.b = intersectionPoints[nl.bIdx];
-    nl.calcCenter(); // calls CalculateFirstAndLastPoint
+    nl.calcCenter(); // calls calculateFirstAndLastPoint
     nl.origLine = l1.origLine; // will be used to construct collinearLineMap
     nl.lastDissolveStep = l1.lastDissolveStep;
     nl.attr0 = l1.attr0;
@@ -1338,7 +1338,7 @@ bool PolyLine::collinear(const PolyLine& line) const
 }
 bool PolyLine::IntersectionPoint(const PolyLine& line, PointType& pos) const
 {
-    return LineLineIntersectionPoint(line, pos);
+    return lineLineIntersectionPoint(line, pos);
 }
 bool PolyLine::bCompareLineOrder(const PolyLine& l1, PolyLine& l2)
 {
@@ -1418,7 +1418,7 @@ int PolyLine::iCompareLineOrder(const PolyLine& l1, PolyLine& l2)
 
     return result;
 }
-bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
+bool PolyLine::hasCommonIdxPoints(const PolyLine& line) const
 {
     return
         aIdx == line.aIdx ||
@@ -1427,7 +1427,7 @@ bool PolyLine::HasCommonIdxPoints(const PolyLine& line) const
         bIdx == line.bIdx;
 }
 // https://www.geeksforgeeks.org/program-for-point-of-intersection-of-two-lines/
-bool PolyLine::LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const
+bool PolyLine::lineLineIntersectionPoint(const PolyLine& line, PointType& pos) const
 {
     auto& c = line.a;
     auto& d = line.b;
@@ -1457,13 +1457,13 @@ bool PolyLine::LineLineIntersectionPoint(const PolyLine& line, PointType& pos) c
 
     return true;
 }
-void PolyLine::SortIntersectionsList(ofxPolygonDetector& pd)
+void PolyLine::sortIntersectionsList(ofxPolygonDetector& pd)
 {
     std::sort(intersections.begin(), intersections.end(), [&pd, this](const uint32_t& p1, const uint32_t& p2) {
         return pd.intersectionPoints[p1].squaredist(a) < pd.intersectionPoints[p2].squaredist(a);
     });
 }
-void PolyLine::CalculateFirstAndLastPoint()
+void PolyLine::calculateFirstAndLastPoint()
 {
     if (!bComparePointOrder(a, b))
     {
@@ -1641,7 +1641,7 @@ uint32_t& PolyLine::incTook(ofxPolygonDetector& pd)
 }
 void PolyLine::calcCenter()
 {
-    CalculateFirstAndLastPoint();
+    calculateFirstAndLastPoint();
     center = a;
     center.add(b);
     center.mul(0.5f);
@@ -1718,7 +1718,7 @@ bool PolyPol::Minus(const PolyPol& other)
     }
     return true;
 }
-void PolyPol::CalculateFirstAndLastPoint()
+void PolyPol::calculateFirstAndLastPoint()
 {
     // if there are only one vertex it is not a polyline
     if (p.size() < 2)
@@ -1781,13 +1781,13 @@ void PolyPol::draw() {
     }
     ofEndShape();
 }
-uint32_t PolyPol::GetCount() const { return (uint32_t)p.size(); }
+uint32_t PolyPol::getCount() const { return (uint32_t)p.size(); }
 int PolyPol::roundArea() {
     return round(_area);
 }
 
 // --------------------- POLYCYCLE
-bool PolyCycle::Equals(const PolyCycle & p) const
+bool PolyCycle::equals(const PolyCycle & p) const
 {
     if (idx.size() != p.idx.size())
         return false;
@@ -1798,7 +1798,7 @@ bool PolyCycle::Equals(const PolyCycle & p) const
     }
     return true;
 }
-bool PolyCycle::AddLineId(ofxPolygonDetector & pd, uint32_t id)
+bool PolyCycle::addLineId(ofxPolygonDetector & pd, uint32_t id)
 {
     auto l = pd.findLine(id);
     if (!l)
