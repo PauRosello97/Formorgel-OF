@@ -4,7 +4,6 @@
 
 class Tone
 {
-
 	ofxHLuv HLuv;
 public:
 	Tone() {};
