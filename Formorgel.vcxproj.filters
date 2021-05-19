@@ -19,9 +19,6 @@
     <ClCompile Include="src\Formorgel.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\Functions.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
     <ClCompile Include="src\GeometricSynth.cpp">
       <Filter>src</Filter>
     </ClCompile>
@@ -87,9 +84,6 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\Formorgel.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="src\Functions.h">
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\geom.h">

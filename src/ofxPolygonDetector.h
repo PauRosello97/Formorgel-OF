@@ -17,6 +17,9 @@
 #define logoutf1(x) printf(x "\n")
 #define logoutf(format, ...) printf(format "\n", __VA_ARGS__)
 
+static const float minPointDiff = 0.001;
+static const float minPointDiffSq = minPointDiff * minPointDiff;
+
 struct PolyLine;
 struct ofxPolygonDetector;
 

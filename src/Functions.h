@@ -16,8 +16,7 @@ using PointType = vec;
 struct PolyLine;
 
 // This variable is really important!
-static const float minPointDiff = 0.001;
-static const float minPointDiffSq = minPointDiff * minPointDiff;
+
 
 bool doIntersect(const PointType& p1, const PointType& q1, const PointType& p2, const PointType& q2);
 int orientation(const PointType& p, const PointType& q, const PointType& r);
