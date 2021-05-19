@@ -1730,6 +1730,10 @@ void PolyPol::draw() {
     }
     ofEndShape();
 }
+uint32_t PolyPol::GetCount() const { return (uint32_t)p.size(); }
+int PolyPol::roundArea() {
+    return round(_area);
+}
 
 // --------------------- POLYCYCLE
 bool PolyCycle::Equals(const PolyCycle & p) const

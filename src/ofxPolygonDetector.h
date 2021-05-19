@@ -23,7 +23,6 @@ struct ofxPolygonDetector;
 using CycleSet = std::set<uint32_t>;
 using PointType = vec;
 
-
 enum class RmLinesType : int
 {
     TakenTwice = 0, // rm lines taken twice
@@ -40,7 +39,6 @@ struct PolyCycle
     bool fine;
     bool canBeClosed(ofxPolygonDetector& pd, uint32_t idToAdd) const;
     bool contains(uint32_t idP) const;
-    uint32_t numCuts(ofxPolygonDetector& pd, const PolyLine& l) const;
     bool AddLineId(ofxPolygonDetector& pd, uint32_t id);
     string idxToString() const;
     string toString() const;
@@ -73,7 +71,6 @@ struct PolyLine
     uint32_t lastDissolveStep = 0;
     void calcCenter();
     bool HasCommonIdxPoints(const PolyLine& line) const;
-    bool Equals(const PolyLine& line) const;
     void SortIntersectionsList(ofxPolygonDetector& pd);
     bool IntersectionPoint(const PolyLine& line, PointType& pos) const;
     bool LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const;
@@ -98,42 +95,28 @@ struct PolyLine
     bool compareNeigh(ofxPolygonDetector& pd, uint32_t nid1, uint32_t nid2) const;
     bool sortNeigh(ofxPolygonDetector& pd) const;
     uint32_t& incTook(ofxPolygonDetector& pd);
-    float angle(ofxPolygonDetector& pd, const PolyLine& l) const;
     bool betweenNeighbors(ofxPolygonDetector& pd, const PolyLine& l1, const PolyLine& l2) const;
 };
 
 struct PolyPol
 {
-    // members {
-    std::vector<PointType> p;
+    vector<PointType> p;
     PointType c;
     size_t firstIdx = 0;
     ofColor color;
-
     PolyCycle cycle;
-
     uint32_t id;
     uint32_t dissolveStep = 0;
-
     double _area;
-
-    uint32_t GetCount() const { return (uint32_t)p.size(); }
-
+    uint32_t GetCount() const;
     void CalculateFirstAndLastPoint();
     bool Minus(const PolyPol& other);
-
     void addLine(const PolyLine& l);
-
-    int roundArea() {
-        return round(_area);
-    }
-
+    int roundArea();
     bool addPointChecked(const PointType& v);
     void setColor(ofColor color);
     void draw();
-
     PointType center();
-
     double TriangleArea(ofxPolygonDetector& pd);
 };
 
