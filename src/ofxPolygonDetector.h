@@ -139,14 +139,14 @@ struct PolyPol
     double _area;
     uint32_t getCount() const;
     void calculateFirstAndLastPoint();
-    bool Minus(const PolyPol& other);
+    bool minus(const PolyPol& other);
     void addLine(const PolyLine& l);
     int roundArea();
     bool addPointChecked(const PointType& v);
     void setColor(ofColor color);
     void draw();
     PointType center();
-    double TriangleArea(ofxPolygonDetector& pd);
+    double triangleArea(ofxPolygonDetector& pd);
 };
 
 struct ofxPolygonDetector
@@ -172,8 +172,8 @@ struct ofxPolygonDetector
     uint32_t dissolveCount = 0;
 
     void reset();
-    void AddLine(const PolyLine& line);
-    bool DetectPolygons();
+    void addLine(const PolyLine& line);
+    bool detectPolygons();
     PolyVector& getPolys() { return polys; }
 
     bool addPointToLine(uint32_t pid, uint32_t lid);
@@ -182,25 +182,25 @@ struct ofxPolygonDetector
     PolyLine* findLine(uint32_t pidA, uint32_t pidB, bool useIgnore = true);
     PolyLine* findOrigLine(uint32_t id);
 
-    uint32_t GetPolyCount() const { return (uint32_t)polys.size(); };
-    void SortLines();
+    uint32_t getPolyCount() const { return (uint32_t)polys.size(); };
+    void sortLines();
 
     // The order of operations
-    void RemoveZeroLengthLines();
-    void RemoveOverlappings(); 
-    uint32_t DetectAllIntersections();
-    bool CreateLines();
-    bool FindPolys();
-    void SimplifyPolys(double smaller_polygon_length);
+    void removeZeroLengthLines();
+    void removeOverlappings(); 
+    uint32_t detectAllIntersections();
+    bool createLines();
+    bool findPolys();
+    void simplifyPolys(double smaller_polygon_length);
 
-    bool BuildCycle(uint32_t id, PolyCycle cycle); // as value!
+    bool buildCycle(uint32_t id, PolyCycle cycle); // as value!
 
     PolyLine newLine(uint32_t i, uint32_t j, PolyLine& origLine);
 
     // collinearity
     void setCollinear(uint32_t l1, uint32_t l2);
-    bool CollinearIdx(uint32_t l1, uint32_t l2);
-    bool CollinearIdx(const PolyLine& l1, const PolyLine& l2);
+    bool collinearIdx(uint32_t l1, uint32_t l2);
+    bool collinearIdx(const PolyLine& l1, const PolyLine& l2);
 
     bool rmLines(RmLinesType type);
     bool rmEarPoints();

@@ -225,7 +225,7 @@ PolyLine ofxPolygonDetector::newLine(uint32_t i, uint32_t j, PolyLine& origLine)
 
     return l;
 }
-bool ofxPolygonDetector::CreateLines()
+bool ofxPolygonDetector::createLines()
 {
     uint32_t n = 0;
     for (auto& l : origLines)
@@ -236,13 +236,13 @@ bool ofxPolygonDetector::CreateLines()
     // prior to removing overlapping, one must
     // remove all zero length line, otherwise the results
     // will be unpredictable
-    RemoveZeroLengthLines();
+    removeZeroLengthLines();
 
     // then we must remove line overlapping
-    RemoveOverlappings();
+    removeOverlappings();
 
     // finally we detect intersections between lines
-    int intersection_count = DetectAllIntersections();
+    int intersection_count = detectAllIntersections();
     if (intersection_count == 0)
         return true;
 
@@ -328,7 +328,7 @@ void ofxPolygonDetector::dumpLines(const char* msg, bool useIgnore)
 /***
 * @desc removes all lines with zero length
 */
-void ofxPolygonDetector::RemoveZeroLengthLines(void)
+void ofxPolygonDetector::removeZeroLengthLines(void)
 {
     for (auto it = origLines.begin(); it != origLines.end(); )
     {
@@ -352,7 +352,7 @@ bool ofxPolygonDetector::addPointToLine(uint32_t pid, uint32_t lid)
 * @descr removes line overlappings
 * @note must be called before applying Bentley-Ottmann algorithm
 */
-void ofxPolygonDetector::RemoveOverlappings()
+void ofxPolygonDetector::removeOverlappings()
 {
     uint32_t i, j, count = uint32_t(origLines.size());
 
@@ -409,7 +409,7 @@ void ofxPolygonDetector::RemoveOverlappings()
         }
     }
 }
-uint32_t ofxPolygonDetector::DetectAllIntersections()
+uint32_t ofxPolygonDetector::detectAllIntersections()
 {
     uint32_t ret = 0;
     size_t counter = origLines.size();
@@ -655,7 +655,7 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
 /***
 * @descr sort the lines
 */
-void ofxPolygonDetector::SortLines(void)
+void ofxPolygonDetector::sortLines(void)
 {
     for (auto& line : lines)
     {
@@ -664,11 +664,11 @@ void ofxPolygonDetector::SortLines(void)
     }
     std::sort(lines.begin(), lines.end(), PolyLine::bCompareLineOrder);
 }
-bool ofxPolygonDetector::DetectPolygons()
+bool ofxPolygonDetector::detectPolygons()
 {
     polys.clear();
 
-    if (!CreateLines())
+    if (!createLines())
     {
         return false;
     }
@@ -677,14 +677,14 @@ bool ofxPolygonDetector::DetectPolygons()
     {
         bool stop = false;
 
-        SortLines();
+        sortLines();
 
-        if (!FindPolys())
+        if (!findPolys())
         {
             return false;
         }
 
-        SimplifyPolys(0.0);
+        simplifyPolys(0.0);
 
         auto beforeCount = dissolveCount;
 
@@ -701,7 +701,7 @@ bool ofxPolygonDetector::DetectPolygons()
 * @desc simplifies the polygons in this set
 * @note removes inclusions and disposes small polygons
 */
-void ofxPolygonDetector::SimplifyPolys(double smaller_polygon_length)
+void ofxPolygonDetector::simplifyPolys(double smaller_polygon_length)
 {
     // remove small polygons
     uint32_t nRemoved = 0;
@@ -717,7 +717,7 @@ void ofxPolygonDetector::SimplifyPolys(double smaller_polygon_length)
         }
     }
 }
-void ofxPolygonDetector::AddLine(const PolyLine& line)
+void ofxPolygonDetector::addLine(const PolyLine& line)
 {
     origLines.push_back(line);
 }
@@ -760,7 +760,7 @@ PolyLine* ofxPolygonDetector::findOrigLine(uint32_t id)
     }
     return nullptr;
 }
-bool ofxPolygonDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
+bool ofxPolygonDetector::buildCycle(uint32_t id, PolyCycle cycle) // as value!
 {
     auto l = findLine(id);
     if (!l) {
@@ -795,7 +795,7 @@ bool ofxPolygonDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
         if (_neighbors[nid].size() < 2) continue;
         if (cycle.canBeClosed(*this, nid) || !cycle.contains(nid))
         {
-            if (!BuildCycle(nid, cycle))
+            if (!buildCycle(nid, cycle))
             {
                 return false;
             }
@@ -804,7 +804,7 @@ bool ofxPolygonDetector::BuildCycle(uint32_t id, PolyCycle cycle) // as value!
 
     return true;
 }
-bool ofxPolygonDetector::FindPolys()
+bool ofxPolygonDetector::findPolys()
 {
     pointToLines.clear();
     collinearLineMap.clear();
@@ -912,7 +912,7 @@ bool ofxPolygonDetector::FindPolys()
         PolyCycle cycle;
         cycle.startIdx = cycle.lastIdx = kv.first;
         cycle.isClosed = false;
-        BuildCycle(kv.first, cycle);
+        buildCycle(kv.first, cycle);
     }
 
     std::sort(_cycles.begin(), _cycles.end(), [](const PolyCycle& a, const PolyCycle& b) {
@@ -986,7 +986,7 @@ bool ofxPolygonDetector::FindPolys()
         poly.id = cycle.startIdx;
         poly.cycle = cycle;
 
-        poly._area = poly.TriangleArea(*this);
+        poly._area = poly.triangleArea(*this);
         poly.dissolveStep = dissolveCount;
         poly.c = poly.center();
         poly.color = ofColor(0, 0, 255);
@@ -1109,7 +1109,7 @@ bool ofxPolygonDetector::dissolveCollinearLine(PolyLine& l)
                 }
             }
         }
-        if (nValid == 1 && CollinearIdx(l, *l1))
+        if (nValid == 1 && collinearIdx(l, *l1))
         {
             return dissolveCollinear(l, *l1);
         }
@@ -1177,16 +1177,16 @@ void ofxPolygonDetector::setCollinear(uint32_t l1, uint32_t l2)
     collinearLineMap[l1].push_back(l2);
     collinearLineMap[l2].push_back(l1);
 }
-bool ofxPolygonDetector::CollinearIdx(uint32_t l1, uint32_t l2)
+bool ofxPolygonDetector::collinearIdx(uint32_t l1, uint32_t l2)
 {
     auto search = collinearLineMap.find(l1);
     if (search == collinearLineMap.end())
         return false;
     return std::find(search->second.begin(), search->second.end(), l2) != search->second.end();
 }
-bool ofxPolygonDetector::CollinearIdx(const PolyLine& l1, const PolyLine& l2)
+bool ofxPolygonDetector::collinearIdx(const PolyLine& l1, const PolyLine& l2)
 {
-    return CollinearIdx(l1.id, l2.id);
+    return collinearIdx(l1.id, l2.id);
 }
 bool ofxPolygonDetector::rmEarPoints()
 {
@@ -1702,7 +1702,7 @@ PointType PolyPol::center()
 *       an single relationship between them
 * @return true if polygon were changed, false otherwise
 */
-bool PolyPol::Minus(const PolyPol& other)
+bool PolyPol::minus(const PolyPol& other)
 {
     for (auto itOther = other.p.begin(); itOther != other.p.end(); ++itOther)
     {
@@ -1746,7 +1746,7 @@ void PolyPol::addLine(const PolyLine& l)
     p.push_back(l.a);
     p.push_back(l.b);
 }
-double PolyPol::TriangleArea(ofxPolygonDetector& pd)
+double PolyPol::triangleArea(ofxPolygonDetector& pd)
 {
     if (p.size() <= 2)
         return 0.0f;
@@ -1841,7 +1841,7 @@ bool PolyCycle::addLineId(ofxPolygonDetector & pd, uint32_t id)
 
         if (shareA || shareB)
         {
-            collinear = pd.CollinearIdx(*l, *l1);
+            collinear = pd.collinearIdx(*l, *l1);
             if (collinear)
             {
                 return false;
@@ -1949,7 +1949,7 @@ bool PolyCycle::pointConsumed(ofxPolygonDetector & pd, uint32_t pid) const
 
     if (nValid == 2 && nValid == nTaken)
     {
-        if (pd.CollinearIdx(lid1, lid2))
+        if (pd.collinearIdx(lid1, lid2))
             return false;
 
         // must be in the cycle!

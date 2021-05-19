@@ -6,7 +6,7 @@ void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB, Formorgel f
 	generateLines(fA, fB, fC, iterations);
 
 	polyDetector.reset();
-	polyDetector.DetectPolygons();
+	polyDetector.detectPolygons();
 
 	polygons = polyDetector.polys;
 	//polygons.at(2).setColor(ofColor(255, 0, 0));
@@ -23,7 +23,7 @@ void GeometricSynth::generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int
 
 	for (auto& l : linesB) { lines.push_back(l); }
 	for (auto& l : linesC) { lines.push_back(l); }
-	for (auto& l : lines) { polyDetector.AddLine(l); }
+	for (auto& l : lines) { polyDetector.addLine(l); }
 }
 
 void GeometricSynth::display() {
