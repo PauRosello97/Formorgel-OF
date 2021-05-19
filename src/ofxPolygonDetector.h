@@ -57,9 +57,7 @@ struct PolyLine
     PointType a, b;
 
     PolyLine() {}
-    PolyLine(const PointType& aP, const PointType& bP) :
-        a(aP), b(bP)
-    {}
+    PolyLine(const PointType& aP, const PointType& bP) : a(aP), b(bP) {}
 
     std::vector<uint32_t> intersections;
     std::set<uint32_t> intersectedLines;
@@ -68,80 +66,38 @@ struct PolyLine
     uint32_t test0 = 0, test1 = 0;
     int32_t origLine = -1;
     int32_t attr0 = -1; // used for testing
-
     bool ignore = false;
     uint32_t took = 0;
     uint32_t processed = 0;
-
     uint32_t aIdx = 0, bIdx = 0;
-
     uint32_t lastDissolveStep = 0;
-
     void calcCenter();
-
     bool HasCommonIdxPoints(const PolyLine& line) const;
     bool Equals(const PolyLine& line) const;
-
     void SortIntersectionsList(ofxPolygonDetector& pd);
-
     bool IntersectionPoint(const PolyLine& line, PointType& pos) const;
     bool LineLineIntersectionPoint(const PolyLine& line, PointType& pos) const;
-
     void CalculateFirstAndLastPoint();
-
     static bool bCompareLineOrder(const PolyLine& l1, PolyLine& l2);
     static int iCompareLineOrder(const PolyLine& l1, PolyLine& l2);
-
-    std::string neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh = nullptr) const;
-    std::string toString(ofxPolygonDetector& pd) const;
+    string neighToString(ofxPolygonDetector& pd, uint32_t* retNNeigh = nullptr) const;
+    string toString(ofxPolygonDetector& pd) const;
     uint32_t numNeigh(ofxPolygonDetector& pd) const;
     uint32_t numIntersections(ofxPolygonDetector& pd) const;
-
     uint32_t canBeRemoved(ofxPolygonDetector& pd, RmLinesType type) const;
-
-    PolyLine& mul(float m)
-    {
-        a.mul(m);
-        b.mul(m);
-        return *this;
-    }
-    PolyLine& add(const PointType& p)
-    {
-        a.add(p);
-        b.add(p);
-        return *this;
-    }
-
+    PolyLine& mul(float m);
+    PolyLine& add(const PointType& p);
     void setIgnore(ofxPolygonDetector& pd, const char* msg);
     bool contains(const PointType& point) const;
     bool contains(const PolyLine& line) const;
     bool collinear(const PolyLine& l) const;
-
-    uint32_t minPid() const
-    {
-        return std::min(aIdx, bIdx);
-    }
-    uint32_t maxPid() const
-    {
-        return std::max(aIdx, bIdx);
-    }
-
-    int32_t commonPid(const PolyLine& l) const
-    {
-        if (aIdx == l.aIdx || aIdx == l.bIdx) return aIdx;
-        if (bIdx == l.aIdx || bIdx == l.bIdx) return bIdx;
-        return -1;
-    }
-
-    uint32_t otherPid(uint32_t pid) const
-    {
-        return aIdx == pid ? bIdx : aIdx;
-    }
-
+    uint32_t minPid() const;
+    uint32_t maxPid() const;
+    int32_t commonPid(const PolyLine& l) const;
+    uint32_t otherPid(uint32_t pid) const;
     bool compareNeigh(ofxPolygonDetector& pd, uint32_t nid1, uint32_t nid2) const;
     bool sortNeigh(ofxPolygonDetector& pd) const;
     uint32_t& incTook(ofxPolygonDetector& pd);
-
     float angle(ofxPolygonDetector& pd, const PolyLine& l) const;
     bool betweenNeighbors(ofxPolygonDetector& pd, const PolyLine& l1, const PolyLine& l2) const;
 };

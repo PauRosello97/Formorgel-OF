@@ -1602,6 +1602,36 @@ void PolyLine::setIgnore(ofxPolygonDetector& pd, const char* msg)
 
     ignore = true;
 }
+PolyLine& PolyLine::mul(float m)
+{
+    a.mul(m);
+    b.mul(m);
+    return *this;
+}
+PolyLine& PolyLine::add(const PointType& p)
+{
+    a.add(p);
+    b.add(p);
+    return *this;
+}
+uint32_t PolyLine::minPid() const
+{
+    return std::min(aIdx, bIdx);
+}
+uint32_t PolyLine::maxPid() const
+{
+    return std::max(aIdx, bIdx);
+}
+int32_t PolyLine::commonPid(const PolyLine& l) const
+{
+    if (aIdx == l.aIdx || aIdx == l.bIdx) return aIdx;
+    if (bIdx == l.aIdx || bIdx == l.bIdx) return bIdx;
+    return -1;
+}
+uint32_t PolyLine::otherPid(uint32_t pid) const
+{
+    return aIdx == pid ? bIdx : aIdx;
+}
 
 // --------------------- POLYPOL
 PointType PolyPol::center()
