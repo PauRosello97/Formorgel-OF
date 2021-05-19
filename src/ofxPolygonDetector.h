@@ -18,35 +18,35 @@ static const float minPointDiffSq = minPointDiff * minPointDiff;
 struct PolyLine;
 struct ofxPolygonDetector;
 
-struct vec
+struct PointType
 {
     float x, y;
 
-    vec() {}
+    PointType() {}
 
-    vec(float a, float b) : x(a), y(b) {}
-    vec(float a) : x(a), y(a) {}
-    vec(float a, float b, float c) : x(a), y(b) {}
+    PointType(float a, float b) : x(a), y(b) {}
+    PointType(float a) : x(a), y(a) {}
+    PointType(float a, float b, float c) : x(a), y(b) {}
 
-    vec& sub(const vec& v)
+    PointType& sub(const PointType& v)
     {
         x -= v.x;
         y -= v.y;
         return *this;
     }
-    vec& add(const vec& v)
+    PointType& add(const PointType& v)
     {
         x += v.x;
         y += v.y;
         return *this;
     }
-    vec& mul(const float& v)
+    PointType& mul(const float& v)
     {
         x *= v;
         y *= v;
         return *this;
     }
-    vec& div(const float& v)
+    PointType& div(const float& v)
     {
         x /= v;
         y /= v;
@@ -58,12 +58,12 @@ struct vec
         return x * x + y * y;
     }
 
-    float squaredist(const vec& v) const
+    float squaredist(const PointType& v) const
     {
-        return vec(*this).sub(v).squaredlen();
+        return PointType(*this).sub(v).squaredlen();
     }
 
-    static void line(const vec& p, const vec& q, float& a, float& b, float& c)
+    static void line(const PointType& p, const PointType& q, float& a, float& b, float& c)
     {
         // Line AB represented as a*x + b*y = c
         a = p.y - q.y;
@@ -71,13 +71,13 @@ struct vec
         c = (p.x - q.x) * p.y + (q.y - p.y) * p.x;
     }
 
-    static float lineDist(float a, float b, float c, const vec& p)
+    static float lineDist(float a, float b, float c, const PointType& p)
     {
         if (a + b == 0.0f) return std::numeric_limits<float>::max();;
         return fabs(a * p.x + b * p.y + c) / sqrtf(a * a + b * b);
     }
 
-    static float lineDist(const vec& la, const vec& lb, const vec& p)
+    static float lineDist(const PointType& la, const PointType& lb, const PointType& p)
     {
         float a, b, c;
         line(la, lb, a, b, c);
@@ -86,7 +86,6 @@ struct vec
 };
 
 using CycleSet = std::set<uint32_t>;
-using PointType = vec;
 
 bool doIntersect(const PointType& p1, const PointType& q1, const PointType& p2, const PointType& q2);
 int orientation(const PointType& p, const PointType& q, const PointType& r);

@@ -488,7 +488,7 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
 
             if (took.find(std::make_pair(l1.id, l2.id)) == took.end())
             {
-                intersection = vec(0);
+                intersection = PointType(0);
                 if (l1.IntersectionPoint(l2, intersection)) // checks if not parallel
                 {
                     uint32_t intersectionIdx = uint32_t(intersectionPoints.size());
@@ -549,7 +549,7 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
             if (l1.intersections.size() < 2) continue;
 
             float a, b, c;
-            vec::line(vec(l1.a.x, l1.a.y), vec(l1.b.x, l1.b.y), a, b, c);
+            PointType::line(PointType(l1.a.x, l1.a.y), PointType(l1.b.x, l1.b.y), a, b, c);
             if (a + b == 0.0f)
             {
                 continue;
@@ -582,7 +582,7 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
                                 pids.push_back(pid1);
                             }
 
-                            float d = vec::lineDist(a, b, c, vec(intersectionPoints[pid2].x, intersectionPoints[pid2].y));
+                            float d = PointType::lineDist(a, b, c, PointType(intersectionPoints[pid2].x, intersectionPoints[pid2].y));
                             if (d > maxLineDist)
                                 maxLineDist = d;
                         }
@@ -606,7 +606,7 @@ uint32_t ofxPolygonDetector::DetectAllIntersections()
                             }
 
                             l2.intersections.clear();
-                            l2.a = l2.b = l2.center = vec(0);
+                            l2.a = l2.b = l2.center = PointType(0);
                             l2.ignore = true;
 
                             nCol++;
@@ -1548,8 +1548,8 @@ bool PolyLine::betweenNeighbors(ofxPolygonDetector& pd, const PolyLine& l1, cons
         return false;
     }
 
-    vec cp = pd.intersectionPoints[cpid];
-    vec p = pd.intersectionPoints[otherPid(cpid)];
+    PointType cp = pd.intersectionPoints[cpid];
+    PointType p = pd.intersectionPoints[otherPid(cpid)];
 
     bool ret = doIntersect(cp, p, l1.center, l2.center);
 
