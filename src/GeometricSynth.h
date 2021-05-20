@@ -13,7 +13,7 @@ public:
 	GeometricSynth();
 
 	std::vector<PolyPol> polygons;
-	std::vector<PolyLine> lines;
+	std::vector<ofxPolyLine> lines;
 
 	void generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int iterations);
 	void generateComposition(Formorgel fA, Formorgel fB, Formorgel fC, int iterations);

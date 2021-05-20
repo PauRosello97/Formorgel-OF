@@ -20,7 +20,7 @@ class Formorgel
 public:
 	Formorgel();
 	Formorgel(float offsetKnob, float angleKnob, float lengthKnob, int id);
-	std::vector<PolyLine> lines;
-	std::vector<PolyLine> generatePattern(int iterations);
+	vector<ofxPolyLine> lines;
+	vector<ofxPolyLine> generatePattern(int iterations);
 };
 

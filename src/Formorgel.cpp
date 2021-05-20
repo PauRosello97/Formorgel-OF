@@ -9,7 +9,7 @@ Formorgel::Formorgel(float _offsetKnob, float _angleKnob, float _lengthKnob, int
 	id = _id;
 }
 
-std::vector<PolyLine> Formorgel::generatePattern(int iterations) {
+std::vector<ofxPolyLine> Formorgel::generatePattern(int iterations) {
 	lines = {};
 
 	if (iterations == 0) {

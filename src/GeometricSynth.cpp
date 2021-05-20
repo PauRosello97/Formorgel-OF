@@ -16,8 +16,8 @@ void GeometricSynth::generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int
 	formorgelC = fC;
 
 	lines = formorgelA.generatePattern(iterations);
-	std::vector<PolyLine> linesB = formorgelB.generatePattern(iterations);
-	std::vector<PolyLine> linesC = formorgelC.generatePattern(iterations);
+	vector<ofxPolyLine> linesB = formorgelB.generatePattern(iterations);
+	vector<ofxPolyLine> linesC = formorgelC.generatePattern(iterations);
 
 	for (auto& l : linesB) { lines.push_back(l); }
 	for (auto& l : linesC) { lines.push_back(l); }
