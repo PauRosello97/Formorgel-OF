@@ -5,7 +5,7 @@ GeometricSynth::GeometricSynth(){}
 void GeometricSynth::generateComposition(Formorgel fA, Formorgel fB, Formorgel fC, int iterations) {
 	generateLines(fA, fB, fC, iterations);
 	
-	polyDetector.detectPolygons();
+	polyDetector.detectPolygons(lines);
 
 	polygons = polyDetector.polys;
 }
@@ -21,7 +21,6 @@ void GeometricSynth::generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int
 
 	for (auto& l : linesB) { lines.push_back(l); }
 	for (auto& l : linesC) { lines.push_back(l); }
-	for (auto& l : lines) { polyDetector.addLine(l); }
 }
 
 void GeometricSynth::display() {
