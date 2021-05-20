@@ -14,7 +14,7 @@ class ColorPanel
 	float h = 690;
 
 	int baseTone = 0;
-	vector<PolyPol> polygons;
+	vector<ofxPolyPol> polygons;
 	vector<int> areas;
 	vector<Tone> tones;
 	vector<PolygonColorControl> polygonColorControls;
@@ -46,10 +46,10 @@ public:
 	map<int, ofColor> assignations;
 
 	ColorPanel() {};
-	ColorPanel(vector<PolyPol> _polygons);
+	ColorPanel(vector<ofxPolyPol> _polygons);
 
 	void display();
-	void update(vector<PolyPol> _polygons);
+	void update(vector<ofxPolyPol> _polygons);
 	void updateAssignations();
 	void mousePressed();
 };

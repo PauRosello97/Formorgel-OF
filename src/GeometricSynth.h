@@ -12,7 +12,7 @@ class GeometricSynth
 public:
 	GeometricSynth();
 
-	std::vector<PolyPol> polygons;
+	std::vector<ofxPolyPol> polygons;
 	std::vector<ofxPolyLine> lines;
 
 	void generateLines(Formorgel fA, Formorgel fB, Formorgel fC, int iterations);

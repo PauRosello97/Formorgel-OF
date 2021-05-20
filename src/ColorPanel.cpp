@@ -1,6 +1,6 @@
 #include "ColorPanel.h"
 
-ColorPanel::ColorPanel(vector<PolyPol> _polygons) {}
+ColorPanel::ColorPanel(vector<ofxPolyPol> _polygons) {}
 
 void ColorPanel::display() {
 
@@ -23,7 +23,7 @@ void ColorPanel::display() {
 	ofDrawRectangle(x, y, w, h);
 };
 
-void ColorPanel::update(vector<PolyPol> _polygons) {
+void ColorPanel::update(vector<ofxPolyPol> _polygons) {
 	polygons = _polygons;
 
 	// Clear arrays
@@ -32,7 +32,7 @@ void ColorPanel::update(vector<PolyPol> _polygons) {
 	polygonColorControls.clear();
 	
 	// Sort polygons by area
-	sort(polygons.begin(), polygons.end(), [](const PolyPol& a, const PolyPol& b) {
+	sort(polygons.begin(), polygons.end(), [](const ofxPolyPol& a, const ofxPolyPol& b) {
 		return a._area > b._area;
 	});
 
