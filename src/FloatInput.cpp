@@ -5,8 +5,6 @@ bool FloatInput::isOver() {
 }
 
 void FloatInput::display() {
-    //plusButton.display();
-    //lessButton.display();
     update();
     dragController.display();
     ofSetColor(0);

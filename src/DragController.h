@@ -7,12 +7,14 @@ class DragController
 	bool pressed = false;
 	float initialX;
 	float& value;
+	float step, min, max;
+	float initialValue;
 
 	void update();
 
 public:
 
-	DragController(float& v, float x, float y, float w, float h);
+	DragController(float& v, float x, float y, float w, float h, float step, float min, float max);
 	void display();
 	bool isOver();
 	void mousePressed();

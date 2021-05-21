@@ -15,16 +15,7 @@ void GeometryPanel::randomize() {
 }
 
 bool GeometryPanel::mousePressed() {
-	if (oscA.mousePressed()) {
-		return true;
-	}
-	else if (oscB.mousePressed()) {
-		return true;
-	}
-	else if (oscC.mousePressed()) {
-		return true;
-	}
-	else if (iterationsInput.mousePressed()) {
+	if (oscA.mousePressed() || oscB.mousePressed() || oscC.mousePressed() || iterationsInput.mousePressed()) {
 		return true;
 	}
 	else if (randomizeButton.mousePressed()) {
@@ -35,7 +26,7 @@ bool GeometryPanel::mousePressed() {
 }
 
 bool GeometryPanel::mouseReleased() {
-	if (oscA.mouseReleased() || oscB.mouseReleased() || oscC.mouseReleased()) {
+	if (oscA.mouseReleased() || oscB.mouseReleased() || oscC.mouseReleased() || iterationsInput.mousePressed()) {
 		return true;
 	}
 	return false;
