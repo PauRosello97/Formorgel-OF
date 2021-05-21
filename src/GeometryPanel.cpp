@@ -1,5 +1,19 @@
 #include "GeometryPanel.h"
 
+void GeometryPanel::display() {
+	oscA.display();
+	oscB.display();
+	oscC.display();
+	iterationsInput.display();
+	randomizeButton.display("Randomize");
+};
+
+void GeometryPanel::randomize() {
+	oscA.randomize();
+	oscB.randomize();
+	oscC.randomize();
+}
+
 bool GeometryPanel::mousePressed() {
 	if (oscA.mousePressed()) {
 		return true;
@@ -17,19 +31,12 @@ bool GeometryPanel::mousePressed() {
 		randomize();
 		return true;
 	}
-	return false;	
+	return false;
 }
 
-void GeometryPanel::display() {
-	oscA.display();
-	oscB.display();
-	oscC.display();
-	iterationsInput.display();
-	randomizeButton.display("Randomize");
-};
-
-void GeometryPanel::randomize() {
-	oscA.randomize();
-	oscB.randomize();
-	oscC.randomize();
+bool GeometryPanel::mouseReleased() {
+	if (oscA.mouseReleased() || oscB.mouseReleased() || oscC.mouseReleased()) {
+		return true;
+	}
+	return false;
 }

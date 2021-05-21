@@ -5,10 +5,12 @@ bool FloatInput::isOver() {
 }
 
 void FloatInput::display() {
-    plusButton.display();
-    lessButton.display();
-    ofSetColor(0, 0, 0);
-    ofDrawBitmapString(label + ": " + ofToString(value), x + 10, y + 20);
+    //plusButton.display();
+    //lessButton.display();
+    update();
+    dragController.display();
+    ofSetColor(0);
+    ofDrawBitmapString(label + ": " + ofToString(value), x, y + 10);
     if (isOver()) {
         ofSetColor(120, 120, 120);
     }
@@ -19,7 +21,14 @@ void FloatInput::display() {
     ofDrawRectangle(x, y, w, h);
 }
 
+void FloatInput::update() {
+    if (dragController.isPressed()) {
+
+    }
+}
+
 bool FloatInput::mousePressed() {
+    dragController.mousePressed();
     if (isOver()) {
         modifyValue();
         return true;
@@ -27,7 +36,12 @@ bool FloatInput::mousePressed() {
     return false;
 }
 
+bool FloatInput::mouseReleased() {
+    return dragController.mouseReleased();
+}
+
 void FloatInput::modifyValue() {
+    /*
     if (plusButton.isOver()) {
         value += step;
         if (value > max) {
@@ -40,4 +54,5 @@ void FloatInput::modifyValue() {
             value = min;
         }
     }
+    */
 }

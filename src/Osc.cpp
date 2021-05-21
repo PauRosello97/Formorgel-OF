@@ -43,6 +43,17 @@ bool Osc::isOver() {
 	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
 }
 
+float Osc::radians(float degrees) {
+	float pi = 3.14159265359;
+	return degrees * pi / 180;
+}
+
+void Osc::randomize() {
+	offset = round(ofRandom(100)) / 100;
+	angle = round(ofRandom(90));
+	length = round(50 + ofRandom(100)) / 100;
+}
+
 bool Osc::mousePressed() {
 	if (isOver()) {
 		if (!offsetInput.mousePressed()) {
@@ -57,13 +68,9 @@ bool Osc::mousePressed() {
 	}
 }
 
-float Osc::radians(float degrees) {
-	float pi = 3.14159265359;
-	return degrees * pi / 180;
-}
-
-void Osc::randomize() {
-	offset = round(ofRandom(100)) / 100;
-	angle = round(ofRandom(90));
-	length = round(50 + ofRandom(100)) / 100;
+bool Osc::mouseReleased() {
+	if (offsetInput.mouseReleased() || lengthInput.mouseReleased() || angleInput.mouseReleased()) {
+		return true;
+	}
+	return false;
 }

@@ -31,5 +31,6 @@ public:
 
 	void display();
 	bool mousePressed();
+	bool mouseReleased();
 };
 

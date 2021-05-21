@@ -33,7 +33,6 @@ void ofApp::draw(){
 		colorPanel.display();
 	} 
 
-
 	//Margins
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
@@ -105,7 +104,11 @@ void ofApp::mousePressed(int x, int y, int button){
 	}
 }
 
-void ofApp::mouseReleased(int x, int y, int button){ }
+void ofApp::mouseReleased(int x, int y, int button){ 
+	if (geometryPanel.mouseReleased()) {
+		newPattern();
+	}
+}
 void ofApp::mouseEntered(int x, int y){ }
 void ofApp::mouseExited(int x, int y){ }
 void ofApp::windowResized(int w, int h){ }
