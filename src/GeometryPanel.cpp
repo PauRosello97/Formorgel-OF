@@ -26,7 +26,7 @@ bool GeometryPanel::mousePressed() {
 }
 
 bool GeometryPanel::mouseReleased() {
-	if (oscA.mouseReleased() || oscB.mouseReleased() || oscC.mouseReleased() || iterationsInput.mousePressed()) {
+	if (oscA.mouseReleased() || oscB.mouseReleased() || oscC.mouseReleased() || iterationsInput.mouseReleased()) {
 		return true;
 	}
 	return false;

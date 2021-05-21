@@ -24,7 +24,7 @@ public:
 		oscA(x, y+50, 400, 0), 
 		oscB(x, y+260, 400, 0), 
 		oscC(x, y+470, 400), 
-		iterationsInput(iterations, "Iterations", x, y+10, 1, 0, 4) 
+		iterationsInput(iterations, "Iterations", x, y+10, 0, 4) 
 	{
 		randomizeButton = Button(x+200, y+10, 200, 30);
 	};

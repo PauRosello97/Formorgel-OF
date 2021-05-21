@@ -8,7 +8,7 @@ void FloatInput::display() {
     update();
     dragController.display();
     ofSetColor(0);
-    ofDrawBitmapString(label + ": " + ofToString(value), x, y + 10);
+    ofDrawBitmapString(label, x, y + 10);
     if (isOver()) {
         ofSetColor(120, 120, 120);
     }
@@ -26,9 +26,8 @@ void FloatInput::update() {
 }
 
 bool FloatInput::mousePressed() {
-    dragController.mousePressed();
     if (isOver()) {
-        modifyValue();
+        dragController.mousePressed();
         return true;
     }
     return false;
@@ -38,19 +37,3 @@ bool FloatInput::mouseReleased() {
     return dragController.mouseReleased();
 }
 
-void FloatInput::modifyValue() {
-    /*
-    if (plusButton.isOver()) {
-        value += step;
-        if (value > max) {
-            value = max;
-        }
-    }
-    else if (lessButton.isOver()) {
-        value -= step;
-        if (value < min) {
-            value = min;
-        }
-    }
-    */
-}
