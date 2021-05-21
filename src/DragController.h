@@ -9,6 +9,7 @@ class DragController
 	float& value;
 	float step, min, max;
 	float initialValue;
+	float sensibility;
 
 	void update();
 

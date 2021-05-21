@@ -9,6 +9,7 @@ DragController::DragController(float& v, float _x, float _y, float _w, float _h,
 	min = _min;
 	max = _max;
 	initialValue = v;
+	sensibility = (max - min) / 200;
 }
 
 void DragController::display() {
@@ -32,7 +33,7 @@ void DragController::display() {
 
 void DragController::update() {
 	if (pressed) {
-		value = initialValue + ofGetMouseX() - initialX;
+		value = initialValue + (ofGetMouseX() - initialX) * sensibility;
 		if (value > max) {
 			value = max;
 		}
