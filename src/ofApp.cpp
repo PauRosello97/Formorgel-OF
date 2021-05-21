@@ -33,6 +33,7 @@ void ofApp::draw(){
 		colorPanel.display();
 	}
 
+
 	//Margins
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
