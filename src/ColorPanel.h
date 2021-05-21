@@ -10,7 +10,7 @@ class ColorPanel
 {
 	float x = 10;
 	float y = 50;
-	float w = 400;
+	float w = 380;
 	float h = 690;
 
 	int baseTone = 0;

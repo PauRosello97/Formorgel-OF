@@ -8,7 +8,7 @@ class FloatInput
     float& value;
     float x, y;
     float w = 70;
-    float h = 85;
+    float h = 95;
     string label;
     DragController dragController;
 

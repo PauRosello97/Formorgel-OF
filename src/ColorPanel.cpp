@@ -52,7 +52,7 @@ void ColorPanel::update(vector<ofxPolyPol> _polygons) {
 			// Create a new control
 			polygonColorControls.push_back(
 				PolygonColorControl(
-					x + 10 + 130*(assignations.size()%3),
+					x + 10 + 124*(assignations.size()%3),
 					y + 130 + 110*((assignations.size()/3)),
 					roundArea, 
 					tones[assignations.size()],

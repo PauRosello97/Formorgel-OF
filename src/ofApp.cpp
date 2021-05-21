@@ -12,8 +12,8 @@ void ofApp::setup(){
 	lateralWidth = geometryPanel.w + 20;
 
 	newPattern();
-	displayLinesToggle = Button(420, 10, 100, 30);
-	displayPolygonsToggle = Button(530, 10, 130, 30);
+	displayLinesToggle = Button(400, 10, 100, 30);
+	displayPolygonsToggle = Button(510, 10, 130, 30);
 }
 
 void ofApp::update(){ }

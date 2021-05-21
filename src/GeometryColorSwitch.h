@@ -6,7 +6,7 @@ class GeometryColorSwitch
 	string mode = "geometry";
 	float x = 10;
 	float y = 10;
-	float w = 400;
+	float w = 380;
 	float h = 40;
 
 public:
