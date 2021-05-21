@@ -31,7 +31,7 @@ void ofApp::draw(){
 	}
 	else {
 		colorPanel.display();
-	}
+	} 
 
 
 	//Margins
