@@ -8,7 +8,7 @@ void FloatInput::display() {
     update();
     dragController.display();
     ofSetColor(0);
-    ofDrawBitmapString(label, x, y + 10);
+    ofDrawBitmapString(label, x+10, y + 15);
     if (isOver()) {
         ofSetColor(120, 120, 120);
     }

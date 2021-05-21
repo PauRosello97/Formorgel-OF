@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h";
 #include "SmallButton.h";
-#include "DragController.h";
+#include "Knob.h";
 
 class FloatInput
 {
@@ -10,7 +10,7 @@ class FloatInput
     float w = 70;
     float h = 95;
     string label;
-    DragController dragController;
+    Knob dragController;
 
     void update();
 

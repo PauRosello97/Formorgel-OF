@@ -1,6 +1,6 @@
-#include "DragController.h"
+#include "Knob.h"
 
-DragController::DragController(float& v, float _x, float _y, float _w, float _h, float _min, float _max) : value(v){
+Knob::Knob(float& v, float _x, float _y, float _w, float _h, float _min, float _max) : value(v){
 	x = _x;
 	y = _y;
 	w = _w;
@@ -11,12 +11,26 @@ DragController::DragController(float& v, float _x, float _y, float _w, float _h,
 	sensibility = (max - min) / 200;
 }
 
-void DragController::display() {
+void Knob::display() {
 	update();
 
 	// Text
 	ofSetColor(0);
-	ofDrawBitmapString(ofToString(value), x+10, y + 20);
+	ofDrawBitmapString(ofToString(value), x+20, y + 70);
+	float pi = 3.14159265359;
+	float proportion = pi/2 + (2 * pi * value / (max-min));
+
+	// Knob
+	float cx = x + w / 2;
+	float cy = y + h * 0.4;
+	ofSetColor(0);
+	
+	float ex = cx + cos(proportion) * knobRadius;
+	float ey = cy + sin(proportion) * knobRadius;
+	ofDrawLine(cx, cy, ex, ey);
+
+	ofSetColor(200, 255, 200);
+	ofDrawCircle(cx, cy, knobRadius);
 
 	// Fill
 	ofFill();
@@ -35,7 +49,7 @@ void DragController::display() {
 	ofFill();
 }
 
-void DragController::update() {
+void Knob::update() {
 	if (pressed) {
 		value = initialValue + (ofGetMouseX() - initialX) * sensibility;
 		if (value > max) {
@@ -47,11 +61,11 @@ void DragController::update() {
 	}
 }
 
-bool DragController::isOver() {
+bool Knob::isOver() {
 	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
 }
 
-void DragController::mousePressed() {
+void Knob::mousePressed() {
 	if (isOver()) {
 		pressed = true;
 		initialX = ofGetMouseX();
@@ -59,7 +73,7 @@ void DragController::mousePressed() {
 	}
 }
 
-bool DragController::mouseReleased() {
+bool Knob::mouseReleased() {
 	if (pressed) {
 		pressed = false;
 		return true;

@@ -1,7 +1,7 @@
 #pragma once
 #include "ofMain.h"
 
-class DragController
+class Knob
 {
 	float x, y, h, w;
 	bool pressed = false;
@@ -10,12 +10,13 @@ class DragController
 	float min, max;
 	float initialValue;
 	float sensibility;
+	int knobRadius = 20;
 
 	void update();
 
 public:
 
-	DragController(float& v, float x, float y, float w, float h, float min, float max);
+	Knob(float& v, float x, float y, float w, float h, float min, float max);
 	void display();
 	bool isOver();
 	void mousePressed();
