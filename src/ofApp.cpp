@@ -19,7 +19,7 @@ void ofApp::setup(){
 void ofApp::update(){ }
 
 void ofApp::draw(){
-	float margin = 25;
+	float margin = 10;
 
 	displayLinesToggle.display(displayingLines ? "Hide lines" : "Show lines");
 	displayPolygonsToggle.display(displayingPolygons ? "Hide polygons" : "Show polygons");
@@ -37,7 +37,7 @@ void ofApp::draw(){
 	ofSetColor(120, 120, 120);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
-	ofDrawRectangle(0, 0, width, margin*2); //Top
+	ofDrawRectangle(0, 0, width, margin*5); //Top
 	ofDrawRectangle(0, height-margin, width, margin); //Bot
 	ofDrawRectangle(width- margin, 0, margin, height); //Right
 	ofDrawRectangle(0, 0, lateralWidth, height); //Left
