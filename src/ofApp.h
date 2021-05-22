@@ -9,7 +9,7 @@
 #include "FloatInput.h";
 
 class ofApp : public ofBaseApp{
-
+	
 	GeometryPanel geometryPanel;
 	ColorPanel colorPanel;
 	Button applyButton;

@@ -23,11 +23,13 @@ void Knob::display() {
 	// Knob
 	float cx = x + w / 2;
 	float cy = y + h * 0.4;
-	ofSetColor(0);
-	
 	float ex = cx + cos(proportion) * knobRadius;
 	float ey = cy + sin(proportion) * knobRadius;
+
+	ofSetLineWidth(3);
+	ofSetColor(0);
 	ofDrawLine(cx, cy, ex, ey);
+	ofSetLineWidth(1);
 
 	ofSetColor(200, 255, 200);
 	ofDrawCircle(cx, cy, knobRadius);

@@ -28,15 +28,15 @@ void Osc::display() {
 	ofSetColor(25, 25, 25);
 	ofDrawRectangle(x + 10, y + 10, h-20, h-20);
 
-	ofSetColor(0, 0, 0);
-	if (isOver()) {
-		ofSetColor(255, 0, 0);
-	}
-	else {
-		ofSetColor(255, 255, 255);
-	}
-	
-	ofDrawRectangle(x, y, w, h);
+	// Background
+	ofSetColor(135);
+	ofDrawRectangle(x, y, w, h); // Fill
+	ofNoFill();
+	ofSetColor(165);
+	ofSetLineWidth(3);
+	ofDrawRectangle(x, y, w, h); // Stroke
+	ofFill();
+	ofSetLineWidth(1);
 }
 
 bool Osc::isOver() {

@@ -4,7 +4,7 @@ void GeometryPanel::display() {
 	oscA.display();
 	oscB.display();
 	oscC.display();
-	iterationsInput.display();
+	//iterationsInput.display();
 	randomizeButton.display("Randomize");
 };
 
