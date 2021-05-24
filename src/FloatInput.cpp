@@ -5,12 +5,18 @@ bool FloatInput::isOver() {
 }
 
 void FloatInput::display() {
-    dragController.display();
-    ofSetColor(0);
-    ofDrawBitmapString(label, x+10, y + 15);
+    // Stroke
+    ofSetColor(40);
+    ofDrawLine(x, y, x + w, y);
+    ofDrawLine(x, y+h, x + w, y+h);
+    ofDrawLine(x, y, x, y + h);
+    ofDrawLine(x+w, y, x+w, y + h);
 
-    ofSetColor(165);
-    ofDrawRectangle(x, y, w, h);
+    // Controllers
+    dragController.display();
+    ofSetColor(40);
+    ofRectangle rect = openSans.getStringBoundingBox(label, 0, 0);
+    openSans.drawStringAsShapes(label, x + w / 2 - rect.width / 2, y+20);
 }
 
 bool FloatInput::mousePressed() {

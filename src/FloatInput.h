@@ -11,6 +11,7 @@ class FloatInput
     float h = 95;
     string label;
     Knob dragController;
+    ofTrueTypeFont openSans;
 
 public:
      
@@ -21,6 +22,7 @@ public:
         label = _label;
         x = _x;
         y = _y;
+        openSans.load("OpenSans/OpenSans-Regular.ttf", 12, false, false, true);
     };
 
     bool isOver();

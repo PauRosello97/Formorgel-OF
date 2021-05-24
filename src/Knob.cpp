@@ -17,10 +17,9 @@ void Knob::display() {
 	update();
 
 	// Text
-	ofSetColor(0);
+	ofSetColor(40);
 	ofRectangle rect = openSans.getStringBoundingBox(ofToString(value), 0, 0);
 	openSans.drawStringAsShapes(ofToString(value), x + w/2 - rect.width/2, y + 70);
-	//ofDrawBitmapString(ofToString(value), x+20, y + 70);
 	float pi = 3.14159265359;
 	float proportion = pi/2 + (2 * pi * (value-min) / (max-min));
 
@@ -31,7 +30,7 @@ void Knob::display() {
 	float ey = cy + sin(proportion) * knobRadius;
 
 	if (pressed) {
-		ofSetColor(90);
+		ofSetColor(165);
 	}
 	else {
 		ofSetColor(40);
@@ -46,17 +45,6 @@ void Knob::display() {
 	ofDrawCircle(cx, cy, knobRadius); // Circle
 	ofFill();
 	ofSetLineWidth(1);
-
-	// Fill
-	ofFill();
-	ofSetColor(135);
-	ofDrawRectangle(x, y, w, h);
-
-	// Stroke
-	ofNoFill();
-	ofSetColor(0);
-	ofDrawRectangle(x, y, w, h);
-	ofFill();
 }
 
 void Knob::update() {
