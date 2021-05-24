@@ -7,6 +7,7 @@
 #include "Button.h";
 #include "GeometryColorSwitch.h";
 #include "FloatInput.h";
+#include "ofxSvg.h";
 
 class ofApp : public ofBaseApp{
 	
@@ -23,6 +24,8 @@ class ofApp : public ofBaseApp{
 	float lateralWidth;
 	bool workingMode = true;
 	int iterations = 1;
+	ofxSVG arrowPrevious;
+
 
 public:
 	void setup();

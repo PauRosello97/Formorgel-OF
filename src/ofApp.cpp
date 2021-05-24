@@ -6,7 +6,7 @@ void ofApp::setup(){
 	//ofSetLogLevel(OF_LOG_VERBOSE);
 	//ofBackground(110);
 	//ofSetVerticalSync(false);
-	//ofEnableAlphaBlending();
+	ofEnableAlphaBlending();
 	ofEnableDepthTest();
 
 	lateralWidth = geometryPanel.w + 20;
@@ -14,11 +14,20 @@ void ofApp::setup(){
 	newPattern();
 	displayLinesToggle = Button(400, 10, 100, 30);
 	displayPolygonsToggle = Button(510, 10, 130, 30);
+
+	arrowPrevious.load("icons/arrowPrevious.svg");
 }
 
 void ofApp::update(){ }
 
 void ofApp::draw(){
+
+	ofPushStyle();
+	ofSetColor(255, 0, 0);
+	arrowPrevious.draw();
+	ofPopStyle();
+
+
 	float margin = 10;
 
 	displayLinesToggle.display(displayingLines ? "Hide lines" : "Show lines");

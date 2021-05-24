@@ -1,2 +1,3 @@
 ofxHLuv
 ofxPolygonDetector
+ofxSvg

@@ -1,6 +1,7 @@
 #pragma once
-#include "ofMain.h"
-#include "SmallButton.h"
+#include "ofMain.h";
+#include "SmallButton.h";
+#include "ofxSvg.h";
 
 class Selector
 {
@@ -12,6 +13,7 @@ class Selector
 	int value = 0;
 	int nValues;
 	vector<string> valueNames;
+	ofxSVG arrowPrevious;
 	
 public:
 	

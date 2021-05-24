@@ -1,13 +1,19 @@
-#include "Selector.h"
+#include "Selector.h";
 
 Selector::Selector(float _x, float _y, vector<string> _valueNames) {
 	x = _x;
 	y = _y;
 	valueNames = _valueNames;
 	nValues = valueNames.size();
+	arrowPrevious.load("icons/arrowPrevious.svg");
 };
 
 void Selector::display() {
+	ofPushStyle();
+	ofSetColor(255, 0, 0);
+	arrowPrevious.draw();
+	ofPopStyle();
+
 	// Text
 	ofSetColor(0);
 	ofDrawBitmapString(valueNames[value], x + 50, y + 30);
