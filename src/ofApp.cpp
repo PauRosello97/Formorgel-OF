@@ -14,6 +14,8 @@ void ofApp::setup(){
 	newPattern();
 	displayLinesToggle = Button(400, 10, 100, 30);
 	displayPolygonsToggle = Button(510, 10, 130, 30);
+	
+	geometryColorSwitch = GeometryColorSwitch();
 }
 
 void ofApp::update(){ }

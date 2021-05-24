@@ -8,8 +8,10 @@ class GeometryColorSwitch
 	float y = 10;
 	float w = 380;
 	float h = 40;
+	ofTrueTypeFont openSans;
 
 public:
+	GeometryColorSwitch();
 	void display();
 	bool isOverA();
 	bool isOverB();

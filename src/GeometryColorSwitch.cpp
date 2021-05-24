@@ -1,9 +1,15 @@
 #include "GeometryColorSwitch.h"
 
+GeometryColorSwitch::GeometryColorSwitch() {
+	openSans.load("OpenSans/OpenSans-Regular.ttf", 12, false, false, true);
+}
+
 void GeometryColorSwitch::display() {
 	ofSetColor(0);
-	ofDrawBitmapString("Geometry", x + 10, y + 20);
-	ofDrawBitmapString("Color", x + w / 2 + 10, y + 20);
+	ofRectangle rectA = openSans.getStringBoundingBox("Geometry", 0, 0);
+	openSans.drawStringAsShapes("Geometry", x + w / 4 - rectA.width / 2, y + 26);
+	ofRectangle rectB = openSans.getStringBoundingBox("Color", 0, 0);
+	openSans.drawStringAsShapes("Color", x + 3* w / 4 - rectB.width / 2, y + 26);
 
 	// Border lines
 	ofSetColor(40);
