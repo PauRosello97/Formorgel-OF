@@ -1,9 +1,5 @@
 #include "FloatInput.h"
 
-bool FloatInput::isOver() {
-	return ofGetMouseX() > x && ofGetMouseX() < x + w && ofGetMouseY() > y && ofGetMouseY() < y + h;
-}
-
 void FloatInput::display() {
     // Stroke
     ofSetColor(40);
