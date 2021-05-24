@@ -5,6 +5,20 @@ void GeometryColorSwitch::display() {
 	ofDrawBitmapString("Geometry", x + 10, y + 20);
 	ofDrawBitmapString("Color", x + w / 2 + 10, y + 20);
 
+	// Border lines
+	ofSetColor(40);
+	if (mode == "geometry") {
+		ofDrawLine(x, y, x + w / 2, y);
+		ofDrawLine(x, y, x, y + h);
+		ofDrawLine(x + w / 2, y, x + w / 2, y + h);
+		ofDrawLine(x + w / 2, y + h, x + w, y + h);
+	}else{
+		ofDrawLine(x+w/2, y, x + w, y);
+		ofDrawLine(x+w/2, y, x + w / 2, y+h);
+		ofDrawLine(x + w , y, x + w , y + h);
+		ofDrawLine(x, y + h, x + w/2, y + h);
+	}
+
 	//Geometry
 	if (mode == "geometry") {
 		ofSetColor(135);
