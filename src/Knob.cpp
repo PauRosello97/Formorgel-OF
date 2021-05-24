@@ -59,10 +59,6 @@ void Knob::update() {
 	}
 }
 
-bool Knob::isOver() {
-	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
-}
-
 void Knob::mousePressed() {
 	if (isOver()) {
 		pressed = true;
