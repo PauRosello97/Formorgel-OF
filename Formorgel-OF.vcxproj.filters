@@ -28,6 +28,9 @@
 		<ClCompile Include="src\GeometryPanel.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
+		<ClCompile Include="src\InfoButton.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
 		<ClCompile Include="src\Knob.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
@@ -104,6 +107,9 @@
 		<ClInclude Include="src\GeometryPanel.h">
 			<Filter>src</Filter>
 		</ClInclude>
+		<ClInclude Include="src\InfoButton.h">
+			<Filter>src</Filter>
+		</ClInclude>
 		<ClInclude Include="src\Knob.h">
 			<Filter>src</Filter>
 		</ClInclude>
@@ -123,6 +129,9 @@
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="src\Tone.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\Touchable.h">
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.h">

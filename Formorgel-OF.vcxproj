@@ -189,6 +189,7 @@
 		<ClCompile Include="src\GeometricSynth.cpp" />
 		<ClCompile Include="src\GeometryColorSwitch.cpp" />
 		<ClCompile Include="src\GeometryPanel.cpp" />
+		<ClCompile Include="src\InfoButton.cpp" />
 		<ClCompile Include="src\Knob.cpp" />
 		<ClCompile Include="src\Osc.cpp" />
 		<ClCompile Include="src\PolygonColorControl.cpp" />
@@ -207,12 +208,14 @@
 		<ClInclude Include="src\GeometricSynth.h" />
 		<ClInclude Include="src\GeometryColorSwitch.h" />
 		<ClInclude Include="src\GeometryPanel.h" />
+		<ClInclude Include="src\InfoButton.h" />
 		<ClInclude Include="src\Knob.h" />
 		<ClInclude Include="src\Osc.h" />
 		<ClInclude Include="src\PolygonColorControl.h" />
 		<ClInclude Include="src\Selector.h" />
 		<ClInclude Include="src\SmallButton.h" />
 		<ClInclude Include="src\Tone.h" />
+		<ClInclude Include="src\Touchable.h" />
 		<ClInclude Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.h" />
 		<ClInclude Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.h" />
 	</ItemGroup>

@@ -7,6 +7,8 @@
 #include "Button.h";
 #include "GeometryColorSwitch.h";
 #include "FloatInput.h";
+#include "InfoButton.h";
+
 
 class ofApp : public ofBaseApp{
 	
@@ -16,6 +18,7 @@ class ofApp : public ofBaseApp{
 	Button displayLinesToggle;
 	Button displayPolygonsToggle;
 	GeometryColorSwitch geometryColorSwitch;
+	InfoButton infoButton;
 
 	bool displayingLines = true;
 	bool displayingPolygons = false;

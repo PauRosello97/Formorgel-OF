@@ -16,6 +16,7 @@ void ofApp::setup(){
 	displayPolygonsToggle = Button(510, 10, 130, 30);
 	
 	geometryColorSwitch = GeometryColorSwitch();
+	infoButton = InfoButton(ofGetWidth()-40, 10, 30, 30);
 }
 
 void ofApp::update(){ }
@@ -26,6 +27,7 @@ void ofApp::draw(){
 
 	displayLinesToggle.display(displayingLines ? "Hide lines" : "Show lines");
 	displayPolygonsToggle.display(displayingPolygons ? "Hide polygons" : "Show polygons");
+	infoButton.display();
 
 	// Lateral panels
 	geometryColorSwitch.display();
