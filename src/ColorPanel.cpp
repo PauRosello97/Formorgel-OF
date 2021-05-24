@@ -19,7 +19,7 @@ void ColorPanel::display() {
 	}
 	
 	// Background
-	ofSetColor(255);
+	ofSetColor(135);
 	ofDrawRectangle(x, y, w, h);
 };
 

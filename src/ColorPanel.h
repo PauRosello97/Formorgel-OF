@@ -11,7 +11,7 @@ class ColorPanel
 	float x = 10;
 	float y = 50;
 	float w = 380;
-	float h = 690;
+	float h = 740;
 
 	int baseTone = 0;
 	vector<ofxPolyPol> polygons;

@@ -9,6 +9,8 @@ Knob::Knob(float& v, float _x, float _y, float _w, float _h, float _min, float _
 	max = _max;
 	initialValue = v;
 	sensibility = (max - min) / 200;
+	
+	openSans.load("OpenSans/OpenSans-Regular.ttf", 15);
 }
 
 void Knob::display() {
@@ -16,6 +18,7 @@ void Knob::display() {
 
 	// Text
 	ofSetColor(0);
+	//openSans.drawString(ofToString(value), x + 20, y + 70);
 	ofDrawBitmapString(ofToString(value), x+20, y + 70);
 	float pi = 3.14159265359;
 	float proportion = pi/2 + (2 * pi * (value-min) / (max-min));

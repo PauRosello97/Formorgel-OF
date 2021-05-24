@@ -5,6 +5,17 @@ void GeometryPanel::display() {
 	oscB.display();
 	oscC.display();
 	randomizeButton.display("Randomize");
+
+	//Background fill
+	ofSetColor(135);
+	ofDrawRectangle(x, y, w, h);
+	//Background stroke
+	ofNoFill();
+	ofSetColor(80);
+	ofSetLineWidth(4);
+	ofDrawRectangle(x, y, w, h); 
+	ofFill();
+	ofSetLineWidth(1);
 };
 
 void GeometryPanel::randomize() {

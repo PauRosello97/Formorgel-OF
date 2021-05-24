@@ -3,10 +3,10 @@
 #include <sstream>
 
 void ofApp::setup(){
-	ofSetLogLevel(OF_LOG_VERBOSE);
-	ofBackground(50, 50, 50);
-	ofSetVerticalSync(false);
-	ofEnableAlphaBlending();
+	//ofSetLogLevel(OF_LOG_VERBOSE);
+	//ofBackground(110);
+	//ofSetVerticalSync(false);
+	//ofEnableAlphaBlending();
 	ofEnableDepthTest();
 
 	lateralWidth = geometryPanel.w + 20;
@@ -34,7 +34,7 @@ void ofApp::draw(){
 	} 
 
 	//Margins
-	ofSetColor(120, 120, 120);
+	ofSetColor(110);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
 	ofDrawRectangle(0, 0, width, margin*5); //Top

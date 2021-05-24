@@ -19,6 +19,7 @@ public:
 	float iterations = 1;
 	
 	float w = 380;
+	float h = 740;
 	//Si es canvia w, cal canviar els constructors Osc
 	GeometryPanel() : 
 		oscA(x, y+60, 380, 220, 0), 

@@ -7,19 +7,19 @@ void GeometryColorSwitch::display() {
 
 	//Geometry
 	if (mode == "geometry") {
-		ofSetColor(150, 150, 150);
+		ofSetColor(135);
 	}
 	else {
-		ofSetColor(180, 180, 180);
+		ofSetColor(180);
 	}
 	ofDrawRectangle(x, y, w / 2, h);
 
 	//Color
 	if (mode == "color") {
-		ofSetColor(150, 150, 150);
+		ofSetColor(135);
 	}
 	else {
-		ofSetColor(180, 180, 180);
+		ofSetColor(180);
 	}
 	ofDrawRectangle(x + w / 2, y, w / 2, h);
 }

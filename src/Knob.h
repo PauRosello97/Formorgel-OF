@@ -11,6 +11,7 @@ class Knob
 	float initialValue;
 	float sensibility;
 	int knobRadius = 20;
+	ofTrueTypeFont openSans;
 
 	void update();
 
@@ -22,5 +23,6 @@ public:
 	void mousePressed();
 	bool mouseReleased();
 	bool isPressed() { return pressed; }
+
 };
 

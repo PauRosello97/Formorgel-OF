@@ -29,6 +29,7 @@ void Osc::display() {
 	ofDrawRectangle(x + 10, y + 10, h-20, h-20);
 
 	// Background
+	/*
 	ofSetColor(135);
 	ofDrawRectangle(x, y, w, h); // Fill
 	ofNoFill();
@@ -37,6 +38,7 @@ void Osc::display() {
 	ofDrawRectangle(x, y, w, h); // Stroke
 	ofFill();
 	ofSetLineWidth(1);
+	*/
 }
 
 bool Osc::isOver() {
