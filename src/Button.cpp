@@ -33,10 +33,6 @@ void Button::display(string message) {
 	ofDrawRectangle(x, y, w, h);
 }
 
-bool Button::isOver() {
-	return ofGetMouseX() > x && ofGetMouseX() < x+w && ofGetMouseY()> y && ofGetMouseY()<y+h;
-}
-
 bool Button::mousePressed() {
 	return isOver();
 }

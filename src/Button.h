@@ -1,16 +1,15 @@
 #pragma once
 #include "ofMain.h"
+#include "Touchable.h"
 
-class Button
+class Button : public Touchable
 {
-	float x, y, h, w;
 	ofTrueTypeFont openSans;
 
 public:
 	Button();
 	Button(float x, float y, float w, float h);
 	void display(string message);
-	bool isOver();
 	bool mousePressed();
 };
 
