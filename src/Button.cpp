@@ -13,10 +13,10 @@ void Button::display(string message) {
 	ofSetColor(0, 0, 0);
 	ofDrawBitmapString(message, x + 10, y + 20);
 	if (isOver()) {
-		ofSetColor(125, 125, 0);
+		ofSetColor(165);
 	}
 	else {
-		ofSetColor(0, 125, 125);
+		ofSetColor(135);
 	}
 	
 	ofDrawRectangle(x, y, w, h);
