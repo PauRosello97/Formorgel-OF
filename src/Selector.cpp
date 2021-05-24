@@ -5,14 +5,11 @@ Selector::Selector(float _x, float _y, vector<string> _valueNames) {
 	y = _y;
 	valueNames = _valueNames;
 	nValues = valueNames.size();
-	arrowPrevious.load("icons/arrowPrevious.svg");
 };
 
 void Selector::display() {
-	ofPushStyle();
-	ofSetColor(255, 0, 0);
-	arrowPrevious.draw();
-	ofPopStyle();
+	drawPreviousArrow(x+10, y+h/2);
+	drawNextArrow(x +w- 10, y + h / 2);
 
 	// Text
 	ofSetColor(0);
@@ -24,14 +21,44 @@ void Selector::display() {
 }
 
 bool Selector::mousePressed() {
-	if (ofGetMouseX() > x&& ofGetMouseX() < x + w/2 && ofGetMouseY() > y&& ofGetMouseY() < y + h) {
+	if (isOverPrevious()) {
 		value = value > 0 ? value - 1 : (nValues - 1);
 		return true;
 	}
-	else if(ofGetMouseX() > x/2 && ofGetMouseX() < x + w  && ofGetMouseY() > y&& ofGetMouseY() < y + h) {
+	else if(isOverNext()) {
 		value = (value + 1) % nValues;
 		return true;
 	}
 	return false;
+}
+
+void Selector::drawPreviousArrow(float ax, float ay) {
+	ofPushStyle();
+	if (isOverPrevious()) {
+		ofSetLineWidth(2);
+	}
+	ofSetColor(40);
+	ofDrawLine(ax, ay, ax + 10, ay - 10);
+	ofDrawLine(ax, ay, ax + 10, ay + 10);
+	ofPopStyle();
+}
+
+void Selector::drawNextArrow(float ax, float ay) {
+	ofPushStyle();
+	if (isOverNext()) {
+		ofSetLineWidth(2);
+	}
+	ofSetColor(40);
+	ofDrawLine(ax, ay, ax - 10, ay - 10);
+	ofDrawLine(ax, ay, ax - 10, ay + 10);
+	ofPopStyle();
+}
+
+bool Selector::isOverPrevious() {
+	return (ofGetMouseX() > x && ofGetMouseX() < x + w / 2 && ofGetMouseY() > y&& ofGetMouseY() < y + h);
+}
+
+bool Selector::isOverNext() {
+	return (ofGetMouseX() > x +w/ 2 && ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h);
 }
 

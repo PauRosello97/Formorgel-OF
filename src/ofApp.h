@@ -24,8 +24,6 @@ class ofApp : public ofBaseApp{
 	float lateralWidth;
 	bool workingMode = true;
 	int iterations = 1;
-	ofxSVG arrowPrevious;
-
 
 public:
 	void setup();
