@@ -7,7 +7,6 @@
 #include "Button.h";
 #include "GeometryColorSwitch.h";
 #include "FloatInput.h";
-#include "ofxSvg.h";
 
 class ofApp : public ofBaseApp{
 	

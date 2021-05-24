@@ -12,6 +12,7 @@ class Selector
 	int value = 0;
 	int nValues;
 	vector<string> valueNames;
+	ofTrueTypeFont openSans;
 
 	void drawPreviousArrow(float ax, float ay);
 	void drawNextArrow(float ax, float ay);

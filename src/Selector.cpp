@@ -5,6 +5,8 @@ Selector::Selector(float _x, float _y, vector<string> _valueNames) {
 	y = _y;
 	valueNames = _valueNames;
 	nValues = valueNames.size();
+
+	openSans.load("OpenSans/OpenSans-Regular.ttf", 12, false, false, true);
 };
 
 void Selector::display() {
@@ -13,7 +15,8 @@ void Selector::display() {
 
 	// Text
 	ofSetColor(0);
-	ofDrawBitmapString(valueNames[value], x + 50, y + 30);
+	ofRectangle rect = openSans.getStringBoundingBox(valueNames[value], 0, 0);
+	openSans.drawStringAsShapes(valueNames[value], x + w / 2 - rect.width / 2, y + 33);
 
 	// Background
 	ofSetColor(200);

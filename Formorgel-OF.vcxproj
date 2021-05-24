@@ -100,7 +100,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src;..\..\..\addons\ofxSvg\libs;..\..\..\addons\ofxSvg\libs\libxml2;..\..\..\addons\ofxSvg\libs\libxml2\include;..\..\..\addons\ofxSvg\libs\libxml2\include\libxml;..\..\..\addons\ofxSvg\libs\libxml2\lib;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\x64;..\..\..\addons\ofxSvg\libs\libxml2\license;..\..\..\addons\ofxSvg\libs\svgtiny;..\..\..\addons\ofxSvg\libs\svgtiny\include;..\..\..\addons\ofxSvg\libs\svgtiny\lib;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\x64;..\..\..\addons\ofxSvg\libs\svgtiny\license;..\..\..\addons\ofxSvg\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
 		</ClCompile>
@@ -108,8 +108,8 @@
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<SubSystem>Console</SubSystem>
 			<RandomizedBaseAddress>false</RandomizedBaseAddress>
-			<AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;svgtiny.lib</AdditionalDependencies>
-			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\Win32</AdditionalLibraryDirectories>
+			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 		</Link>
 		<PostBuildEvent />
 	</ItemDefinitionGroup>
@@ -120,7 +120,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src;..\..\..\addons\ofxSvg\libs;..\..\..\addons\ofxSvg\libs\libxml2;..\..\..\addons\ofxSvg\libs\libxml2\include;..\..\..\addons\ofxSvg\libs\libxml2\include\libxml;..\..\..\addons\ofxSvg\libs\libxml2\lib;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\x64;..\..\..\addons\ofxSvg\libs\libxml2\license;..\..\..\addons\ofxSvg\libs\svgtiny;..\..\..\addons\ofxSvg\libs\svgtiny\include;..\..\..\addons\ofxSvg\libs\svgtiny\lib;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\x64;..\..\..\addons\ofxSvg\libs\svgtiny\license;..\..\..\addons\ofxSvg\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
@@ -129,8 +129,8 @@
 			<GenerateDebugInformation>true</GenerateDebugInformation>
 			<SubSystem>Console</SubSystem>
 			<RandomizedBaseAddress>false</RandomizedBaseAddress>
-			<AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;svgtiny.lib</AdditionalDependencies>
-			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\x64;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\x64</AdditionalLibraryDirectories>
+			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 		</Link>
 		<PostBuildEvent />
 	</ItemDefinitionGroup>
@@ -140,7 +140,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src;..\..\..\addons\ofxSvg\libs;..\..\..\addons\ofxSvg\libs\libxml2;..\..\..\addons\ofxSvg\libs\libxml2\include;..\..\..\addons\ofxSvg\libs\libxml2\include\libxml;..\..\..\addons\ofxSvg\libs\libxml2\lib;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\x64;..\..\..\addons\ofxSvg\libs\libxml2\license;..\..\..\addons\ofxSvg\libs\svgtiny;..\..\..\addons\ofxSvg\libs\svgtiny\include;..\..\..\addons\ofxSvg\libs\svgtiny\lib;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\x64;..\..\..\addons\ofxSvg\libs\svgtiny\license;..\..\..\addons\ofxSvg\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<MultiProcessorCompilation>true</MultiProcessorCompilation>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
@@ -152,8 +152,8 @@
 			<OptimizeReferences>true</OptimizeReferences>
 			<EnableCOMDATFolding>true</EnableCOMDATFolding>
 			<RandomizedBaseAddress>false</RandomizedBaseAddress>
-			<AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;svgtiny.lib</AdditionalDependencies>
-			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\Win32</AdditionalLibraryDirectories>
+			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 		</Link>
 		<PostBuildEvent />
 	</ItemDefinitionGroup>
@@ -163,7 +163,7 @@
 			<PreprocessorDefinitions>%(PreprocessorDefinitions)</PreprocessorDefinitions>
 			<RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
 			<WarningLevel>Level3</WarningLevel>
-			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src;..\..\..\addons\ofxSvg\libs;..\..\..\addons\ofxSvg\libs\libxml2;..\..\..\addons\ofxSvg\libs\libxml2\include;..\..\..\addons\ofxSvg\libs\libxml2\include\libxml;..\..\..\addons\ofxSvg\libs\libxml2\lib;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\x64;..\..\..\addons\ofxSvg\libs\libxml2\license;..\..\..\addons\ofxSvg\libs\svgtiny;..\..\..\addons\ofxSvg\libs\svgtiny\include;..\..\..\addons\ofxSvg\libs\svgtiny\lib;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\Win32;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\x64;..\..\..\addons\ofxSvg\libs\svgtiny\license;..\..\..\addons\ofxSvg\src</AdditionalIncludeDirectories>
+			<AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);src;..\..\..\addons\ofxHLuv\src;..\..\..\addons\ofxPolygonDetector\src</AdditionalIncludeDirectories>
 			<CompileAs>CompileAsCpp</CompileAs>
 			<ObjectFileName>$(IntDir)</ObjectFileName>
 		</ClCompile>
@@ -174,8 +174,8 @@
 			<OptimizeReferences>true</OptimizeReferences>
 			<EnableCOMDATFolding>true</EnableCOMDATFolding>
 			<RandomizedBaseAddress>false</RandomizedBaseAddress>
-			<AdditionalDependencies>%(AdditionalDependencies);libxml2.lib;svgtiny.lib</AdditionalDependencies>
-			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);..\..\..\addons\ofxSvg\libs\libxml2\lib\vs\x64;..\..\..\addons\ofxSvg\libs\svgtiny\lib\vs\x64</AdditionalLibraryDirectories>
+			<AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
+			<AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
 		</Link>
 		<PostBuildEvent />
 	</ItemDefinitionGroup>
@@ -197,7 +197,6 @@
 		<ClCompile Include="src\Tone.cpp" />
 		<ClCompile Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.cpp" />
 		<ClCompile Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.cpp" />
-		<ClCompile Include="..\..\..\addons\ofxSvg\src\ofxSvg.cpp" />
 	</ItemGroup>
 	<ItemGroup>
 		<ClInclude Include="src\ofApp.h" />
@@ -216,55 +215,6 @@
 		<ClInclude Include="src\Tone.h" />
 		<ClInclude Include="..\..\..\addons\ofxHLuv\src\ofxHLuv.h" />
 		<ClInclude Include="..\..\..\addons\ofxPolygonDetector\src\ofxPolygonDetector.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\src\ofxSvg.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\c14n.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\catalog.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\chvalid.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\debugXML.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\dict.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\DOCBparser.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\encoding.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\entities.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\globals.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\hash.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\HTMLparser.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\HTMLtree.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\list.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\nanoftp.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\nanohttp.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\parser.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\parserInternals.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\pattern.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\relaxng.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\SAX.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\SAX2.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\schemasInternals.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\schematron.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\threads.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\tree.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\uri.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\valid.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xinclude.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xlink.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlautomata.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlerror.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlexports.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlIO.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlmemory.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlmodule.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlreader.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlregexp.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlsave.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlschemas.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlschemastypes.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlstring.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlunicode.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlversion.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xmlwriter.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xpath.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xpathInternals.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\libxml2\include\libxml\xpointer.h" />
-		<ClInclude Include="..\..\..\addons\ofxSvg\libs\svgtiny\include\svgtiny.h" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="$(OF_ROOT)\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">
