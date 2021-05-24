@@ -1,7 +1,7 @@
 #include "GeometryColorSwitch.h"
 
 void GeometryColorSwitch::display() {
-	ofSetColor(0, 0, 0);
+	ofSetColor(0);
 	ofDrawBitmapString("Geometry", x + 10, y + 20);
 	ofDrawBitmapString("Color", x + w / 2 + 10, y + 20);
 

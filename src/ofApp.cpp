@@ -4,7 +4,7 @@
 
 void ofApp::setup(){
 	//ofSetLogLevel(OF_LOG_VERBOSE);
-	//ofBackground(110);
+	ofBackground(40);
 	//ofSetVerticalSync(false);
 	ofEnableAlphaBlending();
 	ofEnableDepthTest();
@@ -34,10 +34,19 @@ void ofApp::draw(){
 		colorPanel.display();
 	} 
 
-	//Margins
-	ofSetColor(110);
 	float width = ofGetWindowWidth();
 	float height = ofGetWindowHeight();
+
+	// Composition stroke
+	ofSetColor(165);
+	ofDrawLine(lateralWidth, margin*5, width - margin, margin*5); // Top
+	ofDrawLine(lateralWidth, margin*5, lateralWidth, height-margin); // Left
+	ofDrawLine(lateralWidth, height - margin, width - margin, height - margin); // Bottom
+	ofDrawLine(width - margin, margin * 5, width - margin, height - margin); // Right
+
+	//Margins
+	ofSetColor(110);
+	
 	ofDrawRectangle(0, 0, width, margin*5); //Top
 	ofDrawRectangle(0, height-margin, width, margin); //Bot
 	ofDrawRectangle(width- margin, 0, margin, height); //Right
