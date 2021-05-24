@@ -24,9 +24,9 @@ class ColorPanel
 		{ "Lydian", "Ionian", "Mixolydian", "Dorian", "Aeolian", "Phrygian", "Locrian" }
 	);
 	Selector baseToneSelector = Selector(
-		x + 10, 
-		y + 70, 
-		{ "0 Red", "30 Orange", "60 Yellow", "90 Yellow-Green", "120 Green", "150 Green-Cyan", "180 Cyan", "210 Cyan-Blue", "240 Blue", "270 Blue-Magenta", "300 Magenta", "330 Red-Magenta" }
+		x + 195, 
+		y + 10, 
+		{ "Red", "Orange", "Yellow", "Yellow-Green", "Green", "Green-Cyan", "Cyan", "Cyan-Blue", "Blue", "Blue-Magenta", "Magenta", "Red-Magenta" }
 	);
 	int nMode = 0;
 

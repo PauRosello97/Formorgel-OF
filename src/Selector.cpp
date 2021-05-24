@@ -3,8 +3,6 @@
 Selector::Selector(float _x, float _y, vector<string> _valueNames) {
 	x = _x;
 	y = _y;
-	previousButton = SmallButton(x + h / 2, y + h / 2, h - 20);
-	nextButton = SmallButton(x + w - h / 2, y + h / 2, h - 20);
 	valueNames = _valueNames;
 	nValues = valueNames.size();
 };
@@ -12,11 +10,7 @@ Selector::Selector(float _x, float _y, vector<string> _valueNames) {
 void Selector::display() {
 	// Text
 	ofSetColor(0);
-	ofDrawBitmapString(ofToString(value) + " " + valueNames[value], x + 50, y + 30);
-
-	// Buttons
-	previousButton.display();
-	nextButton.display();
+	ofDrawBitmapString(valueNames[value], x + 50, y + 30);
 
 	// Background
 	ofSetColor(200);
@@ -24,11 +18,11 @@ void Selector::display() {
 }
 
 bool Selector::mousePressed() {
-	if (previousButton.isOver()) {
+	if (ofGetMouseX() > x&& ofGetMouseX() < x + w/2 && ofGetMouseY() > y&& ofGetMouseY() < y + h) {
 		value = value > 0 ? value - 1 : (nValues - 1);
 		return true;
 	}
-	else if (nextButton.isOver()) {
+	else if(ofGetMouseX() > x/2 && ofGetMouseX() < x + w  && ofGetMouseY() > y&& ofGetMouseY() < y + h) {
 		value = (value + 1) % nValues;
 		return true;
 	}

@@ -5,7 +5,7 @@
 class Selector
 {
 	float x, y;
-	float w = 360;
+	float w = 175;
 	float h = 50;
 	SmallButton previousButton;
 	SmallButton nextButton;
