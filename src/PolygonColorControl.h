@@ -2,13 +2,13 @@
 #include "ofMain.h";
 #include "Tone.h";
 #include "SmallButton.h";
+#include "Touchable.h";
 
-class PolygonColorControl
+class PolygonColorControl : public Touchable
 {
 	float x;
 	float y;
-	float w = 114;
-	float h = 100;
+	
 	int baseHue;
 	Tone tone;
 	ofColor color;
@@ -27,7 +27,6 @@ class PolygonColorControl
 	
 public:
 	bool displayingDialog;
-	//PolygonColorControl(){}
 	PolygonColorControl(
 		float _x, 
 		float _y, 
@@ -39,7 +38,6 @@ public:
 	);
 
 	void display();
-	bool isOver();
 	bool mousePressed();
 	void setModeMatrix(vector<int> modeMatrix);
 	void setColor();

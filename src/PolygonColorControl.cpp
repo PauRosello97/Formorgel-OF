@@ -12,6 +12,8 @@ PolygonColorControl::PolygonColorControl(
 	modeMatrix = _modeMatrix;
 	x = _x;
 	y = _y;
+	w = 114;
+	h = 100;
 	area = _area;
 	displayingDialog = false;
 	tone = _tone;
@@ -84,10 +86,6 @@ void PolygonColorControl::display() {
 	// Background
 	ofSetColor(color);
 	ofDrawRectangle(x, y, w, h);
-}
-
-bool PolygonColorControl::isOver() {
-	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y && ofGetMouseY() < y + h;
 }
 
 bool PolygonColorControl::mousePressed() {
