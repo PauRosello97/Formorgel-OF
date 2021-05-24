@@ -8,6 +8,12 @@ void ColorPanel::display() {
 	modeSelector.display();
 	baseToneSelector.display();
 
+	//Stroke
+	ofSetColor(40);
+	ofDrawLine(x, y, x, y + h);
+	ofDrawLine(x + w, y, x + w, y + h);
+	ofDrawLine(x, y + h, x + w, y + h);
+
 	// Controls
 	for (PolygonColorControl pcc : polygonColorControls) {
 		pcc.display();
@@ -17,7 +23,7 @@ void ColorPanel::display() {
 		ofSetColor(0);
 		ofDrawBitmapString("No polygons detected", x + 120, y + 150);
 	}
-	
+
 	// Background
 	ofSetColor(135);
 	ofDrawRectangle(x, y, w, h);
