@@ -6,7 +6,7 @@ class Selector
 {
 	float x, y;
 	float w = 175;
-	float h = 50;
+	float h = 30;
 	SmallButton previousButton;
 	SmallButton nextButton;
 	int value = 0;

@@ -14,9 +14,15 @@ void Selector::display() {
 	drawNextArrow(x +w- 10, y + h / 2);
 
 	// Text
-	ofSetColor(0);
+	ofSetColor(40);
 	ofRectangle rect = openSans.getStringBoundingBox(valueNames[value], 0, 0);
-	openSans.drawStringAsShapes(valueNames[value], x + w / 2 - rect.width / 2, y + 33);
+	openSans.drawStringAsShapes(valueNames[value], x + w / 2 - rect.width / 2, y + 22);
+
+	// Stroke
+	ofDrawLine(x, y, x + w, y);
+	ofDrawLine(x, y, x, y + h);
+	ofDrawLine(x + w, y, x + w, y + h);
+	ofDrawLine(x, y + h, x + w, y + h);
 
 	// Background
 	ofSetColor(200);
@@ -41,8 +47,8 @@ void Selector::drawPreviousArrow(float ax, float ay) {
 		ofSetLineWidth(2);
 	}
 	ofSetColor(40);
-	ofDrawLine(ax, ay, ax + 10, ay - 10);
-	ofDrawLine(ax, ay, ax + 10, ay + 10);
+	ofDrawLine(ax, ay, ax + 7, ay - 7);
+	ofDrawLine(ax, ay, ax + 7, ay + 7);
 	ofPopStyle();
 }
 
@@ -52,8 +58,8 @@ void Selector::drawNextArrow(float ax, float ay) {
 		ofSetLineWidth(2);
 	}
 	ofSetColor(40);
-	ofDrawLine(ax, ay, ax - 10, ay - 10);
-	ofDrawLine(ax, ay, ax - 10, ay + 10);
+	ofDrawLine(ax, ay, ax - 7, ay - 7);
+	ofDrawLine(ax, ay, ax - 7, ay + 7);
 	ofPopStyle();
 }
 
