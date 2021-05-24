@@ -18,7 +18,7 @@ void Knob::display() {
 	ofSetColor(0);
 	ofDrawBitmapString(ofToString(value), x+20, y + 70);
 	float pi = 3.14159265359;
-	float proportion = pi/2 + (2 * pi * value / (max-min));
+	float proportion = pi/2 + (2 * pi * (value-min) / (max-min));
 
 	// Knob
 	float cx = x + w / 2;
