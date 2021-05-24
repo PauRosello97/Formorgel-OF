@@ -7,15 +7,14 @@ void GeometryColorSwitch::display() {
 
 	// Border lines
 	ofSetColor(40);
+	ofDrawLine(x, y, x + w, y);
+	ofDrawLine(x, y, x, y + h);
+	ofDrawLine(x + w / 2, y, x + w / 2, y + h);
+	ofDrawLine(x + w, y, x + w, y + h);
+	
 	if (mode == "geometry") {
-		ofDrawLine(x, y, x + w / 2, y);
-		ofDrawLine(x, y, x, y + h);
-		ofDrawLine(x + w / 2, y, x + w / 2, y + h);
 		ofDrawLine(x + w / 2, y + h, x + w, y + h);
 	}else{
-		ofDrawLine(x+w/2, y, x + w, y);
-		ofDrawLine(x+w/2, y, x + w / 2, y+h);
-		ofDrawLine(x + w , y, x + w , y + h);
 		ofDrawLine(x, y + h, x + w/2, y + h);
 	}
 
