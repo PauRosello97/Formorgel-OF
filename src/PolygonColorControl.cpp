@@ -65,6 +65,14 @@ void PolygonColorControl::display() {
 	ofDrawBitmapString(romanName, x -romanName.length()*4 + w/2, y + h/2);
 	ofDrawBitmapString("(" + ofToString(round(360*color.getHue()/255)) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
 	
+	// Stroke
+	ofSetColor(40);
+	ofDrawLine(x, y, x + w, y);
+	ofDrawLine(x, y + h, x + w, y + h);
+	ofDrawLine(x, y, x, y + h);
+	ofDrawLine(x+w, y, x+w, y + h);
+
+
 	// Shades
 	for (SmallButton shade : shadesButtons) {
 		shade.display();
