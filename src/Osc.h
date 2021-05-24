@@ -1,13 +1,13 @@
 #pragma once
 #include "ofMain.h"
 #include "FloatInput.h"
+#include "Touchable.h"
 
-class Osc
+class Osc : public Touchable
 {
     FloatInput offsetInput;
     FloatInput angleInput;
     FloatInput lengthInput;
-    float x = 10, y = 10, h = 100, w = 100;
     float value;
     float radians(float degrees);
 
@@ -52,7 +52,6 @@ public:
     float offset, angle, length;
 
     void display();
-    bool isOver();
     bool mousePressed();   
     bool mouseReleased();
     void randomize();

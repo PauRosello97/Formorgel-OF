@@ -33,10 +33,6 @@ void Osc::display() {
 	ofDrawRectangle(x + 10, y + 10, h-20, h-20);
 }
 
-bool Osc::isOver() {
-	return ofGetMouseX() > x&& ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h;
-}
-
 float Osc::radians(float degrees) {
 	float pi = 3.14159265359;
 	return degrees * pi / 180;
