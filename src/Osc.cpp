@@ -11,7 +11,7 @@ void Osc::display() {
 	lengthInput.display();
 
 	// Lines
-	ofSetColor(255, 0, 0);
+	ofSetColor(165);
 	int d = 3;
 	float radius = 50;
 	for (int i = 0; i < d; i++) {
@@ -19,8 +19,8 @@ void Osc::display() {
 
 		float fix = 150;
 
-		float startX = x + 100 + radius * offset * cos(radians(fix + a));
-		float startY = y + 100 + radius * offset * sin(radians(fix + a));
+		float startX = x + 110 + radius * offset * cos(radians(fix + a));
+		float startY = y + 110 + radius * offset * sin(radians(fix + a));
 
 		float endX = startX + radius * length * cos(radians(fix + a + angle));
 		float endY = startY + radius * length * sin(radians(fix + a + angle));
@@ -29,20 +29,8 @@ void Osc::display() {
 	}
 
 	// Square
-	ofSetColor(25, 25, 25);
+	ofSetColor(40);
 	ofDrawRectangle(x + 10, y + 10, h-20, h-20);
-
-	// Background
-	/*
-	ofSetColor(135);
-	ofDrawRectangle(x, y, w, h); // Fill
-	ofNoFill();
-	ofSetColor(165);
-	ofSetLineWidth(3);
-	ofDrawRectangle(x, y, w, h); // Stroke
-	ofFill();
-	ofSetLineWidth(1);
-	*/
 }
 
 bool Osc::isOver() {
