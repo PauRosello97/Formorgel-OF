@@ -1,6 +1,10 @@
 #include "Osc.h"
 
 void Osc::display() {
+	//Stroke
+	ofSetColor(40);
+	ofDrawLine(x+10, y-5, x+w-10, y-5);
+
 	// Inputs
 	offsetInput.display();
 	angleInput.display();
