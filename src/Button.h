@@ -4,6 +4,7 @@
 class Button
 {
 	float x, y, h, w;
+	ofTrueTypeFont openSans;
 
 public:
 	Button();

@@ -27,7 +27,7 @@ public:
 		oscC(x, y+520, 380, 220), 
 		iterationsInput(iterations, "Iterations", x, y+10, 0, 4) 
 	{
-		randomizeButton = Button(x+180, y+10, 200, 30);
+		randomizeButton = Button(x+250, y+10, 120, 30);
 	};
 
 	void display();
