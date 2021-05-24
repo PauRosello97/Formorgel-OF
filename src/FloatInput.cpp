@@ -5,24 +5,12 @@ bool FloatInput::isOver() {
 }
 
 void FloatInput::display() {
-    update();
     dragController.display();
     ofSetColor(0);
     ofDrawBitmapString(label, x+10, y + 15);
-    if (isOver()) {
-        ofSetColor(120, 120, 120);
-    }
-    else {
-        ofSetColor(200, 200, 200);
-    }
-    
+
+    ofSetColor(165);
     ofDrawRectangle(x, y, w, h);
-}
-
-void FloatInput::update() {
-    if (dragController.isPressed()) {
-
-    }
 }
 
 bool FloatInput::mousePressed() {

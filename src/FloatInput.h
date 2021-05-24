@@ -12,8 +12,6 @@ class FloatInput
     string label;
     Knob dragController;
 
-    void update();
-
 public:
      
     FloatInput(float& v, string _label, float _x, float _y, float _min, float _max) 

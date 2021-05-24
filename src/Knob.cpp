@@ -36,12 +36,8 @@ void Knob::display() {
 
 	// Fill
 	ofFill();
-	if (pressed) {
-		ofSetColor(100, 155, 0);
-	}
-	else {
-		ofSetColor(0, 255, 0);
-	}
+	ofSetColor(135);
+
 	ofDrawRectangle(x, y, w, h);
 
 	// Stroke
