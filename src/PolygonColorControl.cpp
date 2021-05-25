@@ -105,7 +105,8 @@ void PolygonColorControl::setModeMatrix(vector<int> _modeMatrix) {
 }
 
 void PolygonColorControl::setColor() {
-	color = HLuv.getColor((baseHue + modeMatrix[tone.number] * 30) % 360, tone.luminance);
+	tone.hue = (baseHue + modeMatrix[tone.number] * 30) % 360;
+	color = HLuv.getColor(tone.hue, tone.luminance);
 	updateShadeButtons();
 }
 
