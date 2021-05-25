@@ -7,7 +7,7 @@
 class PolygonColorControl : public Touchable
 {	
 	int baseHue;
-	Tone tone;
+	
 	ofColor color;
 	int area;
 	vector<Tone>& tones;
@@ -23,6 +23,7 @@ class PolygonColorControl : public Touchable
 	void updateShadeButtons();
 	
 public:
+	Tone tone;
 	bool displayingDialog;
 	PolygonColorControl(
 		float _x, 

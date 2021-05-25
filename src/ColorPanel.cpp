@@ -52,7 +52,7 @@ void ColorPanel::update(vector<ofxPolyPol> _polygons) {
 			// If we need a new tone, create it
 			if (i >= tones.size()) {
 				Tone t = Tone(tones.size()%7);
-				t.hue = ((baseTone + modesMatrix[nMode][t.number]*30)%360)*0.7083;
+				t.hue = ((baseTone + modesMatrix[nMode][t.number]*30)%360);
 				tones.push_back(t);
 			}
 			// Create a new control
@@ -101,7 +101,7 @@ void ColorPanel::updateControls() {
 void ColorPanel::updateAssignations() {
 	assignations.clear();
 	for (int i = 0; i < areas.size(); i++) {
-		tones[i].hue = polygonColorControls[i].getColor().getHue();
+		tones[i].hue = polygonColorControls[i].tone.hue;
 		assignations.insert(pair<int, ofColor>(areas[i], tones[i].getColor()));
 	}
 }
