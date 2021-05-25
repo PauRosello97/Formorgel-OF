@@ -17,11 +17,17 @@ class PolygonColorControl : public Touchable
 	ofxHLuv HLuv;
 
 	vector<SmallButton> shadesButtons;
-	SmallButton nextTone;
-	SmallButton previousTone;
+	ofTrueTypeFont openSans;
 
-	void updateShadeButtons();
+	void updateShadeButtons(); 
 	
+	void drawPreviousArrow(float ax, float ay);
+	void drawNextArrow(float ax, float ay);
+	bool isOverPrevious();
+	bool isOverNext();
+	
+	bool isDark();
+
 public:
 	Tone tone;
 	bool displayingDialog;

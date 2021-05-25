@@ -32,18 +32,7 @@ PolygonColorControl::PolygonColorControl(
 			)
 		);
 	}
-	previousTone = SmallButton( 
-		x-30+w/2,
-		y-15+ w/2, 
-		20, 
-		ofColor(120, 120, 0)
-	);
-	nextTone = SmallButton(
-		x + 30 + w / 2,
-		y - 15 + w / 2,
-		20,
-		ofColor(120, 120, 0)
-	);
+	openSans.load("OpenSans/OpenSans-Regular.ttf", 12, false, false, true);
 };
 
 void PolygonColorControl::updateShadeButtons() {
@@ -55,15 +44,20 @@ void PolygonColorControl::updateShadeButtons() {
 
 void PolygonColorControl::display() {
 	// Text
-	if (tone.luminance > 90) {
-		ofSetColor(0);
-	}
-	else {
+	if (isDark()) {
 		ofSetColor(255);
 	}
+	else {
+		ofSetColor(40);
+	}
 	string romanName = romanNumbers[tone.number];
-	ofDrawBitmapString(romanName, x -romanName.length()*4 + w/2, y + h/2);
-	//ofDrawBitmapString("(" + ofToString(tone.hue) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
+	ofDrawBitmapString(romanName, x -romanName.length()*4 + w/2, y + h/2 );
+	//ofRectangle rect = openSans.getStringBoundingBox(romanName, 0, 0);
+	//openSans.drawStringAsShapes(romanName, x, y);
+
+	// Arrows
+	drawPreviousArrow(x + 10, y -5 + h / 2);
+	drawNextArrow(x + w - 10, y -5 + h / 2);
 	
 	// Stroke
 	ofSetColor(40);
@@ -72,14 +66,10 @@ void PolygonColorControl::display() {
 	ofDrawLine(x, y, x, y + h);
 	ofDrawLine(x+w, y, x+w, y + h);
 
-
 	// Shades
 	for (SmallButton shade : shadesButtons) {
 		shade.display();
 	}
-
-	nextTone.display();
-	previousTone.display();
 	
 	// Background
 	ofSetColor(color);
@@ -95,12 +85,12 @@ bool PolygonColorControl::mousePressed() {
 				break;
 			}
 		}
-		if (nextTone.isOver()) {
+		if (isOverNext()) {
 			tone.increaseTone();
 			tone.hue = baseHue + modeMatrix[tone.number] * 30;
 			return true;
 		}
-		if (previousTone.isOver()) {
+		if (isOverPrevious()) {
 			tone.decreaseTone();
 			tone.hue = baseHue + modeMatrix[tone.number] * 30;
 			return true;
@@ -129,4 +119,51 @@ void PolygonColorControl::setBaseHue(int baseTone) {
 
 float PolygonColorControl::getLuminance() {
 	return tone.luminance;
+}
+
+void PolygonColorControl::drawPreviousArrow(float ax, float ay) {
+	ofPushStyle();
+	if (isOverPrevious()) {
+		ofSetLineWidth(2);
+	}
+	if (isDark()) {
+		ofSetColor(255);
+	}
+	else {
+		ofSetColor(40);
+	}
+	ofDrawLine(ax, ay, ax + 7, ay - 7);
+	ofDrawLine(ax, ay, ax + 7, ay + 7);
+	ofPopStyle();
+}
+
+void PolygonColorControl::drawNextArrow(float ax, float ay) {
+	ofPushStyle();
+	if (isOverNext()) {
+		ofSetLineWidth(2);
+	}
+	if (isDark()) {
+		ofSetColor(255);
+	}
+	else {
+		ofSetColor(40);		
+	}
+	ofDrawLine(ax, ay, ax - 7, ay - 7);
+	ofDrawLine(ax, ay, ax - 7, ay + 7);
+	ofPopStyle();
+}
+
+bool PolygonColorControl::isOverPrevious() {
+	return (ofGetMouseX() > x&& ofGetMouseX() < x + w / 2 && ofGetMouseY() > y && ofGetMouseY() < y + h -w/7);
+}
+
+bool PolygonColorControl::isOverNext() {
+	return (ofGetMouseX() > x + w / 2 && ofGetMouseX() < x + w && ofGetMouseY() > y&& ofGetMouseY() < y + h-w/7);
+}
+
+bool PolygonColorControl::isDark() {
+	if (tone.luminance > 70) {
+		return false;
+	}
+	return true;
 }
