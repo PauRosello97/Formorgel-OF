@@ -101,7 +101,9 @@ void ofApp::newPattern() {
 }
 
 void ofApp::mousePressed(int x, int y, int button){
-	if (displayingOverlay && infoOverlay.isOver()) {
+	if (infoButton.mousePressed()) {
+		displayingOverlay = !displayingOverlay;
+	}else if (displayingOverlay && infoOverlay.isOver()) {
 
 	}
 	else {
@@ -122,9 +124,6 @@ void ofApp::mousePressed(int x, int y, int button){
 				displayingPolygons = true;
 				newPattern();
 			}
-		}
-		else if (infoButton.mousePressed()) {
-			displayingOverlay = !displayingOverlay;
 		}
 		else {
 			colorPanel.mousePressed();

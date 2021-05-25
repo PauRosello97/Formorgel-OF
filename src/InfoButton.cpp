@@ -5,17 +5,23 @@ InfoButton::InfoButton(float _x, float _y, float _w, float _h) {
 	y = _y;
 	w = _w;
 	h = _h;
+	lightLogo.load("icons/lightInfo.svg");
+	darkLogo.load("icons/darkInfo.svg");
 }
 
 void InfoButton::display() {
+	// logo
+	ofPushMatrix();
+	ofSetColor(40);
+	ofTranslate(x, y);
+	
 	if (isOver()) {
-		ofSetColor(255, 0, 0);
+		darkLogo.draw();
 	}
 	else {
-		ofSetColor(0, 0, 255);
+		lightLogo.draw();
 	}
-	
-	ofDrawRectangle(x, y, w, h);
+	ofPopMatrix();
 }
 
 bool InfoButton::mousePressed() {
