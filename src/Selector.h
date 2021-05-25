@@ -1,6 +1,6 @@
 #pragma once
-#include "ofMain.h";
-#include "SmallButton.h";
+#include "ofMain.h"
+#include "SmallButton.h"
 
 class Selector
 {

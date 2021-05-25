@@ -62,9 +62,8 @@ void PolygonColorControl::display() {
 		ofSetColor(255);
 	}
 	string romanName = romanNumbers[tone.number];
-	//ofDrawBitmapString(romanName + " (" + ofToString(modeMatrix[tone.number]) + ")", x + 10, y + 20);
 	ofDrawBitmapString(romanName, x -romanName.length()*4 + w/2, y + h/2);
-	ofDrawBitmapString("(" + ofToString(tone.hue) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
+	//ofDrawBitmapString("(" + ofToString(tone.hue) + ", " + ofToString(round(tone.luminance)) + ")", x + 15, y + 80);
 	
 	// Stroke
 	ofSetColor(40);

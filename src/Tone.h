@@ -9,7 +9,7 @@ public:
 	Tone() {};
 	Tone(int toneN) {
 		number = toneN;
-		luminance = 20 + round(ofRandom(4)) * 20;
+		luminance = round(ofRandom(6)) * 100 /6;
 	};
 	int number;
 	float hue;
