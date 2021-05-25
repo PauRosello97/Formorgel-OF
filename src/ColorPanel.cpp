@@ -1,6 +1,9 @@
 #include "ColorPanel.h"
 
-ColorPanel::ColorPanel(vector<ofxPolyPol> _polygons) {}
+ColorPanel::ColorPanel() {
+	bigOpenSans.load("OpenSans/OpenSans-Regular.ttf", 20, false, false, true);
+	smallOpenSans.load("OpenSans/OpenSans-Regular.ttf", 14, false, false, true);
+}
 
 void ColorPanel::display() {
 
@@ -20,8 +23,15 @@ void ColorPanel::display() {
 	}
 
 	if (polygonColorControls.size()==0) {
-		ofSetColor(0);
-		ofDrawBitmapString("No polygons detected", x + 120, y + 150);
+		ofSetColor(40);
+		ofRectangle rect = bigOpenSans.getStringBoundingBox("No polygons detected", 0, 0);
+		bigOpenSans.drawStringAsShapes("No polygons detected", x + w / 2 - rect.width / 2, y + 150);
+		rect = smallOpenSans.getStringBoundingBox("Try to increase the iterations,", 0, 0);
+		smallOpenSans.drawStringAsShapes("Try to increase the iterations,", x + w / 2 - rect.width / 2, y + 180);
+		rect = smallOpenSans.getStringBoundingBox("change the pattern", 0, 0);
+		smallOpenSans.drawStringAsShapes("change the pattern", x + w / 2 - rect.width / 2, y + 200);
+		rect = smallOpenSans.getStringBoundingBox("or show the polygons.", 0, 0);
+		smallOpenSans.drawStringAsShapes("or show the polygons.", x + w / 2 - rect.width / 2, y + 220);
 	}
 
 	// Background

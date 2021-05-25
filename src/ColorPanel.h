@@ -29,6 +29,8 @@ class ColorPanel
 		{ "Red", "Orange", "Yellow", "Yellow-Green", "Green", "Green-Cyan", "Cyan", "Cyan-Blue", "Blue", "Blue-Magenta", "Magenta", "Red-Magenta" }
 	);
 	int nMode = 0;
+	ofTrueTypeFont bigOpenSans;
+	ofTrueTypeFont smallOpenSans;
 
 	void updateControls();
 	
@@ -45,8 +47,7 @@ public:
 
 	map<int, ofColor> assignations;
 
-	ColorPanel() {};
-	ColorPanel(vector<ofxPolyPol> _polygons);
+	ColorPanel();
 
 	void display();
 	void update(vector<ofxPolyPol> _polygons);

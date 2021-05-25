@@ -17,6 +17,7 @@ void ofApp::setup(){
 	
 	geometryColorSwitch = GeometryColorSwitch();
 	infoButton = InfoButton(ofGetWidth()-40, 10, 30, 30);
+	colorPanel = ColorPanel();
 }
 
 void ofApp::update(){ }
