@@ -89,7 +89,9 @@ void PolygonColorControl::display() {
 }
 
 bool PolygonColorControl::mousePressed() {
+	
 	if (isOver()) {
+		cout << "pressed";
 		for (SmallButton shade : shadesButtons) {
 			if (shade.isOver()) {
 				//setColor(ofColor(255, 0, 0));

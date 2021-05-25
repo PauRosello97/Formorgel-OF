@@ -5,10 +5,7 @@
 #include "Touchable.h";
 
 class PolygonColorControl : public Touchable
-{
-	float x;
-	float y;
-	
+{	
 	int baseHue;
 	Tone tone;
 	ofColor color;
