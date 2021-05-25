@@ -18,6 +18,7 @@ void ofApp::setup(){
 	geometryColorSwitch = GeometryColorSwitch();
 	infoButton = InfoButton(ofGetWidth()-40, 10, 30, 30);
 	colorPanel = ColorPanel();
+	infoOverlay = InfoOverlay();
 }
 
 void ofApp::update(){ }
@@ -29,6 +30,9 @@ void ofApp::draw(){
 	displayLinesToggle.display(displayingLines ? "Hide lines" : "Show lines");
 	displayPolygonsToggle.display(displayingPolygons ? "Hide polygons" : "Show polygons");
 	infoButton.display();
+	if (displayingOverlay) {
+		infoOverlay.display();
+	}
 
 	// Lateral panels
 	geometryColorSwitch.display();
@@ -97,26 +101,37 @@ void ofApp::newPattern() {
 }
 
 void ofApp::mousePressed(int x, int y, int button){
-	if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed()) {
-		iterations = round(geometryPanel.iterations);
-		newPattern();
+	if (displayingOverlay && infoOverlay.isOver()) {
+
 	}
-	else if (displayLinesToggle.mousePressed()) {
-		displayingLines = !displayingLines;
-	}
-	else if (displayPolygonsToggle.mousePressed()) {
-		displayingPolygons = !displayingPolygons;
-		newPattern();
-	}
-	else if (geometryColorSwitch.mousePressed()) {
-		if (!geometryColorSwitch.inGeometryMode() && !displayingPolygons) {
-			displayingPolygons = true;
+	else {
+		displayingOverlay = false;
+		if (geometryColorSwitch.inGeometryMode() && geometryPanel.mousePressed()) {
+			iterations = round(geometryPanel.iterations);
 			newPattern();
 		}
-	}else {
-		colorPanel.mousePressed();
-		geometricSynth.applyColors(colorPanel.assignations);
+		else if (displayLinesToggle.mousePressed()) {
+			displayingLines = !displayingLines;
+		}
+		else if (displayPolygonsToggle.mousePressed()) {
+			displayingPolygons = !displayingPolygons;
+			newPattern();
+		}
+		else if (geometryColorSwitch.mousePressed()) {
+			if (!geometryColorSwitch.inGeometryMode() && !displayingPolygons) {
+				displayingPolygons = true;
+				newPattern();
+			}
+		}
+		else if (infoButton.mousePressed()) {
+			displayingOverlay = !displayingOverlay;
+		}
+		else {
+			colorPanel.mousePressed();
+			geometricSynth.applyColors(colorPanel.assignations);
+		}
 	}
+	
 }
 
 void ofApp::mouseReleased(int x, int y, int button){ 

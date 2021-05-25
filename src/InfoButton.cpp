@@ -17,3 +17,7 @@ void InfoButton::display() {
 	
 	ofDrawRectangle(x, y, w, h);
 }
+
+bool InfoButton::mousePressed() {
+	return isOver();
+}

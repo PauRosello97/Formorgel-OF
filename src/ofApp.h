@@ -1,14 +1,14 @@
 #pragma once
 
 #include "ofMain.h"
-#include "GeometricSynth.h";
-#include "GeometryPanel.h";
-#include "ColorPanel.h";
-#include "Button.h";
-#include "GeometryColorSwitch.h";
-#include "FloatInput.h";
-#include "InfoButton.h";
-
+#include "GeometricSynth.h"
+#include "GeometryPanel.h"
+#include "ColorPanel.h"
+#include "Button.h"
+#include "GeometryColorSwitch.h"
+#include "FloatInput.h"
+#include "InfoButton.h"
+#include "InfoOverlay.h"
 
 class ofApp : public ofBaseApp{
 	
@@ -19,9 +19,11 @@ class ofApp : public ofBaseApp{
 	Button displayPolygonsToggle;
 	GeometryColorSwitch geometryColorSwitch;
 	InfoButton infoButton;
+	InfoOverlay infoOverlay;
 
 	bool displayingLines = true;
 	bool displayingPolygons = false;
+	bool displayingOverlay = false;
 
 	float lateralWidth;
 	bool workingMode = true;

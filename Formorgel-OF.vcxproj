@@ -190,6 +190,7 @@
 		<ClCompile Include="src\GeometryColorSwitch.cpp" />
 		<ClCompile Include="src\GeometryPanel.cpp" />
 		<ClCompile Include="src\InfoButton.cpp" />
+		<ClCompile Include="src\InfoOverlay.cpp" />
 		<ClCompile Include="src\Knob.cpp" />
 		<ClCompile Include="src\Osc.cpp" />
 		<ClCompile Include="src\PolygonColorControl.cpp" />
@@ -209,6 +210,7 @@
 		<ClInclude Include="src\GeometryColorSwitch.h" />
 		<ClInclude Include="src\GeometryPanel.h" />
 		<ClInclude Include="src\InfoButton.h" />
+		<ClInclude Include="src\InfoOverlay.h" />
 		<ClInclude Include="src\Knob.h" />
 		<ClInclude Include="src\Osc.h" />
 		<ClInclude Include="src\PolygonColorControl.h" />

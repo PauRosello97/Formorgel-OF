@@ -31,6 +31,9 @@
 		<ClCompile Include="src\InfoButton.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
+		<ClCompile Include="src\InfoOverlay.cpp">
+			<Filter>src</Filter>
+		</ClCompile>
 		<ClCompile Include="src\Knob.cpp">
 			<Filter>src</Filter>
 		</ClCompile>
@@ -108,6 +111,9 @@
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="src\InfoButton.h">
+			<Filter>src</Filter>
+		</ClInclude>
+		<ClInclude Include="src\InfoOverlay.h">
 			<Filter>src</Filter>
 		</ClInclude>
 		<ClInclude Include="src\Knob.h">

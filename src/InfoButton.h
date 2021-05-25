@@ -9,5 +9,6 @@ public:
 	InfoButton() {};
 	InfoButton(float x, float y, float w, float h);
 	void display();
+	bool mousePressed();
 };
 

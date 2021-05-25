@@ -21,9 +21,6 @@ public:
     };
     void display() {
         ofSetColor(color);
-        if (isOver()) {
-            ofSetColor(255, 0, 0);
-        }
         ofDrawRectangle(x-size/2, y-size/2, size, size);
     }
     bool isOver() {
