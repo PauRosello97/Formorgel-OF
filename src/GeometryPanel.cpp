@@ -5,6 +5,7 @@ void GeometryPanel::display() {
 	oscB.display();
 	oscC.display();
 	randomizeButton.display("Randomize");
+	iterationsSelector.display();
 
 	//Stroke
 	ofSetColor(40);
@@ -24,11 +25,15 @@ void GeometryPanel::randomize() {
 }
 
 bool GeometryPanel::mousePressed() {
-	if (oscA.mousePressed() || oscB.mousePressed() || oscC.mousePressed() || iterationsInput.mousePressed()) {
+	if (oscA.mousePressed() || oscB.mousePressed() || oscC.mousePressed()) {
 		return true;
 	}
 	else if (randomizeButton.mousePressed()) {
 		randomize();
+		return true;
+	}
+	else if (iterationsSelector.mousePressed()) {
+		iterations = iterationsSelector.getValue();
 		return true;
 	}
 	return false;

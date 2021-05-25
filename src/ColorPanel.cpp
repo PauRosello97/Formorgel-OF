@@ -77,7 +77,6 @@ void ColorPanel::mousePressed() {
 	if (modeSelector.mousePressed() || baseToneSelector.mousePressed()) {
 		nMode = modeSelector.getValue();
 		baseTone = baseToneSelector.getValue();
-		
 	}
 	else {
 		for (int i = 0; i < polygonColorControls.size(); i++) {
