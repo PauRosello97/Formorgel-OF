@@ -115,6 +115,11 @@ void ofApp::mousePressed(int x, int y, int button){
 			iterations = round(geometryPanel.iterations);
 			newPattern();
 		}
+		else if (downloadButton.mousePressed()) {
+			cout << "download";
+			screenshot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+			screenshot.save("screenshots/formorgel-screenshot.png");
+		}
 		else if (displayLinesToggle.mousePressed()) {
 			displayingLines = !displayingLines;
 		}

@@ -30,6 +30,8 @@ class ofApp : public ofBaseApp{
 	bool workingMode = true;
 	int iterations = 1;
 
+	ofImage screenshot;
+
 public:
 	void setup();
 	void update();
