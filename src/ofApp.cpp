@@ -14,6 +14,7 @@ void ofApp::setup(){
 	newPattern();
 	displayLinesToggle = Button(400, 10, 100, 30);
 	displayPolygonsToggle = Button(510, 10, 130, 30);
+	downloadButton = Button(1150, 10, 200, 30);
 	
 	geometryColorSwitch = GeometryColorSwitch();
 	infoButton = InfoButton(ofGetWidth()-40, 10, 30, 30);
@@ -29,7 +30,9 @@ void ofApp::draw(){
 
 	displayLinesToggle.display(displayingLines ? "Hide lines" : "Show lines");
 	displayPolygonsToggle.display(displayingPolygons ? "Hide polygons" : "Show polygons");
+	downloadButton.display("Download composition");
 	infoButton.display();
+
 	if (displayingOverlay) {
 		infoOverlay.display();
 	}

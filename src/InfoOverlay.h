@@ -4,6 +4,8 @@
 
 class InfoOverlay : public Touchable
 {
+	ofTrueTypeFont openSans;
+
 public:
 	InfoOverlay();
 	void display();

@@ -17,6 +17,7 @@ class ofApp : public ofBaseApp{
 	Button applyButton;
 	Button displayLinesToggle;
 	Button displayPolygonsToggle;
+	Button downloadButton;
 	GeometryColorSwitch geometryColorSwitch;
 	InfoButton infoButton;
 	InfoOverlay infoOverlay;

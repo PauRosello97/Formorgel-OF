@@ -10,16 +10,15 @@ InfoButton::InfoButton(float _x, float _y, float _w, float _h) {
 }
 
 void InfoButton::display() {
-	// logo
 	ofPushMatrix();
 	ofSetColor(40);
 	ofTranslate(x, y);
 	
 	if (isOver()) {
-		darkLogo.draw();
+		lightLogo.draw();
 	}
 	else {
-		lightLogo.draw();
+		darkLogo.draw();		
 	}
 	ofPopMatrix();
 }
