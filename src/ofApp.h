@@ -28,7 +28,7 @@ class ofApp : public ofBaseApp{
 
 	float lateralWidth;
 	bool workingMode = true;
-	int iterations = 1;
+	int iterations = 0;
 
 	ofImage screenshot;
 
