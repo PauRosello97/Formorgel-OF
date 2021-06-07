@@ -72,6 +72,7 @@ void ofApp::draw(){
 	if (displayingPolygons) {
 		geometricSynth.display();
 	}	
+
 }
 
 void ofApp::keyPressed(int key){ }
@@ -116,8 +117,7 @@ void ofApp::mousePressed(int x, int y, int button){
 			newPattern();
 		}
 		else if (downloadButton.mousePressed()) {
-			cout << "download";
-			screenshot.grabScreen(0, 0, ofGetWidth(), ofGetHeight());
+			screenshot.grabScreen(lateralWidth, 50, ofGetWidth() - lateralWidth - 10, ofGetHeight() -60);
 			screenshot.save("screenshots/formorgel-screenshot.png");
 		}
 		else if (displayLinesToggle.mousePressed()) {
